@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e0748b40-4387-480c-a8c6-b4bc8d6f1e32" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Hashtable" Category="Dictionary" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost/AWBarCodeService/Service.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="1bf6e557-4312-483a-81e0-14f330917688" SourceId="1" SourceUrl="http://localhost/AWBarCodeService/Service.svc?wsdl" />
+    <MetadataFile FileName="Service4.xsd" MetadataType="Schema" ID="b7d4cfd7-dcab-4ef5-bfe0-3458adf3037b" SourceId="1" SourceUrl="http://localhost/AWBarCodeService/Service.svc?xsd=xsd2" />
+    <MetadataFile FileName="Service41.xsd" MetadataType="Schema" ID="c53624e7-2edc-4da2-a1a2-2d774050d5b7" SourceId="1" SourceUrl="http://localhost/AWBarCodeService/Service.svc?xsd=xsd3" />
+    <MetadataFile FileName="Service42.xsd" MetadataType="Schema" ID="cf56dc27-7495-4a07-8222-dd8f89a1e026" SourceId="1" SourceUrl="http://localhost/AWBarCodeService/Service.svc?xsd=xsd0" />
+    <MetadataFile FileName="Service43.xsd" MetadataType="Schema" ID="24e923eb-eeb9-4511-8d83-21a68b539bd1" SourceId="1" SourceUrl="http://localhost/AWBarCodeService/Service.svc?xsd=xsd1" />
+    <MetadataFile FileName="Service1.disco" MetadataType="Disco" ID="617d5dd9-2dfb-438b-bcba-78f9a264e36f" SourceId="1" SourceUrl="http://localhost/AWBarCodeService/Service.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

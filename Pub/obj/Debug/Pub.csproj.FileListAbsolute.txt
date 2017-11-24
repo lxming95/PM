@@ -1,0 +1,11 @@
+E:\项目库\条码项目\乐凯医疗\源码\BarCode\Lib\Pub.dll
+E:\项目库\条码项目\乐凯医疗\源码\BarCode\Pub\obj\Debug\Pub.dll
+E:\项目库\条码项目\乐凯医疗\源码\BarCode\Pub\obj\Debug\Pub.csprojResolveAssemblyReference.cache
+E:\project\乐凯医疗项目\BarCodeV17092601\BarCode\Lib\Pub.dll
+E:\project\乐凯医疗项目\BarCodeV17092601\BarCode\Pub\obj\Debug\Pub.csprojResolveAssemblyReference.cache
+E:\project\乐凯医疗项目\BarCodeV17092601\BarCode\Pub\obj\Debug\Pub.dll
+E:\project\1\BarCode\Lib\Pub.dll
+E:\project\1\BarCode\Pub\obj\Debug\Pub.dll
+E:\project\1\BarCode\Pub\obj\Debug\Pub.csprojResolveAssemblyReference.cache
+D:\project\1\BarCode\Lib\Pub.dll
+D:\project\1\BarCode\Pub\obj\Debug\Pub.dll

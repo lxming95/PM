@@ -1,0 +1,138 @@
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\obj\Debug\PersonnelManagement.csprojResolveAssemblyReference.cache
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\obj\Debug\PersonnelManagement.FrmShipmentType.resources
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\obj\Debug\PersonnelManagement.Properties.Resources.resources
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\obj\Debug\PersonnelManagement.csproj.GenerateResource.Cache
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\obj\Debug\PersonnelManagement.exe.licenses
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\obj\Debug\PersonnelManagement.FrmDetailed.resources
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\obj\Debug\PersonnelManagement.FrmQurry.resources
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\PersonnelManagement.exe.config
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\PersonnelManagement.exe
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\PersonnelManagement.pdb
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\DevExpress.BonusSkins.v17.1.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\DevExpress.Data.v17.1.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\DevExpress.Printing.v17.1.Core.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\DevExpress.Sparkline.v17.1.Core.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\DevExpress.Utils.v17.1.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\DevExpress.XtraBars.v17.1.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\DevExpress.XtraEditors.v17.1.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\DevExpress.XtraGrid.v17.1.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\DevExpress.XtraLayout.v17.1.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\DevExpress.XtraPrinting.v17.1.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\DevExpress.Pdf.v17.1.Core.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\DevExpress.RichEdit.v17.1.Core.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\DevExpress.XtraTreeList.v17.1.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\DevExpress.Office.v17.1.Core.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\DevExpress.Data.v17.1.xml
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\DevExpress.Utils.v17.1.xml
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\DevExpress.Sparkline.v17.1.Core.xml
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\DevExpress.XtraBars.v17.1.xml
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\DevExpress.XtraEditors.v17.1.xml
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\DevExpress.Printing.v17.1.Core.xml
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\DevExpress.XtraGrid.v17.1.xml
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\DevExpress.XtraLayout.v17.1.xml
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\DevExpress.XtraPrinting.v17.1.xml
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\DevExpress.Pdf.v17.1.Core.xml
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\DevExpress.RichEdit.v17.1.Core.xml
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\DevExpress.XtraTreeList.v17.1.xml
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\DevExpress.Office.v17.1.Core.xml
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\de\DevExpress.Data.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\es\DevExpress.Data.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\ja\DevExpress.Data.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\ru\DevExpress.Data.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\de\DevExpress.Utils.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\es\DevExpress.Utils.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\ja\DevExpress.Utils.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\ru\DevExpress.Utils.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\de\DevExpress.Sparkline.v17.1.Core.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\es\DevExpress.Sparkline.v17.1.Core.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\ja\DevExpress.Sparkline.v17.1.Core.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\ru\DevExpress.Sparkline.v17.1.Core.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\de\DevExpress.XtraBars.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\es\DevExpress.XtraBars.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\ja\DevExpress.XtraBars.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\ru\DevExpress.XtraBars.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\de\DevExpress.XtraEditors.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\es\DevExpress.XtraEditors.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\ja\DevExpress.XtraEditors.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\ru\DevExpress.XtraEditors.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\de\DevExpress.Printing.v17.1.Core.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\es\DevExpress.Printing.v17.1.Core.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\ja\DevExpress.Printing.v17.1.Core.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\ru\DevExpress.Printing.v17.1.Core.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\de\DevExpress.XtraGrid.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\es\DevExpress.XtraGrid.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\ja\DevExpress.XtraGrid.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\ru\DevExpress.XtraGrid.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\de\DevExpress.XtraLayout.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\es\DevExpress.XtraLayout.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\ja\DevExpress.XtraLayout.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\ru\DevExpress.XtraLayout.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\de\DevExpress.XtraPrinting.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\es\DevExpress.XtraPrinting.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\ja\DevExpress.XtraPrinting.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\ru\DevExpress.XtraPrinting.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\de\DevExpress.Pdf.v17.1.Core.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\es\DevExpress.Pdf.v17.1.Core.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\ja\DevExpress.Pdf.v17.1.Core.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\ru\DevExpress.Pdf.v17.1.Core.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\de\DevExpress.RichEdit.v17.1.Core.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\es\DevExpress.RichEdit.v17.1.Core.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\ja\DevExpress.RichEdit.v17.1.Core.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\ru\DevExpress.RichEdit.v17.1.Core.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\de\DevExpress.XtraTreeList.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\es\DevExpress.XtraTreeList.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\ja\DevExpress.XtraTreeList.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\ru\DevExpress.XtraTreeList.v17.1.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\de\DevExpress.Office.v17.1.Core.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\es\DevExpress.Office.v17.1.Core.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\ja\DevExpress.Office.v17.1.Core.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\bin\Debug\ru\DevExpress.Office.v17.1.Core.resources.dll
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\obj\Debug\PersonnelManagement.exe
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\obj\Debug\PersonnelManagement.pdb
+C:\Users\LXM\documents\visual studio 2015\Projects\PersonnelManagement\PersonnelManagement\obj\Debug\PersonnelManagement.FrmSecond.resources
+C:\Users\LXM\Documents\Visual Studio 2015\Projects\PersonnelManagement\PersonnelManagement\obj\Debug\PersonnelManagement.dll.licenses
+E:\project\1\BarCode\Lib\PersonnelManagement.dll.config
+E:\project\1\BarCode\Lib\PersonnelManagement.dll
+E:\project\1\BarCode\Lib\PersonnelManagement.pdb
+E:\project\1\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.csprojResolveAssemblyReference.cache
+E:\project\1\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.FrmPersion.resources
+E:\project\1\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.Properties.Resources.resources
+E:\project\1\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.csproj.GenerateResource.Cache
+E:\project\1\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.dll.licenses
+E:\project\1\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.dll
+E:\project\1\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.pdb
+E:\project\1\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.FrmInf.resources
+E:\project\1\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.FrmExport.resources
+E:\project\1\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.FrmInport.resources
+D:\project\1\BarCode\Lib\PersonnelManagement.dll.config
+D:\project\1\BarCode\Lib\PersonnelManagement.dll
+D:\project\1\BarCode\Lib\PersonnelManagement.pdb
+D:\project\1\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.csprojResolveAssemblyReference.cache
+D:\project\1\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.FrmExport.resources
+D:\project\1\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.FrmInfMain.resources
+D:\project\1\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.FrmOther.resources
+D:\project\1\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.FrmInf.resources
+D:\project\1\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.FrmInport.resources
+D:\project\1\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.FrmPersionMain.resources
+D:\project\1\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.FrmPersion.resources
+D:\project\1\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.Properties.Resources.resources
+D:\project\1\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.csproj.GenerateResource.Cache
+D:\project\1\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.dll.licenses
+D:\project\1\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.dll
+D:\project\1\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.pdb
+E:\project\BarCode\Lib\PersonnelManagement.dll.config
+E:\project\BarCode\Lib\PersonnelManagement.dll
+E:\project\BarCode\Lib\PersonnelManagement.pdb
+E:\project\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.csprojResolveAssemblyReference.cache
+E:\project\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.FrmExport.resources
+E:\project\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.FrmInfMain.resources
+E:\project\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.FrmOther.resources
+E:\project\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.FrmInf.resources
+E:\project\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.FrmInport.resources
+E:\project\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.FrmPersionMain.resources
+E:\project\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.FrmPersion.resources
+E:\project\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.Properties.Resources.resources
+E:\project\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.csproj.GenerateResource.Cache
+E:\project\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.dll.licenses
+E:\project\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.dll
+E:\project\BarCode\PersonnelManagement\obj\Debug\PersonnelManagement.pdb
