@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmExport));
             this.repositoryItemCheckEdit15 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
@@ -84,7 +85,7 @@
             this.bar1 = new DevExpress.XtraBars.Bar();
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.bar3 = new DevExpress.XtraBars.Bar();
-            this.barManager1 = new DevExpress.XtraBars.BarManager();
+            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar5 = new DevExpress.XtraBars.Bar();
             this.btnQuerry = new DevExpress.XtraBars.BarButtonItem();
             this.btnClear = new DevExpress.XtraBars.BarButtonItem();
@@ -187,6 +188,7 @@
             this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
             this.txtNum = new DevExpress.XtraEditors.TextEdit();
             this.labelControl44 = new DevExpress.XtraEditors.LabelControl();
+            this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckedComboBoxEdit1)).BeginInit();
@@ -876,9 +878,10 @@
             this.btnExport,
             this.btnClear,
             this.btnAdd,
-            this.btnDel});
+            this.btnDel,
+            this.btnExportExcel});
             this.barManager1.MainMenu = this.bar5;
-            this.barManager1.MaxItemId = 9;
+            this.barManager1.MaxItemId = 10;
             // 
             // bar5
             // 
@@ -891,7 +894,8 @@
             this.bar5.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnQuerry, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnClear, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExport, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExport, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExportExcel, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar5.OptionsBar.MultiLine = true;
             this.bar5.OptionsBar.UseWholeRow = true;
             this.bar5.Text = "Main menu";
@@ -914,7 +918,7 @@
             // 
             // btnExport
             // 
-            this.btnExport.Caption = "导出";
+            this.btnExport.Caption = "导出为中组部格式";
             this.btnExport.Id = 2;
             this.btnExport.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnExport.ImageOptions.Image")));
             this.btnExport.Name = "btnExport";
@@ -1383,7 +1387,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 23);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(974, 240);
+            this.tabPage2.Size = new System.Drawing.Size(966, 240);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "工作信息";
             // 
@@ -1850,6 +1854,14 @@
             this.labelControl44.TabIndex = 94;
             this.labelControl44.Text = "查询结果条数：";
             // 
+            // btnExportExcel
+            // 
+            this.btnExportExcel.Caption = "导出为excel格式";
+            this.btnExportExcel.Id = 9;
+            this.btnExportExcel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.Image")));
+            this.btnExportExcel.Name = "btnExportExcel";
+            this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
+            // 
             // FrmExport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -2131,6 +2143,7 @@
         private DevExpress.XtraEditors.DateEdit dDeadLine;
         private DevExpress.XtraEditors.TextEdit txtCurrentJob;
         private DevExpress.XtraEditors.LabelControl labelControl2;
+        private DevExpress.XtraBars.BarButtonItem btnExportExcel;
     }
 }
 

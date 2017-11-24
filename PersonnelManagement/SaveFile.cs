@@ -115,12 +115,12 @@ namespace PersonnelManagement
             {
                 for (int i = 0; i < dt_resume.Rows.Count - 1; i++)
                 {
-                    s.Append(@"""" + Convert.ToDateTime(dt_resume.Rows[i]["dStartDate"]).ToString("yyyy.MM") + "-"
-                        + Convert.ToDateTime(dt_resume.Rows[i]["dDeadline"]).ToString("yyyy.MM") + "       "
+                    s.Append(@"""" + dt_resume.Rows[i]["dStartDate"]+ "-"
+                        + dt_resume.Rows[i]["dDeadline"] + "       "
                         + dt_resume.Rows[i]["cExperience"].ToString() + "\r\n");
                 }
-                s.Append(@"""" + Convert.ToDateTime(dt_resume.Rows[dt_resume.Rows.Count - 1]["dStartDate"]).ToString("yyyy.MM") + "-"
-                        + Convert.ToDateTime(dt_resume.Rows[dt_resume.Rows.Count - 1]["dDeadline"]).ToString("yyyy.MM") + "       "
+                s.Append(@"""" + dt_resume.Rows[dt_resume.Rows.Count - 1]["dStartDate"] + "-"
+                        + dt_resume.Rows[dt_resume.Rows.Count - 1]["dDeadline"]+ "       "
                         + dt_resume.Rows[dt_resume.Rows.Count - 1]["cExperience"].ToString() + @""",");
             }
             dt_resume.Dispose();
