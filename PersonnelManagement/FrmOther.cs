@@ -58,7 +58,7 @@ namespace PersonnelManagement
             };
             MySqlParameter[] param = ilistStr.ToArray();
             DataTable dt= MySQLHelper.table("SELECT * FROM data_persion WHERE cName=@cName AND dBirth_date=@dBirth_date ", param);
-            SaveFile.Export(dt);
+            SaveFile.ExportLrm(dt);
         }
 
         /// <summary>

@@ -2,6 +2,7 @@
 using DevExpress.XtraEditors;
 using System;
 using System.Data;
+using System.Data.OleDb;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -10,7 +11,12 @@ namespace PersonnelManagement
 {
     public class SaveFile
     {
-        public static void saveFile(string s, string name)
+        /// <summary>
+        /// 保存对话框
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="name"></param>
+        private static void saveFile(string s, string name)
         {
 
             using (SaveFileDialog saveDialog = new SaveFileDialog())    //离开后销毁对话框
@@ -79,8 +85,8 @@ namespace PersonnelManagement
         /// 格式化数据
         /// </summary>
         /// <param name="dt"></param>
-        /// <returns></returns>
-        public static string formString(DataTable dt)
+        /// <returns>返回lrm字符串</returns>
+        private static string formString(DataTable dt)
         {
             StringBuilder s = new StringBuilder("");
             if (dt == null || dt.Rows.Count < 0)
@@ -188,9 +194,140 @@ namespace PersonnelManagement
             return s.ToString();
         }
 
-        public static void Export(DataTable dt, string name = "")
+        public static void ExportLrm(DataTable dt, string name = "")
         {
             saveFile(formString(dt), name);
+        }
+        public static void ExportExcel(string name)
+        {
+            using (SaveFileDialog saveDialog = new SaveFileDialog())    //离开后销毁对话框
+            {
+                //string name = gvType.GetFocusedDataRow()["cName"].ToString() + "-";
+                saveDialog.FileName = name + DateTime.Now.ToString("yyyyMMdd");
+                saveDialog.Filter = "Excel files (*.xlsx)|*.xlsx";
+                if (saveDialog.ShowDialog() != DialogResult.Cancel)  //用户点击保存按钮
+                {
+                    string exportFilePath = saveDialog.FileName;        //定义文件路径              
+                    string fileExtenstion = new FileInfo(exportFilePath).Extension; //创建文件
+                    if (saveDialog.FileName.Trim().Length > 0)
+                    {
+                        byte[] excel = Properties.Resources.模版;
+                        FileStream stream = new FileStream(saveDialog.FileName, FileMode.Create);
+                        stream.Write(excel, 0, excel.Length);
+                        stream.Close();
+                        stream.Dispose();
+                        //XtraMessageBox.Show("保存成功", "提示");
+
+                        string Path = exportFilePath;
+                        if (Path == "")
+                            return;
+                        try
+                        {
+                            string sConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Path + ";" + ";Extended Properties='Excel 12.0;HDR=Yes;IMEX=0;'";
+                            OleDbConnection cn = new OleDbConnection(sConnectionString);
+                            string c = "INSERT INTO [后备干部$] (本人姓名,出生年月,年度,级别,备注) VALUES('lxm','1995/07','1995','1','2')";
+                            OleDbCommand cmd = new OleDbCommand(c, cn);
+                            //创建Excel文件
+                            cn.Open();
+                            //添加数据
+                            cmd.ExecuteNonQuery();
+                            //关闭连接
+                            cn.Close();
+                        }
+                        catch (OleDbException err)
+                        {
+                            XtraMessageBox.Show(err.Message);
+                        }
+                    }
+                }
+            };
+        }
+
+        public static void ExportWord(DataTable dt, string name)
+        {
+            try
+            {
+                object oMissing = System.Reflection.Missing.Value;
+                //创建一个Word应用程序实例  
+                Microsoft.Office.Interop.Word._Application oWord = new Microsoft.Office.Interop.Word.Application();
+                //设置为不可见  
+                oWord.Visible = false;
+                //模板文件地址，这里假设在X盘根目录  
+                object oTemplate = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "model//word.doc";
+                //以模板为基础生成文档  
+                Microsoft.Office.Interop.Word._Document oDoc = oWord.Documents.Add(ref oTemplate, ref oMissing, ref oMissing, ref oMissing);
+
+                #region //声明书签数组  
+                object[] oBookMark = new object[63];
+                //赋值书签名  
+                oBookMark[0] = "cName";
+                oBookMark[1] = "cSex";
+                oBookMark[2] = "dBirth_date";
+                oBookMark[3] = "cEage";
+                oBookMark[4] = "cNation";
+                oBookMark[5] = "cNativePlace";
+                oBookMark[6] = "cBirthPlace";
+                oBookMark[7] = "dJoin_date";
+                oBookMark[8] = "dWorkDate";
+                oBookMark[9] = "cHealthStatus";
+                oBookMark[10] = "cDuties";
+                oBookMark[11] = "cSkill";
+                oBookMark[12] = "cFull_timeEducation";
+                oBookMark[13] = "cFull_timeDegree";
+                oBookMark[14] = "cFull_timeSchool";
+                oBookMark[15] = "cFull_timeMajor";
+                oBookMark[16] = "cIn_serviceEducation";
+                oBookMark[17] = "cIn_serviceDegree";
+                oBookMark[18] = "cIn_serviceSchool";
+                oBookMark[19] = "cIn_serviceMajor";
+                oBookMark[20] = "cCurrentJob";
+                oBookMark[21] = "cProposedJob";
+                oBookMark[22] = "cRemoveJob";
+
+
+                //赋值任意数据到书签的位置  
+                oDoc.Bookmarks.get_Item(ref oBookMark[0]).Range.Text = dt.Rows[0]["cName"].ToString();
+                oDoc.Bookmarks.get_Item(ref oBookMark[1]).Range.Text = dt.Rows[0]["cSex"].ToString();
+                oDoc.Bookmarks.get_Item(ref oBookMark[2]).Range.Text = dt.Rows[0]["dBirth_date"].ToString();
+                oDoc.Bookmarks.get_Item(ref oBookMark[3]).Range.Text = dt.Rows[0]["cAge"].ToString();
+                oDoc.Bookmarks.get_Item(ref oBookMark[4]).Range.Text = dt.Rows[0]["cNation"].ToString();
+                oDoc.Bookmarks.get_Item(ref oBookMark[5]).Range.Text = dt.Rows[0]["cNativePlace"].ToString();
+                oDoc.Bookmarks.get_Item(ref oBookMark[6]).Range.Text = dt.Rows[0]["cBirthPlace"].ToString();
+                oDoc.Bookmarks.get_Item(ref oBookMark[7]).Range.Text = dt.Rows[0]["dJoin_date"].ToString();
+                oDoc.Bookmarks.get_Item(ref oBookMark[8]).Range.Text = dt.Rows[0]["dWorkDate"].ToString();
+                oDoc.Bookmarks.get_Item(ref oBookMark[9]).Range.Text = dt.Rows[0]["cHealthStatus"].ToString();
+                oDoc.Bookmarks.get_Item(ref oBookMark[10]).Range.Text = dt.Rows[0]["cDuties"].ToString();
+
+                #endregion
+                using (SaveFileDialog sfd = new SaveFileDialog())    //离开后销毁对话框
+                {
+                    //string name = gvType.GetFocusedDataRow()["cName"].ToString() + "-";
+                    sfd.FileName = name;
+                    sfd.Filter = "Word Document(*.doc)|*.doc";
+                    if (sfd.ShowDialog() != DialogResult.Cancel)  //用户点击保存按钮
+                    {
+                        //string exportFilePath = sfd.FileName;        //定义文件路径              
+                        //string fileExtenstion = new FileInfo(exportFilePath).Extension; //创建文件
+                        if (sfd.FileName.Trim().Length > 0)
+                        {
+                            object filename = sfd.FileName;
+
+                            oDoc.SaveAs(ref filename, ref oMissing, ref oMissing, ref oMissing,
+                            ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing,
+                            ref oMissing, ref oMissing, ref oMissing, ref oMissing, ref oMissing,
+                            ref oMissing, ref oMissing);
+                            oDoc.Close(ref oMissing, ref oMissing, ref oMissing);
+                            //关闭word  
+                            oWord.Quit(ref oMissing, ref oMissing, ref oMissing);
+                        }
+                        XtraMessageBox.Show("保存成功", "提示");
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                XtraMessageBox.Show(err.Message);
+            }
         }
     }
 }

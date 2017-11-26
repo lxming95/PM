@@ -138,7 +138,8 @@ namespace PersonnelManagement
                 return;
             }
 
-            SaveFile.saveFile(SaveFile.formString(row.Table),"");
+            string name = row["cName"].ToString() + "-";
+            SaveFile.ExportLrm(row.Table, "");
             //XtraMessageBox.Show(@"""");
             //FrmInf frm = new FrmInf(row["pid"].ToString());
             //frm.Show();

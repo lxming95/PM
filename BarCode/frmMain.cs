@@ -39,7 +39,7 @@ namespace BarCode
 
             //Banner初始化
             InitBanner();
-            
+
 
             Pub.PubValue.frmmain = this;
 

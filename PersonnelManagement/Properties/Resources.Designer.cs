@@ -63,6 +63,16 @@ namespace PersonnelManagement.Properties {
         /// <summary>
         ///   查找 System.Byte[] 类型的本地化资源。
         /// </summary>
+        internal static byte[] word模版 {
+            get {
+                object obj = ResourceManager.GetObject("word模版", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
         internal static byte[] 模版 {
             get {
                 object obj = ResourceManager.GetObject("模版", resourceCulture);

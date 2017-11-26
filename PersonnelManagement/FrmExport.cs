@@ -8,6 +8,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using PersonnelManagement;
+using System.Data.OleDb;
+using System.IO;
 
 namespace PersonnelManagement
 {
@@ -28,6 +30,8 @@ namespace PersonnelManagement
             {
                 gvType.OptionsSelection.MultiSelect = true;
                 gvType.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
+                //设置列宽
+                gvType.OptionsSelection.CheckBoxSelectorColumnWidth = 30;
             }
             //不显示CheckBox列初始化界面
             else
@@ -88,7 +92,7 @@ namespace PersonnelManagement
             Match m = r.Match(txtEage.Text);    //匹配源文本
             Match m2 = r.Match(txtEage2.Text);  //匹配源文本
             DateTime date1 = DateTime.Now;
-            if (dDate.Text != "基准时间")
+            if (dDate.Text != "基准时间"&& dDate.Text != "")
             {
                 date1 = Convert.ToDateTime(dDate.Text);
             }
@@ -176,25 +180,45 @@ namespace PersonnelManagement
                     //MyStringBuilder.Append(" and cNativePlace =@cNativePlace ");
                     MyStringBuilder.Append(" and cNativePlace like '%" + txtNativePlace.Text + "%'");
                 }
-            if (txtIsNative.Text!="")
+            //本地人
+            if (cbIsNative.Checked==true)
             {
-                if(txtIsNative.Text.Equals("本地"))
-                    MyStringBuilder.Append(" and bIsNative = 1");
-                if (txtIsNative.Text.Equals("外地"))
-                    MyStringBuilder.Append(" and bIsNative = 0");
+                MyStringBuilder.Append(" and bIsNative = 1");
+                //if(txtIsNative.Text.Equals("本地"))
+                //    MyStringBuilder.Append(" and bIsNative = 1");
+                //if (txtIsNative.Text.Equals("外地"))
+                //    MyStringBuilder.Append(" and bIsNative = 0");
             }
+            //党政正职
+            if (cbIsOfficialPosition.Checked==true)
+            {
+                MyStringBuilder.Append(" and bIsOfficialPosition = 1");
+            }
+            //现任职务
             if (txtCurrentJob.Text!="")
             {
                 MyStringBuilder.Append(" and cCurrentJob like '%" + txtCurrentJob.Text + "%'");
             }
+            //身份类别
             if (txtcIdentityCategory.Text != "")
             {
                 MyStringBuilder.Append(" and cIdentityCategory like '%" + txtcIdentityCategory.Text + "%'");
             }
+            //个人所属职级
             if (txtcRank.Text != "")
             {
                 MyStringBuilder.Append(" and cRank like '%" + txtcRank.Text + "%'");
             }
+            //干部身份取得
+            if (dGetCadresDate.Text != "" && dGetCadresDate.Text != "起")
+                MyStringBuilder.Append(" and dGetCadresDate like '%" + Convert.ToDateTime(dGetCadresDate.DateTime).ToString("yyyy-MM") + "%'");
+            if (txtgcDocumentBasis.Text != "")
+                MyStringBuilder.Append(" and cDocumentBasis like '%" + txtgcDocumentBasis.Text + "%'");
+            if (txtgcApprovingAuthority.Text != "")
+                MyStringBuilder.Append(" and cApprovingAuthority like '%" + txtgcApprovingAuthority.Text + "%'");
+            if (txtgcWay.Text != "")
+                MyStringBuilder.Append(" and cWay like '%" + txtgcWay.Text + "%'");
+
             #endregion
 
 
@@ -203,10 +227,10 @@ namespace PersonnelManagement
             DataTable dt = new DataTable();
             #region 工作经历
             //简历起始时间
-            if (dStartDate.Text != "")
+            if (dStartDate.Text != ""&& dStartDate.Text != "起")
                 other.Append(" and dStartDate like '" + Convert.ToDateTime(dStartDate.DateTime).ToString("yyyy-MM") + "%'");
             //简历结束时间
-            if (dDeadLine.Text != "")
+            if (dDeadLine.Text != ""&& dDeadLine.Text != "止")
                 other.Append(" and dDeadline like '" + Convert.ToDateTime(dDeadLine.DateTime).ToString("yyyy-MM") + "%'");
 
             //学习或者工作单位
@@ -216,15 +240,18 @@ namespace PersonnelManagement
                     //MyStringBuilder.Append(" and cExperience =@Experience ");
                     other.Append(" and cExperience like '%" + txtExperience.Text + "%'");
                 }
-            dt= MySQLHelper.table("SELECT DISTINCT(PersionID) from data_resume where PersionID IS NOT NULL " + other);
-            if(dStartDate.Text != ""&& dDeadLine.Text != ""&& txtExperience.Text != "")
-                MyStringBuilder.Append(" and pid in ("+GetPidFromDatetable(dt)+")");
+            if (!other.Equals(""))
+            {
+                dt = MySQLHelper.table("SELECT DISTINCT(PersionID) from data_resume where PersionID IS NOT NULL " + other);
+                //if(dStartDate.Text != "" && dStartDate.Text != "起" && dDeadLine.Text != "" && dDeadLine.Text != "止" && txtExperience.Text != "")
+                MyStringBuilder.Append(" and pid in (" + GetPidFromDatetable(dt) + ")");
+            }
             other.Clear();
             dt.Clear();
             #endregion
 
             #region 奖惩信息
-            if (dRewardData.Text != "")
+            if (dRewardData.Text != ""&& dRewardData.Text != "起")
                 other.Append(" and dData like '%" + Convert.ToDateTime(dRewardData.DateTime).ToString("yyyy-MM") + "%'");
             if (txtcCategory.Text != "")
                 other.Append(" and cCategory like '%" + txtcCategory.Text+ "%'");
@@ -232,68 +259,83 @@ namespace PersonnelManagement
                 other.Append(" and cLevel like '%" + txtcLevel.Text+ "%'");
             if (txtcDetailed.Text != "")
                 other.Append(" and cDetailed like '%" + txtcDetailed.Text + "%'");
-            dt = MySQLHelper.table("SELECT DISTINCT(PersionID) from data_rewards_punishments where PersionID IS NOT NULL " + other);
-            if(dRewardData.Text != ""&& txtcCategory.Text != ""&& txtcLevel.Text != ""&& txtcDetailed.Text != "")
+            if (!other.Equals(""))
+            {
+                dt = MySQLHelper.table("SELECT DISTINCT(PersionID) from data_rewards_punishments where PersionID IS NOT NULL " + other);
+                //if(dRewardData.Text != "" && dRewardData.Text != "起" && txtcCategory.Text != ""&& txtcLevel.Text != ""&& txtcDetailed.Text != "")
                 MyStringBuilder.Append(" and pid in (" + GetPidFromDatetable(dt) + ")");
+            }
             other.Clear();
             dt.Clear();
             #endregion 
             #region 考核结果
-            if (dCheckYear.Text!="")
-                other.Append(" and dcrYear like '%" + Convert.ToDateTime(dRewardData.DateTime).ToString("yyyy") + "%'");
+            if (dCheckYear.Text!=""&& dCheckYear.Text != "起")
+                other.Append(" and dcrYear like '%" + Convert.ToDateTime(dCheckYear.DateTime).ToString("yyyy") + "%'");
             if(txtcrChechResult.Text!="")
                 other.Append(" and crChechResult like '%" + txtcrChechResult.Text + "%'");
-            dt = MySQLHelper.table("SELECT DISTINCT(PersionID) from data_checkresult where PersionID IS NOT NULL " + other);
-            if(dCheckYear.Text != ""&& txtcrChechResult.Text != "")
+            if (!other.Equals(""))
+            {
+                dt = MySQLHelper.table("SELECT DISTINCT(PersionID) from data_checkresult where PersionID IS NOT NULL " + other);
+                //if(dCheckYear.Text != "" && dCheckYear.Text != "起" && txtcrChechResult.Text != "")
                 MyStringBuilder.Append(" and pid in (" + GetPidFromDatetable(dt) + ")");
+            }
             other.Clear();
             dt.Clear();
             #endregion
             #region 干部身份取得
-            if (dGetCadresDate.Text!="")
-                other.Append(" and gcData like '%" + Convert.ToDateTime(dGetCadresDate.DateTime).ToString("yyyy-MM") + "%'");
-            if(txtgcDocumentBasis.Text!="")
-                other.Append(" and gcDocumentBasis like '%" + txtgcDocumentBasis.Text + "%'");
-            if(txtgcApprovingAuthority.Text!="")
-                other.Append(" and gcApprovingAuthority like '%" + txtgcApprovingAuthority.Text + "%'");
-            if(txtgcWay.Text!="")
-                other.Append(" and gcWay like '%" + txtgcWay.Text + "%'");
-            dt = MySQLHelper.table("SELECT DISTINCT(PersionID) from data_getcadres where PersionID IS NOT NULL " + other);
-            if(dGetCadresDate.Text != ""&& txtgcDocumentBasis.Text != ""&& txtgcApprovingAuthority.Text != ""&& txtgcWay.Text != "")
-                MyStringBuilder.Append(" and pid in (" + GetPidFromDatetable(dt) + ")");
+            //if (dGetCadresDate.Text!=""&& dGetCadresDate.Text != "起")
+            //    other.Append(" and gcData like '%" + Convert.ToDateTime(dGetCadresDate.DateTime).ToString("yyyy-MM") + "%'");
+            //if(txtgcDocumentBasis.Text!="")
+            //    other.Append(" and gcDocumentBasis like '%" + txtgcDocumentBasis.Text + "%'");
+            //if(txtgcApprovingAuthority.Text!="")
+            //    other.Append(" and gcApprovingAuthority like '%" + txtgcApprovingAuthority.Text + "%'");
+            //if(txtgcWay.Text!="")
+            //    other.Append(" and gcWay like '%" + txtgcWay.Text + "%'");
+            //if (!other.Equals(""))
+            //{
+            //    dt = MySQLHelper.table("SELECT DISTINCT(PersionID) from data_getcadres where PersionID IS NOT NULL " + other);
+            //    //if(dGetCadresDate.Text != "" && dGetCadresDate.Text != "起" && txtgcDocumentBasis.Text != ""&& txtgcApprovingAuthority.Text != ""&& txtgcWay.Text != "")
+            //    MyStringBuilder.Append(" and pid in (" + GetPidFromDatetable(dt) + ")");
+            //}
             other.Clear();
             dt.Clear();
             #endregion
             #region  后备干部时间
-            if(dReservecadreDate.Text!="")
-                other.Append(" and rcYear like '%" + Convert.ToDateTime(dRewardData.DateTime).ToString("yyyy") + "%'");
+            if(dReservecadreDate.Text!=""&& dReservecadreDate.Text != "起")
+                other.Append(" and rcYear like '%" + Convert.ToDateTime(dReservecadreDate.DateTime).ToString("yyyy") + "%'");
             if(txtrcLevel.Text!="")
                 other.Append(" and rcLevel like '%" + txtrcLevel.Text + "%'");
-            dt = MySQLHelper.table("SELECT DISTINCT(PersionID) from data_reservecadre where PersionID IS NOT NULL " + other);
-            if(dReservecadreDate.Text != ""&& txtrcLevel.Text != "")
+            if (!other.Equals(""))
+            {
+                dt = MySQLHelper.table("SELECT DISTINCT(PersionID) from data_reservecadre where PersionID IS NOT NULL " + other);
+                //if(dReservecadreDate.Text != "" && dReservecadreDate.Text != "起" && txtrcLevel.Text != "")
                 MyStringBuilder.Append(" and pid in (" + GetPidFromDatetable(dt) + ")");
+            }
             other.Clear();
             dt.Clear();
             #endregion
             #region 现实表现
-            if(dPerformanceDate.Text!="")
-                other.Append(" and dData like '%" + Convert.ToDateTime(dRewardData.DateTime).ToString("yyyy") + "%'");
+            if(dPerformanceDate.Text!=""&& dPerformanceDate.Text != "起")
+                other.Append(" and rpYear like '%" + Convert.ToDateTime(dPerformanceDate.DateTime).ToString("yyyy") + "%'");
             if(txtcSelfEvaluation.Text!="")
                 other.Append(" and cSelfEvaluation like '%" + txtcSelfEvaluation.Text + "%'");
             if (txtcUnitEvaluation.Text != "")
                 other.Append(" and cUnitEvaluation like '%" + txtcUnitEvaluation.Text + "%'");
             if (txtcOrganizationEvaluation.Text != "")
                 other.Append(" and cOrganizationEvaluation like '%" + txtcOrganizationEvaluation.Text + "%'");
-            dt = MySQLHelper.table("SELECT DISTINCT(PersionID) from data_performance where PersionID IS NOT NULL  " + other);
-            if(dPerformanceDate.Text != ""&& txtcSelfEvaluation.Text != ""&& txtcOrganizationEvaluation.Text != "")
+            if (!other.Equals(""))
+            {
+                dt = MySQLHelper.table("SELECT DISTINCT(PersionID) from data_performance where PersionID IS NOT NULL  " + other);
+                //if(dPerformanceDate.Text != "" && dPerformanceDate.Text != "起" && txtcSelfEvaluation.Text != ""&& txtcOrganizationEvaluation.Text != "")
                 MyStringBuilder.Append(" and pid in (" + GetPidFromDatetable(dt) + ")");
+            }
             other.Clear();
             dt.Clear();
             #endregion
             #endregion
 
 
-            gcType.DataSource = MySQLHelper.table("select * from data_persion where do_flag =1 " + MyStringBuilder);
+            gcType.DataSource = FormatDT(MySQLHelper.table("select * from data_persion where do_flag =1 " + MyStringBuilder),DateTime.Now);
             txtNum.Text = (gcType.DataSource as DataTable).Rows.Count.ToString();
 
         }
@@ -308,7 +350,7 @@ namespace PersonnelManagement
                 foreach (int drid in gvType.GetSelectedRows())
                 {
                     //ReturnDT.Rows.Add(gvType.GetDataRow(drid).ItemArray);
-                    SaveFile.Export(gvType.GetFocusedDataRow().Table, gvType.GetFocusedDataRow()["cName"].ToString()+"-");
+                    SaveFile.ExportLrm(gvType.GetFocusedDataRow().Table, gvType.GetFocusedDataRow()["cName"].ToString()+"-");
                 }
             }
             //不带CheckBox传值
@@ -322,7 +364,7 @@ namespace PersonnelManagement
                 }
 
                 //ReturnDT.Rows.Add(gvType.GetFocusedDataRow().ItemArray);
-                SaveFile.Export(gvType.GetFocusedDataRow().Table, gvType.GetFocusedDataRow()["cName"].ToString() + "-");
+                SaveFile.ExportLrm(gvType.GetFocusedDataRow().Table, gvType.GetFocusedDataRow()["cName"].ToString() + "-");
             }
 
 
@@ -399,46 +441,9 @@ namespace PersonnelManagement
         /// </summary>
         private void start()
         {
-            gcType.DataSource = MySQLHelper.table("select * from data_persion where do_flag =1");
+            gcType.DataSource = FormatDT(MySQLHelper.table("select * from data_persion where do_flag =1"),DateTime.Now);
+            dDate.Text = DateTime.Now.ToString("yyyy.MM");
 
-            //设置基准年龄选择框样式
-            var formatString = "yyyy.MM";
-            //var dateEdit = new DateEdit();
-            //格式化显示字符串
-            //dDate.Properties.DisplayFormat.FormatString = formatString;
-            //格式化编辑字符串
-            dDate.Properties.Mask.EditMask = formatString;
-            //使用编辑的格式作为显示的格式
-            dDate.Properties.Mask.UseMaskAsDisplayFormat = true;
-            //设置选择样式
-            dDate.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
-            dDate.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearView;
-            //性别下拉框绑定
-            DataTable dt = new DataTable();
-            dt.Columns.Add("sex", typeof(string));
-            dt.Rows.Add();
-            dt.Rows.Add();
-            dt.Rows.Add();
-            dt.Rows[0]["sex"] = "";
-            dt.Rows[1]["sex"] = "男";
-            dt.Rows[2]["sex"] = "女";
-
-            txtSex.Properties.ValueMember = "sex";   //相当于editvalue
-            txtSex.Properties.DisplayMember = "sex";
-            //txtSex.Properties.valuemember = "实际要用的字段";   //相当于editvalue
-            //txtSex.Properties.DisplayMember = "要显示的字段";    //相当于text
-            txtSex.Properties.DataSource = dt;
-            DataTable dtNative=new DataTable();
-            dtNative.Columns.Add("Native", typeof(string));
-            dtNative.Rows.Add();
-            dtNative.Rows.Add();
-            dtNative.Rows.Add();
-            dtNative.Rows[0]["Native"] = "";
-            dtNative.Rows[1]["Native"] = "本地";
-            dtNative.Rows[2]["Native"] = "外地";
-            txtIsNative.Properties.DataSource = dtNative;
-            txtIsNative.Properties.ValueMember = "Native";
-            txtIsNative.Properties.DisplayMember = "Native";
         }
         /// <summary>
         /// 输入字符的安全检测
@@ -454,7 +459,6 @@ namespace PersonnelManagement
             }
             else { return true; }
         }
-
         /// <summary>
         /// 获得datatable中PersionID的组合字符串，用于查询
         /// </summary>
@@ -469,9 +473,9 @@ namespace PersonnelManagement
                 {
                     s += dt.Rows[i]["PersionID"].ToString()+",";
                 }
-                s = s.Substring(0, s.Length - 1);
+                //s = s.Substring(0, s.Length - 1);
             }
-
+            s += @"''";
             return s;
         }
 
@@ -483,11 +487,120 @@ namespace PersonnelManagement
             dCheckYear.Properties.Mask.UseMaskAsDisplayFormat = true;
             dCheckYear.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearsGroupView;
             dCheckYear.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearsGroupView;
+
+            dPerformanceDate.Properties.Mask.EditMask = formatString;
+            dPerformanceDate.Properties.Mask.UseMaskAsDisplayFormat = true;
+            dPerformanceDate.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearsGroupView;
+            dPerformanceDate.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearsGroupView;
+
+            dReservecadreDate.Properties.Mask.EditMask = formatString;
+            dReservecadreDate.Properties.Mask.UseMaskAsDisplayFormat = true;
+            dReservecadreDate.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearsGroupView;
+            dReservecadreDate.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearsGroupView;
+
+            dCheckYear.Properties.Mask.EditMask = formatString;
+            dCheckYear.Properties.Mask.UseMaskAsDisplayFormat = true;
+            dCheckYear.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearsGroupView;
+            dCheckYear.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearsGroupView;
+
+            //设置基准年龄选择框样式
+            formatString = "yyyy.MM";
+            //var dateEdit = new DateEdit();
+            //格式化显示字符串
+            //dDate.Properties.DisplayFormat.FormatString = formatString;
+            //格式化编辑字符串
+            dDate.Properties.Mask.EditMask = formatString;
+            //使用编辑的格式作为显示的格式
+            dDate.Properties.Mask.UseMaskAsDisplayFormat = true;
+            //设置选择样式
+            dDate.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
+            dDate.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.Default;
+
+            dRewardData.Properties.Mask.EditMask = formatString;
+            dRewardData.Properties.Mask.UseMaskAsDisplayFormat = true;
+            dRewardData.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
+            dRewardData.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.Default;
+
+            dGetCadresDate.Properties.Mask.EditMask = formatString;
+            dGetCadresDate.Properties.Mask.UseMaskAsDisplayFormat = true;
+            dGetCadresDate.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
+            dGetCadresDate.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.Default;
         }
 
         private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            string name= gvType.GetFocusedDataRow()["cName"].ToString() + "-";
+            //SaveFile.ExportExcel(name);
 
+        }
+        /// <summary>
+        /// 获得年龄
+        /// </summary>
+        /// <param name="birthdate"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public int GetAgeByBirthdate(DateTime birthdate, DateTime date)
+        {
+            int age = date.Year - birthdate.Year;
+            //if (date.Month < birthdate.Month || (date.Month == birthdate.Month && date.Day < birthdate.Day))
+            if (date.Month < birthdate.Month)
+            {
+                age--;
+            }
+            return age < 0 ? 0 : age;
+        }
+        /// <summary>
+        /// 添加年龄，添加党政正职
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        private DataTable FormatDT(DataTable dt, DateTime date)
+        {
+            if (!dt.Columns.Contains("cAge"))
+                dt.Columns.Add("cAge", typeof(string));
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                dt.Rows[i]["cAge"] = GetAgeByBirthdate(Convert.ToDateTime(dt.Rows[i]["dBirth_date"] + "/01"), date);
+                if (dt.Rows[i]["bIsOfficialPosition"].ToString() == "1")
+                {
+                    dt.Rows[i]["bIsOfficialPosition"] = "是";
+                }
+                else
+                {
+                    dt.Rows[i]["bIsOfficialPosition"] = "否";
+                }
+            }
+
+            return dt;
+        }
+
+        private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            //带CheckBox传值
+            if (ExportCheckBox)
+            {
+                //返回传值
+                foreach (int drid in gvType.GetSelectedRows())
+                {
+                    //ReturnDT.Rows.Add(gvType.GetDataRow(drid).ItemArray);
+
+                    SaveFile.ExportWord(gvType.GetFocusedDataRow().Table, "《干部任免审批表-" + gvType.GetFocusedDataRow()["cName"].ToString() + gvType.GetFocusedDataRow()["dBirth_date"].ToString() + "》");
+                }
+            }
+            //不带CheckBox传值
+            else
+            {
+                //判断当前行是否为null
+                if (gvType.RowCount == 0)
+                {
+                    MessageBox.Show("数据为空！");
+                    return;
+                }
+
+                //ReturnDT.Rows.Add(gvType.GetFocusedDataRow().ItemArray);
+                SaveFile.ExportWord(gvType.GetFocusedDataRow().Table, "《干部任免审批表-"+gvType.GetFocusedDataRow()["cName"].ToString()+ gvType.GetFocusedDataRow()["dBirth_date"].ToString() + "》");
+            }
         }
     }
 }

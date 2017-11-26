@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraEditors;
 using MySql.Data.MySqlClient;
+using PersonnelManagement;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -14,11 +15,13 @@ namespace BarCode
         public static string shop_code = null,DBName=null,suserName=null;
         frmMain main;
         string[] password;
-        Boolean DLorGB = false;
+        bool DLorGB = false;
+        bool Authentication = false;
         public FrmLogin(frmMain frmMain)
         {
             //初始化登陆界面
             InitializeComponent();
+
             //设置当前的服务器，读取app.config配置文件
             String constr = ConfigurationManager.AppSettings["ConnectionString"];
             //截取服务器地址信息
@@ -28,8 +31,6 @@ namespace BarCode
                 txtServer.EditValue = sLocalHost[0];
                 password = sLocalHost[1].Split(new string[] { "gr_uf_jiekou;Persist Security Info=True;User ID=sa;Password=", "" }, StringSplitOptions.RemoveEmptyEntries);
                 main = frmMain;
-
-                
             }
             
         }
@@ -82,10 +83,19 @@ namespace BarCode
             
             if (dt!=null&&dt.Rows.Count>0)
             {
+               
                 if (suserPassword.Equals(dt.Rows[0]["user_pass"]))
                 {
                     this.Close();
-
+                    if (Authentication)
+                    { 
+                        if (GetId.IsTruePersion() != true)
+                        {
+                            XtraMessageBox.Show("请不要更换机器");
+                            this.Close();
+                            return;
+                        }
+                    }
                     DateTime LoginDate = DateTime.Today;
                     Pub.PubValue.ComputerName = Environment.MachineName;
                     //赋值执行程序目录

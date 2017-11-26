@@ -56,8 +56,8 @@ namespace PersonnelManagement
 
         private void btnSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            saveIteam();
-            if(this.Parent!=null)
+            bool su=saveIteam();
+            if (this.Parent!=null&& su)
                 if (DialogResult.Yes == XtraMessageBox.Show("是否继续添加？", "提示", MessageBoxButtons.YesNo) && isAdd)
             {
                 clear();
@@ -70,11 +70,11 @@ namespace PersonnelManagement
             btnSave_ItemClick(sender, e);
             List<MySqlParameter> ilistStr = new List<MySqlParameter> {
             new MySqlParameter("cName", txtcName.Text),
-            new MySqlParameter("cName", txtcName.Text),
+            new MySqlParameter("dBirth_date", dBirth_date.Text),
             };
             MySqlParameter[] param = ilistStr.ToArray();
             DataTable dt = MySQLHelper.table("SELECT * FROM data_persion WHERE cName=@cName AND dBirth_date=@dBirth_date ", param);
-            SaveFile.Export(dt);
+            SaveFile.ExportLrm(dt);
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace PersonnelManagement
             txtcCurrentJob.Text = gl_dt.Rows[0]["cCurrentJob"].ToString();              //现任职务
             txtcProposedJob.Text = gl_dt.Rows[0]["cProposedJob"].ToString();            //拟任职务
             txtcRemoveJob.Text = gl_dt.Rows[0]["cRemoveJob"].ToString();                //拟免职务
-            txtResume.Text = gl_dt.Rows[0]["cResume"].ToString();                       //工作经历
+            //txtResume.Text = gl_dt.Rows[0]["cResume"].ToString();                       //工作经历
             //txtcChech_Result.Text = gl_dt.Rows[0]["cChech_Result"].ToString();        //审核结果
             txtcDismissalReason.Text = gl_dt.Rows[0]["cDismissalReason"].ToString();    //任免理由
             txtcReporting_Unit.Text = gl_dt.Rows[0]["cReporting_Unit"].ToString();      //承包单位
@@ -175,6 +175,14 @@ namespace PersonnelManagement
             else
             {
                 cbIsNative.Checked = false;
+            }
+            if (gl_dt.Rows[0]["bIsOfficialPosition"].Equals("1"))
+            {
+                cbIsOfficialPosition.Checked = true;
+            }
+            else
+            {
+                cbIsOfficialPosition.Checked = false;
             }
 
             #endregion
@@ -220,7 +228,8 @@ namespace PersonnelManagement
             txtcDocumentBasis.Text = "";
             txtcApprovingAuthority.Text = "";
             txtcWay.Text = "";
-
+            cbIsNative.Checked = false;
+            cbIsOfficialPosition.Checked = false;
             #endregion
             #region clear all excel
             DataTable dt_clear = new DataTable();
@@ -303,9 +312,10 @@ namespace PersonnelManagement
         /// <summary>
         ///  保存数据
         /// </summary>
-        private void saveIteam()
+        private bool saveIteam()
         {
-            if (txtcName.Text != "")
+            bool su = false;
+            if (txtcName.Text != ""&&dBirth_date.Text!="")
             {
                 #region  制造数据集合
                 List<MySqlParameter> ilistStr = new List<MySqlParameter> {
@@ -327,7 +337,7 @@ namespace PersonnelManagement
                     new MySqlParameter("cCurrentJob", txtcCurrentJob.Text),
                     new MySqlParameter("cProposedJob", txtcProposedJob.Text),
                     new MySqlParameter("cRemoveJob", txtcRemoveJob.Text),
-                    new MySqlParameter("cResume", txtResume.Text),
+                    //new MySqlParameter("cResume", txtResume.Text),
 
                     new MySqlParameter("cIdentityCategory", txtIdentityCategory.Text),
                     new MySqlParameter("cRank", txtRank.Text),
@@ -360,6 +370,14 @@ namespace PersonnelManagement
                 else
                 {
                     ilistStr.Add(new MySqlParameter("bIsNative", "0"));
+                }
+                if (cbIsOfficialPosition.Checked == true)
+                {
+                    ilistStr.Add(new MySqlParameter("bIsOfficialPosition", "1"));
+                }
+                else
+                {
+                    ilistStr.Add(new MySqlParameter("bIsOfficialPosition", "0"));
                 }
                 gvResume.CloseEditor();
                 gvResume.UpdateCurrentRow();
@@ -394,7 +412,7 @@ namespace PersonnelManagement
                 {
 
                     //MySQLHelper.ExecuteNonQuery(" INSERT INTO data_persion(cName,cSex,dWorkDate) VALUES(@cName,@cSex,@dWorkDate)", param);
-                    MySQLHelper.ExecuteNonQuery(" INSERT INTO data_persion( cIdentityCategory,cRank,cName,cSex,dBirth_date,cNation,cNativePlace,dJoin_date,cHealthStatus, cBirthPlace, dWorkDate, cDuties, cSkill, cFull_timeEducation, cFull_timeSchool, cIn_serviceEducation, cIn_serviceSchool,cCurrentJob, cProposedJob, cRemoveJob,cResume, cDismissalReason, cReporting_Unit, dEageDate, dMakeDate, cMaker, do_flag,bIsNative,cFull_timeDegree,cFull_timeMajor,cIn_serviceDegree,cIn_serviceMajor,dGetCadresDate,cDocumentBasis,cApprovingAuthority,cWay ) VALUES( @cIdentityCategory,@cRank, @cName , @cSex , @dBirth_date , @cNation,@cNativePlace,@dJoin_date,@cHealthStatus, @cBirthPlace, @dWorkDate, @cDuties, @cSkill, @cFull_timeEducation, @cFull_timeSchool, @cIn_serviceEducation, @cIn_serviceSchool,@cCurrentJob, @cProposedJob, @cRemoveJob,@cResume, @cDismissalReason, @cReporting_Unit, @dEageDate, @dMakeDate, @cMaker, @do_flag, @bIsNative,@cFull_timeDegree,@cFull_timeMajor,@cIn_serviceDegree,@cIn_serviceMajor,@dGetCadresDate,@cDocumentBasis,@cApprovingAuthority,@cWay )", param);
+                    MySQLHelper.ExecuteNonQuery(" INSERT INTO data_persion( cIdentityCategory,cRank,cName,cSex,dBirth_date,cNation,cNativePlace,dJoin_date,cHealthStatus, cBirthPlace, dWorkDate, cDuties, cSkill, cFull_timeEducation, cFull_timeSchool, cIn_serviceEducation, cIn_serviceSchool,cCurrentJob, cProposedJob, cRemoveJob, cDismissalReason, cReporting_Unit, dEageDate, dMakeDate, cMaker, do_flag,bIsNative,bIsOfficialPosition,cFull_timeDegree,cFull_timeMajor,cIn_serviceDegree,cIn_serviceMajor,dGetCadresDate,cDocumentBasis,cApprovingAuthority,cWay ) VALUES( @cIdentityCategory,@cRank, @cName , @cSex , @dBirth_date , @cNation,@cNativePlace,@dJoin_date,@cHealthStatus, @cBirthPlace, @dWorkDate, @cDuties, @cSkill, @cFull_timeEducation, @cFull_timeSchool, @cIn_serviceEducation, @cIn_serviceSchool,@cCurrentJob, @cProposedJob, @cRemoveJob, @cDismissalReason, @cReporting_Unit, @dEageDate, @dMakeDate, @cMaker, @do_flag, @bIsNative,@bIsOfficialPosition,@cFull_timeDegree,@cFull_timeMajor,@cIn_serviceDegree,@cIn_serviceMajor,@dGetCadresDate,@cDocumentBasis,@cApprovingAuthority,@cWay )", param);
                 }
                 else
                 {
@@ -403,7 +421,7 @@ namespace PersonnelManagement
                     {
                         ilistStr.Add(new MySqlParameter("pid", gl_dt.Rows[0]["pid"].ToString()));
                         param = ilistStr.ToArray();
-                        MySQLHelper.ExecuteNonQuery(" UPDATE data_persion SET cIdentityCategory=@cIdentityCategory,cRank=@cRank,cName=@cName,cSex=@cSex,dBirth_date=@dBirth_date,cNation=@cNation,cNativePlace=@cNativePlace,dJoin_date=@dJoin_date,cHealthStatus=@cHealthStatus,cBirthPlace=@cBirthPlace,dWorkDate=@dWorkDate,cDuties=@cDuties,cSkill=@cSkill,cFull_timeEducation=@cFull_timeEducation,cFull_timeSchool=@cFull_timeSchool,cIn_serviceEducation=@cIn_serviceEducation,cIn_serviceSchool=@cIn_serviceSchool, cCurrentJob=@cCurrentJob,cProposedJob=@cProposedJob,cRemoveJob=@cRemoveJob,cResume=@cResume,cDismissalReason=@cDismissalReason,cReporting_Unit=@cReporting_Unit,dEageDate=@dEageDate,dMakeDate=@dMakeDate,cMaker=@cMaker,do_flag=@do_flag,bIsNative=@bIsNative,cFull_timeDegree=@cFull_timeDegree,cFull_timeMajor=@cFull_timeMajor,cIn_serviceDegree=@cIn_serviceDegree,cIn_serviceMajor=@cIn_serviceMajor,dGetCadresDate=@dGetCadresDate,cDocumentBasis=@cDocumentBasis,cApprovingAuthority=@cApprovingAuthority,cWay=@cWay WHERE pid=@pid", param);
+                        MySQLHelper.ExecuteNonQuery(" UPDATE data_persion SET cIdentityCategory=@cIdentityCategory,cRank=@cRank,cName=@cName,cSex=@cSex,dBirth_date=@dBirth_date,cNation=@cNation,cNativePlace=@cNativePlace,dJoin_date=@dJoin_date,cHealthStatus=@cHealthStatus,cBirthPlace=@cBirthPlace,dWorkDate=@dWorkDate,cDuties=@cDuties,cSkill=@cSkill,cFull_timeEducation=@cFull_timeEducation,cFull_timeSchool=@cFull_timeSchool,cIn_serviceEducation=@cIn_serviceEducation,cIn_serviceSchool=@cIn_serviceSchool, cCurrentJob=@cCurrentJob,cProposedJob=@cProposedJob,cRemoveJob=@cRemoveJob,cDismissalReason=@cDismissalReason,cReporting_Unit=@cReporting_Unit,dEageDate=@dEageDate,dMakeDate=@dMakeDate,cMaker=@cMaker,do_flag=@do_flag,bIsNative=@bIsNative,bIsOfficialPosition=@bIsOfficialPosition,cFull_timeDegree=@cFull_timeDegree,cFull_timeMajor=@cFull_timeMajor,cIn_serviceDegree=@cIn_serviceDegree,cIn_serviceMajor=@cIn_serviceMajor,dGetCadresDate=@dGetCadresDate,cDocumentBasis=@cDocumentBasis,cApprovingAuthority=@cApprovingAuthority,cWay=@cWay WHERE pid=@pid", param);
                     }
                     else
                     {
@@ -430,11 +448,12 @@ namespace PersonnelManagement
                                 List<MySqlParameter> tableStr = new List<MySqlParameter> {
                                     new MySqlParameter("dStartDate", dt_Resume.Rows[i]["dStartDate"].ToString()),
                                     new MySqlParameter("dDeadline", dt_Resume.Rows[i]["dDeadline"].ToString()),
+                                    new MySqlParameter("rLevel", dt_Resume.Rows[i]["rLevel"].ToString()),
                                     new MySqlParameter("cExperience", dt_Resume.Rows[i]["cExperience"].ToString()),
                                     new MySqlParameter("rid", dt_Resume.Rows[i]["rid"].ToString()),
                                     };
                                 MySqlParameter[] tableParam = tableStr.ToArray();
-                                MySQLHelper.ExecuteNonQuery("UPDATE data_resume SET dStartDate=@dStartDate ,dDeadline=@dDeadline ,cExperience=@cExperience WHERE rid=@rid ", tableParam);
+                                MySQLHelper.ExecuteNonQuery("UPDATE data_resume SET dStartDate=@dStartDate ,dDeadline=@dDeadline,rLevel=@rLevel ,cExperience=@cExperience WHERE rid=@rid ", tableParam);
                             }
                             else
                             {
@@ -442,10 +461,11 @@ namespace PersonnelManagement
                                 MySqlParameter[] tableParam = new MySqlParameter[]  {
                                     new MySqlParameter("dStartDate", dt_Resume.Rows[i]["dStartDate"].ToString()),
                                     new MySqlParameter("dDeadline", dt_Resume.Rows[i]["dDeadline"].ToString()),
+                                    new MySqlParameter("rLevel", dt_Resume.Rows[i]["cExperience"].ToString()),
                                     new MySqlParameter("cExperience", dt_Resume.Rows[i]["cExperience"].ToString()),
                                     new MySqlParameter("pid", dt_pid.Rows[0]["pid"].ToString()),
                                     };
-                                MySQLHelper.ExecuteNonQuery("INSERT INTO data_resume (PersionID,dStartDate,dDeadline,cExperience) VALUES(@pid,@dStartDate,@dDeadline,@cExperience )", tableParam);
+                                MySQLHelper.ExecuteNonQuery("INSERT INTO data_resume (PersionID,dStartDate,dDeadline,rLevel,cExperience) VALUES(@pid,@dStartDate,@dDeadline,@rLevel,@cExperience )", tableParam);
 
                             }
                         }
@@ -524,7 +544,7 @@ namespace PersonnelManagement
                                 new MySqlParameter("pid", dt_pid.Rows[0]["pid"].ToString()),
                                 };
                             MySqlParameter[] tableParam = tableStr.ToArray();
-                            MySQLHelper.ExecuteNonQuery("INSERT INTO data_familymembers (PersionID,cfCalled,cfName,dfBirthDate,cfPoliticalStatus,cfDuties) VALUES(@PersionID,@cfCalled,@cfName,@dfBirthDate,@cfPoliticalStatus,@cfDuties)", tableParam);
+                            MySQLHelper.ExecuteNonQuery("INSERT INTO data_familymembers (PersionID,cfCalled,cfName,dfBirthDate,cfPoliticalStatus,cfDuties) VALUES(@pid,@cfCalled,@cfName,@dfBirthDate,@cfPoliticalStatus,@cfDuties)", tableParam);
                         }
                     }
                     
@@ -704,9 +724,15 @@ namespace PersonnelManagement
 
                 }
                 #endregion
-
+                su = true;
+                return su ;
             }
-            else { XtraMessageBox.Show("请填写关键数据"); }
+            else {
+                su = false;
+
+                XtraMessageBox.Show("请填写姓名和出生年月");
+                return su;
+            }
         }
         /// <summary>
         /// formatDateEdit
@@ -718,33 +744,33 @@ namespace PersonnelManagement
             //dfBirthDateDateEdit.DisplayFormat.FormatString = formatString;
             dfBirthDateDateEdit.Mask.EditMask = formatString;
             dfBirthDateDateEdit.Mask.UseMaskAsDisplayFormat = true;
-            dfBirthDateDateEdit.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
-            dfBirthDateDateEdit.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearView;
+            dfBirthDateDateEdit.VistaCalendarInitialViewStyle = VistaCalendarInitialViewStyle.YearView;
+            dfBirthDateDateEdit.VistaCalendarViewStyle = VistaCalendarViewStyle.Default;
 
             dStratDateEdit.Mask.EditMask = formatString;
             dStratDateEdit.Mask.UseMaskAsDisplayFormat = true;
-            dStratDateEdit.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
-            dStratDateEdit.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearView;
+            dStratDateEdit.VistaCalendarInitialViewStyle = VistaCalendarInitialViewStyle.YearView;
+            dStratDateEdit.VistaCalendarViewStyle = VistaCalendarViewStyle.Default;
 
             dBirth_date.Properties.Mask.EditMask = formatString;
             dBirth_date.Properties.Mask.UseMaskAsDisplayFormat = true;
-            dBirth_date.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
-            dBirth_date.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearView;
+            dBirth_date.Properties.VistaCalendarInitialViewStyle = VistaCalendarInitialViewStyle.YearView;
+            dBirth_date.Properties.VistaCalendarViewStyle = VistaCalendarViewStyle.Default;
 
             dJoin_date.Properties.Mask.EditMask = formatString;
             dJoin_date.Properties.Mask.UseMaskAsDisplayFormat = true;
-            dJoin_date.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
-            dJoin_date.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearView;
+            dJoin_date.Properties.VistaCalendarInitialViewStyle = VistaCalendarInitialViewStyle.YearView;
+            dJoin_date.Properties.VistaCalendarViewStyle = VistaCalendarViewStyle.Default;
 
             dWorkDate.Properties.Mask.EditMask = formatString;
             dWorkDate.Properties.Mask.UseMaskAsDisplayFormat = true;
-            dWorkDate.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
-            dWorkDate.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearView;
+            dWorkDate.Properties.VistaCalendarInitialViewStyle = VistaCalendarInitialViewStyle.YearView;
+            dWorkDate.Properties.VistaCalendarViewStyle = VistaCalendarViewStyle.Default;
 
             dDate4.Properties.Mask.EditMask = formatString;
             dDate4.Properties.Mask.UseMaskAsDisplayFormat = true;
-            dDate4.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
-            dDate4.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearView;
+            dDate4.Properties.VistaCalendarInitialViewStyle = VistaCalendarInitialViewStyle.YearView;
+            dDate4.Properties.VistaCalendarViewStyle = VistaCalendarViewStyle.Default;
 
             formatString = "yyyy.MM.dd";
             dDate5.Mask.EditMask = formatString;

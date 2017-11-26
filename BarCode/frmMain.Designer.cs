@@ -29,7 +29,6 @@ namespace BarCode
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("人员信息新增");
             System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("人员信息管理");
@@ -50,11 +49,11 @@ namespace BarCode
             System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("人员信息导入", 4);
             System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("人员信息查询导出", 3);
             this.picBanner = new System.Windows.Forms.PictureBox();
-            this.imgList = new System.Windows.Forms.ImageList(this.components);
-            this.imgNode = new System.Windows.Forms.ImageList(this.components);
-            this.timer = new System.Windows.Forms.Timer(this.components);
-            this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
-            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.imgList = new System.Windows.Forms.ImageList();
+            this.imgNode = new System.Windows.Forms.ImageList();
+            this.timer = new System.Windows.Forms.Timer();
+            this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager();
+            this.barManager1 = new DevExpress.XtraBars.BarManager();
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
             this.bsiServer = new DevExpress.XtraBars.BarStaticItem();
@@ -164,12 +163,14 @@ namespace BarCode
             this.barStaticItem1.Caption = "服务器：";
             this.barStaticItem1.Id = 2;
             this.barStaticItem1.Name = "barStaticItem1";
+            this.barStaticItem1.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             // 
             // bsiServer
             // 
             this.bsiServer.Caption = "服务器";
             this.bsiServer.Id = 3;
             this.bsiServer.Name = "bsiServer";
+            this.bsiServer.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             // 
             // barStaticItem2
             // 

@@ -33,7 +33,8 @@ namespace PersonnelManagement
                     new MySqlParameter("cName",txtName.Text),
                     new MySqlParameter("cSex", txtSex.Text),
                     new MySqlParameter("cNation", txtNation.Text),
-                    new MySqlParameter("cIn_serviceEducation", txtEducation.Text),
+                    new MySqlParameter("cFull_timeEducation", txtcFull_timeEducation.Text),
+                    new MySqlParameter("cIn_serviceEducation", txtcIn_serviceEducation.Text),
                     new MySqlParameter("cCurrentJob", txtCurrentJob.Text),
                     new MySqlParameter("cNativePlace", txtNativePlace.Text),
                     new MySqlParameter("Experience", txtExperience.Text),
@@ -59,7 +60,23 @@ namespace PersonnelManagement
                     //MyStringBuilder.Append(" and cNation =@cNation ");
                     MyStringBuilder.Append(" and cNation like '%" + txtNation.Text + "%'");
                 }
-           
+
+            //籍贯
+            if (txtNativePlace.Text != "")
+                if (isSafe(txtNativePlace.Text))
+                {
+                    //MyStringBuilder.Append(" and cNativePlace =@cNativePlace ");
+                    MyStringBuilder.Append(" and cNativePlace like '%" + txtNativePlace.Text + "%'");
+                }
+            //是否本地人
+            if (cbIsNative.Checked)
+            {
+                MyStringBuilder.Append(" and bIsNative ='1' ");
+            }
+            else
+            {
+                MyStringBuilder.Append(" and bIsNative ='0' ");
+            }
 
             //年龄
             int year;
@@ -82,26 +99,68 @@ namespace PersonnelManagement
                 string da2 = year + date1.ToString("yyyy-MM-dd").Substring(4);
                 MyStringBuilder.Append(" and dBirth_date > '" + da2 + "' and  dBirth_date < '"+da1+"'");
             }
+            //党龄
+            m = r.Match(txtJoinEage1.Text);//匹配源文本
+            m2 = r.Match(txtJoinEage2.Text);//匹配源文本
+            date1 = DateTime.Now;
+            if (dDate.Text != "基准时间")
+            {
+                date1 = Convert.ToDateTime(dDate.Text);
+            }
+            if (m.Success && m2.Success)
+            {
+                //MessageBox.Show("bigo");
 
-            //学历
-            if (txtEducation.Text != "")
+                year = date1.Year - Convert.ToInt32(txtJoinEage1.Text);
+                string da1 = year + date1.ToString("yyyy-MM-dd").Substring(4);
+                year = date1.Year - Convert.ToInt32(txtJoinEage2.Text);
+                string da2 = year + date1.ToString("yyyy-MM-dd").Substring(4);
+                MyStringBuilder.Append(" and dJoin_date > '" + da2 + "' and  dJoin_date < '" + da1 + "'");
+            }
+
+            //工龄
+            m = r.Match(txtWorkEage1.Text);//匹配源文本
+            m2 = r.Match(txtWorkEage2.Text);//匹配源文本
+            date1 = DateTime.Now;
+            if (dDate.Text != "基准时间")
+            {
+                date1 = Convert.ToDateTime(dDate.Text);
+            }
+            if (m.Success && m2.Success)
+            {
+                //MessageBox.Show("bigo");
+
+                year = date1.Year - Convert.ToInt32(txtWorkEage1.Text);
+                string da1 = year + date1.ToString("yyyy-MM-dd").Substring(4);
+                year = date1.Year - Convert.ToInt32(txtWorkEage2.Text);
+                string da2 = year + date1.ToString("yyyy-MM-dd").Substring(4);
+                MyStringBuilder.Append(" and dWorkDate > '" + da2 + "' and  dWorkDate < '" + da1 + "'");
+            }
+
+            //全日制学历
+            if (txtcFull_timeEducation.Text != "")
+                MyStringBuilder.Append(" and cFull_timeEducation =@cFull_timeEducation ");
+            //在职学历
+            if (txtcIn_serviceEducation.Text != "")
                 MyStringBuilder.Append(" and cIn_serviceEducation =@cIn_serviceEducation ");
-            //身份
+            //现任职位
             if (txtCurrentJob.Text != "")
                 MyStringBuilder.Append(" and cCurrentJob =@cCurrentJob ");
-            //籍贯
-            if (txtNativePlace.Text != "")
-                if (isSafe(txtNativePlace.Text))
-                {
-                    //MyStringBuilder.Append(" and cNativePlace =@cNativePlace ");
-                    MyStringBuilder.Append(" and cNativePlace like '%" + txtNativePlace.Text + "%'");
-                }
+            //是否党政正职
+            if (cbbIsOfficialPosition.Checked)
+            {
+                MyStringBuilder.Append(" and bIsOfficialPosition ='1' ");
+            }
+            else
+            {
+                MyStringBuilder.Append(" and bIsOfficialPosition ='0' ");
+            }
 
             //简历起始时间
-            if (dStartDate.Text != "")
+            if (dStartDate.Text != ""&& dStartDate.Text != "始")
                 MyStringBuilder.Append(" and dStartDate like '"+Convert.ToDateTime(dStartDate.Text).ToString("yyyy-MM")+"%%'");
             //简历结束时间
-            if (dDeadLine.Text != "")
+            if (dDeadLine.Text != ""&& dDeadLine.Text != "止")
                 MyStringBuilder.Append(" and dDeadline like '" + Convert.ToDateTime(dDeadLine.Text).ToString("yyyy-MM") + "%%'");
 
             //学习或者工作单位
@@ -111,10 +170,11 @@ namespace PersonnelManagement
                     //MyStringBuilder.Append(" and cExperience =@Experience ");
                     MyStringBuilder.Append(" and cExperience like '%" + txtExperience.Text + "%'");
                 }
-            
-            #endregion
 
-            gcType.DataSource = MySQLHelper.table("select * from data_persion where do_flag =1 " + MyStringBuilder);
+            #endregion
+            DataTable dt= MySQLHelper.table("select * from data_persion where do_flag =1 " + MyStringBuilder, param);
+            gcType.DataSource = FormatDT(dt, date1);
+            txtNum.Text = (gcType.DataSource as DataTable).Rows.Count.ToString();
         }
 
         private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -137,8 +197,8 @@ namespace PersonnelManagement
                 XtraMessageBox.Show("请不要选择空行");
                 return;
             }
-
-            SaveFile.saveFile(SaveFile.formString(row.Table),"");
+            string name = row["cName"].ToString() + "-";
+            SaveFile.ExportLrm(row.Table,"");
             //XtraMessageBox.Show(@"""");
             //FrmInf frm = new FrmInf(row["pid"].ToString());
             //frm.Show();
@@ -155,12 +215,18 @@ namespace PersonnelManagement
             txtName.Text = "";
             txtSex.Text = "";
             txtNation.Text = "";
-            txtEducation.Text = "";
+            txtcFull_timeEducation.Text = "";
+            txtcIn_serviceEducation.Text = "";
             txtCurrentJob.Text = "";
             txtNativePlace.Text = "";
             dDate.Text = "";
             txtEage.Text = "";
             txtEage2.Text = "";
+            txtJoinEage1.Text = "";
+            txtJoinEage2.Text = "";
+            txtWorkEage1.Text = "";
+            txtWorkEage2.Text = "";
+            cbbIsOfficialPosition.Checked = false;
             //经历
             dStartDate.Text = "";
             dDeadLine.Text = "";
@@ -228,11 +294,11 @@ namespace PersonnelManagement
 
         }
         /// <summary>
-        /// 初始化，数据绑定
+        /// 初始化
         /// </summary>
         private void start()
         {
-            gcType.DataSource = MySQLHelper.table("select * from data_persion where do_flag =1");
+            gcType.DataSource = FormatDT( MySQLHelper.table("select * from data_persion where do_flag =1"), DateTime.Now);
 
             //设置基准年龄选择框样式
             var formatString = "yyyy.MM";
@@ -244,19 +310,8 @@ namespace PersonnelManagement
             //设置选择样式
             dDate.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
             dDate.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearView;
-            //性别下拉框绑定
-            DataTable dt = new DataTable();
-            dt.Columns.Add("sex",typeof(string));
-            dt.Rows.Add();
-            dt.Rows.Add();
-            dt.Rows.Add();
-            dt.Rows[0]["sex"] = "";
-            dt.Rows[1]["sex"] = "男";
-            dt.Rows[2]["sex"] = "女";
-            txtSex.Properties.DisplayMember = "sex";                //相当于editvalue
-            //txtSex.Properties.valuemember = "实际要用的字段";     //相当于editvalue
-            //txtSex.Properties.DisplayMember = "要显示的字段";     //相当于text
-            txtSex.Properties.DataSource = dt;
+
+            dDate.Text = DateTime.Now.ToString("yyyy.MM");
 
         }
         /// <summary>
@@ -284,6 +339,36 @@ namespace PersonnelManagement
             }
             FrmInfMain frm = new FrmInfMain(row["pid"].ToString());
             frm.Show();
+        }
+
+        private DataTable FormatDT(DataTable dt,DateTime date)
+        {
+            if (!dt.Columns.Contains("cAge"))
+                dt.Columns.Add("cAge", typeof(string));
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                dt.Rows[i]["cAge"] = GetAgeByBirthdate(Convert.ToDateTime(dt.Rows[i]["dBirth_date"] + "/01"), date);
+                if (dt.Rows[i]["bIsOfficialPosition"].ToString() == "1")
+                {
+                    dt.Rows[i]["bIsOfficialPosition"] = "是";
+                }
+                else
+                {
+                    dt.Rows[i]["bIsOfficialPosition"] = "否";
+                }
+            }
+
+            return dt;
+        }
+        public int GetAgeByBirthdate(DateTime birthdate, DateTime date)
+        {
+            int age = date.Year - birthdate.Year;
+            //if (date.Month < birthdate.Month || (date.Month == birthdate.Month && date.Day < birthdate.Day))
+            if (date.Month < birthdate.Month)
+            {
+                age--;
+            }
+            return age < 0 ? 0 : age;
         }
     }
 }
