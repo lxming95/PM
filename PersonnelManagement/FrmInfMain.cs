@@ -25,13 +25,14 @@ namespace PersonnelManagement
             start();
             isAdd = true;
         }
-        public FrmInfMain(string id)
+        public FrmInfMain(string id,bool flag=true)
         {
             InitializeComponent();
             formatDateEdit();
             isAdd = false;
             formatDateEdit();
             start(id);
+            enableEdit(flag);
 
         }
         private void FrmInfMain_Load(object sender, EventArgs e)
@@ -206,10 +207,14 @@ namespace PersonnelManagement
             dWorkDate.Text = "";
             txtcDuties.Text = "";
             txtcSkill.Text = "";
+            txtcFull_timeEducation.Text = "";
             txtcFull_timeDegree.Text = "";
             txtcFull_timeSchool.Text = "";
+            txtcFull_timeMajor.Text = "";
+            txtcIn_serviceEducation.Text = "";
             txtcIn_serviceDegree.Text = "";
             txtcIn_serviceSchool.Text = "";
+            txtcIn_serviceMajor.Text = "";
             txtcCurrentJob.Text = "";
             txtcProposedJob.Text = "";
             txtcRemoveJob.Text = "";
@@ -795,7 +800,69 @@ namespace PersonnelManagement
             dDate6.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearsGroupView;
         }
 
+        private void enableEdit(bool flag)
+        {
+            if (!flag)
+            {
+                #region disable balnk
+                txtcName.Enabled = false;
+                txtcSex.Enabled = false;
+                dBirth_date.Enabled = false;
+                txtcNation.Enabled = false;
+                txtcNativePlace.Enabled = false;
+                dJoin_date.Enabled = false;
+                txtcHealthStatus.Enabled = false;
+                txtcBirthPlace.Enabled = false;
+                dWorkDate.Enabled = false;
+                txtcDuties.Enabled = false;
+                txtcSkill.Enabled = false;
+                txtcFull_timeEducation.Enabled = false;
+                txtcFull_timeDegree.Enabled = false;
+                txtcFull_timeSchool.Enabled = false;
+                txtcFull_timeMajor.Enabled = false;
+                txtcIn_serviceEducation.Enabled = false;
+                txtcIn_serviceDegree.Enabled = false;
+                txtcIn_serviceSchool.Enabled = false;
+                txtcIn_serviceMajor.Enabled = false;
+                txtcCurrentJob.Enabled = false;
+                txtcProposedJob.Enabled = false;
+                txtcRemoveJob.Enabled = false;
+                txtcDismissalReason.Enabled = false;
+                txtcReporting_Unit.Enabled = false;
 
+                dEageDate.Enabled = false;
+                txtcMaker.Enabled = false;
+                dMakeDate.Enabled = false;
+
+                txtIdentityCategory.Enabled = false;
+                txtRank.Enabled = false;
+
+                dDate4.Enabled = false;
+                txtcDocumentBasis.Enabled = false;
+                txtcApprovingAuthority.Enabled = false;
+                txtcWay.Enabled = false;
+                cbIsNative.Enabled = false;
+                cbIsOfficialPosition.Enabled = false;
+                #endregion
+                #region disable all excel
+
+                gcResume.Enabled = false;
+                gcRewards.Enabled = false;
+                gcFamilymembers.Enabled = false;
+                gcCheckResult.Enabled = false;
+                gcReserveCadre.Enabled = false;
+                gcEmployment.Enabled = false;
+                gcPerformance.Enabled = false;
+
+                #endregion
+                #region disable button
+                btnSave.Enabled = false;
+                btnClear.Enabled = false;
+                btnOut.Enabled = false;
+                btnExit.Enabled = false;
+                #endregion
+            }
+        }
         private void FrmInfMain_FormClosing(object sender, FormClosingEventArgs e)
         {
            if( this.Parent == null)

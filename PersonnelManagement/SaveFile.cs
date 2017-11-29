@@ -298,6 +298,19 @@ namespace PersonnelManagement
                 oDoc.Bookmarks.get_Item(ref oBookMark[9]).Range.Text = dt.Rows[0]["cHealthStatus"].ToString();
                 oDoc.Bookmarks.get_Item(ref oBookMark[10]).Range.Text = dt.Rows[0]["cDuties"].ToString();
 
+                oDoc.Bookmarks.get_Item(ref oBookMark[11]).Range.Text = dt.Rows[0]["cSkill"].ToString();
+                oDoc.Bookmarks.get_Item(ref oBookMark[12]).Range.Text = dt.Rows[0]["cFull_timeEducation"].ToString();
+                oDoc.Bookmarks.get_Item(ref oBookMark[13]).Range.Text = dt.Rows[0]["cFull_timeDegree"].ToString();
+                oDoc.Bookmarks.get_Item(ref oBookMark[14]).Range.Text = dt.Rows[0]["cFull_timeSchool"].ToString();
+                oDoc.Bookmarks.get_Item(ref oBookMark[15]).Range.Text = dt.Rows[0]["cFull_timeMajor"].ToString();
+                oDoc.Bookmarks.get_Item(ref oBookMark[16]).Range.Text = dt.Rows[0]["cIn_serviceEducation"].ToString();
+                oDoc.Bookmarks.get_Item(ref oBookMark[17]).Range.Text = dt.Rows[0]["cIn_serviceDegree"].ToString();
+                oDoc.Bookmarks.get_Item(ref oBookMark[18]).Range.Text = dt.Rows[0]["cIn_serviceSchool"].ToString();
+                oDoc.Bookmarks.get_Item(ref oBookMark[19]).Range.Text = dt.Rows[0]["cIn_serviceMajor"].ToString();
+                oDoc.Bookmarks.get_Item(ref oBookMark[20]).Range.Text = dt.Rows[0]["cCurrentJob"].ToString();
+                oDoc.Bookmarks.get_Item(ref oBookMark[21]).Range.Text = dt.Rows[0]["cProposedJob"].ToString();
+                oDoc.Bookmarks.get_Item(ref oBookMark[22]).Range.Text = dt.Rows[0]["cRemoveJob"].ToString();
+
                 #endregion
                 using (SaveFileDialog sfd = new SaveFileDialog())    //离开后销毁对话框
                 {

@@ -25,13 +25,13 @@ namespace BarCode
             switch (gvUser.FocusedColumn.Name)
             {
                 case "colUserCode":
-                    if (Convert.ToString(gvUser.GetFocusedRowCellValue(colUserCode)) == "88888")
+                    if (Convert.ToString(gvUser.GetFocusedRowCellValue(colUserName)) == "系统管理员")
                     {
                         e.Cancel = true;
                     }
                     break;
                 case "colUserName":
-                    if (Convert.ToString(gvUser.GetFocusedRowCellValue(colUserCode)) == "88888")
+                    if (Convert.ToString(gvUser.GetFocusedRowCellValue(colUserName)) == "系统管理员")
                     {
                         e.Cancel = true;
                     }
@@ -45,7 +45,7 @@ namespace BarCode
             {
                 return;
             }
-            if (Convert.ToString(gvUser.GetFocusedRowCellValue(colUserCode)) == "88888")
+            if (Convert.ToString(gvUser.GetFocusedRowCellValue(colUserName)) == "系统管理员")
             {
                 XtraMessageBox.Show("系统管理员不能删除！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -112,7 +112,7 @@ namespace BarCode
         }
         private void start()
         {
-            if (Pub.PubValue.UserCode == "88888")
+            if (Pub.PubValue.UserName == "系统管理员")
             {
                 gcUser.DataSource = MySQLHelper.table("SELECT * FROM ry_user");
             }

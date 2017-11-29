@@ -2139,7 +2139,7 @@
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.Name = "FrmInfMain";
-            this.Text = "frmInfMain";
+            this.Text = "人员信息编辑";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmInfMain_FormClosing);
             this.Load += new System.EventHandler(this.FrmInfMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();

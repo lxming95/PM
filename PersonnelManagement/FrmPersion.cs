@@ -337,7 +337,7 @@ namespace PersonnelManagement
                 XtraMessageBox.Show("请不要选择空行");
                 return;
             }
-            FrmInfMain frm = new FrmInfMain(row["pid"].ToString());
+            FrmInfMain frm = new FrmInfMain(row["pid"].ToString(),false);
             frm.Show();
         }
 
