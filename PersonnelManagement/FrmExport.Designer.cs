@@ -739,7 +739,7 @@
             // 
             // btnExportExcel
             // 
-            this.btnExportExcel.Caption = "导出excel文件";
+            this.btnExportExcel.Caption = "导出人名册";
             this.btnExportExcel.Id = 9;
             this.btnExportExcel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnExportExcel.ImageOptions.Image")));
             this.btnExportExcel.Name = "btnExportExcel";

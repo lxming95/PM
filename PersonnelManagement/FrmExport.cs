@@ -350,7 +350,7 @@ namespace PersonnelManagement
                 foreach (int drid in gvType.GetSelectedRows())
                 {
                     //ReturnDT.Rows.Add(gvType.GetDataRow(drid).ItemArray);
-                    SaveFile.ExportLrm(gvType.GetFocusedDataRow().Table, gvType.GetFocusedDataRow()["cName"].ToString()+"-");
+                    SaveFile.ExportLrm(gvType.GetDataRow(drid).Table, gvType.GetDataRow(drid)["cName"].ToString()+"-");
                 }
             }
             //不带CheckBox传值
@@ -529,9 +529,35 @@ namespace PersonnelManagement
 
         private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            string name= gvType.GetFocusedDataRow()["cName"].ToString() + "-";
+            //string name= gvType.GetFocusedDataRow()["cName"].ToString() + "-";
             //SaveFile.ExportExcel(name);
 
+            DataTable ReturnDT = (gcType.DataSource as DataTable).Clone();
+            ReturnDT.Clear();
+            //带CheckBox传值
+            if (ExportCheckBox)
+            {
+                //返回传值
+                foreach (int drid in gvType.GetSelectedRows())
+                {
+                    ReturnDT.Rows.Add(gvType.GetDataRow(drid).ItemArray);
+                    //SaveFile.ExportLrm(gvType.GetDataRow(drid).Table, gvType.GetDataRow(drid)["cName"].ToString() + "-");
+                }
+            }
+            //不带CheckBox传值
+            else
+            {
+                //判断当前行是否为null
+                if (gvType.RowCount == 0)
+                {
+                    MessageBox.Show("数据为空！");
+                    return;
+                }
+
+                ReturnDT.Rows.Add(gvType.GetFocusedDataRow().ItemArray);
+                //SaveFile.ExportLrm(gvType.GetFocusedDataRow().Table, gvType.GetFocusedDataRow()["cName"].ToString() + "-");
+            }
+            SaveFile.ExportExcel(ReturnDT);
         }
         /// <summary>
         /// 获得年龄

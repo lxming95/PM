@@ -84,7 +84,7 @@ namespace PersonnelManagement
         /// <summary>
         /// 格式化数据
         /// </summary>
-        /// <param name="dt"></param>
+        /// <param name="dt">基础数据表，需含有pid列(人员主键列)</param>
         /// <returns>返回lrm字符串</returns>
         private static string formString(DataTable dt)
         {
@@ -193,12 +193,96 @@ namespace PersonnelManagement
 
             return s.ToString();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dt">基础数据表，需含有pid列(人员主键列)</param>
+        /// <param name="name">文件名</param>
         public static void ExportLrm(DataTable dt, string name = "")
         {
             saveFile(formString(dt), name);
         }
-        public static void ExportExcel(string name)
+        /// <summary>
+        /// 导出人名单
+        /// </summary>
+        /// <param name="dt">基础数据表，需含有pid列(人员主键列)</param>
+        /// <param name="name">文件名</param>
+        public static void ExportExcel(DataTable dt, string name="")
+        {
+            using (SaveFileDialog saveDialog = new SaveFileDialog())    //离开后销毁对话框
+            {
+                //string name = gvType.GetFocusedDataRow()["cName"].ToString() + "-";
+                saveDialog.FileName = name + DateTime.Now.ToString("yyyyMMdd");
+                saveDialog.Filter = "Excel files (*.xls)|*.xls";
+                if (saveDialog.ShowDialog() != DialogResult.Cancel)  //用户点击保存按钮
+                {
+                    string exportFilePath = saveDialog.FileName;        //定义文件路径              
+                    string fileExtenstion = new FileInfo(exportFilePath).Extension; //创建文件
+                    if (saveDialog.FileName.Trim().Length > 0)
+                    {
+                        byte[] excel = Properties.Resources.名册;
+                        FileStream stream = new FileStream(saveDialog.FileName, FileMode.Create);
+                        stream.Write(excel, 0, excel.Length);
+                        stream.Close();
+                        stream.Dispose();
+                        //XtraMessageBox.Show("保存成功", "提示");
+
+                        string Path = exportFilePath;
+                        if (Path == "")
+                            return;
+                        try
+                        {
+                            //Office 07以下版本
+                            string sConnectionString = "Provider=Microsoft.JET.OLEDB.4.0;Data Source=" + Path + ";Extended Properties='Excel 8.0;HDR=Yes;IMEX=0;'"; 
+                            // Office 07及以上版本 不能出现多余的空格 而且分号注意
+                            //string sConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Path + ";Extended Properties='Excel 12.0;HDR=Yes;IMEX=0;'";
+                            OleDbConnection cn = new OleDbConnection(sConnectionString);
+                            //string c = "INSERT INTO [在职$] (本人姓名,出生年月,年度,级别,备注) VALUES('lxm','1995/07','1995','1','2')";
+
+
+
+                            OleDbCommand cmd = new OleDbCommand("", cn);
+                            //创建Excel文件
+                            cn.Open();
+                            //foreach (DataRow r in dt.Rows)
+                            for(int i=0;i<dt.Rows.Count;i++)
+                            {
+                                //cmd.CommandText = "INSERT INTO [在职$] (入党时间) VALUES('1995.02')";
+                                cmd.CommandText = "INSERT INTO [在职$] (序号,单位,姓名,职务,性别,民族,籍贯,"
+                                    + "出生年月,入党时间,参加工作时间,全日制学历,毕业院校及专业,在职教育,毕业学校及专业,历任职务,"
+                                    + "任现职时间,任同级职务时间,备注) "
+                                    + "VALUES('" + i + 1 + "','" + dt.Rows[i]["cUnit"] + "','" + dt.Rows[i]["cName"] + "','" + dt.Rows[i]["cCurrentJob"] + "','" + dt.Rows[i]["cSex"] + "','" + dt.Rows[i]["cNation"] + "','" + dt.Rows[i]["cNativePlace"] + "','" + dt.Rows[i]["dBirth_date"] + "','" + dt.Rows[i]["dJoin_date"] + "',"
+                                    + "'" + dt.Rows[i]["dWorkDate"] + "','" + dt.Rows[i]["cFull_timeEducation"] + "','" + dt.Rows[i]["cFull_timeSchool"] + dt.Rows[i]["cFull_timeMajor"] + "','" + dt.Rows[i]["cIn_serviceEducation"] + "','" + dt.Rows[i]["cIn_serviceSchool"] + dt.Rows[i]["cIn_serviceMajor"] + "','" + getResumeBypid(dt.Rows[i]["pid"].ToString()) + "','" + dt.Rows[i]["dInOffice"] + "','" + dt.Rows[i]["dSameOffic"] + "','" + dt.Rows[i]["cRemarks"] + "')";
+
+                                //添加数据
+                                cmd.ExecuteNonQuery();
+                            }
+                            //关闭连接
+                            cn.Close();
+                        }
+                        catch (OleDbException err)
+                        {
+                            XtraMessageBox.Show(err.Message);
+                        }
+                    }
+                }
+            };
+        }
+
+        public static string getResumeBypid(string pid)
+        {
+            StringBuilder resume = new StringBuilder("");
+            DataTable dt_resume = MySQLHelper.table("SELECT *FROM data_resume WHERE PersionID='" + pid + "'");
+            if (dt_resume != null && dt_resume.Rows.Count > 0)
+            {
+                foreach (DataRow r in dt_resume.Rows)
+                {
+                    resume.Append(r["dStartDate"]+ "-"+ r["dDeadline"]+","+ r["cExperience"]+"；  ");
+                }
+            }
+            return resume.ToString();
+        }
+        public static void ExportExcel1(string name)
         {
             using (SaveFileDialog saveDialog = new SaveFileDialog())    //离开后销毁对话框
             {
@@ -253,7 +337,7 @@ namespace PersonnelManagement
                 //设置为不可见  
                 oWord.Visible = false;
                 //模板文件地址，这里假设在X盘根目录  
-                object oTemplate = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "model//word.doc";
+                object oTemplate = AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "model//word.doc";
                 //以模板为基础生成文档  
                 Microsoft.Office.Interop.Word._Document oDoc = oWord.Documents.Add(ref oTemplate, ref oMissing, ref oMissing, ref oMissing);
 
@@ -341,6 +425,22 @@ namespace PersonnelManagement
             {
                 XtraMessageBox.Show(err.Message);
             }
+        }
+        /// <summary>
+        /// seve log in app's path
+        /// </summary>
+        /// <param name="log"></param>
+        /// <returns></returns>
+        public static string savelog(string log)
+        {
+            string path= AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "log//"+DateTime.Now.ToString("yyyyMMddHHmmss") +".txt";
+            StreamWriter sw = new StreamWriter(path, true);
+            //向创建的文件中写入内容
+            sw.WriteLine(log);
+            //关闭当前文件写入流
+            sw.Close();
+            return path;
+
         }
     }
 }

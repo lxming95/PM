@@ -99,6 +99,16 @@
             this.btnClear = new DevExpress.XtraBars.BarButtonItem();
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
             this.btnDel = new DevExpress.XtraBars.BarButtonItem();
+            this.cIdentityCategory = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.labelControl21 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl14 = new DevExpress.XtraEditors.LabelControl();
+            this.txtSuccess = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.txtfail = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
+            this.txtTotal = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckedComboBoxEdit1)).BeginInit();
@@ -138,6 +148,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSuccess.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtfail.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTotal.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // repositoryItemCheckEdit15
@@ -444,10 +457,10 @@
             // 
             // gcType
             // 
-            this.gcType.Location = new System.Drawing.Point(0, 61);
+            this.gcType.Location = new System.Drawing.Point(0, 58);
             this.gcType.MainView = this.gvType;
             this.gcType.Name = "gcType";
-            this.gcType.Size = new System.Drawing.Size(897, 493);
+            this.gcType.Size = new System.Drawing.Size(987, 496);
             this.gcType.TabIndex = 5;
             this.gcType.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvType});
@@ -460,6 +473,7 @@
             this.dBirth_date,
             this.cNation,
             this.cNativePlace,
+            this.cIdentityCategory,
             this.dJoin_date,
             this.cHealthStatus,
             this.dWorkDate,
@@ -491,7 +505,7 @@
             this.cName.Name = "cName";
             this.cName.Visible = true;
             this.cName.VisibleIndex = 0;
-            this.cName.Width = 59;
+            this.cName.Width = 101;
             // 
             // cSex
             // 
@@ -507,7 +521,7 @@
             this.cSex.Name = "cSex";
             this.cSex.Visible = true;
             this.cSex.VisibleIndex = 1;
-            this.cSex.Width = 49;
+            this.cSex.Width = 65;
             // 
             // dBirth_date
             // 
@@ -517,13 +531,13 @@
             this.dBirth_date.AppearanceHeader.Options.UseTextOptions = true;
             this.dBirth_date.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.dBirth_date.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.dBirth_date.Caption = "出生日期";
+            this.dBirth_date.Caption = "出生年月";
             this.dBirth_date.FieldName = "dBirth_date";
             this.dBirth_date.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
             this.dBirth_date.Name = "dBirth_date";
             this.dBirth_date.Visible = true;
             this.dBirth_date.VisibleIndex = 2;
-            this.dBirth_date.Width = 81;
+            this.dBirth_date.Width = 85;
             // 
             // cNation
             // 
@@ -539,7 +553,7 @@
             this.cNation.Name = "cNation";
             this.cNation.Visible = true;
             this.cNation.VisibleIndex = 3;
-            this.cNation.Width = 47;
+            this.cNation.Width = 74;
             // 
             // cNativePlace
             // 
@@ -553,8 +567,8 @@
             this.cNativePlace.FieldName = "cNativePlace";
             this.cNativePlace.Name = "cNativePlace";
             this.cNativePlace.Visible = true;
-            this.cNativePlace.VisibleIndex = 7;
-            this.cNativePlace.Width = 149;
+            this.cNativePlace.VisibleIndex = 4;
+            this.cNativePlace.Width = 177;
             // 
             // dJoin_date
             // 
@@ -568,8 +582,8 @@
             this.dJoin_date.FieldName = "dJoin_date";
             this.dJoin_date.Name = "dJoin_date";
             this.dJoin_date.Visible = true;
-            this.dJoin_date.VisibleIndex = 6;
-            this.dJoin_date.Width = 86;
+            this.dJoin_date.VisibleIndex = 7;
+            this.dJoin_date.Width = 90;
             // 
             // cHealthStatus
             // 
@@ -582,8 +596,6 @@
             this.cHealthStatus.Caption = "健康状况";
             this.cHealthStatus.FieldName = "cHealthStatus";
             this.cHealthStatus.Name = "cHealthStatus";
-            this.cHealthStatus.Visible = true;
-            this.cHealthStatus.VisibleIndex = 5;
             this.cHealthStatus.Width = 65;
             // 
             // dWorkDate
@@ -594,12 +606,12 @@
             this.dWorkDate.AppearanceHeader.Options.UseTextOptions = true;
             this.dWorkDate.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.dWorkDate.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.dWorkDate.Caption = "参加工作时间";
+            this.dWorkDate.Caption = "参加工作年月";
             this.dWorkDate.FieldName = "dWorkDate";
             this.dWorkDate.Name = "dWorkDate";
             this.dWorkDate.Visible = true;
-            this.dWorkDate.VisibleIndex = 4;
-            this.dWorkDate.Width = 85;
+            this.dWorkDate.VisibleIndex = 6;
+            this.dWorkDate.Width = 89;
             // 
             // cDuties
             // 
@@ -612,8 +624,6 @@
             this.cDuties.Caption = "专业技术职务";
             this.cDuties.FieldName = "cDuties";
             this.cDuties.Name = "cDuties";
-            this.cDuties.Visible = true;
-            this.cDuties.VisibleIndex = 8;
             this.cDuties.Width = 87;
             // 
             // cFull_timeEducation
@@ -627,8 +637,6 @@
             this.cFull_timeEducation.Caption = "全日制学历";
             this.cFull_timeEducation.FieldName = "cFull_timeEducation";
             this.cFull_timeEducation.Name = "cFull_timeEducation";
-            this.cFull_timeEducation.Visible = true;
-            this.cFull_timeEducation.VisibleIndex = 9;
             this.cFull_timeEducation.Width = 71;
             // 
             // cCurrentJob
@@ -643,8 +651,8 @@
             this.cCurrentJob.FieldName = "cCurrentJob";
             this.cCurrentJob.Name = "cCurrentJob";
             this.cCurrentJob.Visible = true;
-            this.cCurrentJob.VisibleIndex = 10;
-            this.cCurrentJob.Width = 59;
+            this.cCurrentJob.VisibleIndex = 8;
+            this.cCurrentJob.Width = 122;
             // 
             // dMakeDate
             // 
@@ -746,7 +754,6 @@
             this.bar5.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar5.FloatLocation = new System.Drawing.Point(792, 299);
             this.bar5.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExport, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barButtonItem1, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnInPort, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar5.OptionsBar.MultiLine = true;
@@ -780,7 +787,7 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager1;
-            this.barDockControlTop.Size = new System.Drawing.Size(897, 40);
+            this.barDockControlTop.Size = new System.Drawing.Size(987, 40);
             // 
             // barDockControlBottom
             // 
@@ -788,7 +795,7 @@
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 562);
             this.barDockControlBottom.Manager = this.barManager1;
-            this.barDockControlBottom.Size = new System.Drawing.Size(897, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(987, 0);
             // 
             // barDockControlLeft
             // 
@@ -802,7 +809,7 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(897, 40);
+            this.barDockControlRight.Location = new System.Drawing.Point(987, 40);
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 522);
             // 
@@ -831,11 +838,119 @@
             this.btnDel.Id = 9;
             this.btnDel.Name = "btnDel";
             // 
+            // cIdentityCategory
+            // 
+            this.cIdentityCategory.AppearanceCell.Options.UseTextOptions = true;
+            this.cIdentityCategory.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.cIdentityCategory.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.cIdentityCategory.AppearanceHeader.Options.UseTextOptions = true;
+            this.cIdentityCategory.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.cIdentityCategory.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.cIdentityCategory.Caption = "身份类别";
+            this.cIdentityCategory.FieldName = "cIdentityCategory";
+            this.cIdentityCategory.Name = "cIdentityCategory";
+            this.cIdentityCategory.Visible = true;
+            this.cIdentityCategory.VisibleIndex = 5;
+            this.cIdentityCategory.Width = 84;
+            // 
+            // labelControl21
+            // 
+            this.labelControl21.Location = new System.Drawing.Point(732, 35);
+            this.labelControl21.Name = "labelControl21";
+            this.labelControl21.Size = new System.Drawing.Size(12, 14);
+            this.labelControl21.TabIndex = 62;
+            this.labelControl21.Text = "条";
+            // 
+            // labelControl14
+            // 
+            this.labelControl14.Location = new System.Drawing.Point(631, 35);
+            this.labelControl14.Name = "labelControl14";
+            this.labelControl14.Size = new System.Drawing.Size(48, 14);
+            this.labelControl14.TabIndex = 60;
+            this.labelControl14.Text = "导入成功";
+            // 
+            // txtSuccess
+            // 
+            this.txtSuccess.EditValue = "";
+            this.txtSuccess.Enabled = false;
+            this.txtSuccess.Location = new System.Drawing.Point(685, 32);
+            this.txtSuccess.MenuManager = this.barManager1;
+            this.txtSuccess.Name = "txtSuccess";
+            this.txtSuccess.Properties.Appearance.Options.UseTextOptions = true;
+            this.txtSuccess.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.txtSuccess.Size = new System.Drawing.Size(41, 20);
+            this.txtSuccess.TabIndex = 61;
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Location = new System.Drawing.Point(872, 35);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(12, 14);
+            this.labelControl1.TabIndex = 65;
+            this.labelControl1.Text = "条";
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Location = new System.Drawing.Point(771, 35);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(48, 14);
+            this.labelControl2.TabIndex = 63;
+            this.labelControl2.Text = "导入失败";
+            // 
+            // txtfail
+            // 
+            this.txtfail.EditValue = "";
+            this.txtfail.Enabled = false;
+            this.txtfail.Location = new System.Drawing.Point(825, 32);
+            this.txtfail.MenuManager = this.barManager1;
+            this.txtfail.Name = "txtfail";
+            this.txtfail.Properties.Appearance.Options.UseTextOptions = true;
+            this.txtfail.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.txtfail.Size = new System.Drawing.Size(41, 20);
+            this.txtfail.TabIndex = 64;
+            // 
+            // labelControl3
+            // 
+            this.labelControl3.Location = new System.Drawing.Point(574, 35);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(12, 14);
+            this.labelControl3.TabIndex = 68;
+            this.labelControl3.Text = "条";
+            // 
+            // labelControl4
+            // 
+            this.labelControl4.Location = new System.Drawing.Point(473, 35);
+            this.labelControl4.Name = "labelControl4";
+            this.labelControl4.Size = new System.Drawing.Size(48, 14);
+            this.labelControl4.TabIndex = 66;
+            this.labelControl4.Text = "本次导入";
+            // 
+            // txtTotal
+            // 
+            this.txtTotal.EditValue = "";
+            this.txtTotal.Enabled = false;
+            this.txtTotal.Location = new System.Drawing.Point(527, 32);
+            this.txtTotal.MenuManager = this.barManager1;
+            this.txtTotal.Name = "txtTotal";
+            this.txtTotal.Properties.Appearance.Options.UseTextOptions = true;
+            this.txtTotal.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.txtTotal.Size = new System.Drawing.Size(41, 20);
+            this.txtTotal.TabIndex = 67;
+            // 
             // FrmInport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(897, 562);
+            this.ClientSize = new System.Drawing.Size(987, 562);
+            this.Controls.Add(this.labelControl3);
+            this.Controls.Add(this.labelControl4);
+            this.Controls.Add(this.txtTotal);
+            this.Controls.Add(this.labelControl1);
+            this.Controls.Add(this.labelControl2);
+            this.Controls.Add(this.txtfail);
+            this.Controls.Add(this.labelControl21);
+            this.Controls.Add(this.labelControl14);
+            this.Controls.Add(this.txtSuccess);
             this.Controls.Add(this.gcType);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
@@ -883,6 +998,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSuccess.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtfail.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTotal.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -959,6 +1077,16 @@
         private DevExpress.XtraBars.BarButtonItem btnDel;
         private DevExpress.XtraBars.BarButtonItem btnInPort;
         private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraGrid.Columns.GridColumn cIdentityCategory;
+        private DevExpress.XtraEditors.LabelControl labelControl3;
+        private DevExpress.XtraEditors.LabelControl labelControl4;
+        private DevExpress.XtraEditors.TextEdit txtTotal;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.LabelControl labelControl2;
+        private DevExpress.XtraEditors.TextEdit txtfail;
+        private DevExpress.XtraEditors.LabelControl labelControl21;
+        private DevExpress.XtraEditors.LabelControl labelControl14;
+        private DevExpress.XtraEditors.TextEdit txtSuccess;
     }
 }
 

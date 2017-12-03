@@ -168,6 +168,7 @@
     </Compile>
     <None Include="Resources\初始数据表171122.xlsx" />
     <None Include="Resources\初始数据表171124.xlsx" />
+    <None Include="Resources\名册.xls" />
     <None Include="Resources\数据导出%28干部任免审批表%29.doc" />
   </ItemGroup>
   <ItemGroup>
