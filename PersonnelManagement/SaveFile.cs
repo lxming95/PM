@@ -4,6 +4,8 @@ using System;
 using System.Data;
 using System.Data.OleDb;
 using System.IO;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
@@ -11,6 +13,8 @@ namespace PersonnelManagement
 {
     public class SaveFile
     {
+        private static DateTime date1 = DateTime.Now;
+
         /// <summary>
         /// 保存对话框
         /// </summary>
@@ -251,7 +255,7 @@ namespace PersonnelManagement
                                 cmd.CommandText = "INSERT INTO [在职$] (序号,单位,姓名,职务,性别,民族,籍贯,"
                                     + "出生年月,入党时间,参加工作时间,全日制学历,毕业院校及专业,在职教育,毕业学校及专业,历任职务,"
                                     + "任现职时间,任同级职务时间,备注) "
-                                    + "VALUES('" + i + 1 + "','" + dt.Rows[i]["cUnit"] + "','" + dt.Rows[i]["cName"] + "','" + dt.Rows[i]["cCurrentJob"] + "','" + dt.Rows[i]["cSex"] + "','" + dt.Rows[i]["cNation"] + "','" + dt.Rows[i]["cNativePlace"] + "','" + dt.Rows[i]["dBirth_date"] + "','" + dt.Rows[i]["dJoin_date"] + "',"
+                                    + "VALUES('" + (i+1).ToString() + "','" + dt.Rows[i]["cUnit"] + "','" + dt.Rows[i]["cName"] + "','" + dt.Rows[i]["cCurrentJob"] + "','" + dt.Rows[i]["cSex"] + "','" + dt.Rows[i]["cNation"] + "','" + dt.Rows[i]["cNativePlace"] + "','" + dt.Rows[i]["dBirth_date"] + "','" + dt.Rows[i]["dJoin_date"] + "',"
                                     + "'" + dt.Rows[i]["dWorkDate"] + "','" + dt.Rows[i]["cFull_timeEducation"] + "','" + dt.Rows[i]["cFull_timeSchool"] + dt.Rows[i]["cFull_timeMajor"] + "','" + dt.Rows[i]["cIn_serviceEducation"] + "','" + dt.Rows[i]["cIn_serviceSchool"] + dt.Rows[i]["cIn_serviceMajor"] + "','" + getResumeBypid(dt.Rows[i]["pid"].ToString()) + "','" + dt.Rows[i]["dInOffice"] + "','" + dt.Rows[i]["dSameOffic"] + "','" + dt.Rows[i]["cRemarks"] + "')";
 
                                 //添加数据
@@ -268,8 +272,13 @@ namespace PersonnelManagement
                 }
             };
         }
-
-        public static string getResumeBypid(string pid)
+        /// <summary>
+        /// 通过pid获得人员的主要经历，
+        /// </summary>
+        /// <param name="pid">人员唯一标识，pid</param>
+        /// <param name="wrap">是否一条记录之后换行</param>
+        /// <returns></returns>
+        public static string getResumeBypid(string pid,bool wrap=false)
         {
             StringBuilder resume = new StringBuilder("");
             DataTable dt_resume = MySQLHelper.table("SELECT *FROM data_resume WHERE PersionID='" + pid + "'");
@@ -277,10 +286,58 @@ namespace PersonnelManagement
             {
                 foreach (DataRow r in dt_resume.Rows)
                 {
-                    resume.Append(r["dStartDate"]+ "-"+ r["dDeadline"]+","+ r["cExperience"]+"；  ");
+                    resume.Append(r["dStartDate"]+ "-"+ r["dDeadline"]+","+ r["cExperience"]+"；");
+                    if (wrap)
+                        resume.Append("\r\n");
                 }
+                
             }
             return resume.ToString();
+        }
+        /// <summary>
+        /// 通过pid获得人员的奖惩情况
+        /// </summary>
+        /// <param name="pid">人员唯一标识</param>
+        /// <param name="wrap">是否一条记录之后换行</param>
+        /// <returns></returns>
+        public static string getRewardsBypid(string pid, bool wrap = false)
+        {
+            StringBuilder rewards = new StringBuilder("");
+            DataTable dt_rewards = MySQLHelper.table("SELECT *FROM data_rewards_punishments WHERE PersionID='" + pid + "'");
+            if (dt_rewards != null && dt_rewards.Rows.Count > 0)
+            {
+                foreach (DataRow r in dt_rewards.Rows)
+                {
+                    rewards.Append(r["dData"] + "," + r["cDetailed"] + "；");
+                    if (wrap)
+                        rewards.Append("\r\n");
+                }
+            }
+            return rewards.ToString();
+
+        }
+        /// <summary>
+        /// 通过pid获得人员的年度审核结果
+        /// </summary>
+        /// <param name="pid">人员唯一标识</param>
+        /// <param name="wrap">是否一条记录之后换行</param>
+        /// <returns></returns>
+        public static string getCheckresultBypid(string pid, bool wrap = false)
+        {
+            StringBuilder checkresult = new StringBuilder("");
+            DataTable dt_checkresult = MySQLHelper.table("SELECT *FROM data_checkresult WHERE PersionID='" + pid + "'");
+            if (dt_checkresult != null && dt_checkresult.Rows.Count > 0)
+            {
+                foreach (DataRow r in dt_checkresult.Rows)
+                {
+                    checkresult.Append(r["dcrYear"] + "年度考核为：" + r["crChechResult"] + "；");
+                    if (wrap)
+                        checkresult.Append("\r\n");
+                }
+
+            }
+            return checkresult.ToString();
+
         }
         public static void ExportExcel1(string name)
         {
@@ -327,7 +384,7 @@ namespace PersonnelManagement
             };
         }
 
-        public static void ExportWord(DataTable dt, string name)
+        public static void ExportWord(DateTime date, DataTable dt, string name)
         {
             try
             {
@@ -441,6 +498,159 @@ namespace PersonnelManagement
             sw.Close();
             return path;
 
+        }
+
+        /// <summary>
+        /// 往excel指定位置插入值
+        /// </summary>
+        /// <param name="ws">工作表对象</param>
+        /// <param name="x">x轴坐标</param>
+        /// <param name="y">y轴坐标</param>
+        /// <param name="value"></param>
+        private static void SetCellValue (Microsoft.Office.Interop.Excel.Worksheet ws, int x, int y, object value)
+        {
+            ws.Cells[x, y] = value;
+        }
+
+        private static void insertIntoExcel(Microsoft.Office.Interop.Excel.Worksheet ws, DataRow dr)
+        {
+            SetCellValue(ws, 5, 4, dr["cName"].ToString());
+            SetCellValue(ws, 5, 8, dr["cSex"].ToString());
+            SetCellValue(ws, 5, 13, dr["dBirth_date"].ToString() + "\n" + "（" + dr["cAge"].ToString() + "岁）");
+            SetCellValue(ws, 6, 4, dr["cNation"].ToString());
+            SetCellValue(ws, 6, 8, dr["cNativePlace"].ToString());
+            SetCellValue(ws, 6, 13, dr["cBirthPlace"].ToString());
+            SetCellValue(ws, 7, 4, dr["dJoin_date"].ToString());
+            SetCellValue(ws, 7, 8, dr["dWorkDate"].ToString());
+            SetCellValue(ws, 7, 13, dr["cHealthStatus"].ToString());
+
+            SetCellValue(ws, 8, 4, dr["cDuties"].ToString());
+            SetCellValue(ws, 8, 10, dr["cSkill"].ToString());
+
+            SetCellValue(ws, 9, 6, dr["cFull_timeEducation"].ToString());
+            SetCellValue(ws, 9, 13, dr["cFull_timeSchool"].ToString() + dr["cFull_timeMajor"].ToString());
+
+            SetCellValue(ws, 10, 6, dr["cIn_serviceEducation"].ToString());
+            SetCellValue(ws, 10, 13, dr["cIn_serviceSchool"].ToString() + dr["cIn_serviceMajor"].ToString());
+
+            SetCellValue(ws, 11, 6, dr["cCurrentJob"].ToString());
+            SetCellValue(ws, 12, 6, dr["cProposedJob"].ToString());
+            SetCellValue(ws, 13, 6, dr["cRemoveJob"].ToString());
+
+            SetCellValue(ws, 15, 3, getResumeBypid(dr["pid"].ToString(),wrap:true));
+
+            SetCellValue(ws, 51, 4, getRewardsBypid(dr["pid"].ToString()));
+            SetCellValue(ws, 55, 4, getCheckresultBypid(dr["pid"].ToString()));
+            SetCellValue(ws, 58, 4, dr["cDismissalReason"].ToString());
+
+            DataTable dt_familymembers = MySQLHelper.table("SELECT *FROM data_familymembers WHERE PersionID='" + dr["pid"].ToString() + "'");
+            for (int i = 0; i < 7 && i < dt_familymembers.Rows.Count; i++)
+            {
+                SetCellValue(ws, 63 + i, 3, dt_familymembers.Rows[i]["cfCalled"].ToString());
+                SetCellValue(ws, 63 + i, 5, dt_familymembers.Rows[i]["cfName"].ToString());
+                SetCellValue(ws, 63 + i, 7, GetAgeByBirthdate(Convert.ToDateTime(dt_familymembers.Rows[i]["dfBirthDate"].ToString() + ".01"), date1));
+                SetCellValue(ws, 63 + i, 9, dt_familymembers.Rows[i]["cfPoliticalStatus"].ToString());
+                SetCellValue(ws, 63 + i, 11, dt_familymembers.Rows[i]["cfDuties"].ToString());
+            }
+
+
+        }
+        /// <summary>
+        /// 导出任免审批表excel文件
+        /// </summary>
+        /// <param name="dt">人员信息主表，需要包含pid列，标识唯一人员</param>
+        /// <param name="name">文件名</param>
+        /// <param name="SheetName">excel工作表名，默认为Sheet1</param>
+        /// <returns></returns>
+        public static bool seveExcel(DateTime date,DataRow dr,string name, int SheetNum=1)
+        {
+            date1 = date;
+            bool success = false;
+            //创建一个Word应用程序实例  
+            Microsoft.Office.Interop.Excel._Application oExcel = new Microsoft.Office.Interop.Excel.Application();
+            //设置为不可见  
+            oExcel.Visible = false;
+            //审批表模版路径
+            string path = AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "model//excel.xls";
+            //Microsoft.Office.Interop.Excel.Workbooks wbs = oExcel.Workbooks;
+
+
+            try
+            {
+                Microsoft.Office.Interop.Excel.Workbook wb = oExcel.Workbooks._Open(path,
+                Missing.Value, Missing.Value, Missing.Value, Missing.Value,
+                Missing.Value, Missing.Value, Missing.Value, Missing.Value,
+                Missing.Value, Missing.Value, Missing.Value, Missing.Value);
+                Microsoft.Office.Interop.Excel.Worksheet ws = wb.Worksheets[SheetNum];
+                insertIntoExcel(ws, dr);
+
+                using (SaveFileDialog sfd = new SaveFileDialog())    //离开后销毁对话框
+                {
+                    //string name = gvType.GetFocusedDataRow()["cName"].ToString() + "-";
+                    sfd.FileName = name;
+                    sfd.Filter = "Excel 97-2013 工作簿(*.xls)|*.xls";
+                    if (sfd.ShowDialog() != DialogResult.Cancel)  //用户点击保存按钮
+                    {
+                        //string exportFilePath = sfd.FileName;        //定义文件路径              
+                        //string fileExtenstion = new FileInfo(exportFilePath).Extension; //创建文件
+                        if (sfd.FileName.Trim().Length > 0)
+                        {
+                            object filename = sfd.FileName;
+                            wb.SaveAs(filename, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+                            wb.Close(Type.Missing, Type.Missing, Type.Missing);
+                            //关闭word  
+                            oExcel.Quit();
+                            XtraMessageBox.Show("保存成功", "提示");
+                            success= true;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                success = false;
+                KillExcel(oExcel);
+            }
+            return success;
+        }
+        [DllImport("User32.dll")]
+        public static extern int GetWindowThreadProcessId(IntPtr hWnd, out int ProcessId);
+        private static void KillExcel(Microsoft.Office.Interop.Excel._Application theApp)
+        {
+            int id = 0;
+            IntPtr intptr = new IntPtr(theApp.Hwnd);
+            System.Diagnostics.Process p = null;
+            try
+            {
+                GetWindowThreadProcessId(intptr, out id);
+                p = System.Diagnostics.Process.GetProcessById(id);
+                if (p != null)
+                {
+                    p.Kill();
+                    p.Dispose();
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// 获得年龄
+        /// </summary>
+        /// <param name="birthdate"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public static int GetAgeByBirthdate(DateTime birthdate, DateTime date)
+        {
+            int age = date.Year - birthdate.Year;
+            //if (date.Month < birthdate.Month || (date.Month == birthdate.Month && date.Day < birthdate.Day))
+            if (date.Month < birthdate.Month)
+            {
+                age--;
+            }
+            return age < 0 ? 0 : age;
         }
     }
 }

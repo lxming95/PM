@@ -16,7 +16,8 @@ namespace PersonnelManagement
 
     public partial class FrmExport : DevExpress.XtraEditors.XtraForm
     {
-        public bool ExportCheckBox = true;
+        DateTime date1 = DateTime.Now;          //基准时间
+        public bool ExportCheckBox = true;      //是否带复选框
         public FrmExport()
         {
             InitializeComponent();
@@ -91,7 +92,7 @@ namespace PersonnelManagement
             Regex r = new Regex(@"^\d+$");      //构造表达式
             Match m = r.Match(txtEage.Text);    //匹配源文本
             Match m2 = r.Match(txtEage2.Text);  //匹配源文本
-            DateTime date1 = DateTime.Now;
+
             if (dDate.Text != "基准时间"&& dDate.Text != "")
             {
                 date1 = Convert.ToDateTime(dDate.Text);
@@ -335,7 +336,7 @@ namespace PersonnelManagement
             #endregion
 
 
-            gcType.DataSource = FormatDT(MySQLHelper.table("select * from data_persion where do_flag =1 " + MyStringBuilder),DateTime.Now);
+            gcType.DataSource = FormatDT(MySQLHelper.table("select * from data_persion where do_flag =1 " + MyStringBuilder), date1);
             txtNum.Text = (gcType.DataSource as DataTable).Rows.Count.ToString();
 
         }
@@ -527,7 +528,7 @@ namespace PersonnelManagement
             dGetCadresDate.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.Default;
         }
 
-        private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void btnExportPersionList_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             //string name= gvType.GetFocusedDataRow()["cName"].ToString() + "-";
             //SaveFile.ExportExcel(name);
@@ -560,22 +561,6 @@ namespace PersonnelManagement
             SaveFile.ExportExcel(ReturnDT);
         }
         /// <summary>
-        /// 获得年龄
-        /// </summary>
-        /// <param name="birthdate"></param>
-        /// <param name="date"></param>
-        /// <returns></returns>
-        public int GetAgeByBirthdate(DateTime birthdate, DateTime date)
-        {
-            int age = date.Year - birthdate.Year;
-            //if (date.Month < birthdate.Month || (date.Month == birthdate.Month && date.Day < birthdate.Day))
-            if (date.Month < birthdate.Month)
-            {
-                age--;
-            }
-            return age < 0 ? 0 : age;
-        }
-        /// <summary>
         /// 添加年龄，添加党政正职
         /// </summary>
         /// <param name="dt"></param>
@@ -587,7 +572,7 @@ namespace PersonnelManagement
                 dt.Columns.Add("cAge", typeof(string));
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                dt.Rows[i]["cAge"] = GetAgeByBirthdate(Convert.ToDateTime(dt.Rows[i]["dBirth_date"] + "/01"), date);
+                dt.Rows[i]["cAge"] = SaveFile.GetAgeByBirthdate(Convert.ToDateTime(dt.Rows[i]["dBirth_date"] + ".01"), date);
                 if (dt.Rows[i]["bIsOfficialPosition"].ToString() == "1")
                 {
                     dt.Rows[i]["bIsOfficialPosition"] = "是";
@@ -600,7 +585,11 @@ namespace PersonnelManagement
 
             return dt;
         }
-
+        /// <summary>
+        /// 导出word任免审批表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             //带CheckBox传值
@@ -611,7 +600,7 @@ namespace PersonnelManagement
                 {
                     //ReturnDT.Rows.Add(gvType.GetDataRow(drid).ItemArray);
 
-                    SaveFile.ExportWord(gvType.GetFocusedDataRow().Table, "《干部任免审批表-" + gvType.GetFocusedDataRow()["cName"].ToString() + gvType.GetFocusedDataRow()["dBirth_date"].ToString() + "》");
+                    SaveFile.ExportWord(date1, gvType.GetDataRow(drid).Table, "干部任免审批表-" + gvType.GetDataRow(drid)["cName"].ToString() + gvType.GetDataRow(drid)["dBirth_date"].ToString());
                 }
             }
             //不带CheckBox传值
@@ -625,7 +614,39 @@ namespace PersonnelManagement
                 }
 
                 //ReturnDT.Rows.Add(gvType.GetFocusedDataRow().ItemArray);
-                SaveFile.ExportWord(gvType.GetFocusedDataRow().Table, "《干部任免审批表-"+gvType.GetFocusedDataRow()["cName"].ToString()+ gvType.GetFocusedDataRow()["dBirth_date"].ToString() + "》");
+                SaveFile.ExportWord(date1, gvType.GetFocusedDataRow().Table, "干部任免审批表-"+gvType.GetFocusedDataRow()["cName"].ToString()+ gvType.GetFocusedDataRow()["dBirth_date"].ToString());
+            }
+        }
+        /// <summary>
+        /// 导出excel任免审批表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnExportExcel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            //带CheckBox传值
+            if (ExportCheckBox)
+            {
+                //返回传值
+                foreach (int drid in gvType.GetSelectedRows())
+                {
+                    //ReturnDT.Rows.Add(gvType.GetDataRow(drid).ItemArray);
+
+                    SaveFile.seveExcel(date1,gvType.GetDataRow(drid), "干部任免审批表-" + gvType.GetDataRow(drid)["cName"].ToString() + gvType.GetDataRow(drid)["dBirth_date"].ToString());
+                }
+            }
+            //不带CheckBox传值
+            else
+            {
+                //判断当前行是否为null
+                if (gvType.RowCount == 0)
+                {
+                    MessageBox.Show("数据为空！");
+                    return;
+                }
+
+                //ReturnDT.Rows.Add(gvType.GetFocusedDataRow().ItemArray);
+                SaveFile.seveExcel(date1, gvType.GetFocusedDataRow(), "干部任免审批表-" + gvType.GetFocusedDataRow()["cName"].ToString() + gvType.GetFocusedDataRow()["dBirth_date"].ToString());
             }
         }
     }

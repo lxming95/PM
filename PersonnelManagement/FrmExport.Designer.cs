@@ -75,8 +75,9 @@
             this.btnQuerry = new DevExpress.XtraBars.BarButtonItem();
             this.btnClear = new DevExpress.XtraBars.BarButtonItem();
             this.btnExport = new DevExpress.XtraBars.BarButtonItem();
-            this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
+            this.btnExportPersionList = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.btnExportExcel = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -690,10 +691,11 @@
             this.btnClear,
             this.btnAdd,
             this.btnDel,
-            this.btnExportExcel,
-            this.barButtonItem1});
+            this.btnExportPersionList,
+            this.barButtonItem1,
+            this.btnExportExcel});
             this.barManager1.MainMenu = this.bar5;
-            this.barManager1.MaxItemId = 11;
+            this.barManager1.MaxItemId = 12;
             // 
             // bar5
             // 
@@ -707,8 +709,9 @@
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnQuerry, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnClear, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExport, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExportExcel, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barButtonItem1, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExportPersionList, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barButtonItem1, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnExportExcel, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar5.OptionsBar.MultiLine = true;
             this.bar5.OptionsBar.UseWholeRow = true;
             this.bar5.Text = "Main menu";
@@ -737,21 +740,29 @@
             this.btnExport.Name = "btnExport";
             this.btnExport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExport_ItemClick);
             // 
-            // btnExportExcel
+            // btnExportPersionList
             // 
-            this.btnExportExcel.Caption = "导出人名册";
-            this.btnExportExcel.Id = 9;
-            this.btnExportExcel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnExportExcel.ImageOptions.Image")));
-            this.btnExportExcel.Name = "btnExportExcel";
-            this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
+            this.btnExportPersionList.Caption = "导出人名册";
+            this.btnExportPersionList.Id = 9;
+            this.btnExportPersionList.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnExportPersionList.ImageOptions.Image")));
+            this.btnExportPersionList.Name = "btnExportPersionList";
+            this.btnExportPersionList.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportPersionList_ItemClick);
             // 
             // barButtonItem1
             // 
-            this.barButtonItem1.Caption = "导出任免表";
+            this.barButtonItem1.Caption = "导出word任免表";
             this.barButtonItem1.Id = 10;
             this.barButtonItem1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.Image")));
             this.barButtonItem1.Name = "barButtonItem1";
             this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
+            // 
+            // btnExportExcel
+            // 
+            this.btnExportExcel.Caption = "导出excel任免审批表";
+            this.btnExportExcel.Id = 11;
+            this.btnExportExcel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnExportExcel.ImageOptions.Image")));
+            this.btnExportExcel.Name = "btnExportExcel";
+            this.btnExportExcel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExportExcel_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -2473,7 +2484,7 @@
         private DevExpress.XtraEditors.LabelControl labelControl30;
         private DevExpress.XtraEditors.LabelControl labelControl29;
         private DevExpress.XtraEditors.DateEdit dRewardData;
-        private DevExpress.XtraBars.BarButtonItem btnExportExcel;
+        private DevExpress.XtraBars.BarButtonItem btnExportPersionList;
         private DevExpress.XtraEditors.ComboBoxEdit txtcFull_timeEducation;
         private DevExpress.XtraEditors.ComboBoxEdit txtSex;
         private DevExpress.XtraEditors.ComboBoxEdit txtcIn_serviceEducation;
@@ -2534,6 +2545,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn cHealthStatus;
         private DevExpress.XtraGrid.Columns.GridColumn dMakeDate;
         private DevExpress.XtraGrid.Columns.GridColumn cMaker;
+        private DevExpress.XtraBars.BarButtonItem btnExportExcel;
     }
 }
 

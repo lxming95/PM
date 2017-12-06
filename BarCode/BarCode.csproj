@@ -166,6 +166,9 @@
       <DependentUpon>FrmUserSet.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="BarCode_TemporaryKey.pfx" />
+    <None Include="model\excel.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="model\word.doc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

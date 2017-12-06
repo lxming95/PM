@@ -122,7 +122,7 @@
     <value>..\Resources\数据导出(干部任免审批表).doc;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="名册" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\名册.xls;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\Resources\名册12-5.xls;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="模版" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\初始数据表171124.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

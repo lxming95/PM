@@ -303,8 +303,8 @@ namespace PersonnelManagement
                         List<MySqlParameter> ilistStr = new List<MySqlParameter> {
                             new MySqlParameter("cName", dt_re.Rows[i][1].ToString()),               //姓名
                             new MySqlParameter("cIDnumber", dt_re.Rows[i][2].ToString()),           //身份证号码
-                            new MySqlParameter("dData", dt_re.Rows[i][3].ToString()),               //时间
-                            new MySqlParameter("cCategory", dt_re.Rows[i][4].ToString()),           //类别
+                            new MySqlParameter("dData", dt_re.Rows[i][4].ToString()),               //时间
+                            new MySqlParameter("cCategory", dt_re.Rows[i][3].ToString()),           //类别
                             new MySqlParameter("cLevel", dt_re.Rows[i][5].ToString()),              //级别
                             new MySqlParameter("cDetailed", dt_re.Rows[i][6].ToString()),           //奖惩内容
                             new MySqlParameter("rpRemarks", dt_re.Rows[i][7].ToString()),           //备注
