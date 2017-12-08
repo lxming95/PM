@@ -99,6 +99,9 @@
             this.labelControl34 = new DevExpress.XtraEditors.LabelControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.MainControl = new DevExpress.XtraEditors.XtraScrollableControl();
+            this.labelControl46 = new DevExpress.XtraEditors.LabelControl();
+            this.txtcIDnumber = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl45 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl23 = new DevExpress.XtraEditors.LabelControl();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
@@ -161,7 +164,6 @@
             this.gridView9 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.labelControl24 = new DevExpress.XtraEditors.LabelControl();
             this.txtcHealthStatus = new DevExpress.XtraEditors.TextEdit();
-            this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl12 = new DevExpress.XtraEditors.LabelControl();
             this.dWorkDate = new DevExpress.XtraEditors.DateEdit();
             this.labelControl11 = new DevExpress.XtraEditors.LabelControl();
@@ -235,6 +237,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView6)).BeginInit();
             this.xtraTabPage1.SuspendLayout();
             this.MainControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtcIDnumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
             this.panelControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtcDismissalReason.Properties)).BeginInit();
@@ -365,7 +368,7 @@
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 599);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 664);
             this.barDockControlBottom.Manager = this.barManager1;
             this.barDockControlBottom.Size = new System.Drawing.Size(1054, 0);
             // 
@@ -375,7 +378,7 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 40);
             this.barDockControlLeft.Manager = this.barManager1;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 559);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 624);
             // 
             // barDockControlRight
             // 
@@ -383,7 +386,7 @@
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(1054, 40);
             this.barDockControlRight.Manager = this.barManager1;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 559);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 624);
             // 
             // btnExit
             // 
@@ -417,7 +420,7 @@
             this.gcPerformance.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemDateEdit1,
             this.dDate6});
-            this.gcPerformance.Size = new System.Drawing.Size(966, 114);
+            this.gcPerformance.Size = new System.Drawing.Size(966, 137);
             this.gcPerformance.TabIndex = 145;
             this.gcPerformance.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvPerformance,
@@ -548,13 +551,13 @@
             // 
             // gcCheckResult
             // 
-            this.gcCheckResult.Location = new System.Drawing.Point(33, 187);
+            this.gcCheckResult.Location = new System.Drawing.Point(33, 207);
             this.gcCheckResult.MainView = this.gvCheckResult;
             this.gcCheckResult.Name = "gcCheckResult";
             this.gcCheckResult.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.dDate2,
             this.cbcrChechResult});
-            this.gcCheckResult.Size = new System.Drawing.Size(388, 102);
+            this.gcCheckResult.Size = new System.Drawing.Size(388, 153);
             this.gcCheckResult.TabIndex = 146;
             this.gcCheckResult.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvCheckResult,
@@ -657,12 +660,12 @@
             // 
             // gcEmployment
             // 
-            this.gcEmployment.Location = new System.Drawing.Point(468, 324);
+            this.gcEmployment.Location = new System.Drawing.Point(468, 400);
             this.gcEmployment.MainView = this.gvEmployment;
             this.gcEmployment.Name = "gcEmployment";
             this.gcEmployment.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.dDate5});
-            this.gcEmployment.Size = new System.Drawing.Size(421, 102);
+            this.gcEmployment.Size = new System.Drawing.Size(421, 147);
             this.gcEmployment.TabIndex = 152;
             this.gcEmployment.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvEmployment,
@@ -763,7 +766,7 @@
             // 
             this.xtraTabPage2.Controls.Add(this.xtraScrollableControl1);
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(1048, 524);
+            this.xtraTabPage2.Size = new System.Drawing.Size(1048, 589);
             this.xtraTabPage2.Text = "个人其他信息";
             // 
             // xtraScrollableControl1
@@ -786,12 +789,12 @@
             this.xtraScrollableControl1.Controls.Add(this.labelControl34);
             this.xtraScrollableControl1.Location = new System.Drawing.Point(0, 0);
             this.xtraScrollableControl1.Name = "xtraScrollableControl1";
-            this.xtraScrollableControl1.Size = new System.Drawing.Size(1049, 524);
+            this.xtraScrollableControl1.Size = new System.Drawing.Size(1049, 589);
             this.xtraScrollableControl1.TabIndex = 107;
             // 
             // labelControl27
             // 
-            this.labelControl27.Location = new System.Drawing.Point(468, 167);
+            this.labelControl27.Location = new System.Drawing.Point(468, 187);
             this.labelControl27.Name = "labelControl27";
             this.labelControl27.Size = new System.Drawing.Size(52, 14);
             this.labelControl27.TabIndex = 170;
@@ -799,12 +802,12 @@
             // 
             // gcRewards
             // 
-            this.gcRewards.Location = new System.Drawing.Point(468, 187);
+            this.gcRewards.Location = new System.Drawing.Point(468, 207);
             this.gcRewards.MainView = this.gvRewards;
             this.gcRewards.Name = "gcRewards";
             this.gcRewards.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.cbcCategory});
-            this.gcRewards.Size = new System.Drawing.Size(531, 102);
+            this.gcRewards.Size = new System.Drawing.Size(531, 153);
             this.gcRewards.TabIndex = 169;
             this.gcRewards.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvRewards,
@@ -903,7 +906,7 @@
             // 
             // labelControl29
             // 
-            this.labelControl29.Location = new System.Drawing.Point(468, 304);
+            this.labelControl29.Location = new System.Drawing.Point(468, 380);
             this.labelControl29.Name = "labelControl29";
             this.labelControl29.Size = new System.Drawing.Size(136, 14);
             this.labelControl29.TabIndex = 153;
@@ -912,7 +915,7 @@
             // 
             // labelControl31
             // 
-            this.labelControl31.Location = new System.Drawing.Point(11, 304);
+            this.labelControl31.Location = new System.Drawing.Point(11, 380);
             this.labelControl31.Name = "labelControl31";
             this.labelControl31.Size = new System.Drawing.Size(52, 14);
             this.labelControl31.TabIndex = 149;
@@ -920,14 +923,14 @@
             // 
             // gcReserveCadre
             // 
-            this.gcReserveCadre.Location = new System.Drawing.Point(33, 324);
+            this.gcReserveCadre.Location = new System.Drawing.Point(33, 400);
             this.gcReserveCadre.MainView = this.gvReserveCadre;
             this.gcReserveCadre.Name = "gcReserveCadre";
             this.gcReserveCadre.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.dDate3,
             this.rcLevelEdit,
             this.cbrcLevel});
-            this.gcReserveCadre.Size = new System.Drawing.Size(388, 102);
+            this.gcReserveCadre.Size = new System.Drawing.Size(388, 147);
             this.gcReserveCadre.TabIndex = 148;
             this.gcReserveCadre.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvReserveCadre,
@@ -1037,7 +1040,7 @@
             // 
             // labelControl32
             // 
-            this.labelControl32.Location = new System.Drawing.Point(11, 167);
+            this.labelControl32.Location = new System.Drawing.Point(11, 187);
             this.labelControl32.Name = "labelControl32";
             this.labelControl32.Size = new System.Drawing.Size(52, 14);
             this.labelControl32.TabIndex = 147;
@@ -1062,7 +1065,7 @@
             // 
             this.xtraTabPage1.Controls.Add(this.MainControl);
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(1048, 524);
+            this.xtraTabPage1.Size = new System.Drawing.Size(1048, 589);
             this.xtraTabPage1.Text = "个人基本信息";
             // 
             // MainControl
@@ -1072,6 +1075,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MainControl.Appearance.BackColor = System.Drawing.Color.Gainsboro;
             this.MainControl.Appearance.Options.UseBackColor = true;
+            this.MainControl.Controls.Add(this.labelControl46);
+            this.MainControl.Controls.Add(this.txtcIDnumber);
+            this.MainControl.Controls.Add(this.labelControl13);
             this.MainControl.Controls.Add(this.labelControl45);
             this.MainControl.Controls.Add(this.labelControl23);
             this.MainControl.Controls.Add(this.panelControl3);
@@ -1091,7 +1097,6 @@
             this.MainControl.Controls.Add(this.gcFamilymembers);
             this.MainControl.Controls.Add(this.labelControl24);
             this.MainControl.Controls.Add(this.txtcHealthStatus);
-            this.MainControl.Controls.Add(this.labelControl13);
             this.MainControl.Controls.Add(this.labelControl12);
             this.MainControl.Controls.Add(this.dWorkDate);
             this.MainControl.Controls.Add(this.labelControl11);
@@ -1110,8 +1115,32 @@
             this.MainControl.Controls.Add(this.panelControl1);
             this.MainControl.Location = new System.Drawing.Point(-1, 0);
             this.MainControl.Name = "MainControl";
-            this.MainControl.Size = new System.Drawing.Size(1049, 524);
+            this.MainControl.Size = new System.Drawing.Size(1049, 594);
             this.MainControl.TabIndex = 107;
+            // 
+            // labelControl46
+            // 
+            this.labelControl46.Location = new System.Drawing.Point(816, 39);
+            this.labelControl46.Name = "labelControl46";
+            this.labelControl46.Size = new System.Drawing.Size(48, 14);
+            this.labelControl46.TabIndex = 193;
+            this.labelControl46.Text = "身份证号";
+            // 
+            // txtcIDnumber
+            // 
+            this.txtcIDnumber.EditValue = "";
+            this.txtcIDnumber.Location = new System.Drawing.Point(870, 36);
+            this.txtcIDnumber.Name = "txtcIDnumber";
+            this.txtcIDnumber.Size = new System.Drawing.Size(141, 20);
+            this.txtcIDnumber.TabIndex = 192;
+            // 
+            // labelControl13
+            // 
+            this.labelControl13.Location = new System.Drawing.Point(899, 13);
+            this.labelControl13.Name = "labelControl13";
+            this.labelControl13.Size = new System.Drawing.Size(48, 14);
+            this.labelControl13.TabIndex = 118;
+            this.labelControl13.Text = "健康状况";
             // 
             // labelControl45
             // 
@@ -1429,7 +1458,7 @@
             // 
             // cbIsNative
             // 
-            this.cbIsNative.Location = new System.Drawing.Point(835, 8);
+            this.cbIsNative.Location = new System.Drawing.Point(816, 11);
             this.cbIsNative.MenuManager = this.barManager1;
             this.cbIsNative.Name = "cbIsNative";
             this.cbIsNative.Properties.Caption = "  本地人";
@@ -1444,7 +1473,7 @@
             this.gcResume.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.dStratDateEdit,
             this.cbrLevel});
-            this.gcResume.Size = new System.Drawing.Size(506, 102);
+            this.gcResume.Size = new System.Drawing.Size(506, 161);
             this.gcResume.TabIndex = 156;
             this.gcResume.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvResume,
@@ -1563,7 +1592,7 @@
             // 
             // labelControl7
             // 
-            this.labelControl7.Location = new System.Drawing.Point(879, 482);
+            this.labelControl7.Location = new System.Drawing.Point(879, 556);
             this.labelControl7.Name = "labelControl7";
             this.labelControl7.Size = new System.Drawing.Size(36, 14);
             this.labelControl7.TabIndex = 153;
@@ -1571,7 +1600,7 @@
             // 
             // txtcMaker
             // 
-            this.txtcMaker.Location = new System.Drawing.Point(921, 479);
+            this.txtcMaker.Location = new System.Drawing.Point(921, 553);
             this.txtcMaker.Name = "txtcMaker";
             this.txtcMaker.Size = new System.Drawing.Size(90, 20);
             this.txtcMaker.TabIndex = 152;
@@ -1579,7 +1608,7 @@
             // dMakeDate
             // 
             this.dMakeDate.EditValue = null;
-            this.dMakeDate.Location = new System.Drawing.Point(647, 479);
+            this.dMakeDate.Location = new System.Drawing.Point(647, 553);
             this.dMakeDate.Name = "dMakeDate";
             this.dMakeDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -1590,7 +1619,7 @@
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(593, 482);
+            this.labelControl1.Location = new System.Drawing.Point(593, 556);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(48, 14);
             this.labelControl1.TabIndex = 150;
@@ -1599,7 +1628,7 @@
             // dEageDate
             // 
             this.dEageDate.EditValue = null;
-            this.dEageDate.Location = new System.Drawing.Point(889, 509);
+            this.dEageDate.Location = new System.Drawing.Point(856, 579);
             this.dEageDate.Name = "dEageDate";
             this.dEageDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -1611,7 +1640,7 @@
             // 
             // labelControl8
             // 
-            this.labelControl8.Location = new System.Drawing.Point(803, 512);
+            this.labelControl8.Location = new System.Drawing.Point(770, 582);
             this.labelControl8.Name = "labelControl8";
             this.labelControl8.Size = new System.Drawing.Size(80, 14);
             this.labelControl8.TabIndex = 148;
@@ -1620,14 +1649,14 @@
             // 
             // txtcReporting_Unit
             // 
-            this.txtcReporting_Unit.Location = new System.Drawing.Point(74, 479);
+            this.txtcReporting_Unit.Location = new System.Drawing.Point(74, 553);
             this.txtcReporting_Unit.Name = "txtcReporting_Unit";
             this.txtcReporting_Unit.Size = new System.Drawing.Size(398, 20);
             this.txtcReporting_Unit.TabIndex = 147;
             // 
             // labelControl9
             // 
-            this.labelControl9.Location = new System.Drawing.Point(20, 482);
+            this.labelControl9.Location = new System.Drawing.Point(20, 556);
             this.labelControl9.Name = "labelControl9";
             this.labelControl9.Size = new System.Drawing.Size(48, 14);
             this.labelControl9.TabIndex = 146;
@@ -1640,7 +1669,7 @@
             this.gcFamilymembers.Name = "gcFamilymembers";
             this.gcFamilymembers.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.dfBirthDateDateEdit});
-            this.gcFamilymembers.Size = new System.Drawing.Size(472, 102);
+            this.gcFamilymembers.Size = new System.Drawing.Size(472, 161);
             this.gcFamilymembers.TabIndex = 145;
             this.gcFamilymembers.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvFamilymembers,
@@ -1768,18 +1797,10 @@
             // 
             // txtcHealthStatus
             // 
-            this.txtcHealthStatus.Location = new System.Drawing.Point(889, 36);
+            this.txtcHealthStatus.Location = new System.Drawing.Point(953, 10);
             this.txtcHealthStatus.Name = "txtcHealthStatus";
-            this.txtcHealthStatus.Size = new System.Drawing.Size(100, 20);
+            this.txtcHealthStatus.Size = new System.Drawing.Size(58, 20);
             this.txtcHealthStatus.TabIndex = 119;
-            // 
-            // labelControl13
-            // 
-            this.labelControl13.Location = new System.Drawing.Point(835, 39);
-            this.labelControl13.Name = "labelControl13";
-            this.labelControl13.Size = new System.Drawing.Size(48, 14);
-            this.labelControl13.TabIndex = 118;
-            this.labelControl13.Text = "健康状况";
             // 
             // labelControl12
             // 
@@ -2122,7 +2143,7 @@
             this.tcMain.Location = new System.Drawing.Point(0, 46);
             this.tcMain.Name = "tcMain";
             this.tcMain.SelectedTabPage = this.xtraTabPage1;
-            this.tcMain.Size = new System.Drawing.Size(1054, 553);
+            this.tcMain.Size = new System.Drawing.Size(1054, 618);
             this.tcMain.TabIndex = 0;
             this.tcMain.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
@@ -2132,14 +2153,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1054, 599);
+            this.ClientSize = new System.Drawing.Size(1054, 664);
             this.Controls.Add(this.tcMain);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
             this.Name = "FrmInfMain";
-            this.Text = "人员信息编辑";
+            this.Text = "人员信息";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmInfMain_FormClosing);
             this.Load += new System.EventHandler(this.FrmInfMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
@@ -2181,6 +2202,7 @@
             this.xtraTabPage1.ResumeLayout(false);
             this.MainControl.ResumeLayout(false);
             this.MainControl.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtcIDnumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
             this.panelControl3.ResumeLayout(false);
             this.panelControl3.PerformLayout();
@@ -2418,5 +2440,7 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox cbcCategory;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox cbcrChechResult;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox cbrLevel;
+        private DevExpress.XtraEditors.LabelControl labelControl46;
+        private DevExpress.XtraEditors.TextEdit txtcIDnumber;
     }
 }

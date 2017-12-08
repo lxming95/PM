@@ -202,7 +202,8 @@ namespace PersonnelManagement
                     {
                         List<MySqlParameter> ilistStr = new List<MySqlParameter> {
                             new MySqlParameter("cName", dt_re.Rows[i][1].ToString()),          //姓名
-                            new MySqlParameter("cIDnumber", dt_re.Rows[i][2].ToString()),      //身份证号码
+                            new MySqlParameter("dBirth_date", dt_re.Rows[i][2].ToString()),    //出生日期
+                            //new MySqlParameter("cIDnumber", dt_re.Rows[i][2].ToString()),      //身份证号码
                             new MySqlParameter("dStartDate", dt_re.Rows[i][3].ToString()),     //开始时间
                             new MySqlParameter("dDeadline", dt_re.Rows[i][4].ToString()),      //截至时间
                             new MySqlParameter("rLevel", dt_re.Rows[i][5].ToString()),    //工作单位经历
@@ -210,7 +211,8 @@ namespace PersonnelManagement
                             new MySqlParameter("rRemarks", dt_re.Rows[i][7].ToString()),       //备注
                         };
                         MySqlParameter[] param = ilistStr.ToArray();
-                        DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cIDnumber=@cIDnumber", param);
+                        DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName=@cName AND dBirth_date LIKE '%" + dt_re.Rows[i][2].ToString() + "%'", param);
+                        //DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cIDnumber=@cIDnumber", param);
                         if (dt_persion == null || dt_persion.Rows.Count <= 0)
                         {
                             XtraMessageBox.Show("请确保数据库中存在"+ dt_re.Rows[i][1].ToString() + "的信息，然后再插入相关的学习及工作简历");
@@ -243,7 +245,8 @@ namespace PersonnelManagement
                             new MySqlParameter("rcRemarks", dt_re.Rows[i][5].ToString()),      //备注
                         };
                         MySqlParameter[] param = ilistStr.ToArray();
-                        DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND  cIDnumber=@cIDnumber", param);
+                        DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName=@cName AND dBirth_date LIKE '%" + dt_re.Rows[i][2].ToString() + "%'", param);
+                        //DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND  cIDnumber=@cIDnumber", param);
                         if (dt_persion == null || dt_persion.Rows.Count <= 0)
                         {
                             XtraMessageBox.Show("请确保数据库中存在" + dt_re.Rows[i][1].ToString() + "的信息，然后再插入相关的后备干部数据");
@@ -277,7 +280,8 @@ namespace PersonnelManagement
                             
                         };
                         MySqlParameter[] param = ilistStr.ToArray();
-                        DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND  cIDnumber=@cIDnumber", param);
+                        DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName=@cName AND dBirth_date LIKE '%" + dt_re.Rows[i][2].ToString() + "%'", param);
+                        //DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND  cIDnumber=@cIDnumber", param);
                         if (dt_persion == null || dt_persion.Rows.Count <= 0)
                         {
                             XtraMessageBox.Show("请确保数据库中存在" + dt_re.Rows[i][1].ToString() + "的信息，然后再插入相关的家庭主要成员数据");
@@ -310,7 +314,8 @@ namespace PersonnelManagement
                             new MySqlParameter("rpRemarks", dt_re.Rows[i][7].ToString()),           //备注
                         };
                         MySqlParameter[] param = ilistStr.ToArray();
-                        DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND  cIDnumber=@cIDnumber", param);
+                        DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName=@cName AND dBirth_date LIKE '%" + dt_re.Rows[i][2].ToString() + "%'", param);
+                        //DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND  cIDnumber=@cIDnumber", param);
                         if (dt_persion == null || dt_persion.Rows.Count <= 0)
                         {
                             XtraMessageBox.Show("请确保数据库中存在" + dt_re.Rows[i][1].ToString() + "的信息，然后再插入相关的奖惩情况数据");
@@ -341,7 +346,8 @@ namespace PersonnelManagement
                             new MySqlParameter("crRemarks", dt_re.Rows[i][5].ToString()),           //类别
                         };
                         MySqlParameter[] param = ilistStr.ToArray();
-                        DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1  AND  cIDnumber=@cIDnumber", param);
+                        DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName=@cName AND dBirth_date LIKE '%" + dt_re.Rows[i][2].ToString() + "%'", param);
+                        //DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1  AND  cIDnumber=@cIDnumber", param);
                         if (dt_persion == null || dt_persion.Rows.Count <= 0)
                         {
                             XtraMessageBox.Show("请确保数据库中存在" + dt_re.Rows[i][1].ToString() + "的信息，然后再插入相关的年度考核数据");
@@ -374,7 +380,8 @@ namespace PersonnelManagement
                             new MySqlParameter("prRemarks", dt_re.Rows[i][7].ToString()), //组织部评价
                         };
                         MySqlParameter[] param = ilistStr.ToArray();
-                        DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND  cIDnumber=@cIDnumber", param);
+                        DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName=@cName AND dBirth_date LIKE '%" + dt_re.Rows[i][2].ToString() + "%'", param);
+                        //DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND  cIDnumber=@cIDnumber", param);
                         if (dt_persion == null || dt_persion.Rows.Count <= 0)
                         {
                             XtraMessageBox.Show("请确保数据库中存在" + dt_re.Rows[i][1].ToString() + "的信息，然后再插入相关的现实表现数据");

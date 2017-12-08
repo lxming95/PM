@@ -20,20 +20,23 @@ namespace PersonnelManagement
         /// </summary>
         /// <param name="s"></param>
         /// <param name="name"></param>
-        private static void saveFile(string s, string name)
+        private static string saveFile(string s, string name)
         {
-
+            string path = "";
             using (SaveFileDialog saveDialog = new SaveFileDialog())    //离开后销毁对话框
             {
-                saveDialog.FileName = name + DateTime.Now.ToString("yyyyMMdd");
+                name += DateTime.Now.ToString("yyyyMMdd");
+                saveDialog.FileName = name;
 
 
                 saveDialog.Filter = "任免表(.lrm)|*.lrm";
-                Start: if (saveDialog.ShowDialog() != DialogResult.Cancel)  //用户点击保存按钮
+                Start: if (saveDialog.ShowDialog() != DialogResult.Cancel)          //用户点击保存按钮
                 {
-                    string exportFilePath = saveDialog.FileName;        //定义文件路径              
-                    string fileExtenstion = new FileInfo(exportFilePath).Extension; //创建文件
-
+                    
+                    string exportFilePath = saveDialog.FileName;                    //定义文件路径              
+                    string fileExtenstion = new FileInfo(exportFilePath).Extension; //文件扩展名
+                    path = saveDialog.FileName.Replace(name+ fileExtenstion, "");
+                    //创建文件
                     try
                     {
                         switch (fileExtenstion)                             //判断文件类型
@@ -50,6 +53,9 @@ namespace PersonnelManagement
                             default:
                                 break;
                         }
+                        path= saveDialog.FileName.Replace(name, "");
+                        XtraMessageBox.Show("文件保存成功");
+                        //return saveDialog.FileName.Replace(name,"");
                     }
                     catch
                     {
@@ -62,6 +68,7 @@ namespace PersonnelManagement
 
                     }
                 }
+                return path;
             }
 
             //if (s == string.Empty)
@@ -224,18 +231,20 @@ namespace PersonnelManagement
                     string fileExtenstion = new FileInfo(exportFilePath).Extension; //创建文件
                     if (saveDialog.FileName.Trim().Length > 0)
                     {
-                        byte[] excel = Properties.Resources.名册;
-                        FileStream stream = new FileStream(saveDialog.FileName, FileMode.Create);
-                        stream.Write(excel, 0, excel.Length);
-                        stream.Close();
-                        stream.Dispose();
-                        //XtraMessageBox.Show("保存成功", "提示");
+                        byte[] excel = Properties.Resources.名册0;
 
-                        string Path = exportFilePath;
-                        if (Path == "")
-                            return;
                         try
                         {
+                            FileStream stream = new FileStream(saveDialog.FileName, FileMode.Create);
+                            stream.Write(excel, 0, excel.Length);
+                            stream.Close();
+                            stream.Dispose();
+                            //XtraMessageBox.Show("保存成功", "提示");
+
+                            string Path = exportFilePath;
+                            if (Path == "")
+                                return;
+
                             //Office 07以下版本
                             string sConnectionString = "Provider=Microsoft.JET.OLEDB.4.0;Data Source=" + Path + ";Extended Properties='Excel 8.0;HDR=Yes;IMEX=0;'"; 
                             // Office 07及以上版本 不能出现多余的空格 而且分号注意
@@ -263,8 +272,10 @@ namespace PersonnelManagement
                             }
                             //关闭连接
                             cn.Close();
+                            XtraMessageBox.Show("保存成功！");
+
                         }
-                        catch (OleDbException err)
+                        catch (Exception err)
                         {
                             XtraMessageBox.Show(err.Message);
                         }
@@ -613,6 +624,7 @@ namespace PersonnelManagement
             }
             return success;
         }
+
         [DllImport("User32.dll")]
         public static extern int GetWindowThreadProcessId(IntPtr hWnd, out int ProcessId);
         private static void KillExcel(Microsoft.Office.Interop.Excel._Application theApp)

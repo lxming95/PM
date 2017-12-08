@@ -54,7 +54,11 @@ namespace PersonnelManagement
 
             }
         }
-
+        /// <summary>
+        /// 保存按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             bool su=saveIteam();
@@ -64,8 +68,11 @@ namespace PersonnelManagement
                 clear();
             }
         }
-
-
+        /// <summary>
+        /// 导出按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnExport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             btnSave_ItemClick(sender, e);
@@ -77,11 +84,11 @@ namespace PersonnelManagement
             DataTable dt = MySQLHelper.table("SELECT * FROM data_persion WHERE cName=@cName AND dBirth_date=@dBirth_date ", param);
             SaveFile.ExportLrm(dt);
         }
-
         /// <summary>
-        /// 初始化操作
+        /// 清空按钮
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnClear_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             //saveIteam();
@@ -89,6 +96,9 @@ namespace PersonnelManagement
             clear();
 
         }
+        /// <summary>
+        /// 不传值的初始化函数
+        /// </summary>
         private void start()
         {
             gcResume.DataSource= MySQLHelper.table("SELECT * FROM data_resume  where rid in ('')");
@@ -103,6 +113,10 @@ namespace PersonnelManagement
 
 
         }
+        /// <summary>
+        /// 传值的初始化函数
+        /// </summary>
+        /// <param name="id"></param>
         private void start(string id)
         {
             List<MySqlParameter> ilistStr = new List<MySqlParameter> {
@@ -131,12 +145,12 @@ namespace PersonnelManagement
             gcPerformance.DataSource = MySQLHelper.table("SELECT * FROM data_performance  where PersionID= @pid", parm);
 
             txtcName.Text = gl_dt.Rows[0]["cName"].ToString();                          //姓名
-            //txtcSex.EditValue = gl_dt.Rows[0]["cSex"];                                  //
-            
-            txtcSex.Text = gl_dt.Rows[0]["cSex"].ToString();                       //性别
+            //txtcSex.EditValue = gl_dt.Rows[0]["cSex"];                                //
+            txtcSex.Text = gl_dt.Rows[0]["cSex"].ToString();                            //性别
             dBirth_date.Text = gl_dt.Rows[0]["dBirth_date"].ToString();                 //出生年月
             txtcNation.Text = gl_dt.Rows[0]["cNation"].ToString();                      //民族
             txtcNativePlace.Text = gl_dt.Rows[0]["cNativePlace"].ToString();            //籍贯
+            txtcIDnumber.Text= gl_dt.Rows[0]["cIDnumber"].ToString();                   //身份证号码
             dJoin_date.Text = gl_dt.Rows[0]["dJoin_date"].ToString();                   //入党时间
             txtcHealthStatus.Text = gl_dt.Rows[0]["cHealthStatus"].ToString();          //健康状况
             txtcBirthPlace.Text = gl_dt.Rows[0]["cBirthPlace"].ToString();              //出生地
@@ -201,6 +215,7 @@ namespace PersonnelManagement
             dBirth_date.Text = "";
             txtcNation.Text = "";
             txtcNativePlace.Text = "";
+            txtcIDnumber.Text = "";
             dJoin_date.Text = "";
             txtcHealthStatus.Text = "";
             txtcBirthPlace.Text = "";
@@ -329,6 +344,7 @@ namespace PersonnelManagement
                     new MySqlParameter("dBirth_date", dBirth_date.Text),
                     new MySqlParameter("cNation", txtcNation.Text),
                     new MySqlParameter("cNativePlace", txtcNativePlace.Text),
+                    new MySqlParameter("cIDnumber", txtcIDnumber.Text),
                     new MySqlParameter("dJoin_date", dJoin_date.Text),
                     new MySqlParameter("cHealthStatus", txtcHealthStatus.Text),
                     new MySqlParameter("cBirthPlace", txtcBirthPlace.Text),
@@ -417,7 +433,7 @@ namespace PersonnelManagement
                 {
 
                     //MySQLHelper.ExecuteNonQuery(" INSERT INTO data_persion(cName,cSex,dWorkDate) VALUES(@cName,@cSex,@dWorkDate)", param);
-                    MySQLHelper.ExecuteNonQuery(" INSERT INTO data_persion( cIdentityCategory,cRank,cName,cSex,dBirth_date,cNation,cNativePlace,dJoin_date,cHealthStatus, cBirthPlace, dWorkDate, cDuties, cSkill, cFull_timeEducation, cFull_timeSchool, cIn_serviceEducation, cIn_serviceSchool,cCurrentJob, cProposedJob, cRemoveJob, cDismissalReason, cReporting_Unit, dEageDate, dMakeDate, cMaker, do_flag,bIsNative,bIsOfficialPosition,cFull_timeDegree,cFull_timeMajor,cIn_serviceDegree,cIn_serviceMajor,dGetCadresDate,cDocumentBasis,cApprovingAuthority,cWay ) VALUES( @cIdentityCategory,@cRank, @cName , @cSex , @dBirth_date , @cNation,@cNativePlace,@dJoin_date,@cHealthStatus, @cBirthPlace, @dWorkDate, @cDuties, @cSkill, @cFull_timeEducation, @cFull_timeSchool, @cIn_serviceEducation, @cIn_serviceSchool,@cCurrentJob, @cProposedJob, @cRemoveJob, @cDismissalReason, @cReporting_Unit, @dEageDate, @dMakeDate, @cMaker, @do_flag, @bIsNative,@bIsOfficialPosition,@cFull_timeDegree,@cFull_timeMajor,@cIn_serviceDegree,@cIn_serviceMajor,@dGetCadresDate,@cDocumentBasis,@cApprovingAuthority,@cWay )", param);
+                    MySQLHelper.ExecuteNonQuery(" INSERT INTO data_persion( cIdentityCategory,cRank,cName,cSex,dBirth_date,cNation,cNativePlace,cIDnumber,dJoin_date,cHealthStatus, cBirthPlace, dWorkDate, cDuties, cSkill, cFull_timeEducation, cFull_timeSchool, cIn_serviceEducation, cIn_serviceSchool,cCurrentJob, cProposedJob, cRemoveJob, cDismissalReason, cReporting_Unit, dEageDate, dMakeDate, cMaker, do_flag,bIsNative,bIsOfficialPosition,cFull_timeDegree,cFull_timeMajor,cIn_serviceDegree,cIn_serviceMajor,dGetCadresDate,cDocumentBasis,cApprovingAuthority,cWay ) VALUES( @cIdentityCategory,@cRank, @cName , @cSex , @dBirth_date , @cNation,@cNativePlace,@cIDnumber,@dJoin_date,@cHealthStatus, @cBirthPlace, @dWorkDate, @cDuties, @cSkill, @cFull_timeEducation, @cFull_timeSchool, @cIn_serviceEducation, @cIn_serviceSchool,@cCurrentJob, @cProposedJob, @cRemoveJob, @cDismissalReason, @cReporting_Unit, @dEageDate, @dMakeDate, @cMaker, @do_flag, @bIsNative,@bIsOfficialPosition,@cFull_timeDegree,@cFull_timeMajor,@cIn_serviceDegree,@cIn_serviceMajor,@dGetCadresDate,@cDocumentBasis,@cApprovingAuthority,@cWay )", param);
                 }
                 else
                 {
@@ -426,7 +442,7 @@ namespace PersonnelManagement
                     {
                         ilistStr.Add(new MySqlParameter("pid", gl_dt.Rows[0]["pid"].ToString()));
                         param = ilistStr.ToArray();
-                        MySQLHelper.ExecuteNonQuery(" UPDATE data_persion SET cIdentityCategory=@cIdentityCategory,cRank=@cRank,cName=@cName,cSex=@cSex,dBirth_date=@dBirth_date,cNation=@cNation,cNativePlace=@cNativePlace,dJoin_date=@dJoin_date,cHealthStatus=@cHealthStatus,cBirthPlace=@cBirthPlace,dWorkDate=@dWorkDate,cDuties=@cDuties,cSkill=@cSkill,cFull_timeEducation=@cFull_timeEducation,cFull_timeSchool=@cFull_timeSchool,cIn_serviceEducation=@cIn_serviceEducation,cIn_serviceSchool=@cIn_serviceSchool, cCurrentJob=@cCurrentJob,cProposedJob=@cProposedJob,cRemoveJob=@cRemoveJob,cDismissalReason=@cDismissalReason,cReporting_Unit=@cReporting_Unit,dEageDate=@dEageDate,dMakeDate=@dMakeDate,cMaker=@cMaker,do_flag=@do_flag,bIsNative=@bIsNative,bIsOfficialPosition=@bIsOfficialPosition,cFull_timeDegree=@cFull_timeDegree,cFull_timeMajor=@cFull_timeMajor,cIn_serviceDegree=@cIn_serviceDegree,cIn_serviceMajor=@cIn_serviceMajor,dGetCadresDate=@dGetCadresDate,cDocumentBasis=@cDocumentBasis,cApprovingAuthority=@cApprovingAuthority,cWay=@cWay WHERE pid=@pid", param);
+                        MySQLHelper.ExecuteNonQuery(" UPDATE data_persion SET cIDnumber=@cIDnumber,cIdentityCategory=@cIdentityCategory,cRank=@cRank,cName=@cName,cSex=@cSex,dBirth_date=@dBirth_date,cNation=@cNation,cNativePlace=@cNativePlace,dJoin_date=@dJoin_date,cHealthStatus=@cHealthStatus,cBirthPlace=@cBirthPlace,dWorkDate=@dWorkDate,cDuties=@cDuties,cSkill=@cSkill,cFull_timeEducation=@cFull_timeEducation,cFull_timeSchool=@cFull_timeSchool,cIn_serviceEducation=@cIn_serviceEducation,cIn_serviceSchool=@cIn_serviceSchool, cCurrentJob=@cCurrentJob,cProposedJob=@cProposedJob,cRemoveJob=@cRemoveJob,cDismissalReason=@cDismissalReason,cReporting_Unit=@cReporting_Unit,dEageDate=@dEageDate,dMakeDate=@dMakeDate,cMaker=@cMaker,do_flag=@do_flag,bIsNative=@bIsNative,bIsOfficialPosition=@bIsOfficialPosition,cFull_timeDegree=@cFull_timeDegree,cFull_timeMajor=@cFull_timeMajor,cIn_serviceDegree=@cIn_serviceDegree,cIn_serviceMajor=@cIn_serviceMajor,dGetCadresDate=@dGetCadresDate,cDocumentBasis=@cDocumentBasis,cApprovingAuthority=@cApprovingAuthority,cWay=@cWay WHERE pid=@pid", param);
                     }
                     else
                     {
@@ -740,7 +756,7 @@ namespace PersonnelManagement
             }
         }
         /// <summary>
-        /// formatDateEdit
+        /// formatDateEdit,更改时间选择格式
         /// </summary>
         private void formatDateEdit()
         {
@@ -799,60 +815,168 @@ namespace PersonnelManagement
             dDate6.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearsGroupView;
             dDate6.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearsGroupView;
         }
-
+        /// <summary>
+        /// 是否激活编辑状态
+        /// </summary>
+        /// <param name="flag">true表示激活，false不激活</param>
         private void enableEdit(bool flag)
         {
             if (!flag)
             {
                 #region disable balnk
                 txtcName.Enabled = false;
+                txtcName.ForeColor = Color.Black;
+                txtcName.BackColor = Color.White;
+                
                 txtcSex.Enabled = false;
+                txtcSex.ForeColor = Color.Black;
+                txtcSex.BackColor = Color.White;
+
                 dBirth_date.Enabled = false;
+                dBirth_date.ForeColor = Color.Black;
+                dBirth_date.BackColor = Color.White;
+
                 txtcNation.Enabled = false;
+                txtcNation.ForeColor = Color.Black;
+                txtcNation.BackColor = Color.White;
+
                 txtcNativePlace.Enabled = false;
+                txtcNativePlace.ForeColor = Color.Black;
+                txtcNativePlace.BackColor = Color.White;
+
+                txtcIDnumber.Enabled = false;
+                txtcIDnumber.ForeColor = Color.Black;
+                txtcIDnumber.BackColor = Color.White;
+
                 dJoin_date.Enabled = false;
+                dJoin_date.ForeColor = Color.Black;
+                dJoin_date.BackColor = Color.White;
+
                 txtcHealthStatus.Enabled = false;
+                txtcHealthStatus.ForeColor = Color.Black;
+                txtcHealthStatus.BackColor = Color.White;
+
                 txtcBirthPlace.Enabled = false;
+                txtcBirthPlace.ForeColor = Color.Black;
+                txtcBirthPlace.BackColor = Color.White;
+
                 dWorkDate.Enabled = false;
+                dWorkDate.ForeColor = Color.Black;
+                dWorkDate.BackColor = Color.White;
+
                 txtcDuties.Enabled = false;
+                txtcDuties.ForeColor = Color.Black;
+                txtcDuties.BackColor = Color.White;
+
                 txtcSkill.Enabled = false;
+                txtcSkill.ForeColor = Color.Black;
+                txtcSkill.BackColor = Color.White;
+
                 txtcFull_timeEducation.Enabled = false;
+                txtcFull_timeEducation.ForeColor = Color.Black;
+                txtcFull_timeEducation.BackColor = Color.White;
+
                 txtcFull_timeDegree.Enabled = false;
+                txtcFull_timeDegree.ForeColor = Color.Black;
+                txtcFull_timeDegree.BackColor = Color.White;
+
                 txtcFull_timeSchool.Enabled = false;
+                txtcFull_timeSchool.ForeColor = Color.Black;
+                txtcFull_timeSchool.BackColor = Color.White;
+
                 txtcFull_timeMajor.Enabled = false;
+                txtcFull_timeMajor.ForeColor = Color.Black;
+                txtcFull_timeMajor.BackColor = Color.White;
+
                 txtcIn_serviceEducation.Enabled = false;
+                txtcIn_serviceEducation.ForeColor = Color.Black;
+                txtcIn_serviceEducation.BackColor = Color.White;
+
                 txtcIn_serviceDegree.Enabled = false;
+                txtcIn_serviceDegree.ForeColor = Color.Black;
+                txtcIn_serviceDegree.BackColor = Color.White;
+
                 txtcIn_serviceSchool.Enabled = false;
+                txtcIn_serviceSchool.ForeColor = Color.Black;
+                txtcIn_serviceSchool.BackColor = Color.White;
+
                 txtcIn_serviceMajor.Enabled = false;
+                txtcIn_serviceMajor.ForeColor = Color.Black;
+                txtcIn_serviceMajor.BackColor = Color.White;
+
                 txtcCurrentJob.Enabled = false;
+                txtcCurrentJob.ForeColor = Color.Black;
+                txtcCurrentJob.BackColor = Color.White;
+
                 txtcProposedJob.Enabled = false;
+                txtcProposedJob.ForeColor = Color.Black;
+                txtcProposedJob.BackColor = Color.White;
+
                 txtcRemoveJob.Enabled = false;
+                txtcRemoveJob.ForeColor = Color.Black;
+                txtcRemoveJob.BackColor = Color.White;
+
                 txtcDismissalReason.Enabled = false;
+                txtcDismissalReason.ForeColor = Color.Black;
+                txtcDismissalReason.BackColor = Color.White;
+
                 txtcReporting_Unit.Enabled = false;
+                txtcReporting_Unit.ForeColor = Color.Black;
+                txtcReporting_Unit.BackColor = Color.White;
 
                 dEageDate.Enabled = false;
+                dEageDate.ForeColor = Color.Black;
+                dEageDate.BackColor = Color.White;
+
                 txtcMaker.Enabled = false;
+                txtcMaker.ForeColor = Color.Black;
+                txtcMaker.BackColor = Color.White;
+
                 dMakeDate.Enabled = false;
+                dMakeDate.ForeColor = Color.Black;
+                dMakeDate.BackColor = Color.White;
 
                 txtIdentityCategory.Enabled = false;
+                txtIdentityCategory.ForeColor = Color.Black;
+                txtIdentityCategory.BackColor = Color.White;
+
                 txtRank.Enabled = false;
+                txtRank.ForeColor = Color.Black;
+                txtRank.BackColor = Color.White;
 
                 dDate4.Enabled = false;
+                dDate4.ForeColor = Color.Black;
+                dDate4.BackColor = Color.White;
+
                 txtcDocumentBasis.Enabled = false;
+                txtcDocumentBasis.ForeColor = Color.Black;
+                txtcDocumentBasis.BackColor = Color.White;
+
                 txtcApprovingAuthority.Enabled = false;
+                txtcApprovingAuthority.ForeColor = Color.Black;
+                txtcApprovingAuthority.BackColor = Color.White;
+
                 txtcWay.Enabled = false;
+                txtcWay.ForeColor = Color.Black;
+                txtcWay.BackColor = Color.White;
+
                 cbIsNative.Enabled = false;
+                cbIsNative.ForeColor = Color.Black;
+                cbIsNative.BackColor = Color.White;
+
                 cbIsOfficialPosition.Enabled = false;
+                cbIsOfficialPosition.ForeColor = Color.Black;
+                cbIsOfficialPosition.BackColor = Color.White;
+
                 #endregion
                 #region disable all excel
-
-                gcResume.Enabled = false;
-                gcRewards.Enabled = false;
-                gcFamilymembers.Enabled = false;
-                gcCheckResult.Enabled = false;
-                gcReserveCadre.Enabled = false;
-                gcEmployment.Enabled = false;
-                gcPerformance.Enabled = false;
+                gvResume.OptionsBehavior.Editable= false;
+                gvRewards.OptionsBehavior.Editable = false;
+                gvFamilymembers.OptionsBehavior.Editable = false;
+                gvCheckResult.OptionsBehavior.Editable = false;
+                gvReserveCadre.OptionsBehavior.Editable = false;
+                gvEmployment.OptionsBehavior.Editable = false;
+                gvPerformance.OptionsBehavior.Editable = false;
 
                 #endregion
                 #region disable button
@@ -863,6 +987,11 @@ namespace PersonnelManagement
                 #endregion
             }
         }
+        /// <summary>
+        /// 窗体关闭事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FrmInfMain_FormClosing(object sender, FormClosingEventArgs e)
         {
            if( this.Parent == null)

@@ -212,7 +212,9 @@ namespace PersonnelManagement
             }
             //干部身份取得
             if (dGetCadresDate.Text != "" && dGetCadresDate.Text != "起")
-                MyStringBuilder.Append(" and dGetCadresDate like '%" + Convert.ToDateTime(dGetCadresDate.DateTime).ToString("yyyy-MM") + "%'");
+                MyStringBuilder.Append(" and dGetCadresDate >=" + Convert.ToDateTime(dGetCadresDate.DateTime).ToString("yyyy-MM"));
+            if (dGetCadresDate2.Text != "" && dGetCadresDate2.Text != "止")
+                MyStringBuilder.Append(" and dGetCadresDate <=" + Convert.ToDateTime(dGetCadresDate2.DateTime).ToString("yyyy-MM"));
             if (txtgcDocumentBasis.Text != "")
                 MyStringBuilder.Append(" and cDocumentBasis like '%" + txtgcDocumentBasis.Text + "%'");
             if (txtgcApprovingAuthority.Text != "")
@@ -253,7 +255,9 @@ namespace PersonnelManagement
 
             #region 奖惩信息
             if (dRewardData.Text != ""&& dRewardData.Text != "起")
-                other.Append(" and dData like '%" + Convert.ToDateTime(dRewardData.DateTime).ToString("yyyy-MM") + "%'");
+                other.Append(" and dData >=" + Convert.ToDateTime(dRewardData.DateTime).ToString("yyyy-MM"));
+            if (dRewardData2.Text != "" && dRewardData2.Text != "止")
+                other.Append(" and dData <=" + Convert.ToDateTime(dRewardData2.DateTime).ToString("yyyy-MM"));
             if (txtcCategory.Text != "")
                 other.Append(" and cCategory like '%" + txtcCategory.Text+ "%'");
             if (txtcLevel.Text != "")
@@ -271,8 +275,10 @@ namespace PersonnelManagement
             #endregion 
             #region 考核结果
             if (dCheckYear.Text!=""&& dCheckYear.Text != "起")
-                other.Append(" and dcrYear like '%" + Convert.ToDateTime(dCheckYear.DateTime).ToString("yyyy") + "%'");
-            if(txtcrChechResult.Text!="")
+                other.Append(" and dcrYear >=" + Convert.ToDateTime(dCheckYear.DateTime).ToString("yyyy"));
+            if (dCheckYear2.Text != "" && dCheckYear2.Text != "止")
+                other.Append(" and dcrYear <=" + Convert.ToDateTime(dCheckYear2.DateTime).ToString("yyyy"));
+            if (txtcrChechResult.Text!="")
                 other.Append(" and crChechResult like '%" + txtcrChechResult.Text + "%'");
             if (!other.Equals(""))
             {
@@ -303,8 +309,10 @@ namespace PersonnelManagement
             #endregion
             #region  后备干部时间
             if(dReservecadreDate.Text!=""&& dReservecadreDate.Text != "起")
-                other.Append(" and rcYear like '%" + Convert.ToDateTime(dReservecadreDate.DateTime).ToString("yyyy") + "%'");
-            if(txtrcLevel.Text!="")
+                other.Append(" and rcYear >=" + Convert.ToDateTime(dReservecadreDate.DateTime).ToString("yyyy"));
+            if (dReservecadreDate2.Text != "" && dReservecadreDate2.Text != "止")
+                other.Append(" and rcYear <=" + Convert.ToDateTime(dReservecadreDate2.DateTime).ToString("yyyy"));
+            if (txtrcLevel.Text!="")
                 other.Append(" and rcLevel like '%" + txtrcLevel.Text + "%'");
             if (!other.Equals(""))
             {
@@ -317,8 +325,10 @@ namespace PersonnelManagement
             #endregion
             #region 现实表现
             if(dPerformanceDate.Text!=""&& dPerformanceDate.Text != "起")
-                other.Append(" and rpYear like '%" + Convert.ToDateTime(dPerformanceDate.DateTime).ToString("yyyy") + "%'");
-            if(txtcSelfEvaluation.Text!="")
+                other.Append(" and rpYear >=" + Convert.ToDateTime(dPerformanceDate.DateTime).ToString("yyyy"));
+            if (dPerformanceDate2.Text != "" && dPerformanceDate2.Text != "止")
+                other.Append(" and rpYear <=" + Convert.ToDateTime(dPerformanceDate2.DateTime).ToString("yyyy"));
+            if (txtcSelfEvaluation.Text!="")
                 other.Append(" and cSelfEvaluation like '%" + txtcSelfEvaluation.Text + "%'");
             if (txtcUnitEvaluation.Text != "")
                 other.Append(" and cUnitEvaluation like '%" + txtcUnitEvaluation.Text + "%'");
@@ -336,7 +346,7 @@ namespace PersonnelManagement
             #endregion
 
 
-            gcType.DataSource = FormatDT(MySQLHelper.table("select * from data_persion where do_flag =1 " + MyStringBuilder), date1);
+            gcType.DataSource = FormatDT(MySQLHelper.table("select IF(pid=''||ISNULL(pid),' ',pid) as pid,IF(cUnit=''||ISNULL(cUnit),' ',cUnit) as cUnit,IF(cName=''||ISNULL(cName),' ',cName) as cName,IF(cSex=''||ISNULL(cSex),' ',cSex) as cSex,IF(dBirth_date=''||ISNULL(dBirth_date),' ',dBirth_date) as dBirth_date,IF(cNation=''||ISNULL(cNation),' ',cNation) as cNation,IF(cNativePlace=''||ISNULL(cNativePlace),' ',cNativePlace) as cNativePlace,IF(bIsNative=''||ISNULL(bIsNative),' ',bIsNative) as bIsNative,IF(dJoin_date=''||ISNULL(dJoin_date),' ',dJoin_date) as dJoin_date,IF(cHealthStatus=''||ISNULL(cHealthStatus),' ',cHealthStatus) as cHealthStatus,IF(cBirthPlace=''||ISNULL(cBirthPlace),' ',cBirthPlace) as cBirthPlace,IF(dWorkDate=''||ISNULL(dWorkDate),' ',dWorkDate) as dWorkDate,IF(cDuties=''||ISNULL(cDuties),' ',cDuties) as cDuties,IF(cSkill=''||ISNULL(cSkill),' ',cSkill) as cSkill,IF(cFull_timeEducation=''||ISNULL(cFull_timeEducation),' ',cFull_timeEducation) as cFull_timeEducation,IF(cFull_timeDegree=''||ISNULL(cFull_timeDegree),' ',cFull_timeDegree) as cFull_timeDegree,IF(cFull_timeMajor=''||ISNULL(cFull_timeMajor),' ',cFull_timeMajor) as cFull_timeMajor,IF(cFull_timeSchool=''||ISNULL(cFull_timeSchool),' ',cFull_timeSchool) as cFull_timeSchool,IF(cIn_serviceEducation=''||ISNULL(cIn_serviceEducation),' ',cIn_serviceEducation) as cIn_serviceEducation,IF(cIn_serviceDegree=''||ISNULL(cIn_serviceDegree),' ',cIn_serviceDegree) as cIn_serviceDegree,IF(cIn_serviceMajor=''||ISNULL(cIn_serviceMajor),' ',cIn_serviceMajor) as cIn_serviceMajor,IF(cIn_serviceSchool=''||ISNULL(cIn_serviceSchool),' ',cIn_serviceSchool) as cIn_serviceSchool,IF(cCurrentJob=''||ISNULL(cCurrentJob),' ',cCurrentJob) as cCurrentJob,IF(cProposedJob=''||ISNULL(cProposedJob),' ',cProposedJob) as cProposedJob,IF(cRemoveJob=''||ISNULL(cRemoveJob),' ',cRemoveJob) as cRemoveJob,IF(cResume=''||ISNULL(cResume),' ',cResume) as cResume,IF(dInOffice=''||ISNULL(dInOffice),' ',dInOffice) as dInOffice,IF(dSameOffic=''||ISNULL(dSameOffic),' ',dSameOffic) as dSameOffic,IF(cIdentityCategory=''||ISNULL(cIdentityCategory),' ',cIdentityCategory) as cIdentityCategory,IF(cRank=''||ISNULL(cRank),' ',cRank) as cRank,IF(bIsOfficialPosition=''||ISNULL(bIsOfficialPosition),' ',bIsOfficialPosition) as bIsOfficialPosition,IF(cChech_Result=''||ISNULL(cChech_Result),' ',cChech_Result) as cChech_Result,IF(cDismissalReason=''||ISNULL(cDismissalReason),' ',cDismissalReason) as cDismissalReason,IF(dGetCadresDate=''||ISNULL(dGetCadresDate),' ',dGetCadresDate) as dGetCadresDate,IF(cDocumentBasis=''||ISNULL(cDocumentBasis),' ',cDocumentBasis) as cDocumentBasis,IF(cApprovingAuthority=''||ISNULL(cApprovingAuthority),' ',cApprovingAuthority) as cApprovingAuthority,IF(cWay=''||ISNULL(cWay),' ',cWay) as cWay,IF(cReporting_Unit=''||ISNULL(cReporting_Unit),' ',cReporting_Unit) as cReporting_Unit,IF(dEageDate=''||ISNULL(dEageDate),' ',dEageDate) as dEageDate,IF(dMakeDate=''||ISNULL(dMakeDate),' ',dMakeDate) as dMakeDate,IF(cMaker=''||ISNULL(cMaker),' ',cMaker) as cMaker,IF(cRemarks=''||ISNULL(cRemarks),' ',cRemarks) as cRemarks from data_persion where do_flag =1 " + MyStringBuilder), date1);
             txtNum.Text = (gcType.DataSource as DataTable).Rows.Count.ToString();
 
         }
@@ -418,18 +428,23 @@ namespace PersonnelManagement
             txtcIdentityCategory.Text = "";
             txtcRank.Text = "";
             dRewardData.Text = "";
+            dRewardData2.Text = "";
             txtcCategory.Text = "";
             txtcLevel.Text = "";
             txtcDetailed.Text = "";
             dCheckYear.Text = "";
+            dCheckYear2.Text = "";
             txtcrChechResult.Text = "";
             dGetCadresDate.Text = "";
+            dGetCadresDate2.Text = "";
             txtgcDocumentBasis.Text = "";
             txtgcApprovingAuthority.Text = "";
             txtgcWay.Text = "";
             dReservecadreDate.Text = "";
+            dReservecadreDate2.Text = "";
             txtrcLevel.Text = "";
             dPerformanceDate.Text = "";
+            dPerformanceDate2.Text = "";
 
             txtcSelfEvaluation.Text = "";
             txtcUnitEvaluation.Text = "";
@@ -442,7 +457,7 @@ namespace PersonnelManagement
         /// </summary>
         private void start()
         {
-            gcType.DataSource = FormatDT(MySQLHelper.table("select * from data_persion where do_flag =1"),DateTime.Now);
+            gcType.DataSource = FormatDT(MySQLHelper.table("select IF(pid=''||ISNULL(pid),' ',pid) as pid,IF(cUnit=''||ISNULL(cUnit),' ',cUnit) as cUnit,IF(cName=''||ISNULL(cName),' ',cName) as cName,IF(cSex=''||ISNULL(cSex),' ',cSex) as cSex,IF(dBirth_date=''||ISNULL(dBirth_date),' ',dBirth_date) as dBirth_date,IF(cNation=''||ISNULL(cNation),' ',cNation) as cNation,IF(cNativePlace=''||ISNULL(cNativePlace),' ',cNativePlace) as cNativePlace,IF(bIsNative=''||ISNULL(bIsNative),' ',bIsNative) as bIsNative,IF(dJoin_date=''||ISNULL(dJoin_date),' ',dJoin_date) as dJoin_date,IF(cHealthStatus=''||ISNULL(cHealthStatus),' ',cHealthStatus) as cHealthStatus,IF(cBirthPlace=''||ISNULL(cBirthPlace),' ',cBirthPlace) as cBirthPlace,IF(dWorkDate=''||ISNULL(dWorkDate),' ',dWorkDate) as dWorkDate,IF(cDuties=''||ISNULL(cDuties),' ',cDuties) as cDuties,IF(cSkill=''||ISNULL(cSkill),' ',cSkill) as cSkill,IF(cFull_timeEducation=''||ISNULL(cFull_timeEducation),' ',cFull_timeEducation) as cFull_timeEducation,IF(cFull_timeDegree=''||ISNULL(cFull_timeDegree),' ',cFull_timeDegree) as cFull_timeDegree,IF(cFull_timeMajor=''||ISNULL(cFull_timeMajor),' ',cFull_timeMajor) as cFull_timeMajor,IF(cFull_timeSchool=''||ISNULL(cFull_timeSchool),' ',cFull_timeSchool) as cFull_timeSchool,IF(cIn_serviceEducation=''||ISNULL(cIn_serviceEducation),' ',cIn_serviceEducation) as cIn_serviceEducation,IF(cIn_serviceDegree=''||ISNULL(cIn_serviceDegree),' ',cIn_serviceDegree) as cIn_serviceDegree,IF(cIn_serviceMajor=''||ISNULL(cIn_serviceMajor),' ',cIn_serviceMajor) as cIn_serviceMajor,IF(cIn_serviceSchool=''||ISNULL(cIn_serviceSchool),' ',cIn_serviceSchool) as cIn_serviceSchool,IF(cCurrentJob=''||ISNULL(cCurrentJob),' ',cCurrentJob) as cCurrentJob,IF(cProposedJob=''||ISNULL(cProposedJob),' ',cProposedJob) as cProposedJob,IF(cRemoveJob=''||ISNULL(cRemoveJob),' ',cRemoveJob) as cRemoveJob,IF(cResume=''||ISNULL(cResume),' ',cResume) as cResume,IF(dInOffice=''||ISNULL(dInOffice),' ',dInOffice) as dInOffice,IF(dSameOffic=''||ISNULL(dSameOffic),' ',dSameOffic) as dSameOffic,IF(cIdentityCategory=''||ISNULL(cIdentityCategory),' ',cIdentityCategory) as cIdentityCategory,IF(cRank=''||ISNULL(cRank),' ',cRank) as cRank,IF(bIsOfficialPosition=''||ISNULL(bIsOfficialPosition),' ',bIsOfficialPosition) as bIsOfficialPosition,IF(cChech_Result=''||ISNULL(cChech_Result),' ',cChech_Result) as cChech_Result,IF(cDismissalReason=''||ISNULL(cDismissalReason),' ',cDismissalReason) as cDismissalReason,IF(dGetCadresDate=''||ISNULL(dGetCadresDate),' ',dGetCadresDate) as dGetCadresDate,IF(cDocumentBasis=''||ISNULL(cDocumentBasis),' ',cDocumentBasis) as cDocumentBasis,IF(cApprovingAuthority=''||ISNULL(cApprovingAuthority),' ',cApprovingAuthority) as cApprovingAuthority,IF(cWay=''||ISNULL(cWay),' ',cWay) as cWay,IF(cReporting_Unit=''||ISNULL(cReporting_Unit),' ',cReporting_Unit) as cReporting_Unit,IF(dEageDate=''||ISNULL(dEageDate),' ',dEageDate) as dEageDate,IF(dMakeDate=''||ISNULL(dMakeDate),' ',dMakeDate) as dMakeDate,IF(cMaker=''||ISNULL(cMaker),' ',cMaker) as cMaker,IF(cRemarks=''||ISNULL(cRemarks),' ',cRemarks) as cRemarks from data_persion where do_flag =1"),DateTime.Now);
             dDate.Text = DateTime.Now.ToString("yyyy.MM");
 
         }
@@ -489,20 +504,31 @@ namespace PersonnelManagement
             dCheckYear.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearsGroupView;
             dCheckYear.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearsGroupView;
 
+            dCheckYear2.Properties.Mask.EditMask = formatString;
+            //dDate2.DisplayFormat.FormatString = formatString;
+            dCheckYear2.Properties.Mask.UseMaskAsDisplayFormat = true;
+            dCheckYear2.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearsGroupView;
+            dCheckYear2.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearsGroupView;
+
             dPerformanceDate.Properties.Mask.EditMask = formatString;
             dPerformanceDate.Properties.Mask.UseMaskAsDisplayFormat = true;
             dPerformanceDate.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearsGroupView;
             dPerformanceDate.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearsGroupView;
+
+            dPerformanceDate2.Properties.Mask.EditMask = formatString;
+            dPerformanceDate2.Properties.Mask.UseMaskAsDisplayFormat = true;
+            dPerformanceDate2.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearsGroupView;
+            dPerformanceDate2.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearsGroupView;
 
             dReservecadreDate.Properties.Mask.EditMask = formatString;
             dReservecadreDate.Properties.Mask.UseMaskAsDisplayFormat = true;
             dReservecadreDate.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearsGroupView;
             dReservecadreDate.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearsGroupView;
 
-            dCheckYear.Properties.Mask.EditMask = formatString;
-            dCheckYear.Properties.Mask.UseMaskAsDisplayFormat = true;
-            dCheckYear.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearsGroupView;
-            dCheckYear.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearsGroupView;
+            dReservecadreDate2.Properties.Mask.EditMask = formatString;
+            dReservecadreDate2.Properties.Mask.UseMaskAsDisplayFormat = true;
+            dReservecadreDate2.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearsGroupView;
+            dReservecadreDate2.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.YearsGroupView;
 
             //设置基准年龄选择框样式
             formatString = "yyyy.MM";
@@ -522,10 +548,20 @@ namespace PersonnelManagement
             dRewardData.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
             dRewardData.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.Default;
 
+            dRewardData2.Properties.Mask.EditMask = formatString;
+            dRewardData2.Properties.Mask.UseMaskAsDisplayFormat = true;
+            dRewardData2.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
+            dRewardData2.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.Default;
+
             dGetCadresDate.Properties.Mask.EditMask = formatString;
             dGetCadresDate.Properties.Mask.UseMaskAsDisplayFormat = true;
             dGetCadresDate.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
             dGetCadresDate.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.Default;
+
+            dGetCadresDate2.Properties.Mask.EditMask = formatString;
+            dGetCadresDate2.Properties.Mask.UseMaskAsDisplayFormat = true;
+            dGetCadresDate2.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
+            dGetCadresDate2.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.Default;
         }
 
         private void btnExportPersionList_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

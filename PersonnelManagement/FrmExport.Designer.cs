@@ -150,19 +150,19 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.pcExpress = new DevExpress.XtraEditors.PanelControl();
             this.labelControl54 = new DevExpress.XtraEditors.LabelControl();
-            this.dateEdit5 = new DevExpress.XtraEditors.DateEdit();
+            this.dReservecadreDate2 = new DevExpress.XtraEditors.DateEdit();
             this.labelControl53 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl52 = new DevExpress.XtraEditors.LabelControl();
-            this.dateEdit4 = new DevExpress.XtraEditors.DateEdit();
+            this.dGetCadresDate2 = new DevExpress.XtraEditors.DateEdit();
             this.labelControl51 = new DevExpress.XtraEditors.LabelControl();
-            this.dateEdit3 = new DevExpress.XtraEditors.DateEdit();
+            this.dRewardData2 = new DevExpress.XtraEditors.DateEdit();
             this.labelControl50 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl49 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl48 = new DevExpress.XtraEditors.LabelControl();
-            this.dateEdit2 = new DevExpress.XtraEditors.DateEdit();
+            this.dCheckYear2 = new DevExpress.XtraEditors.DateEdit();
             this.labelControl47 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.dateEdit1 = new DevExpress.XtraEditors.DateEdit();
+            this.dPerformanceDate2 = new DevExpress.XtraEditors.DateEdit();
             this.labelControl46 = new DevExpress.XtraEditors.LabelControl();
             this.txtcOrganizationEvaluation = new DevExpress.XtraEditors.TextEdit();
             this.labelControl41 = new DevExpress.XtraEditors.LabelControl();
@@ -293,16 +293,16 @@
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcExpress)).BeginInit();
             this.pcExpress.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit5.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit5.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit4.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit4.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit3.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit3.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dReservecadreDate2.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dReservecadreDate2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGetCadresDate2.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGetCadresDate2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dRewardData2.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dRewardData2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dCheckYear2.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dCheckYear2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dPerformanceDate2.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dPerformanceDate2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcOrganizationEvaluation.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcUnitEvaluation.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcSelfEvaluation.Properties)).BeginInit();
@@ -1465,19 +1465,19 @@
             // pcExpress
             // 
             this.pcExpress.Controls.Add(this.labelControl54);
-            this.pcExpress.Controls.Add(this.dateEdit5);
+            this.pcExpress.Controls.Add(this.dReservecadreDate2);
             this.pcExpress.Controls.Add(this.labelControl53);
             this.pcExpress.Controls.Add(this.labelControl52);
-            this.pcExpress.Controls.Add(this.dateEdit4);
+            this.pcExpress.Controls.Add(this.dGetCadresDate2);
             this.pcExpress.Controls.Add(this.labelControl51);
-            this.pcExpress.Controls.Add(this.dateEdit3);
+            this.pcExpress.Controls.Add(this.dRewardData2);
             this.pcExpress.Controls.Add(this.labelControl50);
             this.pcExpress.Controls.Add(this.labelControl49);
             this.pcExpress.Controls.Add(this.labelControl48);
-            this.pcExpress.Controls.Add(this.dateEdit2);
+            this.pcExpress.Controls.Add(this.dCheckYear2);
             this.pcExpress.Controls.Add(this.labelControl47);
             this.pcExpress.Controls.Add(this.labelControl1);
-            this.pcExpress.Controls.Add(this.dateEdit1);
+            this.pcExpress.Controls.Add(this.dPerformanceDate2);
             this.pcExpress.Controls.Add(this.labelControl46);
             this.pcExpress.Controls.Add(this.txtcOrganizationEvaluation);
             this.pcExpress.Controls.Add(this.labelControl41);
@@ -1524,21 +1524,21 @@
             this.labelControl54.TabIndex = 108;
             this.labelControl54.Text = "— ";
             // 
-            // dateEdit5
+            // dReservecadreDate2
             // 
-            this.dateEdit5.EditValue = null;
-            this.dateEdit5.Location = new System.Drawing.Point(300, 152);
-            this.dateEdit5.MenuManager = this.barManager1;
-            this.dateEdit5.Name = "dateEdit5";
-            this.dateEdit5.Properties.Appearance.ForeColor = System.Drawing.Color.Red;
-            this.dateEdit5.Properties.Appearance.Options.UseForeColor = true;
-            this.dateEdit5.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.dReservecadreDate2.EditValue = null;
+            this.dReservecadreDate2.Location = new System.Drawing.Point(300, 152);
+            this.dReservecadreDate2.MenuManager = this.barManager1;
+            this.dReservecadreDate2.Name = "dReservecadreDate2";
+            this.dReservecadreDate2.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.dReservecadreDate2.Properties.Appearance.Options.UseForeColor = true;
+            this.dReservecadreDate2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit5.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.dReservecadreDate2.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit5.Properties.NullText = "止";
-            this.dateEdit5.Size = new System.Drawing.Size(100, 20);
-            this.dateEdit5.TabIndex = 107;
+            this.dReservecadreDate2.Properties.NullText = "止";
+            this.dReservecadreDate2.Size = new System.Drawing.Size(100, 20);
+            this.dReservecadreDate2.TabIndex = 107;
             // 
             // labelControl53
             // 
@@ -1556,21 +1556,21 @@
             this.labelControl52.TabIndex = 105;
             this.labelControl52.Text = "— ";
             // 
-            // dateEdit4
+            // dGetCadresDate2
             // 
-            this.dateEdit4.EditValue = null;
-            this.dateEdit4.Location = new System.Drawing.Point(300, 120);
-            this.dateEdit4.MenuManager = this.barManager1;
-            this.dateEdit4.Name = "dateEdit4";
-            this.dateEdit4.Properties.Appearance.ForeColor = System.Drawing.Color.Red;
-            this.dateEdit4.Properties.Appearance.Options.UseForeColor = true;
-            this.dateEdit4.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.dGetCadresDate2.EditValue = null;
+            this.dGetCadresDate2.Location = new System.Drawing.Point(300, 120);
+            this.dGetCadresDate2.MenuManager = this.barManager1;
+            this.dGetCadresDate2.Name = "dGetCadresDate2";
+            this.dGetCadresDate2.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.dGetCadresDate2.Properties.Appearance.Options.UseForeColor = true;
+            this.dGetCadresDate2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit4.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.dGetCadresDate2.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit4.Properties.NullText = "止";
-            this.dateEdit4.Size = new System.Drawing.Size(100, 20);
-            this.dateEdit4.TabIndex = 104;
+            this.dGetCadresDate2.Properties.NullText = "止";
+            this.dGetCadresDate2.Size = new System.Drawing.Size(100, 20);
+            this.dGetCadresDate2.TabIndex = 104;
             // 
             // labelControl51
             // 
@@ -1580,21 +1580,21 @@
             this.labelControl51.TabIndex = 103;
             this.labelControl51.Text = "— ";
             // 
-            // dateEdit3
+            // dRewardData2
             // 
-            this.dateEdit3.EditValue = null;
-            this.dateEdit3.Location = new System.Drawing.Point(300, 89);
-            this.dateEdit3.MenuManager = this.barManager1;
-            this.dateEdit3.Name = "dateEdit3";
-            this.dateEdit3.Properties.Appearance.ForeColor = System.Drawing.Color.Red;
-            this.dateEdit3.Properties.Appearance.Options.UseForeColor = true;
-            this.dateEdit3.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.dRewardData2.EditValue = null;
+            this.dRewardData2.Location = new System.Drawing.Point(300, 89);
+            this.dRewardData2.MenuManager = this.barManager1;
+            this.dRewardData2.Name = "dRewardData2";
+            this.dRewardData2.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.dRewardData2.Properties.Appearance.Options.UseForeColor = true;
+            this.dRewardData2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit3.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.dRewardData2.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit3.Properties.NullText = "止";
-            this.dateEdit3.Size = new System.Drawing.Size(100, 20);
-            this.dateEdit3.TabIndex = 102;
+            this.dRewardData2.Properties.NullText = "止";
+            this.dRewardData2.Size = new System.Drawing.Size(100, 20);
+            this.dRewardData2.TabIndex = 102;
             // 
             // labelControl50
             // 
@@ -1620,21 +1620,21 @@
             this.labelControl48.TabIndex = 99;
             this.labelControl48.Text = "— ";
             // 
-            // dateEdit2
+            // dCheckYear2
             // 
-            this.dateEdit2.EditValue = null;
-            this.dateEdit2.Location = new System.Drawing.Point(300, 60);
-            this.dateEdit2.MenuManager = this.barManager1;
-            this.dateEdit2.Name = "dateEdit2";
-            this.dateEdit2.Properties.Appearance.ForeColor = System.Drawing.Color.Red;
-            this.dateEdit2.Properties.Appearance.Options.UseForeColor = true;
-            this.dateEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.dCheckYear2.EditValue = null;
+            this.dCheckYear2.Location = new System.Drawing.Point(300, 60);
+            this.dCheckYear2.MenuManager = this.barManager1;
+            this.dCheckYear2.Name = "dCheckYear2";
+            this.dCheckYear2.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.dCheckYear2.Properties.Appearance.Options.UseForeColor = true;
+            this.dCheckYear2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit2.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.dCheckYear2.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit2.Properties.NullText = "止";
-            this.dateEdit2.Size = new System.Drawing.Size(100, 20);
-            this.dateEdit2.TabIndex = 98;
+            this.dCheckYear2.Properties.NullText = "止";
+            this.dCheckYear2.Size = new System.Drawing.Size(100, 20);
+            this.dCheckYear2.TabIndex = 98;
             // 
             // labelControl47
             // 
@@ -1652,21 +1652,21 @@
             this.labelControl1.TabIndex = 96;
             this.labelControl1.Text = "— ";
             // 
-            // dateEdit1
+            // dPerformanceDate2
             // 
-            this.dateEdit1.EditValue = null;
-            this.dateEdit1.Location = new System.Drawing.Point(300, 29);
-            this.dateEdit1.MenuManager = this.barManager1;
-            this.dateEdit1.Name = "dateEdit1";
-            this.dateEdit1.Properties.Appearance.ForeColor = System.Drawing.Color.Red;
-            this.dateEdit1.Properties.Appearance.Options.UseForeColor = true;
-            this.dateEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.dPerformanceDate2.EditValue = null;
+            this.dPerformanceDate2.Location = new System.Drawing.Point(300, 29);
+            this.dPerformanceDate2.MenuManager = this.barManager1;
+            this.dPerformanceDate2.Name = "dPerformanceDate2";
+            this.dPerformanceDate2.Properties.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.dPerformanceDate2.Properties.Appearance.Options.UseForeColor = true;
+            this.dPerformanceDate2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.dPerformanceDate2.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit1.Properties.NullText = "止";
-            this.dateEdit1.Size = new System.Drawing.Size(100, 20);
-            this.dateEdit1.TabIndex = 95;
+            this.dPerformanceDate2.Properties.NullText = "止";
+            this.dPerformanceDate2.Size = new System.Drawing.Size(100, 20);
+            this.dPerformanceDate2.TabIndex = 95;
             // 
             // labelControl46
             // 
@@ -2319,16 +2319,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.pcExpress)).EndInit();
             this.pcExpress.ResumeLayout(false);
             this.pcExpress.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit5.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit5.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit4.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit4.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit3.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit3.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dReservecadreDate2.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dReservecadreDate2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGetCadresDate2.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGetCadresDate2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dRewardData2.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dRewardData2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dCheckYear2.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dCheckYear2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dPerformanceDate2.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dPerformanceDate2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcOrganizationEvaluation.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcUnitEvaluation.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcSelfEvaluation.Properties)).EndInit();
@@ -2511,19 +2511,19 @@
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.LabelControl labelControl46;
         private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.DateEdit dateEdit1;
+        private DevExpress.XtraEditors.DateEdit dPerformanceDate2;
         private DevExpress.XtraEditors.LabelControl labelControl48;
-        private DevExpress.XtraEditors.DateEdit dateEdit2;
+        private DevExpress.XtraEditors.DateEdit dCheckYear2;
         private DevExpress.XtraEditors.LabelControl labelControl49;
         private DevExpress.XtraEditors.LabelControl labelControl47;
         private DevExpress.XtraEditors.LabelControl labelControl28;
         private DevExpress.XtraEditors.LabelControl labelControl50;
         private DevExpress.XtraEditors.LabelControl labelControl52;
-        private DevExpress.XtraEditors.DateEdit dateEdit4;
+        private DevExpress.XtraEditors.DateEdit dGetCadresDate2;
         private DevExpress.XtraEditors.LabelControl labelControl51;
-        private DevExpress.XtraEditors.DateEdit dateEdit3;
+        private DevExpress.XtraEditors.DateEdit dRewardData2;
         private DevExpress.XtraEditors.LabelControl labelControl54;
-        private DevExpress.XtraEditors.DateEdit dateEdit5;
+        private DevExpress.XtraEditors.DateEdit dReservecadreDate2;
         private DevExpress.XtraEditors.LabelControl labelControl53;
         private DevExpress.XtraEditors.LabelControl labelControl55;
         private DevExpress.XtraBars.BarButtonItem barButtonItem1;
