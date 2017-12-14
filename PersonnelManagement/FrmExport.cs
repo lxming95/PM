@@ -42,7 +42,11 @@ namespace PersonnelManagement
             }
             start();
         }
-
+        /// <summary>
+        /// 查询按钮点击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnQuerry_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             //MessageBox.Show(dCheckYear.Text);
@@ -158,7 +162,10 @@ namespace PersonnelManagement
                 MyStringBuilder.Append(" and cFull_timeDegree =@cFull_timeDegree ");
             //专业
             if (txtcFull_timeMajor.Text != "")
-                MyStringBuilder.Append(" and cFull_timeMajor =@cFull_timeMajor ");
+            {
+                DataTable dt_Major = MySQLHelper.table("SELECT *FROM data_majorinf WHERE cMulitString LIKE '%"+ txtcFull_timeMajor.Text + "%'");
+                MyStringBuilder.Append(" and cFull_timeMajor in "+SaveFile.FormatMajor(dt_Major));
+            }
 
             //在职
             //学历
@@ -169,8 +176,10 @@ namespace PersonnelManagement
                 MyStringBuilder.Append(" and cIn_serviceDegree =@cIn_serviceDegree ");
             //专业
             if (txtcIn_serviceMajor.Text != "")
-                MyStringBuilder.Append(" and cIn_serviceMajor =@cIn_serviceMajor ");
-
+            {
+                DataTable dt_Major = MySQLHelper.table("SELECT *FROM data_majorinf WHERE cMulitString LIKE '%" + txtcIn_serviceMajor.Text + "%'");
+                MyStringBuilder.Append(" and cIn_serviceMajor in " + SaveFile.FormatMajor(dt_Major));
+            }
             //身份
             if (txtCurrentJob.Text != "")
                 MyStringBuilder.Append(" and cCurrentJob =@cCurrentJob ");
@@ -226,7 +235,7 @@ namespace PersonnelManagement
 
 
             #region 从表信息查询
-            StringBuilder other = new StringBuilder(" ");
+            StringBuilder other = new StringBuilder("");
             DataTable dt = new DataTable();
             #region 工作经历
             //简历起始时间
@@ -243,7 +252,7 @@ namespace PersonnelManagement
                     //MyStringBuilder.Append(" and cExperience =@Experience ");
                     other.Append(" and cExperience like '%" + txtExperience.Text + "%'");
                 }
-            if (!other.Equals(""))
+            if (!other.ToString().Equals(""))
             {
                 dt = MySQLHelper.table("SELECT DISTINCT(PersionID) from data_resume where PersionID IS NOT NULL " + other);
                 //if(dStartDate.Text != "" && dStartDate.Text != "起" && dDeadLine.Text != "" && dDeadLine.Text != "止" && txtExperience.Text != "")
@@ -264,7 +273,7 @@ namespace PersonnelManagement
                 other.Append(" and cLevel like '%" + txtcLevel.Text+ "%'");
             if (txtcDetailed.Text != "")
                 other.Append(" and cDetailed like '%" + txtcDetailed.Text + "%'");
-            if (!other.Equals(""))
+            if (!other.ToString().Equals(""))
             {
                 dt = MySQLHelper.table("SELECT DISTINCT(PersionID) from data_rewards_punishments where PersionID IS NOT NULL " + other);
                 //if(dRewardData.Text != "" && dRewardData.Text != "起" && txtcCategory.Text != ""&& txtcLevel.Text != ""&& txtcDetailed.Text != "")
@@ -280,7 +289,7 @@ namespace PersonnelManagement
                 other.Append(" and dcrYear <=" + Convert.ToDateTime(dCheckYear2.DateTime).ToString("yyyy"));
             if (txtcrChechResult.Text!="")
                 other.Append(" and crChechResult like '%" + txtcrChechResult.Text + "%'");
-            if (!other.Equals(""))
+            if (!other.ToString().Equals(""))
             {
                 dt = MySQLHelper.table("SELECT DISTINCT(PersionID) from data_checkresult where PersionID IS NOT NULL " + other);
                 //if(dCheckYear.Text != "" && dCheckYear.Text != "起" && txtcrChechResult.Text != "")
@@ -298,7 +307,7 @@ namespace PersonnelManagement
             //    other.Append(" and gcApprovingAuthority like '%" + txtgcApprovingAuthority.Text + "%'");
             //if(txtgcWay.Text!="")
             //    other.Append(" and gcWay like '%" + txtgcWay.Text + "%'");
-            //if (!other.Equals(""))
+            //if (!other.ToString().Equals(""))
             //{
             //    dt = MySQLHelper.table("SELECT DISTINCT(PersionID) from data_getcadres where PersionID IS NOT NULL " + other);
             //    //if(dGetCadresDate.Text != "" && dGetCadresDate.Text != "起" && txtgcDocumentBasis.Text != ""&& txtgcApprovingAuthority.Text != ""&& txtgcWay.Text != "")
@@ -314,7 +323,7 @@ namespace PersonnelManagement
                 other.Append(" and rcYear <=" + Convert.ToDateTime(dReservecadreDate2.DateTime).ToString("yyyy"));
             if (txtrcLevel.Text!="")
                 other.Append(" and rcLevel like '%" + txtrcLevel.Text + "%'");
-            if (!other.Equals(""))
+            if (!other.ToString().Equals(""))
             {
                 dt = MySQLHelper.table("SELECT DISTINCT(PersionID) from data_reservecadre where PersionID IS NOT NULL " + other);
                 //if(dReservecadreDate.Text != "" && dReservecadreDate.Text != "起" && txtrcLevel.Text != "")
@@ -334,7 +343,7 @@ namespace PersonnelManagement
                 other.Append(" and cUnitEvaluation like '%" + txtcUnitEvaluation.Text + "%'");
             if (txtcOrganizationEvaluation.Text != "")
                 other.Append(" and cOrganizationEvaluation like '%" + txtcOrganizationEvaluation.Text + "%'");
-            if (!other.Equals(""))
+            if (!other.ToString().Equals(""))
             {
                 dt = MySQLHelper.table("SELECT DISTINCT(PersionID) from data_performance where PersionID IS NOT NULL  " + other);
                 //if(dPerformanceDate.Text != "" && dPerformanceDate.Text != "起" && txtcSelfEvaluation.Text != ""&& txtcOrganizationEvaluation.Text != "")
@@ -350,8 +359,11 @@ namespace PersonnelManagement
             txtNum.Text = (gcType.DataSource as DataTable).Rows.Count.ToString();
 
         }
-
-
+        /// <summary>
+        /// 导出lrm格式文件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnExport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             //带CheckBox传值
@@ -494,7 +506,9 @@ namespace PersonnelManagement
             s += @"''";
             return s;
         }
-
+        /// <summary>
+        /// 格式化dateedit 的显示样式
+        /// </summary>
         private void fromatDateEdit()
         {
             var formatString = "yyyy";
@@ -563,7 +577,11 @@ namespace PersonnelManagement
             dGetCadresDate2.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
             dGetCadresDate2.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.Default;
         }
-
+        /// <summary>
+        /// 导出人名册
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnExportPersionList_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             //string name= gvType.GetFocusedDataRow()["cName"].ToString() + "-";
@@ -684,6 +702,18 @@ namespace PersonnelManagement
                 //ReturnDT.Rows.Add(gvType.GetFocusedDataRow().ItemArray);
                 SaveFile.seveExcel(date1, gvType.GetFocusedDataRow(), "干部任免审批表-" + gvType.GetFocusedDataRow()["cName"].ToString() + gvType.GetFocusedDataRow()["dBirth_date"].ToString());
             }
+        }
+
+        private void gcType_DoubleClick(object sender, EventArgs e)
+        {
+            DataRow row = gvType.GetDataRow(gvType.FocusedRowHandle);
+            if (row == null || row["pid"].Equals(""))                           //判断是否为空行
+            {
+                XtraMessageBox.Show("请不要选择空行");
+                return;
+            }
+            FrmInfMain frm = new FrmInfMain(row["pid"].ToString(), false);
+            frm.Show();
         }
     }
 }

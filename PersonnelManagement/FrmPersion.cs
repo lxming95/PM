@@ -73,10 +73,10 @@ namespace PersonnelManagement
             {
                 MyStringBuilder.Append(" and bIsNative ='1' ");
             }
-            else
-            {
-                MyStringBuilder.Append(" and bIsNative ='0' ");
-            }
+            //else
+            //{
+            //    MyStringBuilder.Append(" and bIsNative ='0' ");
+            //}
 
             //年龄
             int year;
@@ -151,10 +151,10 @@ namespace PersonnelManagement
             {
                 MyStringBuilder.Append(" and bIsOfficialPosition ='1' ");
             }
-            else
-            {
-                MyStringBuilder.Append(" and bIsOfficialPosition ='0' ");
-            }
+            //else
+            //{
+            //    MyStringBuilder.Append(" and bIsOfficialPosition ='0' ");
+            //}
 
             //简历起始时间
             if (dStartDate.Text != ""&& dStartDate.Text != "始")
@@ -219,7 +219,7 @@ namespace PersonnelManagement
             txtcIn_serviceEducation.Text = "";
             txtCurrentJob.Text = "";
             txtNativePlace.Text = "";
-            dDate.Text = "";
+            dDate.Text = "基准时间";
             txtEage.Text = "";
             txtEage2.Text = "";
             txtJoinEage1.Text = "";
@@ -240,10 +240,10 @@ namespace PersonnelManagement
         /// <param name="e"></param>
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            FrmInf form = new FrmInf();
-            form.Show();
+            //FrmInf form = new FrmInf();
+            //form.Show();
             //tcMmain = Pub.PubValue.frmmain;
-            string frmname = "人员信息新增";
+            //string frmname = "人员信息新增";
             //if (tabControlCheckHave(Pub.PubValue.frmmain., frmname))
             //{
             //    return;

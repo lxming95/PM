@@ -73,6 +73,7 @@
             this.dBirth_date = new DevExpress.XtraGrid.Columns.GridColumn();
             this.cNation = new DevExpress.XtraGrid.Columns.GridColumn();
             this.cNativePlace = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.cIdentityCategory = new DevExpress.XtraGrid.Columns.GridColumn();
             this.dJoin_date = new DevExpress.XtraGrid.Columns.GridColumn();
             this.cHealthStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.dWorkDate = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -87,7 +88,6 @@
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar5 = new DevExpress.XtraBars.Bar();
-            this.btnExport = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.btnInPort = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
@@ -96,10 +96,10 @@
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.btnQuerry = new DevExpress.XtraBars.BarButtonItem();
             this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
+            this.btnExport = new DevExpress.XtraBars.BarButtonItem();
             this.btnClear = new DevExpress.XtraBars.BarButtonItem();
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
             this.btnDel = new DevExpress.XtraBars.BarButtonItem();
-            this.cIdentityCategory = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelControl21 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl14 = new DevExpress.XtraEditors.LabelControl();
             this.txtSuccess = new DevExpress.XtraEditors.TextEdit();
@@ -460,7 +460,7 @@
             this.gcType.Location = new System.Drawing.Point(0, 58);
             this.gcType.MainView = this.gvType;
             this.gcType.Name = "gcType";
-            this.gcType.Size = new System.Drawing.Size(987, 496);
+            this.gcType.Size = new System.Drawing.Size(987, 648);
             this.gcType.TabIndex = 5;
             this.gcType.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvType});
@@ -569,6 +569,21 @@
             this.cNativePlace.Visible = true;
             this.cNativePlace.VisibleIndex = 4;
             this.cNativePlace.Width = 177;
+            // 
+            // cIdentityCategory
+            // 
+            this.cIdentityCategory.AppearanceCell.Options.UseTextOptions = true;
+            this.cIdentityCategory.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.cIdentityCategory.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.cIdentityCategory.AppearanceHeader.Options.UseTextOptions = true;
+            this.cIdentityCategory.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.cIdentityCategory.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.cIdentityCategory.Caption = "身份类别";
+            this.cIdentityCategory.FieldName = "cIdentityCategory";
+            this.cIdentityCategory.Name = "cIdentityCategory";
+            this.cIdentityCategory.Visible = true;
+            this.cIdentityCategory.VisibleIndex = 5;
+            this.cIdentityCategory.Width = 84;
             // 
             // dJoin_date
             // 
@@ -760,11 +775,6 @@
             this.bar5.OptionsBar.UseWholeRow = true;
             this.bar5.Text = "Main menu";
             // 
-            // btnExport
-            // 
-            this.btnExport.Id = 7;
-            this.btnExport.Name = "btnExport";
-            // 
             // barButtonItem1
             // 
             this.barButtonItem1.Caption = "下载模版";
@@ -793,7 +803,7 @@
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 562);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 706);
             this.barDockControlBottom.Manager = this.barManager1;
             this.barDockControlBottom.Size = new System.Drawing.Size(987, 0);
             // 
@@ -803,7 +813,7 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 40);
             this.barDockControlLeft.Manager = this.barManager1;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 522);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 666);
             // 
             // barDockControlRight
             // 
@@ -811,7 +821,7 @@
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(987, 40);
             this.barDockControlRight.Manager = this.barManager1;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 522);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 666);
             // 
             // btnQuerry
             // 
@@ -822,6 +832,11 @@
             // 
             this.btnEdit.Id = 6;
             this.btnEdit.Name = "btnEdit";
+            // 
+            // btnExport
+            // 
+            this.btnExport.Id = 7;
+            this.btnExport.Name = "btnExport";
             // 
             // btnClear
             // 
@@ -837,21 +852,6 @@
             // 
             this.btnDel.Id = 9;
             this.btnDel.Name = "btnDel";
-            // 
-            // cIdentityCategory
-            // 
-            this.cIdentityCategory.AppearanceCell.Options.UseTextOptions = true;
-            this.cIdentityCategory.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.cIdentityCategory.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.cIdentityCategory.AppearanceHeader.Options.UseTextOptions = true;
-            this.cIdentityCategory.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.cIdentityCategory.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.cIdentityCategory.Caption = "身份类别";
-            this.cIdentityCategory.FieldName = "cIdentityCategory";
-            this.cIdentityCategory.Name = "cIdentityCategory";
-            this.cIdentityCategory.Visible = true;
-            this.cIdentityCategory.VisibleIndex = 5;
-            this.cIdentityCategory.Width = 84;
             // 
             // labelControl21
             // 
@@ -941,7 +941,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(987, 562);
+            this.ClientSize = new System.Drawing.Size(987, 706);
             this.Controls.Add(this.labelControl3);
             this.Controls.Add(this.labelControl4);
             this.Controls.Add(this.txtTotal);

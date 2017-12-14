@@ -99,6 +99,7 @@
             this.labelControl34 = new DevExpress.XtraEditors.LabelControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.MainControl = new DevExpress.XtraEditors.XtraScrollableControl();
+            this.labelControl47 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl46 = new DevExpress.XtraEditors.LabelControl();
             this.txtcIDnumber = new DevExpress.XtraEditors.TextEdit();
             this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
@@ -354,6 +355,7 @@
             this.btnOut.Id = 2;
             this.btnOut.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnOut.ImageOptions.Image")));
             this.btnOut.Name = "btnOut";
+            this.btnOut.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.btnOut.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnExport_ItemClick);
             // 
             // barDockControlTop
@@ -368,7 +370,7 @@
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 664);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 682);
             this.barDockControlBottom.Manager = this.barManager1;
             this.barDockControlBottom.Size = new System.Drawing.Size(1054, 0);
             // 
@@ -378,7 +380,7 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 40);
             this.barDockControlLeft.Manager = this.barManager1;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 624);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 642);
             // 
             // barDockControlRight
             // 
@@ -386,7 +388,7 @@
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(1054, 40);
             this.barDockControlRight.Manager = this.barManager1;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 624);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 642);
             // 
             // btnExit
             // 
@@ -766,7 +768,7 @@
             // 
             this.xtraTabPage2.Controls.Add(this.xtraScrollableControl1);
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(1048, 589);
+            this.xtraTabPage2.Size = new System.Drawing.Size(1048, 613);
             this.xtraTabPage2.Text = "个人其他信息";
             // 
             // xtraScrollableControl1
@@ -1065,7 +1067,7 @@
             // 
             this.xtraTabPage1.Controls.Add(this.MainControl);
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(1048, 589);
+            this.xtraTabPage1.Size = new System.Drawing.Size(1048, 613);
             this.xtraTabPage1.Text = "个人基本信息";
             // 
             // MainControl
@@ -1075,6 +1077,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MainControl.Appearance.BackColor = System.Drawing.Color.Gainsboro;
             this.MainControl.Appearance.Options.UseBackColor = true;
+            this.MainControl.Controls.Add(this.labelControl47);
             this.MainControl.Controls.Add(this.labelControl46);
             this.MainControl.Controls.Add(this.txtcIDnumber);
             this.MainControl.Controls.Add(this.labelControl13);
@@ -1115,8 +1118,16 @@
             this.MainControl.Controls.Add(this.panelControl1);
             this.MainControl.Location = new System.Drawing.Point(-1, 0);
             this.MainControl.Name = "MainControl";
-            this.MainControl.Size = new System.Drawing.Size(1049, 594);
+            this.MainControl.Size = new System.Drawing.Size(1049, 613);
             this.MainControl.TabIndex = 107;
+            // 
+            // labelControl47
+            // 
+            this.labelControl47.Location = new System.Drawing.Point(593, 576);
+            this.labelControl47.Name = "labelControl47";
+            this.labelControl47.Size = new System.Drawing.Size(20, 14);
+            this.labelControl47.TabIndex = 194;
+            this.labelControl47.Text = "     ";
             // 
             // labelControl46
             // 
@@ -1189,7 +1200,7 @@
             // 
             this.txtcDismissalReason.Location = new System.Drawing.Point(412, 58);
             this.txtcDismissalReason.Name = "txtcDismissalReason";
-            this.txtcDismissalReason.Size = new System.Drawing.Size(569, 20);
+            this.txtcDismissalReason.Size = new System.Drawing.Size(570, 20);
             this.txtcDismissalReason.TabIndex = 191;
             // 
             // cbIsOfficialPosition
@@ -1378,7 +1389,7 @@
             this.txtcApprovingAuthority.Location = new System.Drawing.Point(822, 23);
             this.txtcApprovingAuthority.MenuManager = this.barManager1;
             this.txtcApprovingAuthority.Name = "txtcApprovingAuthority";
-            this.txtcApprovingAuthority.Size = new System.Drawing.Size(159, 20);
+            this.txtcApprovingAuthority.Size = new System.Drawing.Size(160, 20);
             this.txtcApprovingAuthority.TabIndex = 183;
             // 
             // labelControl42
@@ -1628,7 +1639,7 @@
             // dEageDate
             // 
             this.dEageDate.EditValue = null;
-            this.dEageDate.Location = new System.Drawing.Point(856, 579);
+            this.dEageDate.Location = new System.Drawing.Point(815, 590);
             this.dEageDate.Name = "dEageDate";
             this.dEageDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -1640,7 +1651,7 @@
             // 
             // labelControl8
             // 
-            this.labelControl8.Location = new System.Drawing.Point(770, 582);
+            this.labelControl8.Location = new System.Drawing.Point(729, 591);
             this.labelControl8.Name = "labelControl8";
             this.labelControl8.Size = new System.Drawing.Size(80, 14);
             this.labelControl8.TabIndex = 148;
@@ -1660,7 +1671,7 @@
             this.labelControl9.Name = "labelControl9";
             this.labelControl9.Size = new System.Drawing.Size(48, 14);
             this.labelControl9.TabIndex = 146;
-            this.labelControl9.Text = "呈单报位";
+            this.labelControl9.Text = "呈报单位";
             // 
             // gcFamilymembers
             // 
@@ -2143,7 +2154,7 @@
             this.tcMain.Location = new System.Drawing.Point(0, 46);
             this.tcMain.Name = "tcMain";
             this.tcMain.SelectedTabPage = this.xtraTabPage1;
-            this.tcMain.Size = new System.Drawing.Size(1054, 618);
+            this.tcMain.Size = new System.Drawing.Size(1054, 642);
             this.tcMain.TabIndex = 0;
             this.tcMain.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
@@ -2153,7 +2164,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1054, 664);
+            this.ClientSize = new System.Drawing.Size(1054, 682);
             this.Controls.Add(this.tcMain);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);
@@ -2442,5 +2453,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox cbrLevel;
         private DevExpress.XtraEditors.LabelControl labelControl46;
         private DevExpress.XtraEditors.TextEdit txtcIDnumber;
+        private DevExpress.XtraEditors.LabelControl labelControl47;
     }
 }

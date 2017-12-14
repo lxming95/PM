@@ -754,6 +754,7 @@
             this.barButtonItem1.Id = 10;
             this.barButtonItem1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.Image")));
             this.barButtonItem1.Name = "barButtonItem1";
+            this.barButtonItem1.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
             // 
             // btnExportExcel
@@ -770,15 +771,15 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager1;
-            this.barDockControlTop.Size = new System.Drawing.Size(1083, 40);
+            this.barDockControlTop.Size = new System.Drawing.Size(1112, 40);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 543);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 706);
             this.barDockControlBottom.Manager = this.barManager1;
-            this.barDockControlBottom.Size = new System.Drawing.Size(1083, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1112, 0);
             // 
             // barDockControlLeft
             // 
@@ -786,15 +787,15 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 40);
             this.barDockControlLeft.Manager = this.barManager1;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 503);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 666);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1083, 40);
+            this.barDockControlRight.Location = new System.Drawing.Point(1112, 40);
             this.barDockControlRight.Manager = this.barManager1;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 503);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 666);
             // 
             // btnEdit
             // 
@@ -820,7 +821,7 @@
             this.panelControl1.Controls.Add(this.labelControl13);
             this.panelControl1.Location = new System.Drawing.Point(15, 46);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(987, 251);
+            this.panelControl1.Size = new System.Drawing.Size(1068, 251);
             this.panelControl1.TabIndex = 59;
             // 
             // labelControl55
@@ -855,7 +856,7 @@
             this.tabControl1.Location = new System.Drawing.Point(5, 24);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(974, 222);
+            this.tabControl1.Size = new System.Drawing.Size(1058, 222);
             this.tabControl1.TabIndex = 59;
             // 
             // tabPage1
@@ -865,7 +866,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 23);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(966, 195);
+            this.tabPage1.Size = new System.Drawing.Size(1050, 195);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本信息";
             // 
@@ -928,7 +929,7 @@
             this.pcMain.Controls.Add(this.lblName);
             this.pcMain.Location = new System.Drawing.Point(0, 0);
             this.pcMain.Name = "pcMain";
-            this.pcMain.Size = new System.Drawing.Size(972, 194);
+            this.pcMain.Size = new System.Drawing.Size(1054, 194);
             this.pcMain.TabIndex = 58;
             // 
             // txtCurrentJob
@@ -1458,7 +1459,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 23);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(966, 195);
+            this.tabPage2.Size = new System.Drawing.Size(1050, 195);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "工作信息";
             // 
@@ -1975,10 +1976,11 @@
             this.gcType.Location = new System.Drawing.Point(0, 298);
             this.gcType.MainView = this.gvType;
             this.gcType.Name = "gcType";
-            this.gcType.Size = new System.Drawing.Size(1083, 246);
+            this.gcType.Size = new System.Drawing.Size(1083, 408);
             this.gcType.TabIndex = 64;
             this.gcType.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvType});
+            this.gcType.DoubleClick += new System.EventHandler(this.gcType_DoubleClick);
             // 
             // gvType
             // 
@@ -2229,7 +2231,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1083, 543);
+            this.ClientSize = new System.Drawing.Size(1112, 706);
             this.Controls.Add(this.gcType);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.barDockControlLeft);

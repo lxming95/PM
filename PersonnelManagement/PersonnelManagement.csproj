@@ -95,23 +95,11 @@
     <Compile Include="FrmOther.Designer.cs">
       <DependentUpon>FrmOther.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmInf.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmInf.Designer.cs">
-      <DependentUpon>FrmInf.cs</DependentUpon>
-    </Compile>
     <Compile Include="FrmInport.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmInport.Designer.cs">
       <DependentUpon>FrmInport.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FrmPersionMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmPersionMain.Designer.cs">
-      <DependentUpon>FrmPersionMain.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmPersion.cs">
       <SubType>Form</SubType>
@@ -134,14 +122,8 @@
     <EmbeddedResource Include="FrmOther.resx">
       <DependentUpon>FrmOther.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmInf.resx">
-      <DependentUpon>FrmInf.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FrmInport.resx">
       <DependentUpon>FrmInport.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmPersionMain.resx">
-      <DependentUpon>FrmPersionMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmPersion.resx">
       <DependentUpon>FrmPersion.cs</DependentUpon>
@@ -171,6 +153,8 @@
     </Compile>
     <None Include="Resources\初始数据表171122.xlsx" />
     <None Include="Resources\初始数据表171124.xlsx" />
+    <None Include="Resources\初始数据表171207.xlsx" />
+    <None Include="Resources\初始数据表171212.xls" />
     <None Include="Resources\名册12-07.xls" />
     <None Include="Resources\名册12-5.xls" />
     <None Include="Resources\数据导出%28干部任免审批表%29.doc" />

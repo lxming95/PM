@@ -82,8 +82,8 @@ namespace BarCode
 
                     List<MySqlParameter> ilistStr = new List<MySqlParameter> {
                     new MySqlParameter("user_code", drow["user_code"].ToString()),
-                    new MySqlParameter("user_pass", drow["user_name"].ToString()),
-                    new MySqlParameter("user_name", drow["user_pass"].ToString()),
+                    new MySqlParameter("user_pass", drow["user_pass"].ToString()),
+                    new MySqlParameter("user_name", drow["user_name"].ToString()),
                     new MySqlParameter("awid", Convert.ToInt32( drow["awid"])),
                     };
                     MySqlParameter[] param = ilistStr.ToArray();

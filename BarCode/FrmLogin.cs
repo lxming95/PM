@@ -16,7 +16,8 @@ namespace BarCode
         frmMain main;
         string[] password;
         bool DLorGB = false;
-        bool Authentication = false;
+        //是否绑定机器
+        public bool Authentication = false;
         public FrmLogin(frmMain frmMain)
         {
             //初始化登陆界面

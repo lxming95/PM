@@ -143,9 +143,7 @@ D:\project\Pm\PersonnelManagement\obj\Debug\PersonnelManagement.csprojResolveAss
 D:\project\Pm\PersonnelManagement\obj\Debug\PersonnelManagement.FrmExport.resources
 D:\project\Pm\PersonnelManagement\obj\Debug\PersonnelManagement.FrmInfMain.resources
 D:\project\Pm\PersonnelManagement\obj\Debug\PersonnelManagement.FrmOther.resources
-D:\project\Pm\PersonnelManagement\obj\Debug\PersonnelManagement.FrmInf.resources
 D:\project\Pm\PersonnelManagement\obj\Debug\PersonnelManagement.FrmInport.resources
-D:\project\Pm\PersonnelManagement\obj\Debug\PersonnelManagement.FrmPersionMain.resources
 D:\project\Pm\PersonnelManagement\obj\Debug\PersonnelManagement.FrmPersion.resources
 D:\project\Pm\PersonnelManagement\obj\Debug\PersonnelManagement.Properties.Resources.resources
 D:\project\Pm\PersonnelManagement\obj\Debug\PersonnelManagement.csproj.GenerateResource.Cache

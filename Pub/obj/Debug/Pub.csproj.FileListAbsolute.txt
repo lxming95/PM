@@ -11,4 +11,3 @@ D:\project\1\BarCode\Lib\Pub.dll
 D:\project\1\BarCode\Pub\obj\Debug\Pub.dll
 D:\project\Pm\Lib\Pub.dll
 D:\project\Pm\Pub\obj\Debug\Pub.dll
-D:\project\Pm\Pub\obj\Debug\Pub.csprojResolveAssemblyReference.cache

@@ -18,6 +18,7 @@ namespace PersonnelManagement
         //人员的主表信息
         public DataTable gl_dt = new DataTable();
         private bool isAdd = false;
+        private bool isEnableEdit = true;
         public FrmInfMain()
         {
             InitializeComponent();
@@ -32,7 +33,8 @@ namespace PersonnelManagement
             isAdd = false;
             formatDateEdit();
             start(id);
-            enableEdit(flag);
+            isEnableEdit = flag;
+            enableEdit(isEnableEdit);
 
         }
         private void FrmInfMain_Load(object sender, EventArgs e)
@@ -110,7 +112,10 @@ namespace PersonnelManagement
             gcEmployment.DataSource = MySQLHelper.table("SELECT * FROM data_employment  where eid in ('')");
             gcPerformance.DataSource = MySQLHelper.table("SELECT * FROM data_performance  where prid in ('')");
 
-
+            #region 显示数据
+            dMakeDate.Text = DateTime.Now.ToString("yyyy.MM.dd");       //制表时间
+            txtcMaker.Text = Pub.PubValue.UserName;                     //制表人
+            #endregion
 
         }
         /// <summary>
@@ -171,7 +176,7 @@ namespace PersonnelManagement
             //txtResume.Text = gl_dt.Rows[0]["cResume"].ToString();                       //工作经历
             //txtcChech_Result.Text = gl_dt.Rows[0]["cChech_Result"].ToString();        //审核结果
             txtcDismissalReason.Text = gl_dt.Rows[0]["cDismissalReason"].ToString();    //任免理由
-            txtcReporting_Unit.Text = gl_dt.Rows[0]["cReporting_Unit"].ToString();      //承包单位
+            txtcReporting_Unit.Text = gl_dt.Rows[0]["cReporting_Unit"].ToString();      //呈报单位
             dEageDate.Text = gl_dt.Rows[0]["dEageDate"].ToString();                     //基准时间
             txtcMaker.Text = gl_dt.Rows[0]["cMaker"].ToString();                        //制表人
             dMakeDate.Text = gl_dt.Rows[0]["dMakeDate"].ToString();                     //制表时间
@@ -797,6 +802,9 @@ namespace PersonnelManagement
             dDate5.Mask.EditMask = formatString;
             dDate5.Mask.UseMaskAsDisplayFormat = true;
 
+            dMakeDate.Properties.Mask.EditMask = formatString;
+            dMakeDate.Properties.Mask.UseMaskAsDisplayFormat = true;
+
             formatString = "yyyy";
             dDate2.Mask.EditMask = formatString;
             dDate2.Mask.UseMaskAsDisplayFormat = true;
@@ -994,7 +1002,7 @@ namespace PersonnelManagement
         /// <param name="e"></param>
         private void FrmInfMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-           if( this.Parent == null)
+           if( this.Parent == null&&isEnableEdit)
                 if (XtraMessageBox.Show("是否关闭，未保存的数据将会丢失", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.OK)
                 {
                     this.Close();

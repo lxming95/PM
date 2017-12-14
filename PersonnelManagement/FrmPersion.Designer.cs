@@ -517,10 +517,10 @@
             // 
             // gcType
             // 
-            this.gcType.Location = new System.Drawing.Point(0, 228);
+            this.gcType.Location = new System.Drawing.Point(0, 229);
             this.gcType.MainView = this.gvType;
             this.gcType.Name = "gcType";
-            this.gcType.Size = new System.Drawing.Size(1044, 324);
+            this.gcType.Size = new System.Drawing.Size(1044, 479);
             this.gcType.TabIndex = 5;
             this.gcType.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvType});
@@ -895,7 +895,7 @@
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 577);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 706);
             this.barDockControlBottom.Manager = this.barManager1;
             this.barDockControlBottom.Size = new System.Drawing.Size(1049, 0);
             // 
@@ -905,7 +905,7 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 40);
             this.barDockControlLeft.Manager = this.barManager1;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 537);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 666);
             // 
             // barDockControlRight
             // 
@@ -913,7 +913,7 @@
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.barDockControlRight.Location = new System.Drawing.Point(1049, 40);
             this.barDockControlRight.Manager = this.barManager1;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 537);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 666);
             // 
             // btnExport
             // 
@@ -1395,7 +1395,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1049, 577);
+            this.ClientSize = new System.Drawing.Size(1049, 706);
             this.Controls.Add(this.gcType);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.barDockControlLeft);

@@ -224,7 +224,7 @@ namespace PersonnelManagement
             {
                 //string name = gvType.GetFocusedDataRow()["cName"].ToString() + "-";
                 saveDialog.FileName = name + DateTime.Now.ToString("yyyyMMdd");
-                saveDialog.Filter = "Excel files (*.xls)|*.xls";
+                saveDialog.Filter = "Excel 97-2013 工作簿(*.xls)|*.xls";
                 if (saveDialog.ShowDialog() != DialogResult.Cancel)  //用户点击保存按钮
                 {
                     string exportFilePath = saveDialog.FileName;        //定义文件路径              
@@ -356,7 +356,7 @@ namespace PersonnelManagement
             {
                 //string name = gvType.GetFocusedDataRow()["cName"].ToString() + "-";
                 saveDialog.FileName = name + DateTime.Now.ToString("yyyyMMdd");
-                saveDialog.Filter = "Excel files (*.xlsx)|*.xlsx";
+                saveDialog.Filter = "Excel 97-2013 工作簿(*.xls)|*.xls";
                 if (saveDialog.ShowDialog() != DialogResult.Cancel)  //用户点击保存按钮
                 {
                     string exportFilePath = saveDialog.FileName;        //定义文件路径              
@@ -375,7 +375,7 @@ namespace PersonnelManagement
                             return;
                         try
                         {
-                            string sConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Path + ";" + ";Extended Properties='Excel 12.0;HDR=Yes;IMEX=0;'";
+                            string sConnectionString = "Provider=Microsoft.JET.OLEDB.4.0;Data Source=" + Path + ";" + "Extended Properties='Excel 8.0;HDR=Yes;IMEX=0;'";
                             OleDbConnection cn = new OleDbConnection(sConnectionString);
                             string c = "INSERT INTO [后备干部$] (本人姓名,出生年月,年度,级别,备注) VALUES('lxm','1995/07','1995','1','2')";
                             OleDbCommand cmd = new OleDbCommand(c, cn);
@@ -663,6 +663,17 @@ namespace PersonnelManagement
                 age--;
             }
             return age < 0 ? 0 : age;
+        }
+
+        public static string FormatMajor(DataTable dt)
+        {
+            StringBuilder s = new StringBuilder("(");
+            foreach (DataRow r in dt.Rows)
+            {
+                s.Append("'"+r["cSubject"] +"',");
+            }
+            s.Append("' ')");
+            return s.ToString();
         }
     }
 }

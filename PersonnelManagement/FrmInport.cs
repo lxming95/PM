@@ -76,7 +76,7 @@ namespace PersonnelManagement
             string Path = "";
             OpenFileDialog fileDialog1 = new OpenFileDialog();
             fileDialog1.InitialDirectory = "C:\\";//默认打开C：
-            fileDialog1.Filter = "Excel files (*.xlsx)|*.xlsx";
+            fileDialog1.Filter = "Excel 97-2013 工作簿(*.xls)|*.xls";
             fileDialog1.FilterIndex = 1;//如果您设置 FilterIndex 属性，则当显示对话框时，将选择该筛选器。
             fileDialog1.RestoreDirectory = true;//取得或设定值，指出对话方块是否在关闭前还原目前的目录。
             if (fileDialog1.ShowDialog() == DialogResult.OK)
@@ -97,7 +97,7 @@ namespace PersonnelManagement
             DataTable dt = new DataTable();
             try
             {
-                string strConn = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Path + ";" + ";Extended Properties='Excel 12.0;HDR=Yes;IMEX=1;'";
+                string strConn = "Provider=Microsoft.JET.OLEDB.4.0;Data Source=" + Path + ";" + "Extended Properties='Excel 8.0;HDR=Yes;IMEX=1;'";
                 OleDbConnection conn = new OleDbConnection(strConn);
                 conn.Open();
                 DataTable schemaTable = conn.GetOleDbSchemaTable(System.Data.OleDb.OleDbSchemaGuid.Tables, null);
@@ -119,7 +119,7 @@ namespace PersonnelManagement
                 {
                     try
                     {
-                        if (dt.Rows[i][2].ToString() != "")
+                        if (dt.Rows[i][3].ToString() != "")
                         {
                             List<MySqlParameter> ilistStr = new List<MySqlParameter> {
                             new MySqlParameter("cIDnumber", dt.Rows[i][1].ToString()),              //身份证号码
@@ -129,9 +129,9 @@ namespace PersonnelManagement
                             new MySqlParameter("cSex", dt.Rows[i][5].ToString()),                   //性别
                             new MySqlParameter("cNation", dt.Rows[i][6].ToString()),                //民族
                             new MySqlParameter("cNativePlace", dt.Rows[i][7].ToString()),           //籍贯
-                            new MySqlParameter("dBirth_date", fromDate(dt.Rows[i][8].ToString(),'/')),  //出生年月
-                            new MySqlParameter("dJoin_date", fromDate(dt.Rows[i][9].ToString(),'/')),   //入党时间
-                            new MySqlParameter("dWorkDate", fromDate(dt.Rows[i][10].ToString(),'/')),    //工作时间
+                            new MySqlParameter("dBirth_date", fromDate(dt.Rows[i][8].ToString(),'.')),  //出生年月
+                            new MySqlParameter("dJoin_date", fromDate(dt.Rows[i][9].ToString(),'.')),   //入党时间
+                            new MySqlParameter("dWorkDate", fromDate(dt.Rows[i][10].ToString(),'.')),    //工作时间
                             new MySqlParameter("cFull_timeEducation", dt.Rows[i][11].ToString()),   //全日制学历
                             new MySqlParameter("cFull_timeDegree", dt.Rows[i][12].ToString()),      //全日制学位
                             new MySqlParameter("cFull_timeSchool", dt.Rows[i][13].ToString()),      //全日制毕业院校
@@ -141,8 +141,8 @@ namespace PersonnelManagement
                             new MySqlParameter("cIn_serviceSchool", dt.Rows[i][17].ToString()),     //在职毕业院校
                             new MySqlParameter("cIn_serviceMajor", dt.Rows[i][18].ToString()),      //在职专业
                             new MySqlParameter("cResume", dt.Rows[i][19].ToString()),               //历任职务/工作经历
-                            new MySqlParameter("dInOffice", fromDate(dt.Rows[i][20].ToString(),'/')),   //任现职时间
-                            new MySqlParameter("dSameOffic", fromDate(dt.Rows[i][21].ToString(),'/')),  //任同等职位时间
+                            new MySqlParameter("dInOffice", fromDate(dt.Rows[i][20].ToString(),'.')),   //任现职时间
+                            new MySqlParameter("dSameOffic", fromDate(dt.Rows[i][21].ToString(),'.')),  //任同等职位时间
                             new MySqlParameter("cRank", dt.Rows[i][22].ToString()),                 //个人所属职级
                             //new MySqlParameter("bIsOfficialPosition", dt.Rows[i][23].ToString()),   //是否党政正职
                             new MySqlParameter("cBirthPlace", dt.Rows[i][24].ToString()),           //出生地
@@ -182,10 +182,11 @@ namespace PersonnelManagement
 
                         }
                     }
-                    catch(Exception e)
-                    {
-                       // SaveFile.savelog("第"+i+"条插入错误，错误信息:"+e.Message+".");
-                    }
+                catch (Exception e)
+                {
+                    XtraMessageBox.Show("e.message");
+                    // savefile.savelog("第"+i+"条插入错误，错误信息:"+e.message+".");
+                }
                 }
                 
                 #endregion
@@ -203,10 +204,10 @@ namespace PersonnelManagement
                         List<MySqlParameter> ilistStr = new List<MySqlParameter> {
                             new MySqlParameter("cName", dt_re.Rows[i][1].ToString()),          //姓名
                             new MySqlParameter("dBirth_date", dt_re.Rows[i][2].ToString()),    //出生日期
-                            //new MySqlParameter("cIDnumber", dt_re.Rows[i][2].ToString()),      //身份证号码
+                            //new MySqlParameter("cIDnumber", dt_re.Rows[i][2].ToString()),    //身份证号码
                             new MySqlParameter("dStartDate", dt_re.Rows[i][3].ToString()),     //开始时间
                             new MySqlParameter("dDeadline", dt_re.Rows[i][4].ToString()),      //截至时间
-                            new MySqlParameter("rLevel", dt_re.Rows[i][5].ToString()),    //工作单位经历
+                            new MySqlParameter("rLevel", dt_re.Rows[i][5].ToString()),         //工作单位经历
                             new MySqlParameter("cExperience", dt_re.Rows[i][6].ToString()),    //工作单位经历
                             new MySqlParameter("rRemarks", dt_re.Rows[i][7].ToString()),       //备注
                         };
@@ -220,8 +221,9 @@ namespace PersonnelManagement
                             //break;
                         }
                         ilistStr.Add(new MySqlParameter("PersionID", dt_persion.Rows[0]["pid"].ToString()));
+                        ilistStr.Add(new MySqlParameter("cIDnumber", dt_persion.Rows[0]["cIDnumber"].ToString()));
                         param = ilistStr.ToArray();
-                        MySQLHelper.ExecuteNonQuery("INSERT INTO data_resume(PersionID,dStartDate,dDeadline,rLevel,cExperience,rRemarks) VALUES(@PersionID,@dStartDate,@dDeadline,@rLevel,@cExperience,@rRemarks)", param);
+                        MySQLHelper.ExecuteNonQuery("INSERT INTO data_resume(PersionID,dStartDate,dDeadline,rLevel,cExperience,cIDnumber,rRemarks) VALUES(@PersionID,@dStartDate,@dDeadline,@rLevel,@cExperience,@cIDnumber,@rRemarks)", param);
                     }
                 }
 
@@ -239,7 +241,8 @@ namespace PersonnelManagement
                     {
                         List<MySqlParameter> ilistStr = new List<MySqlParameter> {
                             new MySqlParameter("cName", dt_re.Rows[i][1].ToString()),          //姓名
-                            new MySqlParameter("cIDnumber", dt_re.Rows[i][2].ToString()),      //身份证号码
+                            new MySqlParameter("dBirth_date", dt_re.Rows[i][2].ToString()),    //身份证号码
+                            //new MySqlParameter("cIDnumber", dt_re.Rows[i][2].ToString()),      //身份证号码
                             new MySqlParameter("rcYear", dt_re.Rows[i][3].ToString()),         //年度
                             new MySqlParameter("rcLevel", dt_re.Rows[i][4].ToString()),        //级别
                             new MySqlParameter("rcRemarks", dt_re.Rows[i][5].ToString()),      //备注
@@ -254,8 +257,9 @@ namespace PersonnelManagement
                             //break;
                         }
                         ilistStr.Add(new MySqlParameter("PersionID", dt_persion.Rows[0]["pid"].ToString()));
+                        ilistStr.Add(new MySqlParameter("cIDnumber", dt_persion.Rows[0]["cIDnumber"].ToString()));
                         param = ilistStr.ToArray();
-                        MySQLHelper.ExecuteNonQuery("INSERT INTO data_reservecadre(PersionID,rcYear,rcLevel,rcRemarks) VALUES(@PersionID,@rcYear,@rcLevel,@rcRemarks)", param);
+                        MySQLHelper.ExecuteNonQuery("INSERT INTO data_reservecadre(PersionID,rcYear,rcLevel,cIDnumber,rcRemarks) VALUES(@PersionID,@rcYear,@rcLevel,@cIDnumber,@rcRemarks)", param);
                     }
                 }
                 #endregion
@@ -271,7 +275,8 @@ namespace PersonnelManagement
                     {
                         List<MySqlParameter> ilistStr = new List<MySqlParameter> {
                             new MySqlParameter("cName", dt_re.Rows[i][1].ToString()),               //姓名
-                            new MySqlParameter("cIDnumber", dt_re.Rows[i][2].ToString()),           //身份证号码
+                            new MySqlParameter("dBirth_date", dt_re.Rows[i][2].ToString()),         //出生日期
+                            //new MySqlParameter("cIDnumber", dt_re.Rows[i][2].ToString()),           //身份证号码
                             new MySqlParameter("cfCalled", dt_re.Rows[i][3].ToString()),            //称谓
                             new MySqlParameter("cfName", dt_re.Rows[i][4].ToString()),              //名字
                             new MySqlParameter("dfBirthDate", dt_re.Rows[i][5].ToString()),         //出生年份
@@ -289,8 +294,9 @@ namespace PersonnelManagement
                             //break;
                         }
                         ilistStr.Add(new MySqlParameter("PersionID", dt_persion.Rows[0]["pid"].ToString()));
+                        ilistStr.Add(new MySqlParameter("cIDnumber", dt_persion.Rows[0]["cIDnumber"].ToString()));
                         param = ilistStr.ToArray();
-                        MySQLHelper.ExecuteNonQuery("INSERT INTO data_familymembers(PersionID,cfCalled,cfName,dfBirthDate,cfPoliticalStatus,cfDuties) VALUES(@PersionID,@cfCalled,@cfName,@dfBirthDate,@cfPoliticalStatus,@cfDuties)", param);
+                        MySQLHelper.ExecuteNonQuery("INSERT INTO data_familymembers(PersionID,cfCalled,cfName,dfBirthDate,cfPoliticalStatus,cfDuties,cIDnumber) VALUES(@PersionID,@cfCalled,@cfName,@dfBirthDate,@cfPoliticalStatus,@cfDuties,@cIDnumber)", param);
                     }
                 }
                 #endregion
@@ -306,7 +312,8 @@ namespace PersonnelManagement
                     {
                         List<MySqlParameter> ilistStr = new List<MySqlParameter> {
                             new MySqlParameter("cName", dt_re.Rows[i][1].ToString()),               //姓名
-                            new MySqlParameter("cIDnumber", dt_re.Rows[i][2].ToString()),           //身份证号码
+                            new MySqlParameter("dBirth_date", dt_re.Rows[i][2].ToString()),         //出生日期
+                            //new MySqlParameter("cIDnumber", dt_re.Rows[i][2].ToString()),           //身份证号码
                             new MySqlParameter("dData", dt_re.Rows[i][4].ToString()),               //时间
                             new MySqlParameter("cCategory", dt_re.Rows[i][3].ToString()),           //类别
                             new MySqlParameter("cLevel", dt_re.Rows[i][5].ToString()),              //级别
@@ -323,8 +330,9 @@ namespace PersonnelManagement
                             //break;
                         }
                         ilistStr.Add(new MySqlParameter("PersionID", dt_persion.Rows[0]["pid"].ToString()));
+                        ilistStr.Add(new MySqlParameter("cIDnumber", dt_persion.Rows[0]["cIDnumber"].ToString()));
                         param = ilistStr.ToArray();
-                        MySQLHelper.ExecuteNonQuery("INSERT INTO data_rewards_punishments(PersionID,dData,cCategory,cLevel,cDetailed,rpRemarks) VALUES(@PersionID,@dData,@cCategory,@cLevel,@cDetailed,@rpRemarks)", param);
+                        MySQLHelper.ExecuteNonQuery("INSERT INTO data_rewards_punishments(PersionID,dData,cCategory,cLevel,cDetailed,cIDnumber,rpRemarks) VALUES(@PersionID,@dData,@cCategory,@cLevel,@cDetailed,@cIDnumber,@rpRemarks)", param);
                     }
                 }
                 #endregion
@@ -340,7 +348,8 @@ namespace PersonnelManagement
                     {
                         List<MySqlParameter> ilistStr = new List<MySqlParameter> {
                             new MySqlParameter("cName", dt_re.Rows[i][1].ToString()),               //姓名
-                            new MySqlParameter("cIDnumber", dt_re.Rows[i][2].ToString()),           //身份证号码
+                            new MySqlParameter("dBirth_date", dt_re.Rows[i][2].ToString()),         //出生日期
+                            //new MySqlParameter("cIDnumber", dt_re.Rows[i][2].ToString()),           //身份证号码
                             new MySqlParameter("dcrYear", dt_re.Rows[i][3].ToString()),             //考核年度
                             new MySqlParameter("crChechResult", dt_re.Rows[i][4].ToString()),       //类别
                             new MySqlParameter("crRemarks", dt_re.Rows[i][5].ToString()),           //类别
@@ -355,8 +364,9 @@ namespace PersonnelManagement
                             //break;
                         }
                         ilistStr.Add(new MySqlParameter("PersionID", dt_persion.Rows[0]["pid"].ToString()));
+                        ilistStr.Add(new MySqlParameter("cIDnumber", dt_persion.Rows[0]["cIDnumber"].ToString()));
                         param = ilistStr.ToArray();
-                        MySQLHelper.ExecuteNonQuery("INSERT INTO data_checkresult(PersionID,dcrYear,crChechResult,crRemarks) VALUES(@PersionID,@dcrYear,@crChechResult,@crRemarks)", param);
+                        MySQLHelper.ExecuteNonQuery("INSERT INTO data_checkresult(PersionID,dcrYear,crChechResult,cIDnumber,crRemarks) VALUES(@PersionID,@dcrYear,@crChechResult,@cIDnumber,@crRemarks)", param);
                     }
                 }
                 #endregion
@@ -372,7 +382,8 @@ namespace PersonnelManagement
                     {
                         List<MySqlParameter> ilistStr = new List<MySqlParameter> {
                             new MySqlParameter("cName", dt_re.Rows[i][1].ToString()),                   //姓名
-                            new MySqlParameter("cIDnumber", dt_re.Rows[i][2].ToString()),               //身份证号码
+                            new MySqlParameter("dBirth_date", dt_re.Rows[i][2].ToString()),             //出生日期
+                            //new MySqlParameter("cIDnumber", dt_re.Rows[i][2].ToString()),               //身份证号码
                             new MySqlParameter("rpYear", dt_re.Rows[i][3].ToString()),                  //年度
                             new MySqlParameter("cSelfEvaluation", dt_re.Rows[i][4].ToString()),         //自我评价
                             new MySqlParameter("cUnitEvaluation", dt_re.Rows[i][5].ToString()),         //一把手评价
@@ -389,8 +400,9 @@ namespace PersonnelManagement
                             //break;
                         }
                         ilistStr.Add(new MySqlParameter("PersionID", dt_persion.Rows[0]["pid"].ToString()));
+                        ilistStr.Add(new MySqlParameter("cIDnumber", dt_persion.Rows[0]["cIDnumber"].ToString()));
                         param = ilistStr.ToArray();
-                        MySQLHelper.ExecuteNonQuery("INSERT INTO data_performance(PersionID,rpYear,cSelfEvaluation,cUnitEvaluation,cOrganizationEvaluation,prRemarks) VALUES(@PersionID,@rpYear,@cSelfEvaluation,@cUnitEvaluation,@cOrganizationEvaluation,@prRemarks)", param);
+                        MySQLHelper.ExecuteNonQuery("INSERT INTO data_performance(PersionID,rpYear,cSelfEvaluation,cUnitEvaluation,cOrganizationEvaluation,cIDnumber,prRemarks) VALUES(@PersionID,@rpYear,@cSelfEvaluation,@cUnitEvaluation,@cOrganizationEvaluation,@cIDnumber,@prRemarks)", param);
                     }
                 }
                 #endregion
@@ -403,7 +415,7 @@ namespace PersonnelManagement
                 txtfail.Text = (tatal- success).ToString();
                 return;
             }
-            catch (OleDbException err)
+            catch (Exception err)
             {
                 XtraMessageBox.Show(err.Message);
             }
@@ -433,9 +445,9 @@ namespace PersonnelManagement
                 }
                 
                 if (Convert.ToDecimal("20" + date) > DateTime.Now.Year)
-                    date = "19" + date + "/" + s.Split(c)[1];
+                    date = "19" + date + c + s.Split(c)[1];
                 else
-                    date = "20" + date + "/" + s.Split(c)[1];
+                    date = "20" + date + c + s.Split(c)[1];
 
 
                 if (date.Split(c)[1].Length <= 1)
@@ -476,7 +488,7 @@ namespace PersonnelManagement
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             SaveFileDialog sfExcel = new SaveFileDialog();
-            sfExcel.Filter = "Excel files (*.xlsx)|*.xlsx";
+            sfExcel.Filter = "Excel 97-2013 工作簿(*.xls)|*.xls";
             sfExcel.FileName = "模版";
             if (sfExcel.ShowDialog()==DialogResult.OK)
             {

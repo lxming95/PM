@@ -1411,7 +1411,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>4COOhg867Ij/3he/DJMPHKLQlPE=</dsig:DigestValue>
+        <dsig:DigestValue>C25d7tNifQcZT1aeqyJJjPO4rMc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -1440,14 +1440,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PersonnelManagement.dll" size="510464">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PersonnelManagement.dll" size="476672">
       <assemblyIdentity name="PersonnelManagement" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>LtatBEs8WIQLXlv9b+LhOHciQsM=</dsig:DigestValue>
+        <dsig:DigestValue>kYZnWIjgE5lKbuEQH7pW3p+3oqA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -1459,7 +1459,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>jdD431a8LkiX6URugkI3H1HC9OY=</dsig:DigestValue>
+        <dsig:DigestValue>cfyvH0UIIwldfkQ9VfePol9zNIc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
