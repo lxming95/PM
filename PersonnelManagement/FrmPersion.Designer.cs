@@ -112,8 +112,6 @@
             this.dDate = new DevExpress.XtraEditors.DateEdit();
             this.txtEage = new DevExpress.XtraEditors.TextEdit();
             this.pcMain = new DevExpress.XtraEditors.PanelControl();
-            this.cbIsNative = new DevExpress.XtraEditors.CheckEdit();
-            this.cbbIsOfficialPosition = new DevExpress.XtraEditors.CheckEdit();
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl12 = new DevExpress.XtraEditors.LabelControl();
             this.txtExperience = new DevExpress.XtraEditors.TextEdit();
@@ -145,6 +143,10 @@
             this.labelControl14 = new DevExpress.XtraEditors.LabelControl();
             this.txtNum = new DevExpress.XtraEditors.TextEdit();
             this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
+            this.cbIsNative = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.labelControl22 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl23 = new DevExpress.XtraEditors.LabelControl();
+            this.cbbIsOfficialPosition = new DevExpress.XtraEditors.ComboBoxEdit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckedComboBoxEdit1)).BeginInit();
@@ -192,8 +194,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtEage.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcMain)).BeginInit();
             this.pcMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cbIsNative.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbIsOfficialPosition.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtExperience.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dStartDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dStartDate.Properties)).BeginInit();
@@ -211,6 +211,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtNum.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbIsNative.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbIsOfficialPosition.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // repositoryItemCheckEdit15
@@ -1028,8 +1030,10 @@
             // 
             // pcMain
             // 
-            this.pcMain.Controls.Add(this.cbIsNative);
+            this.pcMain.Controls.Add(this.labelControl23);
             this.pcMain.Controls.Add(this.cbbIsOfficialPosition);
+            this.pcMain.Controls.Add(this.labelControl22);
+            this.pcMain.Controls.Add(this.cbIsNative);
             this.pcMain.Controls.Add(this.labelControl8);
             this.pcMain.Controls.Add(this.labelControl12);
             this.pcMain.Controls.Add(this.txtExperience);
@@ -1071,24 +1075,6 @@
             this.pcMain.Name = "pcMain";
             this.pcMain.Size = new System.Drawing.Size(1039, 145);
             this.pcMain.TabIndex = 57;
-            // 
-            // cbIsNative
-            // 
-            this.cbIsNative.Location = new System.Drawing.Point(885, 9);
-            this.cbIsNative.MenuManager = this.barManager1;
-            this.cbIsNative.Name = "cbIsNative";
-            this.cbIsNative.Properties.Caption = "  本地人";
-            this.cbIsNative.Size = new System.Drawing.Size(86, 19);
-            this.cbIsNative.TabIndex = 203;
-            // 
-            // cbbIsOfficialPosition
-            // 
-            this.cbbIsOfficialPosition.Location = new System.Drawing.Point(258, 110);
-            this.cbbIsOfficialPosition.MenuManager = this.barManager1;
-            this.cbbIsOfficialPosition.Name = "cbbIsOfficialPosition";
-            this.cbbIsOfficialPosition.Properties.Caption = "  党政正职";
-            this.cbbIsOfficialPosition.Size = new System.Drawing.Size(86, 19);
-            this.cbbIsOfficialPosition.TabIndex = 201;
             // 
             // labelControl8
             // 
@@ -1391,6 +1377,50 @@
             this.labelControl13.TabIndex = 57;
             this.labelControl13.Text = "查询条件";
             // 
+            // cbIsNative
+            // 
+            this.cbIsNative.Location = new System.Drawing.Point(927, 8);
+            this.cbIsNative.MenuManager = this.barManager1;
+            this.cbIsNative.Name = "cbIsNative";
+            this.cbIsNative.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbIsNative.Properties.Items.AddRange(new object[] {
+            "",
+            "是",
+            "否"});
+            this.cbIsNative.Size = new System.Drawing.Size(53, 20);
+            this.cbIsNative.TabIndex = 204;
+            // 
+            // labelControl22
+            // 
+            this.labelControl22.Location = new System.Drawing.Point(885, 11);
+            this.labelControl22.Name = "labelControl22";
+            this.labelControl22.Size = new System.Drawing.Size(36, 14);
+            this.labelControl22.TabIndex = 205;
+            this.labelControl22.Text = "本地人";
+            // 
+            // labelControl23
+            // 
+            this.labelControl23.Location = new System.Drawing.Point(258, 112);
+            this.labelControl23.Name = "labelControl23";
+            this.labelControl23.Size = new System.Drawing.Size(48, 14);
+            this.labelControl23.TabIndex = 207;
+            this.labelControl23.Text = "党政正职";
+            // 
+            // cbbIsOfficialPosition
+            // 
+            this.cbbIsOfficialPosition.Location = new System.Drawing.Point(316, 109);
+            this.cbbIsOfficialPosition.MenuManager = this.barManager1;
+            this.cbbIsOfficialPosition.Name = "cbbIsOfficialPosition";
+            this.cbbIsOfficialPosition.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbIsOfficialPosition.Properties.Items.AddRange(new object[] {
+            "",
+            "是",
+            "否"});
+            this.cbbIsOfficialPosition.Size = new System.Drawing.Size(53, 20);
+            this.cbbIsOfficialPosition.TabIndex = 206;
+            // 
             // FrmPersion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -1453,8 +1483,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pcMain)).EndInit();
             this.pcMain.ResumeLayout(false);
             this.pcMain.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cbIsNative.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbIsOfficialPosition.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtExperience.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dStartDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dStartDate.Properties)).EndInit();
@@ -1473,6 +1501,8 @@
             this.panelControl1.ResumeLayout(false);
             this.panelControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtNum.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbIsNative.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbIsOfficialPosition.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1583,7 +1613,6 @@
         private DevExpress.XtraEditors.ComboBoxEdit txtcIn_serviceEducation;
         private DevExpress.XtraEditors.ComboBoxEdit txtSex;
         private DevExpress.XtraEditors.LabelControl labelControl21;
-        private DevExpress.XtraEditors.CheckEdit cbbIsOfficialPosition;
         private DevExpress.XtraEditors.LabelControl labelControl8;
         private DevExpress.XtraEditors.LabelControl labelControl12;
         private DevExpress.XtraEditors.TextEdit txtExperience;
@@ -1594,7 +1623,10 @@
         private DevExpress.XtraEditors.TextEdit txtCurrentJob;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.LabelControl labelControl19;
-        private DevExpress.XtraEditors.CheckEdit cbIsNative;
+        private DevExpress.XtraEditors.LabelControl labelControl22;
+        private DevExpress.XtraEditors.ComboBoxEdit cbIsNative;
+        private DevExpress.XtraEditors.LabelControl labelControl23;
+        private DevExpress.XtraEditors.ComboBoxEdit cbbIsOfficialPosition;
     }
 }
 

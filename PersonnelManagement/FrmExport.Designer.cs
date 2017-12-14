@@ -105,13 +105,11 @@
             this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
             this.labelControl21 = new DevExpress.XtraEditors.LabelControl();
             this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
-            this.cbIsOfficialPosition = new DevExpress.XtraEditors.CheckEdit();
             this.txtcRank = new DevExpress.XtraEditors.ComboBoxEdit();
             this.labelControl27 = new DevExpress.XtraEditors.LabelControl();
             this.txtcIdentityCategory = new DevExpress.XtraEditors.ComboBoxEdit();
             this.labelControl26 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
-            this.cbIsNative = new DevExpress.XtraEditors.CheckEdit();
             this.txtcIn_serviceEducation = new DevExpress.XtraEditors.ComboBoxEdit();
             this.txtSex = new DevExpress.XtraEditors.ComboBoxEdit();
             this.txtcFull_timeEducation = new DevExpress.XtraEditors.ComboBoxEdit();
@@ -216,6 +214,10 @@
             this.cHealthStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.dMakeDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.cMaker = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.labelControl56 = new DevExpress.XtraEditors.LabelControl();
+            this.cbIsNative = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.labelControl57 = new DevExpress.XtraEditors.LabelControl();
+            this.cbbIsOfficialPosition = new DevExpress.XtraEditors.ComboBoxEdit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckedComboBoxEdit1)).BeginInit();
@@ -268,10 +270,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dDeadLine.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbIsOfficialPosition.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcRank.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcIdentityCategory.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbIsNative.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcIn_serviceEducation.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSex.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcFull_timeEducation.Properties)).BeginInit();
@@ -327,6 +327,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvType)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbIsNative.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbIsOfficialPosition.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // repositoryItemCheckEdit15
@@ -872,6 +874,10 @@
             // 
             // pcMain
             // 
+            this.pcMain.Controls.Add(this.labelControl57);
+            this.pcMain.Controls.Add(this.cbbIsOfficialPosition);
+            this.pcMain.Controls.Add(this.labelControl56);
+            this.pcMain.Controls.Add(this.cbIsNative);
             this.pcMain.Controls.Add(this.txtCurrentJob);
             this.pcMain.Controls.Add(this.labelControl2);
             this.pcMain.Controls.Add(this.labelControl8);
@@ -885,13 +891,11 @@
             this.pcMain.Controls.Add(this.textEdit1);
             this.pcMain.Controls.Add(this.labelControl21);
             this.pcMain.Controls.Add(this.textEdit2);
-            this.pcMain.Controls.Add(this.cbIsOfficialPosition);
             this.pcMain.Controls.Add(this.txtcRank);
             this.pcMain.Controls.Add(this.labelControl27);
             this.pcMain.Controls.Add(this.txtcIdentityCategory);
             this.pcMain.Controls.Add(this.labelControl26);
             this.pcMain.Controls.Add(this.labelControl6);
-            this.pcMain.Controls.Add(this.cbIsNative);
             this.pcMain.Controls.Add(this.txtcIn_serviceEducation);
             this.pcMain.Controls.Add(this.txtSex);
             this.pcMain.Controls.Add(this.txtcFull_timeEducation);
@@ -1054,15 +1058,6 @@
             this.textEdit2.Size = new System.Drawing.Size(52, 20);
             this.textEdit2.TabIndex = 192;
             // 
-            // cbIsOfficialPosition
-            // 
-            this.cbIsOfficialPosition.Location = new System.Drawing.Point(519, 124);
-            this.cbIsOfficialPosition.MenuManager = this.barManager1;
-            this.cbIsOfficialPosition.Name = "cbIsOfficialPosition";
-            this.cbIsOfficialPosition.Properties.Caption = "  党政正职";
-            this.cbIsOfficialPosition.Size = new System.Drawing.Size(86, 19);
-            this.cbIsOfficialPosition.TabIndex = 191;
-            // 
             // txtcRank
             // 
             this.txtcRank.Location = new System.Drawing.Point(373, 123);
@@ -1117,15 +1112,6 @@
             this.labelControl6.Size = new System.Drawing.Size(48, 14);
             this.labelControl6.TabIndex = 88;
             this.labelControl6.Text = "身份职级";
-            // 
-            // cbIsNative
-            // 
-            this.cbIsNative.Location = new System.Drawing.Point(859, 30);
-            this.cbIsNative.MenuManager = this.barManager1;
-            this.cbIsNative.Name = "cbIsNative";
-            this.cbIsNative.Properties.Caption = "   本地人";
-            this.cbIsNative.Size = new System.Drawing.Size(70, 19);
-            this.cbIsNative.TabIndex = 87;
             // 
             // txtcIn_serviceEducation
             // 
@@ -1425,7 +1411,7 @@
             this.txtNativePlace.Location = new System.Drawing.Point(573, 29);
             this.txtNativePlace.MenuManager = this.barManager1;
             this.txtNativePlace.Name = "txtNativePlace";
-            this.txtNativePlace.Size = new System.Drawing.Size(262, 20);
+            this.txtNativePlace.Size = new System.Drawing.Size(248, 20);
             this.txtNativePlace.TabIndex = 21;
             // 
             // labelControl3
@@ -2227,6 +2213,50 @@
             this.cMaker.Name = "cMaker";
             this.cMaker.Width = 47;
             // 
+            // labelControl56
+            // 
+            this.labelControl56.Location = new System.Drawing.Point(841, 32);
+            this.labelControl56.Name = "labelControl56";
+            this.labelControl56.Size = new System.Drawing.Size(36, 14);
+            this.labelControl56.TabIndex = 207;
+            this.labelControl56.Text = "本地人";
+            // 
+            // cbIsNative
+            // 
+            this.cbIsNative.Location = new System.Drawing.Point(877, 29);
+            this.cbIsNative.MenuManager = this.barManager1;
+            this.cbIsNative.Name = "cbIsNative";
+            this.cbIsNative.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbIsNative.Properties.Items.AddRange(new object[] {
+            "",
+            "是",
+            "否"});
+            this.cbIsNative.Size = new System.Drawing.Size(53, 20);
+            this.cbIsNative.TabIndex = 206;
+            // 
+            // labelControl57
+            // 
+            this.labelControl57.Location = new System.Drawing.Point(519, 126);
+            this.labelControl57.Name = "labelControl57";
+            this.labelControl57.Size = new System.Drawing.Size(48, 14);
+            this.labelControl57.TabIndex = 209;
+            this.labelControl57.Text = "党政正职";
+            // 
+            // cbbIsOfficialPosition
+            // 
+            this.cbbIsOfficialPosition.Location = new System.Drawing.Point(573, 123);
+            this.cbbIsOfficialPosition.MenuManager = this.barManager1;
+            this.cbbIsOfficialPosition.Name = "cbbIsOfficialPosition";
+            this.cbbIsOfficialPosition.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbIsOfficialPosition.Properties.Items.AddRange(new object[] {
+            "",
+            "是",
+            "否"});
+            this.cbbIsOfficialPosition.Size = new System.Drawing.Size(52, 20);
+            this.cbbIsOfficialPosition.TabIndex = 208;
+            // 
             // FrmExport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -2295,10 +2325,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dDeadLine.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbIsOfficialPosition.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcRank.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcIdentityCategory.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbIsNative.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcIn_serviceEducation.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSex.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcFull_timeEducation.Properties)).EndInit();
@@ -2355,6 +2383,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvType)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbIsNative.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbIsOfficialPosition.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2492,11 +2522,9 @@
         private DevExpress.XtraEditors.ComboBoxEdit txtcIn_serviceEducation;
         private DevExpress.XtraEditors.LabelControl labelControl26;
         private DevExpress.XtraEditors.LabelControl labelControl6;
-        private DevExpress.XtraEditors.CheckEdit cbIsNative;
         private DevExpress.XtraEditors.ComboBoxEdit txtcIdentityCategory;
         private DevExpress.XtraEditors.LabelControl labelControl27;
         private DevExpress.XtraEditors.ComboBoxEdit txtcRank;
-        private DevExpress.XtraEditors.CheckEdit cbIsOfficialPosition;
         private DevExpress.XtraEditors.LabelControl labelControl8;
         private DevExpress.XtraEditors.TextEdit txtExperience;
         private DevExpress.XtraEditors.LabelControl labelControl7;
@@ -2548,6 +2576,10 @@
         private DevExpress.XtraGrid.Columns.GridColumn dMakeDate;
         private DevExpress.XtraGrid.Columns.GridColumn cMaker;
         private DevExpress.XtraBars.BarButtonItem btnExportExcel;
+        private DevExpress.XtraEditors.LabelControl labelControl56;
+        private DevExpress.XtraEditors.ComboBoxEdit cbIsNative;
+        private DevExpress.XtraEditors.LabelControl labelControl57;
+        private DevExpress.XtraEditors.ComboBoxEdit cbbIsOfficialPosition;
     }
 }
 

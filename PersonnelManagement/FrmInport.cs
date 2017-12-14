@@ -117,9 +117,9 @@ namespace PersonnelManagement
 
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    try
-                    {
-                        if (dt.Rows[i][3].ToString() != "")
+                try
+                {
+                    if (dt.Rows[i][3].ToString() != "")
                         {
                             List<MySqlParameter> ilistStr = new List<MySqlParameter> {
                             new MySqlParameter("cIDnumber", dt.Rows[i][1].ToString()),              //身份证号码
@@ -171,27 +171,62 @@ namespace PersonnelManagement
                             else
                                 ilistStr.Add(new MySqlParameter("bIsNative", "0"));
                             MySqlParameter[] param = ilistStr.ToArray();
-                            MySQLHelper.ExecuteNonQuery("INSERT INTO data_persion(cIDnumber,cUnit,cName,cCurrentJob,cSex,"
-                                + "cNation, cNativePlace, dBirth_date, dJoin_date, dWorkDate, cFull_timeEducation,cFull_timeDegree,cFull_timeSchool,cFull_timeMajor,"
-                                + "cIn_serviceEducation,cIn_serviceDegree, cIn_serviceSchool,cIn_serviceMajor, cResume, dInOffice, dSameOffic, cRemarks,"
-                                + " cRank,bIsOfficialPosition,cBirthPlace,bIsNative,cDismissalReason,cHealthStatus,cDuties,cSkill,cIdentityCategory,dGetCadresDate,cWay,cDocumentBasis,cApprovingAuthority)"
-                                + "VALUES(@cIDnumber, @cUnit, @cName, @cCurrentJob, @cSex,"
-                                + "@cNation, @cNativePlace, @dBirth_date, @dJoin_date, @dWorkDate, @cFull_timeEducation,@cFull_timeDegree,@cFull_timeSchool,@cFull_timeMajor,"
-                                + "@cIn_serviceEducation,@cIn_serviceDegree, @cIn_serviceSchool,@cIn_serviceMajor, @cResume, @dInOffice, @dSameOffic, @cRemarks,"
-                                + " @cRank,@bIsOfficialPosition,@cBirthPlace,@bIsNative,@cDismissalReason,@cHealthStatus,@cDuties,@cSkill,@cIdentityCategory,@dGetCadresDate,@cWay,@cDocumentBasis,@cApprovingAuthority)", param);
+                            DataTable dt_hasPersion = MySQLHelper.table("SELECT * FROM data_persion WHERE cName=@cName AND dBirth_date=@dBirth_date AND do_flag='1'",param);
+                            if (dt_hasPersion != null && dt_hasPersion.Rows.Count > 0)
+                            {
+                                ilistStr.Add(new MySqlParameter("pid", dt_hasPersion.Rows[0]["pid"]));
+                                param = ilistStr.ToArray();
+                                MySQLHelper.ExecuteNonQuery("DELETE FROM data_persion WHERE pid=@pid ",param);
+                                MySQLHelper.ExecuteNonQuery("INSERT INTO data_persion(pid,cIDnumber,cUnit,cName,cCurrentJob,cSex,"
+                                    + "cNation, cNativePlace, dBirth_date, dJoin_date, dWorkDate, cFull_timeEducation,cFull_timeDegree,cFull_timeSchool,cFull_timeMajor,"
+                                    + "cIn_serviceEducation,cIn_serviceDegree, cIn_serviceSchool,cIn_serviceMajor, cResume, dInOffice, dSameOffic, cRemarks,"
+                                    + " cRank,bIsOfficialPosition,cBirthPlace,bIsNative,cDismissalReason,cHealthStatus,cDuties,cSkill,cIdentityCategory,dGetCadresDate,cWay,cDocumentBasis,cApprovingAuthority)"
+                                    + "VALUES(@pid,@cIDnumber, @cUnit, @cName, @cCurrentJob, @cSex,"
+                                    + "@cNation, @cNativePlace, @dBirth_date, @dJoin_date, @dWorkDate, @cFull_timeEducation,@cFull_timeDegree,@cFull_timeSchool,@cFull_timeMajor,"
+                                    + "@cIn_serviceEducation,@cIn_serviceDegree, @cIn_serviceSchool,@cIn_serviceMajor, @cResume, @dInOffice, @dSameOffic, @cRemarks,"
+                                    + " @cRank,@bIsOfficialPosition,@cBirthPlace,@bIsNative,@cDismissalReason,@cHealthStatus,@cDuties,@cSkill,@cIdentityCategory,@dGetCadresDate,@cWay,@cDocumentBasis,@cApprovingAuthority)", param);
+                            }
+                            else
+                            {
+                                MySQLHelper.ExecuteNonQuery("INSERT INTO data_persion(cIDnumber,cUnit,cName,cCurrentJob,cSex,"
+                                    + "cNation, cNativePlace, dBirth_date, dJoin_date, dWorkDate, cFull_timeEducation,cFull_timeDegree,cFull_timeSchool,cFull_timeMajor,"
+                                    + "cIn_serviceEducation,cIn_serviceDegree, cIn_serviceSchool,cIn_serviceMajor, cResume, dInOffice, dSameOffic, cRemarks,"
+                                    + " cRank,bIsOfficialPosition,cBirthPlace,bIsNative,cDismissalReason,cHealthStatus,cDuties,cSkill,cIdentityCategory,dGetCadresDate,cWay,cDocumentBasis,cApprovingAuthority)"
+                                    + "VALUES(@cIDnumber, @cUnit, @cName, @cCurrentJob, @cSex,"
+                                    + "@cNation, @cNativePlace, @dBirth_date, @dJoin_date, @dWorkDate, @cFull_timeEducation,@cFull_timeDegree,@cFull_timeSchool,@cFull_timeMajor,"
+                                    + "@cIn_serviceEducation,@cIn_serviceDegree, @cIn_serviceSchool,@cIn_serviceMajor, @cResume, @dInOffice, @dSameOffic, @cRemarks,"
+                                    + " @cRank,@bIsOfficialPosition,@cBirthPlace,@bIsNative,@cDismissalReason,@cHealthStatus,@cDuties,@cSkill,@cIdentityCategory,@dGetCadresDate,@cWay,@cDocumentBasis,@cApprovingAuthority)", param);
+
+                            }
 
                         }
-                    }
+            }
                 catch (Exception e)
-                {
-                    XtraMessageBox.Show("e.message");
-                    // savefile.savelog("第"+i+"条插入错误，错误信息:"+e.message+".");
-                }
-                }
-                
+            {
+                XtraMessageBox.Show(e.Message);
+                // savefile.savelog("第"+i+"条插入错误，错误信息:"+e.Message+".");
+            }
+        }
+
                 #endregion
 
-                #region 学习或工作简历
+                #region 学习或工作简历 data_resume
+                strExcel = "SELECT 本人姓名,出生年月 FROM [学习及工作简历$] WHERE len(本人姓名)>0  GROUP BY 本人姓名,出生年月";
+                myCommand = new OleDbDataAdapter(strExcel, strConn);
+                ds = new DataSet();
+                myCommand.Fill(ds, "table1");
+                DataTable dt_cl = ds.Tables[0];
+                foreach (DataRow r in dt_cl.Rows)
+                {
+                    DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName='"+r["本人姓名"] +"' AND dBirth_date LIKE '%" + r["出生年月"].ToString() + "%'");
+                    if (dt_persion == null || dt_persion.Rows.Count <= 0)
+                    {
+                        XtraMessageBox.Show("请确保数据库中存在" + r["本人姓名"].ToString() + "的信息，然后再插入相关的学习及工作简历");
+                        return;
+                        //break;
+                    }
+                    MySQLHelper.ExecuteNonQuery("DELETE FROM data_resume WHERE PersionID='" + dt_persion.Rows[0]["pid"].ToString()+"' ");
+                }
                 strExcel = "select * from [学习及工作简历$]";
                 myCommand = new OleDbDataAdapter(strExcel, strConn);
                 ds = new DataSet();
@@ -229,7 +264,23 @@ namespace PersonnelManagement
 
                 #endregion
 
-                #region 后备干部
+                #region 后备干部 data_reservecadre
+                strExcel = "SELECT 本人姓名,出生年月 FROM [学习及工作简历$] WHERE len(本人姓名)>0  GROUP BY 本人姓名,出生年月";
+                myCommand = new OleDbDataAdapter(strExcel, strConn);
+                ds = new DataSet();
+                myCommand.Fill(ds, "table1");
+                dt_cl = ds.Tables[0];
+                foreach (DataRow r in dt_cl.Rows)
+                {
+                    DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName='" + r["本人姓名"] + "' AND dBirth_date LIKE '%" + r["出生年月"].ToString() + "%'");
+                    if (dt_persion == null || dt_persion.Rows.Count <= 0)
+                    {
+                        XtraMessageBox.Show("请确保数据库中存在" + r["本人姓名"].ToString() + "的信息，然后再插入相关的学习及工作简历");
+                        return;
+                        //break;
+                    }
+                    MySQLHelper.ExecuteNonQuery("DELETE FROM data_reservecadre WHERE PersionID='" + dt_persion.Rows[0]["pid"].ToString() + "' ");
+                }
                 strExcel = "select * from [后备干部$]";
                 myCommand = new OleDbDataAdapter(strExcel, strConn);
                 ds = new DataSet();
@@ -263,7 +314,24 @@ namespace PersonnelManagement
                     }
                 }
                 #endregion
-                #region 家庭主要成员
+                #region 家庭主要成员 data_familymembers
+                strExcel = "SELECT 本人姓名,出生年月 FROM [学习及工作简历$] WHERE len(本人姓名)>0  GROUP BY 本人姓名,出生年月";
+                myCommand = new OleDbDataAdapter(strExcel, strConn);
+                ds = new DataSet();
+                myCommand.Fill(ds, "table1");
+                dt_cl = ds.Tables[0];
+                foreach (DataRow r in dt_cl.Rows)
+                {
+                    DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName='" + r["本人姓名"] + "' AND dBirth_date LIKE '%" + r["出生年月"].ToString() + "%'");
+                    if (dt_persion == null || dt_persion.Rows.Count <= 0)
+                    {
+                        XtraMessageBox.Show("请确保数据库中存在" + r["本人姓名"].ToString() + "的信息，然后再插入相关的学习及工作简历");
+                        return;
+                        //break;
+                    }
+                    MySQLHelper.ExecuteNonQuery("DELETE FROM data_familymembers WHERE PersionID='" + dt_persion.Rows[0]["pid"].ToString() + "' ");
+                }
+
                 strExcel = "select * from [家庭主要成员$]";
                 myCommand = new OleDbDataAdapter(strExcel, strConn);
                 ds = new DataSet();
@@ -300,7 +368,24 @@ namespace PersonnelManagement
                     }
                 }
                 #endregion
-                #region 奖惩情况
+                #region 奖惩情况 data_rewards_punishments
+                strExcel = "SELECT 本人姓名,出生年月 FROM [学习及工作简历$] WHERE len(本人姓名)>0  GROUP BY 本人姓名,出生年月";
+                myCommand = new OleDbDataAdapter(strExcel, strConn);
+                ds = new DataSet();
+                myCommand.Fill(ds, "table1");
+                dt_cl = ds.Tables[0];
+                foreach (DataRow r in dt_cl.Rows)
+                {
+                    DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName='" + r["本人姓名"] + "' AND dBirth_date LIKE '%" + r["出生年月"].ToString() + "%'");
+                    if (dt_persion == null || dt_persion.Rows.Count <= 0)
+                    {
+                        XtraMessageBox.Show("请确保数据库中存在" + r["本人姓名"].ToString() + "的信息，然后再插入相关的学习及工作简历");
+                        return;
+                        //break;
+                    }
+                    MySQLHelper.ExecuteNonQuery("DELETE FROM data_rewards_punishments WHERE PersionID='" + dt_persion.Rows[0]["pid"].ToString() + "' ");
+                }
+
                 strExcel = "select * from [奖惩情况$]";
                 myCommand = new OleDbDataAdapter(strExcel, strConn);
                 ds = new DataSet();
@@ -336,7 +421,24 @@ namespace PersonnelManagement
                     }
                 }
                 #endregion
-                #region 年度考核
+                #region 年度考核 data_checkresult
+                strExcel = "SELECT 本人姓名,出生年月 FROM [学习及工作简历$] WHERE len(本人姓名)>0  GROUP BY 本人姓名,出生年月";
+                myCommand = new OleDbDataAdapter(strExcel, strConn);
+                ds = new DataSet();
+                myCommand.Fill(ds, "table1");
+                dt_cl = ds.Tables[0];
+                foreach (DataRow r in dt_cl.Rows)
+                {
+                    DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName='" + r["本人姓名"] + "' AND dBirth_date LIKE '%" + r["出生年月"].ToString() + "%'");
+                    if (dt_persion == null || dt_persion.Rows.Count <= 0)
+                    {
+                        XtraMessageBox.Show("请确保数据库中存在" + r["本人姓名"].ToString() + "的信息，然后再插入相关的学习及工作简历");
+                        return;
+                        //break;
+                    }
+                    MySQLHelper.ExecuteNonQuery("DELETE FROM data_checkresult WHERE PersionID='" + dt_persion.Rows[0]["pid"].ToString() + "' ");
+                }
+
                 strExcel = "select * from [年度考核$]";
                 myCommand = new OleDbDataAdapter(strExcel, strConn);
                 ds = new DataSet();
@@ -370,7 +472,24 @@ namespace PersonnelManagement
                     }
                 }
                 #endregion
-                #region 现实表现
+                #region 现实表现 data_performance
+                strExcel = "SELECT 本人姓名,出生年月 FROM [学习及工作简历$] WHERE len(本人姓名)>0  GROUP BY 本人姓名,出生年月";
+                myCommand = new OleDbDataAdapter(strExcel, strConn);
+                ds = new DataSet();
+                myCommand.Fill(ds, "table1");
+                dt_cl = ds.Tables[0];
+                foreach (DataRow r in dt_cl.Rows)
+                {
+                    DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName='" + r["本人姓名"] + "' AND dBirth_date LIKE '%" + r["出生年月"].ToString() + "%'");
+                    if (dt_persion == null || dt_persion.Rows.Count <= 0)
+                    {
+                        XtraMessageBox.Show("请确保数据库中存在" + r["本人姓名"].ToString() + "的信息，然后再插入相关的学习及工作简历");
+                        return;
+                        //break;
+                    }
+                    MySQLHelper.ExecuteNonQuery("DELETE FROM data_performance WHERE PersionID='" + dt_persion.Rows[0]["pid"].ToString() + "' ");
+                }
+
                 strExcel = "select * from [现实表现$]";
                 myCommand = new OleDbDataAdapter(strExcel, strConn);
                 ds = new DataSet();

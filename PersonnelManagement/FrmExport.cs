@@ -191,18 +191,24 @@ namespace PersonnelManagement
                     MyStringBuilder.Append(" and cNativePlace like '%" + txtNativePlace.Text + "%'");
                 }
             //本地人
-            if (cbIsNative.Checked==true)
+            if (cbIsNative.Text == "是")
             {
-                MyStringBuilder.Append(" and bIsNative = 1");
-                //if(txtIsNative.Text.Equals("本地"))
-                //    MyStringBuilder.Append(" and bIsNative = 1");
-                //if (txtIsNative.Text.Equals("外地"))
-                //    MyStringBuilder.Append(" and bIsNative = 0");
+                MyStringBuilder.Append(" and bIsNative ='1' ");
             }
-            //党政正职
-            if (cbIsOfficialPosition.Checked==true)
+            if (cbIsNative.Text == "否")
             {
-                MyStringBuilder.Append(" and bIsOfficialPosition = 1");
+                MyStringBuilder.Append(" and bIsNative ='0' ");
+            }
+
+
+            //党政正职
+            if (cbbIsOfficialPosition.Text == "是")
+            {
+                MyStringBuilder.Append(" and bIsOfficialPosition ='1' ");
+            }
+            if (cbbIsOfficialPosition.Text == "否")
+            {
+                MyStringBuilder.Append(" and bIsOfficialPosition ='0' ");
             }
             //现任职务
             if (txtCurrentJob.Text!="")
@@ -411,12 +417,16 @@ namespace PersonnelManagement
         /// <param name="e"></param>
         private void btnClear_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            cbIsNative.Text = "";
+            cbbIsOfficialPosition.Text = "";
+
             //基本信息
             txtName.Text = "";
             txtSex.Text = "";
             txtNation.Text = "";
             txtCurrentJob.Text = "";
             txtNativePlace.Text = "";
+
             dDate.Text = "";
             txtEage.Text = "";
             txtEage2.Text = "";

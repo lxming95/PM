@@ -69,14 +69,14 @@ namespace PersonnelManagement
                     MyStringBuilder.Append(" and cNativePlace like '%" + txtNativePlace.Text + "%'");
                 }
             //是否本地人
-            if (cbIsNative.Checked)
+            if (cbIsNative.Text=="是")
             {
                 MyStringBuilder.Append(" and bIsNative ='1' ");
             }
-            //else
-            //{
-            //    MyStringBuilder.Append(" and bIsNative ='0' ");
-            //}
+            if (cbIsNative.Text == "否")
+            {
+                MyStringBuilder.Append(" and bIsNative ='0' ");
+            }
 
             //年龄
             int year;
@@ -147,14 +147,14 @@ namespace PersonnelManagement
             if (txtCurrentJob.Text != "")
                 MyStringBuilder.Append(" and cCurrentJob =@cCurrentJob ");
             //是否党政正职
-            if (cbbIsOfficialPosition.Checked)
+            if (cbbIsOfficialPosition.Text == "是")
             {
                 MyStringBuilder.Append(" and bIsOfficialPosition ='1' ");
             }
-            //else
-            //{
-            //    MyStringBuilder.Append(" and bIsOfficialPosition ='0' ");
-            //}
+            if (cbbIsOfficialPosition.Text == "否")
+            {
+                MyStringBuilder.Append(" and bIsOfficialPosition ='0' ");
+            }
 
             //简历起始时间
             if (dStartDate.Text != ""&& dStartDate.Text != "始")
@@ -219,6 +219,7 @@ namespace PersonnelManagement
             txtcIn_serviceEducation.Text = "";
             txtCurrentJob.Text = "";
             txtNativePlace.Text = "";
+            cbIsNative.Text = "";
             dDate.Text = "基准时间";
             txtEage.Text = "";
             txtEage2.Text = "";
@@ -226,7 +227,7 @@ namespace PersonnelManagement
             txtJoinEage2.Text = "";
             txtWorkEage1.Text = "";
             txtWorkEage2.Text = "";
-            cbbIsOfficialPosition.Checked = false;
+            cbbIsOfficialPosition.Text ="";
             //经历
             dStartDate.Text = "";
             dDeadLine.Text = "";
