@@ -109,6 +109,7 @@
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.txtTotal = new DevExpress.XtraEditors.TextEdit();
+            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckedComboBoxEdit1)).BeginInit();
@@ -756,9 +757,10 @@
             this.btnAdd,
             this.btnDel,
             this.btnInPort,
-            this.barButtonItem1});
+            this.barButtonItem1,
+            this.barButtonItem2});
             this.barManager1.MainMenu = this.bar5;
-            this.barManager1.MaxItemId = 14;
+            this.barManager1.MaxItemId = 15;
             // 
             // bar5
             // 
@@ -770,7 +772,8 @@
             this.bar5.FloatLocation = new System.Drawing.Point(792, 299);
             this.bar5.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barButtonItem1, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnInPort, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnInPort, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barButtonItem2, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar5.OptionsBar.MultiLine = true;
             this.bar5.OptionsBar.UseWholeRow = true;
             this.bar5.Text = "Main menu";
@@ -785,7 +788,7 @@
             // 
             // btnInPort
             // 
-            this.btnInPort.Caption = "导入";
+            this.btnInPort.Caption = "更新导入";
             this.btnInPort.Id = 10;
             this.btnInPort.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnInPort.ImageOptions.Image")));
             this.btnInPort.Name = "btnInPort";
@@ -937,6 +940,13 @@
             this.txtTotal.Size = new System.Drawing.Size(41, 20);
             this.txtTotal.TabIndex = 67;
             // 
+            // barButtonItem2
+            // 
+            this.barButtonItem2.Caption = "追加导入";
+            this.barButtonItem2.Id = 14;
+            this.barButtonItem2.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem2.ImageOptions.Image")));
+            this.barButtonItem2.Name = "barButtonItem2";
+            // 
             // FrmInport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -1087,6 +1097,7 @@
         private DevExpress.XtraEditors.LabelControl labelControl21;
         private DevExpress.XtraEditors.LabelControl labelControl14;
         private DevExpress.XtraEditors.TextEdit txtSuccess;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
     }
 }
 
