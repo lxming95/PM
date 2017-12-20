@@ -112,6 +112,10 @@
             this.dDate = new DevExpress.XtraEditors.DateEdit();
             this.txtEage = new DevExpress.XtraEditors.TextEdit();
             this.pcMain = new DevExpress.XtraEditors.PanelControl();
+            this.labelControl23 = new DevExpress.XtraEditors.LabelControl();
+            this.cbbIsOfficialPosition = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.labelControl22 = new DevExpress.XtraEditors.LabelControl();
+            this.cbIsNative = new DevExpress.XtraEditors.ComboBoxEdit();
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl12 = new DevExpress.XtraEditors.LabelControl();
             this.txtExperience = new DevExpress.XtraEditors.TextEdit();
@@ -143,10 +147,6 @@
             this.labelControl14 = new DevExpress.XtraEditors.LabelControl();
             this.txtNum = new DevExpress.XtraEditors.TextEdit();
             this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
-            this.cbIsNative = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.labelControl22 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl23 = new DevExpress.XtraEditors.LabelControl();
-            this.cbbIsOfficialPosition = new DevExpress.XtraEditors.ComboBoxEdit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckedComboBoxEdit1)).BeginInit();
@@ -194,6 +194,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtEage.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcMain)).BeginInit();
             this.pcMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbIsOfficialPosition.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbIsNative.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtExperience.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dStartDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dStartDate.Properties)).BeginInit();
@@ -211,8 +213,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtNum.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbIsNative.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbIsOfficialPosition.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // repositoryItemCheckEdit15
@@ -1076,6 +1076,50 @@
             this.pcMain.Size = new System.Drawing.Size(1039, 145);
             this.pcMain.TabIndex = 57;
             // 
+            // labelControl23
+            // 
+            this.labelControl23.Location = new System.Drawing.Point(258, 112);
+            this.labelControl23.Name = "labelControl23";
+            this.labelControl23.Size = new System.Drawing.Size(48, 14);
+            this.labelControl23.TabIndex = 207;
+            this.labelControl23.Text = "党政正职";
+            // 
+            // cbbIsOfficialPosition
+            // 
+            this.cbbIsOfficialPosition.Location = new System.Drawing.Point(316, 109);
+            this.cbbIsOfficialPosition.MenuManager = this.barManager1;
+            this.cbbIsOfficialPosition.Name = "cbbIsOfficialPosition";
+            this.cbbIsOfficialPosition.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbbIsOfficialPosition.Properties.Items.AddRange(new object[] {
+            "",
+            "是",
+            "否"});
+            this.cbbIsOfficialPosition.Size = new System.Drawing.Size(53, 20);
+            this.cbbIsOfficialPosition.TabIndex = 206;
+            // 
+            // labelControl22
+            // 
+            this.labelControl22.Location = new System.Drawing.Point(885, 11);
+            this.labelControl22.Name = "labelControl22";
+            this.labelControl22.Size = new System.Drawing.Size(36, 14);
+            this.labelControl22.TabIndex = 205;
+            this.labelControl22.Text = "本地人";
+            // 
+            // cbIsNative
+            // 
+            this.cbIsNative.Location = new System.Drawing.Point(927, 8);
+            this.cbIsNative.MenuManager = this.barManager1;
+            this.cbIsNative.Name = "cbIsNative";
+            this.cbIsNative.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbIsNative.Properties.Items.AddRange(new object[] {
+            "",
+            "是",
+            "否"});
+            this.cbIsNative.Size = new System.Drawing.Size(53, 20);
+            this.cbIsNative.TabIndex = 204;
+            // 
             // labelControl8
             // 
             this.labelControl8.Location = new System.Drawing.Point(503, 112);
@@ -1183,13 +1227,11 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtcFull_timeEducation.Properties.Items.AddRange(new object[] {
             "",
-            "博士",
-            "硕士",
-            "本科",
+            "研究生",
+            "大学",
             "大专",
             "中专",
-            "高中",
-            "初中"});
+            "高中"});
             this.txtcFull_timeEducation.Size = new System.Drawing.Size(85, 20);
             this.txtcFull_timeEducation.TabIndex = 174;
             // 
@@ -1202,13 +1244,11 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtcIn_serviceEducation.Properties.Items.AddRange(new object[] {
             "",
-            "博士",
-            "硕士",
-            "本科",
+            "研究生",
+            "大学",
             "大专",
             "中专",
-            "高中",
-            "初中"});
+            "高中"});
             this.txtcIn_serviceEducation.Size = new System.Drawing.Size(82, 20);
             this.txtcIn_serviceEducation.TabIndex = 173;
             // 
@@ -1377,50 +1417,6 @@
             this.labelControl13.TabIndex = 57;
             this.labelControl13.Text = "查询条件";
             // 
-            // cbIsNative
-            // 
-            this.cbIsNative.Location = new System.Drawing.Point(927, 8);
-            this.cbIsNative.MenuManager = this.barManager1;
-            this.cbIsNative.Name = "cbIsNative";
-            this.cbIsNative.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbIsNative.Properties.Items.AddRange(new object[] {
-            "",
-            "是",
-            "否"});
-            this.cbIsNative.Size = new System.Drawing.Size(53, 20);
-            this.cbIsNative.TabIndex = 204;
-            // 
-            // labelControl22
-            // 
-            this.labelControl22.Location = new System.Drawing.Point(885, 11);
-            this.labelControl22.Name = "labelControl22";
-            this.labelControl22.Size = new System.Drawing.Size(36, 14);
-            this.labelControl22.TabIndex = 205;
-            this.labelControl22.Text = "本地人";
-            // 
-            // labelControl23
-            // 
-            this.labelControl23.Location = new System.Drawing.Point(258, 112);
-            this.labelControl23.Name = "labelControl23";
-            this.labelControl23.Size = new System.Drawing.Size(48, 14);
-            this.labelControl23.TabIndex = 207;
-            this.labelControl23.Text = "党政正职";
-            // 
-            // cbbIsOfficialPosition
-            // 
-            this.cbbIsOfficialPosition.Location = new System.Drawing.Point(316, 109);
-            this.cbbIsOfficialPosition.MenuManager = this.barManager1;
-            this.cbbIsOfficialPosition.Name = "cbbIsOfficialPosition";
-            this.cbbIsOfficialPosition.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbbIsOfficialPosition.Properties.Items.AddRange(new object[] {
-            "",
-            "是",
-            "否"});
-            this.cbbIsOfficialPosition.Size = new System.Drawing.Size(53, 20);
-            this.cbbIsOfficialPosition.TabIndex = 206;
-            // 
             // FrmPersion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -1483,6 +1479,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pcMain)).EndInit();
             this.pcMain.ResumeLayout(false);
             this.pcMain.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cbbIsOfficialPosition.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbIsNative.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtExperience.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dStartDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dStartDate.Properties)).EndInit();
@@ -1501,8 +1499,6 @@
             this.panelControl1.ResumeLayout(false);
             this.panelControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtNum.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbIsNative.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cbbIsOfficialPosition.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
