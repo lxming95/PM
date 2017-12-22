@@ -74,6 +74,8 @@ namespace PersonnelManagement
         private void inport()
         {
             string Path = "";
+            int tatal = 0;
+            int success = 0;
             OpenFileDialog fileDialog1 = new OpenFileDialog();
             fileDialog1.InitialDirectory = "C:\\";//默认打开C：
             fileDialog1.Filter = "Excel 97-2013 工作簿(*.xls)|*.xls";
@@ -117,9 +119,9 @@ namespace PersonnelManagement
 
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                try
-                {
-                    if (dt.Rows[i][3].ToString() != "")
+                    try
+                    {
+                        if (dt.Rows[i][3].ToString() != "")
                         {
                             List<MySqlParameter> ilistStr = new List<MySqlParameter> {
                             new MySqlParameter("cIDnumber", dt.Rows[i][1].ToString()),              //身份证号码
@@ -200,13 +202,14 @@ namespace PersonnelManagement
                             }
 
                         }
-            }
-                catch (Exception e)
-            {
-                XtraMessageBox.Show(e.Message);
-                // savefile.savelog("第"+i+"条插入错误，错误信息:"+e.Message+".");
-            }
-        }
+                        success++;
+                    }
+                    catch (Exception e)
+                    {
+                        XtraMessageBox.Show("第" + i + "条插入错误，错误信息:" + e.Message + ".");
+                        // savefile.savelog("第"+i+"条插入错误，错误信息:"+e.Message+".");
+                    }
+                }
 
                 #endregion
 
@@ -527,8 +530,8 @@ namespace PersonnelManagement
                 #endregion
 
                 this.gcType.DataSource = fromDTcolumns(dt);
-                int tatal= dt.Rows.Count;
-                int success = (gcType.DataSource as DataTable).Rows.Count;
+                tatal= dt.Rows.Count;
+                //success = (gcType.DataSource as DataTable).Rows.Count;
                 txtTotal.Text = tatal.ToString();
                 txtSuccess.Text = success.ToString();
                 txtfail.Text = (tatal- success).ToString();
@@ -539,8 +542,13 @@ namespace PersonnelManagement
                 XtraMessageBox.Show(err.Message);
             }
         }
-
-        private string fromDate(string s,char c)
+        /// <summary>
+        /// 格式化年月
+        /// </summary>
+        /// <param name="s">输入年月字符</param>
+        /// <param name="c">输入分隔符</param>
+        /// <returns>返回为yyyy.MM</returns>
+        private string fromDate(string s,char c,string f= "yyyy.MM")
         {
             if (s == "")
                 return "";
@@ -572,7 +580,7 @@ namespace PersonnelManagement
                 if (date.Split(c)[1].Length <= 1)
                     date += "0";
 
-                return Convert.ToDateTime(date).ToString("yyyy.MM.dd");
+                return Convert.ToDateTime(date).ToString(f);
             }
             else { XtraMessageBox.Show("时间格式错误，请填写yyyy"+c+"MM格式或者yy"+c+"MM格式的时间");return ""; }
 

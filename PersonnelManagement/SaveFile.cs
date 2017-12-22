@@ -115,8 +115,8 @@ namespace PersonnelManagement
             s.Append(@"""" + dt.Rows[0]["dWorkDate"].ToString() + @""",");
 
 
-            s.Append(@"""" + dt.Rows[0]["cFull_timeEducation"].ToString() + "#@" + dt.Rows[0]["cIn_serviceEducation"].ToString() + @"#"",");
-            s.Append(@"""" + dt.Rows[0]["cFull_timeSchool"].ToString() + "#@" + dt.Rows[0]["cIn_serviceSchool"].ToString() + @"#"",");
+            s.Append(@"""" + dt.Rows[0]["cFull_timeEducation"].ToString() + "#"+ dt.Rows[0]["cFull_timeDegree"].ToString() + "@" + dt.Rows[0]["cIn_serviceEducation"].ToString()+"#"+ dt.Rows[0]["cIn_serviceDegree"].ToString() + @""",");
+            s.Append(@"""" + dt.Rows[0]["cFull_timeSchool"].ToString() + "#"+ dt.Rows[0]["cFull_timeMajor"].ToString() + "@" + dt.Rows[0]["cIn_serviceSchool"].ToString()+"#"+ dt.Rows[0]["cIn_serviceMajor"].ToString() + @""",");
 
             s.Append(@"""" + dt.Rows[0]["cDuties"].ToString() + @""",");
             s.Append(@"""" + " " + @""",");
@@ -161,7 +161,22 @@ namespace PersonnelManagement
             dt_rewards.Dispose();
 
             //年度考核结果
-            s.Append(@"""" + dt.Rows[0]["cChech_Result"].ToString() + @""",");
+            //s.Append(@"""" + dt.Rows[0]["cChech_Result"].ToString() + @""",");
+            DataTable dt_checkresult = MySQLHelper.table("SELECT *FROM data_rewards_punishments WHERE PersionID='" + dt.Rows[0]["pid"] + "'");
+            if (dt_rewards != null && dt_rewards.Rows.Count > 0)
+            {
+                for (int i = 0; i < dt_rewards.Rows.Count - 1; i++)
+                {
+                    //s.Append(@"""" + Convert.ToDateTime(dt_rewards.Rows[i]["dData"]).ToString("yyyy.MM") + "       "
+                    //       + dt_rewards.Rows[i]["cDetailed"].ToString() + "\r\n");
+                    s.Append(@"""" + dt_rewards.Rows[i]["dData"].ToString() + "       "
+                           + dt_rewards.Rows[i]["cDetailed"].ToString() + "\r\n");
+                }
+                //s.Append(@"""" + Convert.ToDateTime(dt_rewards.Rows[dt_rewards.Rows.Count - 1]["dData"]).ToString("yyyy.MM") + "       "
+                //           + dt_rewards.Rows[dt_rewards.Rows.Count - 1]["cDetailed"].ToString() + "\r\n");
+                s.Append(@"""" + dt_rewards.Rows[dt_rewards.Rows.Count - 1]["dData"].ToString() + "       "
+                           + dt_rewards.Rows[dt_rewards.Rows.Count - 1]["cDetailed"].ToString() + "\r\n");
+            }
 
             //家庭成员
 
@@ -174,10 +189,18 @@ namespace PersonnelManagement
                     s.Append(@"""");
                     for (int j = 0; j < 12; j++)
                     {
-                        for (int i = 0; i < dt_family.Rows.Count; i++, j++)
-                        {
-                            s.Append(dt_family.Rows[i][str].ToString());
+                        //for (int i = 0; i < dt_family.Rows.Count; i++, j++)
+                        //{
+                        //    s.Append(dt_family.Rows[i][str].ToString());
 
+                        //}
+                        if (j < dt_family.Rows.Count)
+                        {
+                            s.Append(dt_family.Rows[j][str].ToString() + "@");
+                        }
+                        else
+                        {
+                            s.Append("@");
                         }
                     }
                     s.Append(@""",");

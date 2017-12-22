@@ -90,13 +90,14 @@ namespace BarCode
                     MySQLHelper.ExecuteNonQuery("UPDATE ry_user SET user_code =@user_code, user_name=@user_name,user_pass=@user_pass WHERE awid = @awid", param);
                 }
                 //如果是新增
-                if (drow.RowState == DataRowState.Added && !drow["awid"].ToString().Equals(""))
+                //if (drow.RowState == DataRowState.Added && !drow["awid"].ToString().Equals(""))
+                if (drow.RowState == DataRowState.Added && drow["awid"].ToString().Equals(""))
                 {
                     List<MySqlParameter> ilistStr = new List<MySqlParameter> {
                     new MySqlParameter("user_code", drow["user_code"].ToString()),
-                    new MySqlParameter("user_pass", drow["user_name"].ToString()),
-                    new MySqlParameter("user_name", drow["user_pass"].ToString()),
-                    new MySqlParameter("awid", Convert.ToInt32( drow["awid"])),
+                    new MySqlParameter("user_pass", drow["user_pass"].ToString()),
+                    new MySqlParameter("user_name", drow["user_name"].ToString()),
+                    //new MySqlParameter("awid", Convert.ToInt32( drow["awid"])),
                     };
                     MySqlParameter[] param = ilistStr.ToArray();
                     MySQLHelper.ExecuteNonQuery("INSERT INTO ry_user(user_code,user_pass,user_name) VALUES(@user_code, @user_pass,@user_name)", param);

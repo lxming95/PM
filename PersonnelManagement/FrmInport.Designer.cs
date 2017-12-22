@@ -90,6 +90,7 @@
             this.bar5 = new DevExpress.XtraBars.Bar();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.btnInPort = new DevExpress.XtraBars.BarButtonItem();
+            this.btnAddInport = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -109,7 +110,7 @@
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.txtTotal = new DevExpress.XtraEditors.TextEdit();
-            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckedComboBoxEdit1)).BeginInit();
@@ -758,7 +759,7 @@
             this.btnDel,
             this.btnInPort,
             this.barButtonItem1,
-            this.barButtonItem2});
+            this.btnAddInport});
             this.barManager1.MainMenu = this.bar5;
             this.barManager1.MaxItemId = 15;
             // 
@@ -773,7 +774,7 @@
             this.bar5.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barButtonItem1, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnInPort, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barButtonItem2, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnAddInport, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar5.OptionsBar.MultiLine = true;
             this.bar5.OptionsBar.UseWholeRow = true;
             this.bar5.Text = "Main menu";
@@ -793,6 +794,15 @@
             this.btnInPort.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnInPort.ImageOptions.Image")));
             this.btnInPort.Name = "btnInPort";
             this.btnInPort.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInPort_ItemClick);
+            // 
+            // btnAddInport
+            // 
+            this.btnAddInport.Caption = "追加导入";
+            this.btnAddInport.Id = 14;
+            this.btnAddInport.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem2.ImageOptions.Image")));
+            this.btnAddInport.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Red;
+            this.btnAddInport.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.btnAddInport.Name = "btnAddInport";
             // 
             // barDockControlTop
             // 
@@ -858,7 +868,7 @@
             // 
             // labelControl21
             // 
-            this.labelControl21.Location = new System.Drawing.Point(732, 35);
+            this.labelControl21.Location = new System.Drawing.Point(847, 35);
             this.labelControl21.Name = "labelControl21";
             this.labelControl21.Size = new System.Drawing.Size(12, 14);
             this.labelControl21.TabIndex = 62;
@@ -866,17 +876,17 @@
             // 
             // labelControl14
             // 
-            this.labelControl14.Location = new System.Drawing.Point(631, 35);
+            this.labelControl14.Location = new System.Drawing.Point(770, 35);
             this.labelControl14.Name = "labelControl14";
-            this.labelControl14.Size = new System.Drawing.Size(48, 14);
+            this.labelControl14.Size = new System.Drawing.Size(24, 14);
             this.labelControl14.TabIndex = 60;
-            this.labelControl14.Text = "导入成功";
+            this.labelControl14.Text = "成功";
             // 
             // txtSuccess
             // 
             this.txtSuccess.EditValue = "";
             this.txtSuccess.Enabled = false;
-            this.txtSuccess.Location = new System.Drawing.Point(685, 32);
+            this.txtSuccess.Location = new System.Drawing.Point(800, 32);
             this.txtSuccess.MenuManager = this.barManager1;
             this.txtSuccess.Name = "txtSuccess";
             this.txtSuccess.Properties.Appearance.Options.UseTextOptions = true;
@@ -886,7 +896,7 @@
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(872, 35);
+            this.labelControl1.Location = new System.Drawing.Point(972, 35);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(12, 14);
             this.labelControl1.TabIndex = 65;
@@ -894,17 +904,17 @@
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(771, 35);
+            this.labelControl2.Location = new System.Drawing.Point(895, 35);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(48, 14);
+            this.labelControl2.Size = new System.Drawing.Size(24, 14);
             this.labelControl2.TabIndex = 63;
-            this.labelControl2.Text = "导入失败";
+            this.labelControl2.Text = "失败";
             // 
             // txtfail
             // 
             this.txtfail.EditValue = "";
             this.txtfail.Enabled = false;
-            this.txtfail.Location = new System.Drawing.Point(825, 32);
+            this.txtfail.Location = new System.Drawing.Point(925, 32);
             this.txtfail.MenuManager = this.barManager1;
             this.txtfail.Name = "txtfail";
             this.txtfail.Properties.Appearance.Options.UseTextOptions = true;
@@ -914,7 +924,7 @@
             // 
             // labelControl3
             // 
-            this.labelControl3.Location = new System.Drawing.Point(574, 35);
+            this.labelControl3.Location = new System.Drawing.Point(641, 35);
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(12, 14);
             this.labelControl3.TabIndex = 68;
@@ -922,17 +932,17 @@
             // 
             // labelControl4
             // 
-            this.labelControl4.Location = new System.Drawing.Point(473, 35);
+            this.labelControl4.Location = new System.Drawing.Point(532, 35);
             this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(48, 14);
+            this.labelControl4.Size = new System.Drawing.Size(60, 14);
             this.labelControl4.TabIndex = 66;
-            this.labelControl4.Text = "本次导入";
+            this.labelControl4.Text = "本次共导入";
             // 
             // txtTotal
             // 
             this.txtTotal.EditValue = "";
             this.txtTotal.Enabled = false;
-            this.txtTotal.Location = new System.Drawing.Point(527, 32);
+            this.txtTotal.Location = new System.Drawing.Point(594, 32);
             this.txtTotal.MenuManager = this.barManager1;
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.Properties.Appearance.Options.UseTextOptions = true;
@@ -940,18 +950,20 @@
             this.txtTotal.Size = new System.Drawing.Size(41, 20);
             this.txtTotal.TabIndex = 67;
             // 
-            // barButtonItem2
+            // labelControl5
             // 
-            this.barButtonItem2.Caption = "追加导入";
-            this.barButtonItem2.Id = 14;
-            this.barButtonItem2.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem2.ImageOptions.Image")));
-            this.barButtonItem2.Name = "barButtonItem2";
+            this.labelControl5.Location = new System.Drawing.Point(727, 35);
+            this.labelControl5.Name = "labelControl5";
+            this.labelControl5.Size = new System.Drawing.Size(36, 14);
+            this.labelControl5.TabIndex = 73;
+            this.labelControl5.Text = "其中：";
             // 
             // FrmInport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(987, 706);
+            this.Controls.Add(this.labelControl5);
             this.Controls.Add(this.labelControl3);
             this.Controls.Add(this.labelControl4);
             this.Controls.Add(this.txtTotal);
@@ -1097,7 +1109,8 @@
         private DevExpress.XtraEditors.LabelControl labelControl21;
         private DevExpress.XtraEditors.LabelControl labelControl14;
         private DevExpress.XtraEditors.TextEdit txtSuccess;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
+        private DevExpress.XtraBars.BarButtonItem btnAddInport;
+        private DevExpress.XtraEditors.LabelControl labelControl5;
     }
 }
 

@@ -106,15 +106,15 @@ namespace PersonnelManagement
                 //MessageBox.Show("bigo");
 
                 year = date1.Year - Convert.ToInt32(txtEage.Text);
-                string da1 = year + date1.ToString("yyyy-MM-dd").Substring(4);
+                string da1 = year + date1.ToString("yyyy.MM").Substring(4);
                 
-                MyStringBuilder.Append(" and  dBirth_date < '" + da1 + "' ");
+                MyStringBuilder.Append(" and  dBirth_date <= '" + da1 + "' ");
             }
             if (m2.Success)
             {
                 year = date1.Year - Convert.ToInt32(txtEage2.Text);
-                string da2 = year + date1.ToString("yyyy-MM-dd").Substring(4);
-                MyStringBuilder.Append(" and dBirth_date > '" + da2 + "' ");
+                string da2 = year + date1.ToString("yyyy-MM").Substring(4);
+                MyStringBuilder.Append(" and dBirth_date >= '" + da2 + "' ");
             }
 
             //党龄
@@ -125,15 +125,15 @@ namespace PersonnelManagement
                 //MessageBox.Show("bigo");
 
                 year = date1.Year - Convert.ToInt32(txtJoinDate1.Text);
-                string da1 = year + date1.ToString("yyyy-MM-dd").Substring(4);
+                string da1 = year + date1.ToString("yyyy.MM").Substring(4);
 
-                MyStringBuilder.Append(" and  dJoin_date < '" + da1 + "' ");
+                MyStringBuilder.Append(" and  dJoin_date <= '" + da1 + "' ");
             }
             if (m2.Success)
             {
                 year = date1.Year - Convert.ToInt32(txtJoinDate2.Text);
-                string da2 = year + date1.ToString("yyyy-MM-dd").Substring(4);
-                MyStringBuilder.Append(" and dJoin_date > '" + da2 + "' ");
+                string da2 = year + date1.ToString("yyyy-MM").Substring(4);
+                MyStringBuilder.Append(" and dJoin_date >= '" + da2 + "' ");
             }
             //工龄
             m = r.Match(txtWorkDate1.Text);
@@ -143,16 +143,19 @@ namespace PersonnelManagement
                 //MessageBox.Show("bigo");
 
                 year = date1.Year - Convert.ToInt32(txtWorkDate1.Text);
-                string da1 = year + date1.ToString("yyyy-MM-dd").Substring(4);
+                string da1 = year + date1.ToString("yyyy.MM").Substring(4);
 
-                MyStringBuilder.Append(" and  dJoin_date < '" + da1 + "' ");
+                MyStringBuilder.Append(" and  dJoin_date <= '" + da1 + "' ");
             }
             if (m2.Success)
             {
                 year = date1.Year - Convert.ToInt32(txtWorkDate2.Text);
-                string da2 = year + date1.ToString("yyyy-MM-dd").Substring(4);
-                MyStringBuilder.Append(" and dJoin_date > '" + da2 + "' ");
+                string da2 = year + date1.ToString("yyyy-MM").Substring(4);
+                MyStringBuilder.Append(" and dJoin_date >= '" + da2 + "' ");
             }
+
+
+
             //全日制
             //学历
             if (txtcFull_timeEducation.Text != "")
@@ -180,9 +183,6 @@ namespace PersonnelManagement
                 DataTable dt_Major = MySQLHelper.table("SELECT *FROM data_majorinf WHERE cMulitString LIKE '%" + txtcIn_serviceMajor.Text + "%'");
                 MyStringBuilder.Append(" and cIn_serviceMajor in " + SaveFile.FormatMajor(dt_Major));
             }
-            //身份
-            if (txtCurrentJob.Text != "")
-                MyStringBuilder.Append(" and cCurrentJob =@cCurrentJob ");
             //籍贯
             if (txtNativePlace.Text != "")
                 if (isSafe(txtNativePlace.Text))
@@ -267,6 +267,42 @@ namespace PersonnelManagement
             other.Clear();
             dt.Clear();
             #endregion
+            #region 任职时长
+            //工龄
+            m = r.Match(txtJobDate1.Text);
+            m2 = r.Match(txtJobDate2.Text);
+            if (m.Success)
+            {
+                //MessageBox.Show("bigo");
+
+                year = date1.Year - Convert.ToInt32(txtJobDate1.Text);
+                string da1 = year + date1.ToString("yyyy.MM").Substring(4);
+
+                other.Append(" and  b.dStartDate <= '" + da1 + "' ");
+            }
+            if (m2.Success)
+            {
+                year = date1.Year - Convert.ToInt32(txtJobDate2.Text);
+                string da2 = year + date1.ToString("yyyy-MM").Substring(4);
+                other.Append(" and b.dStartDate >= '" + da2 + "' ");
+            }
+            if (!other.ToString().Equals(""))
+            {
+                dt = MySQLHelper.table("SELECT * FROM"
+                    + "(SELECT * FROM data_persion WHERE data_persion.cRank =@cRank)AS a"
+                    + " LEFT JOIN"
+                    +" (SELECT * FROM data_resume) AS b"
+                    + " ON a.pid = b.PersionID AND a.cRank = b.rLevel WHERE a.do_flag = 1 " + other,param);
+                //if(dStartDate.Text != "" && dStartDate.Text != "起" && dDeadLine.Text != "" && dDeadLine.Text != "止" && txtExperience.Text != "")
+                MyStringBuilder.Append(" and pid in (" + GetPidFromDatetable(dt) + ")");
+            }
+
+            other.Clear();
+            dt.Clear();
+
+
+            #endregion
+
 
             #region 奖惩信息
             if (dRewardData.Text != ""&& dRewardData.Text != "起")
@@ -375,6 +411,11 @@ namespace PersonnelManagement
             //带CheckBox传值
             if (ExportCheckBox)
             {
+                if (gvType.GetSelectedRows() == null || gvType.GetSelectedRows().Length == 0)
+                {
+                    XtraMessageBox.Show("请选择要导出的人员！");
+                    return;
+                }
                 //返回传值
                 foreach (int drid in gvType.GetSelectedRows())
                 {
@@ -391,7 +432,11 @@ namespace PersonnelManagement
                     MessageBox.Show("数据为空！");
                     return;
                 }
-
+                if (gvType.GetFocusedDataRow().Table.Rows.Count == 0)
+                {
+                    XtraMessageBox.Show("请选择要导出的人员！");
+                    return;
+                }
                 //ReturnDT.Rows.Add(gvType.GetFocusedDataRow().ItemArray);
                 SaveFile.ExportLrm(gvType.GetFocusedDataRow().Table, gvType.GetFocusedDataRow()["cName"].ToString() + "-");
             }
@@ -480,6 +525,7 @@ namespace PersonnelManagement
         private void start()
         {
             gcType.DataSource = FormatDT(MySQLHelper.table("select IF(pid=''||ISNULL(pid),' ',pid) as pid,IF(cUnit=''||ISNULL(cUnit),' ',cUnit) as cUnit,IF(cName=''||ISNULL(cName),' ',cName) as cName,IF(cSex=''||ISNULL(cSex),' ',cSex) as cSex,IF(dBirth_date=''||ISNULL(dBirth_date),' ',dBirth_date) as dBirth_date,IF(cNation=''||ISNULL(cNation),' ',cNation) as cNation,IF(cNativePlace=''||ISNULL(cNativePlace),' ',cNativePlace) as cNativePlace,IF(bIsNative=''||ISNULL(bIsNative),' ',bIsNative) as bIsNative,IF(dJoin_date=''||ISNULL(dJoin_date),' ',dJoin_date) as dJoin_date,IF(cHealthStatus=''||ISNULL(cHealthStatus),' ',cHealthStatus) as cHealthStatus,IF(cBirthPlace=''||ISNULL(cBirthPlace),' ',cBirthPlace) as cBirthPlace,IF(dWorkDate=''||ISNULL(dWorkDate),' ',dWorkDate) as dWorkDate,IF(cDuties=''||ISNULL(cDuties),' ',cDuties) as cDuties,IF(cSkill=''||ISNULL(cSkill),' ',cSkill) as cSkill,IF(cFull_timeEducation=''||ISNULL(cFull_timeEducation),' ',cFull_timeEducation) as cFull_timeEducation,IF(cFull_timeDegree=''||ISNULL(cFull_timeDegree),' ',cFull_timeDegree) as cFull_timeDegree,IF(cFull_timeMajor=''||ISNULL(cFull_timeMajor),' ',cFull_timeMajor) as cFull_timeMajor,IF(cFull_timeSchool=''||ISNULL(cFull_timeSchool),' ',cFull_timeSchool) as cFull_timeSchool,IF(cIn_serviceEducation=''||ISNULL(cIn_serviceEducation),' ',cIn_serviceEducation) as cIn_serviceEducation,IF(cIn_serviceDegree=''||ISNULL(cIn_serviceDegree),' ',cIn_serviceDegree) as cIn_serviceDegree,IF(cIn_serviceMajor=''||ISNULL(cIn_serviceMajor),' ',cIn_serviceMajor) as cIn_serviceMajor,IF(cIn_serviceSchool=''||ISNULL(cIn_serviceSchool),' ',cIn_serviceSchool) as cIn_serviceSchool,IF(cCurrentJob=''||ISNULL(cCurrentJob),' ',cCurrentJob) as cCurrentJob,IF(cProposedJob=''||ISNULL(cProposedJob),' ',cProposedJob) as cProposedJob,IF(cRemoveJob=''||ISNULL(cRemoveJob),' ',cRemoveJob) as cRemoveJob,IF(cResume=''||ISNULL(cResume),' ',cResume) as cResume,IF(dInOffice=''||ISNULL(dInOffice),' ',dInOffice) as dInOffice,IF(dSameOffic=''||ISNULL(dSameOffic),' ',dSameOffic) as dSameOffic,IF(cIdentityCategory=''||ISNULL(cIdentityCategory),' ',cIdentityCategory) as cIdentityCategory,IF(cRank=''||ISNULL(cRank),' ',cRank) as cRank,IF(bIsOfficialPosition=''||ISNULL(bIsOfficialPosition),' ',bIsOfficialPosition) as bIsOfficialPosition,IF(cChech_Result=''||ISNULL(cChech_Result),' ',cChech_Result) as cChech_Result,IF(cDismissalReason=''||ISNULL(cDismissalReason),' ',cDismissalReason) as cDismissalReason,IF(dGetCadresDate=''||ISNULL(dGetCadresDate),' ',dGetCadresDate) as dGetCadresDate,IF(cDocumentBasis=''||ISNULL(cDocumentBasis),' ',cDocumentBasis) as cDocumentBasis,IF(cApprovingAuthority=''||ISNULL(cApprovingAuthority),' ',cApprovingAuthority) as cApprovingAuthority,IF(cWay=''||ISNULL(cWay),' ',cWay) as cWay,IF(cReporting_Unit=''||ISNULL(cReporting_Unit),' ',cReporting_Unit) as cReporting_Unit,IF(dEageDate=''||ISNULL(dEageDate),' ',dEageDate) as dEageDate,IF(dMakeDate=''||ISNULL(dMakeDate),' ',dMakeDate) as dMakeDate,IF(cMaker=''||ISNULL(cMaker),' ',cMaker) as cMaker,IF(cRemarks=''||ISNULL(cRemarks),' ',cRemarks) as cRemarks from data_persion where do_flag =1"),DateTime.Now);
+            txtNum.Text = (gcType.DataSource as DataTable).Rows.Count.ToString();
             dDate.Text = DateTime.Now.ToString("yyyy.MM");
 
         }
@@ -622,6 +668,11 @@ namespace PersonnelManagement
                 ReturnDT.Rows.Add(gvType.GetFocusedDataRow().ItemArray);
                 //SaveFile.ExportLrm(gvType.GetFocusedDataRow().Table, gvType.GetFocusedDataRow()["cName"].ToString() + "-");
             }
+            if (ReturnDT.Rows.Count == 0)
+            {
+                XtraMessageBox.Show("请选择要导出的人员！");
+                return;
+            }
             SaveFile.ExportExcel(ReturnDT);
         }
         /// <summary>
@@ -691,6 +742,11 @@ namespace PersonnelManagement
             //带CheckBox传值
             if (ExportCheckBox)
             {
+                if (gvType.GetSelectedRows()==null||gvType.GetSelectedRows().Length == 0)
+                {
+                    XtraMessageBox.Show("请选择要导出的人员！");
+                    return;
+                }
                 //返回传值
                 foreach (int drid in gvType.GetSelectedRows())
                 {
@@ -708,7 +764,11 @@ namespace PersonnelManagement
                     MessageBox.Show("数据为空！");
                     return;
                 }
-
+                if (gvType.GetFocusedDataRow().Table.Rows.Count == 0)
+                {
+                    XtraMessageBox.Show("请选择要导出的人员！");
+                    return;
+                }
                 //ReturnDT.Rows.Add(gvType.GetFocusedDataRow().ItemArray);
                 SaveFile.seveExcel(date1, gvType.GetFocusedDataRow(), "干部任免审批表-" + gvType.GetFocusedDataRow()["cName"].ToString() + gvType.GetFocusedDataRow()["dBirth_date"].ToString());
             }

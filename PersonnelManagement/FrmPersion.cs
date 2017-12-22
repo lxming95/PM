@@ -89,15 +89,20 @@ namespace PersonnelManagement
             {
                 date1 = Convert.ToDateTime(dDate.Text);
             }
-            if (m.Success&&m2.Success)
+            if (m.Success)
             {
                 //MessageBox.Show("bigo");
-                
+
                 year = date1.Year - Convert.ToInt32(txtEage.Text);
-                string da1 = year + date1.ToString("yyyy-MM-dd").Substring(4);
+                string da1 = year + date1.ToString("yyyy.MM").Substring(4);
+
+                MyStringBuilder.Append(" and  dBirth_date <= '" + da1 + "' ");
+            }
+            if (m2.Success)
+            {
                 year = date1.Year - Convert.ToInt32(txtEage2.Text);
-                string da2 = year + date1.ToString("yyyy-MM-dd").Substring(4);
-                MyStringBuilder.Append(" and dBirth_date > '" + da2 + "' and  dBirth_date < '"+da1+"'");
+                string da2 = year + date1.ToString("yyyy-MM").Substring(4);
+                MyStringBuilder.Append(" and dBirth_date >= '" + da2 + "' ");
             }
             //党龄
             m = r.Match(txtJoinEage1.Text);//匹配源文本
@@ -107,15 +112,20 @@ namespace PersonnelManagement
             {
                 date1 = Convert.ToDateTime(dDate.Text);
             }
-            if (m.Success && m2.Success)
+            if (m.Success)
             {
                 //MessageBox.Show("bigo");
 
                 year = date1.Year - Convert.ToInt32(txtJoinEage1.Text);
-                string da1 = year + date1.ToString("yyyy-MM-dd").Substring(4);
+                string da1 = year + date1.ToString("yyyy.MM").Substring(4);
+
+                MyStringBuilder.Append(" and  dJoin_date <= '" + da1 + "' ");
+            }
+            if (m2.Success)
+            {
                 year = date1.Year - Convert.ToInt32(txtJoinEage2.Text);
-                string da2 = year + date1.ToString("yyyy-MM-dd").Substring(4);
-                MyStringBuilder.Append(" and dJoin_date > '" + da2 + "' and  dJoin_date < '" + da1 + "'");
+                string da2 = year + date1.ToString("yyyy-MM").Substring(4);
+                MyStringBuilder.Append(" and dJoin_date >= '" + da2 + "' ");
             }
 
             //工龄
@@ -126,15 +136,20 @@ namespace PersonnelManagement
             {
                 date1 = Convert.ToDateTime(dDate.Text);
             }
-            if (m.Success && m2.Success)
+            if (m.Success)
             {
                 //MessageBox.Show("bigo");
 
                 year = date1.Year - Convert.ToInt32(txtWorkEage1.Text);
-                string da1 = year + date1.ToString("yyyy-MM-dd").Substring(4);
+                string da1 = year + date1.ToString("yyyy.MM").Substring(4);
+
+                MyStringBuilder.Append(" and  dJoin_date <= '" + da1 + "' ");
+            }
+            if (m2.Success)
+            {
                 year = date1.Year - Convert.ToInt32(txtWorkEage2.Text);
-                string da2 = year + date1.ToString("yyyy-MM-dd").Substring(4);
-                MyStringBuilder.Append(" and dWorkDate > '" + da2 + "' and  dWorkDate < '" + da1 + "'");
+                string da2 = year + date1.ToString("yyyy-MM").Substring(4);
+                MyStringBuilder.Append(" and dJoin_date >= '" + da2 + "' ");
             }
 
             //全日制学历
@@ -145,7 +160,7 @@ namespace PersonnelManagement
                 MyStringBuilder.Append(" and cIn_serviceEducation =@cIn_serviceEducation ");
             //现任职位
             if (txtCurrentJob.Text != "")
-                MyStringBuilder.Append(" and cCurrentJob =@cCurrentJob ");
+                MyStringBuilder.Append(" and cCurrentJob like '%"+ txtCurrentJob.Text+"%' ");
             //是否党政正职
             if (cbbIsOfficialPosition.Text == "是")
             {
@@ -300,7 +315,7 @@ namespace PersonnelManagement
         private void start()
         {
             gcType.DataSource = FormatDT( MySQLHelper.table("select * from data_persion where do_flag =1"), DateTime.Now);
-
+            txtNum.Text = (gcType.DataSource as DataTable).Rows.Count.ToString();
             //设置基准年龄选择框样式
             var formatString = "yyyy.MM";
             //var dateEdit = new DateEdit();

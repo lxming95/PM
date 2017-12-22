@@ -181,13 +181,14 @@
             this.txtcName = new DevExpress.XtraEditors.TextEdit();
             this.lblName = new DevExpress.XtraEditors.LabelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.txtcIn_serviceDegree = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.txtcFull_timeDegree = new DevExpress.XtraEditors.ComboBoxEdit();
             this.labelControl43 = new DevExpress.XtraEditors.LabelControl();
             this.txtcIn_serviceEducation = new DevExpress.XtraEditors.ComboBoxEdit();
             this.txtcIn_serviceSchool = new DevExpress.XtraEditors.TextEdit();
             this.txtcFull_timeEducation = new DevExpress.XtraEditors.ComboBoxEdit();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl17 = new DevExpress.XtraEditors.LabelControl();
-            this.txtcFull_timeDegree = new DevExpress.XtraEditors.TextEdit();
             this.txtcIn_serviceMajor = new DevExpress.XtraEditors.TextEdit();
             this.labelControl18 = new DevExpress.XtraEditors.LabelControl();
             this.txtcFull_timeMajor = new DevExpress.XtraEditors.TextEdit();
@@ -195,7 +196,6 @@
             this.labelControl39 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl20 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl38 = new DevExpress.XtraEditors.LabelControl();
-            this.txtcIn_serviceDegree = new DevExpress.XtraEditors.TextEdit();
             this.labelControl37 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl19 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl36 = new DevExpress.XtraEditors.LabelControl();
@@ -289,14 +289,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtcName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtcIn_serviceDegree.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtcFull_timeDegree.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcIn_serviceEducation.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcIn_serviceSchool.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcFull_timeEducation.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtcFull_timeDegree.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcIn_serviceMajor.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcFull_timeMajor.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcFull_timeSchool.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtcIn_serviceDegree.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tcMain)).BeginInit();
             this.tcMain.SuspendLayout();
             this.SuspendLayout();
@@ -1013,10 +1013,12 @@
             this.cbrcLevel.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cbrcLevel.Items.AddRange(new object[] {
-            "",
+            "            ",
+            "科员",
             "副科级",
-            "科级",
-            "副处级"});
+            "正科级",
+            "副县级",
+            "正县级"});
             this.cbrcLevel.Name = "cbrcLevel";
             // 
             // dDate3
@@ -1223,7 +1225,9 @@
             "            ",
             "科员",
             "副科级",
-            "正科级"});
+            "正科级",
+            "副县级",
+            "正县级"});
             this.txtRank.Size = new System.Drawing.Size(100, 20);
             this.txtRank.TabIndex = 186;
             // 
@@ -1952,13 +1956,14 @@
             // 
             this.panelControl1.Appearance.BackColor = System.Drawing.Color.Gainsboro;
             this.panelControl1.Appearance.Options.UseBackColor = true;
+            this.panelControl1.Controls.Add(this.txtcIn_serviceDegree);
+            this.panelControl1.Controls.Add(this.txtcFull_timeDegree);
             this.panelControl1.Controls.Add(this.labelControl43);
             this.panelControl1.Controls.Add(this.txtcIn_serviceEducation);
             this.panelControl1.Controls.Add(this.txtcIn_serviceSchool);
             this.panelControl1.Controls.Add(this.txtcFull_timeEducation);
             this.panelControl1.Controls.Add(this.labelControl16);
             this.panelControl1.Controls.Add(this.labelControl17);
-            this.panelControl1.Controls.Add(this.txtcFull_timeDegree);
             this.panelControl1.Controls.Add(this.txtcIn_serviceMajor);
             this.panelControl1.Controls.Add(this.labelControl18);
             this.panelControl1.Controls.Add(this.txtcFull_timeMajor);
@@ -1966,7 +1971,6 @@
             this.panelControl1.Controls.Add(this.labelControl39);
             this.panelControl1.Controls.Add(this.labelControl20);
             this.panelControl1.Controls.Add(this.labelControl38);
-            this.panelControl1.Controls.Add(this.txtcIn_serviceDegree);
             this.panelControl1.Controls.Add(this.labelControl37);
             this.panelControl1.Controls.Add(this.labelControl19);
             this.panelControl1.Controls.Add(this.labelControl36);
@@ -1975,6 +1979,36 @@
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(1003, 95);
             this.panelControl1.TabIndex = 173;
+            // 
+            // txtcIn_serviceDegree
+            // 
+            this.txtcIn_serviceDegree.Location = new System.Drawing.Point(283, 61);
+            this.txtcIn_serviceDegree.MenuManager = this.barManager1;
+            this.txtcIn_serviceDegree.Name = "txtcIn_serviceDegree";
+            this.txtcIn_serviceDegree.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtcIn_serviceDegree.Properties.Items.AddRange(new object[] {
+            "",
+            "学士",
+            "硕士",
+            "博士"});
+            this.txtcIn_serviceDegree.Size = new System.Drawing.Size(111, 20);
+            this.txtcIn_serviceDegree.TabIndex = 175;
+            // 
+            // txtcFull_timeDegree
+            // 
+            this.txtcFull_timeDegree.Location = new System.Drawing.Point(283, 32);
+            this.txtcFull_timeDegree.MenuManager = this.barManager1;
+            this.txtcFull_timeDegree.Name = "txtcFull_timeDegree";
+            this.txtcFull_timeDegree.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtcFull_timeDegree.Properties.Items.AddRange(new object[] {
+            "",
+            "学士",
+            "硕士",
+            "博士"});
+            this.txtcFull_timeDegree.Size = new System.Drawing.Size(111, 20);
+            this.txtcFull_timeDegree.TabIndex = 174;
             // 
             // labelControl43
             // 
@@ -1993,13 +2027,11 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtcIn_serviceEducation.Properties.Items.AddRange(new object[] {
             "",
-            "博士",
-            "硕士",
-            "本科",
+            "研究生",
+            "大学",
             "大专",
             "中专",
-            "高中",
-            "初中"});
+            "高中"});
             this.txtcIn_serviceEducation.Size = new System.Drawing.Size(100, 20);
             this.txtcIn_serviceEducation.TabIndex = 172;
             // 
@@ -2019,13 +2051,11 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtcFull_timeEducation.Properties.Items.AddRange(new object[] {
             "",
-            "博士",
-            "硕士",
-            "本科",
+            "研究生",
+            "大学",
             "大专",
             "中专",
-            "高中",
-            "初中"});
+            "高中"});
             this.txtcFull_timeEducation.Size = new System.Drawing.Size(100, 20);
             this.txtcFull_timeEducation.TabIndex = 171;
             // 
@@ -2044,13 +2074,6 @@
             this.labelControl17.Size = new System.Drawing.Size(40, 14);
             this.labelControl17.TabIndex = 125;
             this.labelControl17.Text = "全日制:";
-            // 
-            // txtcFull_timeDegree
-            // 
-            this.txtcFull_timeDegree.Location = new System.Drawing.Point(283, 35);
-            this.txtcFull_timeDegree.Name = "txtcFull_timeDegree";
-            this.txtcFull_timeDegree.Size = new System.Drawing.Size(111, 20);
-            this.txtcFull_timeDegree.TabIndex = 126;
             // 
             // txtcIn_serviceMajor
             // 
@@ -2104,13 +2127,6 @@
             this.labelControl38.Size = new System.Drawing.Size(48, 14);
             this.labelControl38.TabIndex = 164;
             this.labelControl38.Text = "毕业院校";
-            // 
-            // txtcIn_serviceDegree
-            // 
-            this.txtcIn_serviceDegree.Location = new System.Drawing.Point(283, 61);
-            this.txtcIn_serviceDegree.Name = "txtcIn_serviceDegree";
-            this.txtcIn_serviceDegree.Size = new System.Drawing.Size(111, 20);
-            this.txtcIn_serviceDegree.TabIndex = 130;
             // 
             // labelControl37
             // 
@@ -2267,14 +2283,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             this.panelControl1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtcIn_serviceDegree.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtcFull_timeDegree.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcIn_serviceEducation.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcIn_serviceSchool.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcFull_timeEducation.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtcFull_timeDegree.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcIn_serviceMajor.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcFull_timeMajor.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcFull_timeSchool.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtcIn_serviceDegree.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tcMain)).EndInit();
             this.tcMain.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -2377,7 +2393,6 @@
         private DevExpress.XtraEditors.ComboBoxEdit txtcFull_timeEducation;
         private DevExpress.XtraEditors.LabelControl labelControl16;
         private DevExpress.XtraEditors.LabelControl labelControl17;
-        private DevExpress.XtraEditors.TextEdit txtcFull_timeDegree;
         private DevExpress.XtraEditors.TextEdit txtcIn_serviceMajor;
         private DevExpress.XtraEditors.LabelControl labelControl18;
         private DevExpress.XtraEditors.TextEdit txtcFull_timeMajor;
@@ -2385,7 +2400,6 @@
         private DevExpress.XtraEditors.LabelControl labelControl39;
         private DevExpress.XtraEditors.LabelControl labelControl20;
         private DevExpress.XtraEditors.LabelControl labelControl38;
-        private DevExpress.XtraEditors.TextEdit txtcIn_serviceDegree;
         private DevExpress.XtraEditors.LabelControl labelControl37;
         private DevExpress.XtraEditors.LabelControl labelControl19;
         private DevExpress.XtraEditors.LabelControl labelControl36;
@@ -2454,5 +2468,7 @@
         private DevExpress.XtraEditors.LabelControl labelControl46;
         private DevExpress.XtraEditors.TextEdit txtcIDnumber;
         private DevExpress.XtraEditors.LabelControl labelControl47;
+        private DevExpress.XtraEditors.ComboBoxEdit txtcFull_timeDegree;
+        private DevExpress.XtraEditors.ComboBoxEdit txtcIn_serviceDegree;
     }
 }

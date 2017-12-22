@@ -18,6 +18,7 @@ namespace PersonnelManagement
         //人员的主表信息
         public DataTable gl_dt = new DataTable();
         private bool isAdd = false;
+        private bool issave = false;
         private bool isEnableEdit = true;
         public FrmInfMain()
         {
@@ -64,11 +65,29 @@ namespace PersonnelManagement
         private void btnSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             bool su=saveIteam();
-            if (this.Parent!=null&& su)
-                if (DialogResult.Yes == XtraMessageBox.Show("是否继续添加？", "提示", MessageBoxButtons.YesNo) && isAdd)
+            if (su)
             {
-                clear();
+                issave = true;
+                if (this.Parent != null)
+                {
+                    if (DialogResult.Yes == XtraMessageBox.Show("是否继续添加？", "提示", MessageBoxButtons.YesNo) && isAdd)
+                    {
+                        clear();
+                    }
+                }
+                else
+                {
+                    if (DialogResult.Yes == XtraMessageBox.Show("保存成功！是否关闭本页面？", "提示", MessageBoxButtons.YesNo))
+                    {
+                        this.Close();
+                    }
+                    else
+                    {
+                        issave = false;
+                    }
+                }
             }
+
         }
         /// <summary>
         /// 导出按钮
@@ -1002,11 +1021,18 @@ namespace PersonnelManagement
         /// <param name="e"></param>
         private void FrmInfMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-           if( this.Parent == null&&isEnableEdit)
-                if (XtraMessageBox.Show("是否关闭，未保存的数据将会丢失", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.OK)
+            if (this.Parent == null && isEnableEdit && !issave)
+            {
+                if (XtraMessageBox.Show("是否关闭，未保存的数据将会丢失", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 {
-                    this.Close();
+                    e.Cancel = true;
+                    return;
                 }
+                else
+                {
+                    e.Cancel = false;
+                }
+            }
         }
     }
 }
