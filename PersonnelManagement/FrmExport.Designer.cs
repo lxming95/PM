@@ -92,6 +92,14 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.pcMain = new DevExpress.XtraEditors.PanelControl();
+            this.txtJobDate2 = new DevExpress.XtraEditors.TextEdit();
+            this.txtJobDate1 = new DevExpress.XtraEditors.TextEdit();
+            this.txtWorkDate1 = new DevExpress.XtraEditors.TextEdit();
+            this.txtWorkDate2 = new DevExpress.XtraEditors.TextEdit();
+            this.txtJoinDate2 = new DevExpress.XtraEditors.TextEdit();
+            this.txtEage2 = new DevExpress.XtraEditors.TextEdit();
+            this.txtJoinDate1 = new DevExpress.XtraEditors.TextEdit();
+            this.txtEage = new DevExpress.XtraEditors.TextEdit();
             this.txtcFull_timeDegree = new DevExpress.XtraEditors.ComboBoxEdit();
             this.txtcIn_serviceDegree = new DevExpress.XtraEditors.ComboBoxEdit();
             this.labelControl57 = new DevExpress.XtraEditors.LabelControl();
@@ -210,14 +218,6 @@
             this.cHealthStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.dMakeDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.cMaker = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.txtEage = new DevExpress.XtraEditors.TextEdit();
-            this.txtJoinDate1 = new DevExpress.XtraEditors.TextEdit();
-            this.txtEage2 = new DevExpress.XtraEditors.TextEdit();
-            this.txtJoinDate2 = new DevExpress.XtraEditors.TextEdit();
-            this.txtWorkDate2 = new DevExpress.XtraEditors.TextEdit();
-            this.txtWorkDate1 = new DevExpress.XtraEditors.TextEdit();
-            this.txtJobDate1 = new DevExpress.XtraEditors.TextEdit();
-            this.txtJobDate2 = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckedComboBoxEdit1)).BeginInit();
@@ -262,6 +262,14 @@
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcMain)).BeginInit();
             this.pcMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtJobDate2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtJobDate1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtWorkDate1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtWorkDate2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtJoinDate2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEage2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtJoinDate1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEage.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcFull_timeDegree.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcIn_serviceDegree.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbIsOfficialPosition.Properties)).BeginInit();
@@ -321,14 +329,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvType)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtEage.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtJoinDate1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtEage2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtJoinDate2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtWorkDate2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtWorkDate1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtJobDate1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtJobDate2.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // repositoryItemCheckEdit15
@@ -823,12 +823,12 @@
             this.panelControl1.Controls.Add(this.labelControl13);
             this.panelControl1.Location = new System.Drawing.Point(15, 46);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1068, 251);
+            this.panelControl1.Size = new System.Drawing.Size(1076, 212);
             this.panelControl1.TabIndex = 59;
             // 
             // labelControl55
             // 
-            this.labelControl55.Location = new System.Drawing.Point(941, 21);
+            this.labelControl55.Location = new System.Drawing.Point(939, 21);
             this.labelControl55.Name = "labelControl55";
             this.labelControl55.Size = new System.Drawing.Size(12, 14);
             this.labelControl55.TabIndex = 95;
@@ -845,10 +845,12 @@
             // txtNum
             // 
             this.txtNum.Enabled = false;
-            this.txtNum.Location = new System.Drawing.Point(872, 18);
+            this.txtNum.Location = new System.Drawing.Point(877, 18);
             this.txtNum.MenuManager = this.barManager1;
             this.txtNum.Name = "txtNum";
-            this.txtNum.Size = new System.Drawing.Size(66, 20);
+            this.txtNum.Properties.Appearance.Options.UseTextOptions = true;
+            this.txtNum.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.txtNum.Size = new System.Drawing.Size(52, 20);
             this.txtNum.TabIndex = 94;
             // 
             // tabControl1
@@ -858,7 +860,7 @@
             this.tabControl1.Location = new System.Drawing.Point(5, 24);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1058, 194);
+            this.tabControl1.Size = new System.Drawing.Size(1071, 183);
             this.tabControl1.TabIndex = 59;
             // 
             // tabPage1
@@ -868,7 +870,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 23);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1050, 167);
+            this.tabPage1.Size = new System.Drawing.Size(1063, 156);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "基本信息";
             // 
@@ -931,10 +933,82 @@
             this.pcMain.Controls.Add(this.labelControl3);
             this.pcMain.Controls.Add(this.labelControl4);
             this.pcMain.Controls.Add(this.lblName);
-            this.pcMain.Location = new System.Drawing.Point(0, 0);
+            this.pcMain.Location = new System.Drawing.Point(0, -1);
             this.pcMain.Name = "pcMain";
-            this.pcMain.Size = new System.Drawing.Size(1054, 165);
+            this.pcMain.Size = new System.Drawing.Size(1067, 165);
             this.pcMain.TabIndex = 58;
+            // 
+            // txtJobDate2
+            // 
+            this.txtJobDate2.Location = new System.Drawing.Point(877, 104);
+            this.txtJobDate2.MenuManager = this.barManager1;
+            this.txtJobDate2.Name = "txtJobDate2";
+            this.txtJobDate2.Properties.NullText = "例: 35";
+            this.txtJobDate2.Size = new System.Drawing.Size(52, 20);
+            this.txtJobDate2.TabIndex = 219;
+            // 
+            // txtJobDate1
+            // 
+            this.txtJobDate1.Location = new System.Drawing.Point(793, 104);
+            this.txtJobDate1.MenuManager = this.barManager1;
+            this.txtJobDate1.Name = "txtJobDate1";
+            this.txtJobDate1.Properties.NullText = "例: 30";
+            this.txtJobDate1.Size = new System.Drawing.Size(52, 20);
+            this.txtJobDate1.TabIndex = 218;
+            // 
+            // txtWorkDate1
+            // 
+            this.txtWorkDate1.Location = new System.Drawing.Point(793, 46);
+            this.txtWorkDate1.MenuManager = this.barManager1;
+            this.txtWorkDate1.Name = "txtWorkDate1";
+            this.txtWorkDate1.Properties.NullText = "例: 30";
+            this.txtWorkDate1.Size = new System.Drawing.Size(52, 20);
+            this.txtWorkDate1.TabIndex = 217;
+            // 
+            // txtWorkDate2
+            // 
+            this.txtWorkDate2.Location = new System.Drawing.Point(877, 44);
+            this.txtWorkDate2.MenuManager = this.barManager1;
+            this.txtWorkDate2.Name = "txtWorkDate2";
+            this.txtWorkDate2.Properties.NullText = "例: 35";
+            this.txtWorkDate2.Size = new System.Drawing.Size(52, 20);
+            this.txtWorkDate2.TabIndex = 216;
+            // 
+            // txtJoinDate2
+            // 
+            this.txtJoinDate2.Location = new System.Drawing.Point(671, 41);
+            this.txtJoinDate2.MenuManager = this.barManager1;
+            this.txtJoinDate2.Name = "txtJoinDate2";
+            this.txtJoinDate2.Properties.NullText = "例: 35";
+            this.txtJoinDate2.Size = new System.Drawing.Size(52, 20);
+            this.txtJoinDate2.TabIndex = 215;
+            // 
+            // txtEage2
+            // 
+            this.txtEage2.Location = new System.Drawing.Point(373, 44);
+            this.txtEage2.MenuManager = this.barManager1;
+            this.txtEage2.Name = "txtEage2";
+            this.txtEage2.Properties.NullText = "例: 35";
+            this.txtEage2.Size = new System.Drawing.Size(52, 20);
+            this.txtEage2.TabIndex = 214;
+            // 
+            // txtJoinDate1
+            // 
+            this.txtJoinDate1.Location = new System.Drawing.Point(573, 41);
+            this.txtJoinDate1.MenuManager = this.barManager1;
+            this.txtJoinDate1.Name = "txtJoinDate1";
+            this.txtJoinDate1.Properties.NullText = "例: 30";
+            this.txtJoinDate1.Size = new System.Drawing.Size(52, 20);
+            this.txtJoinDate1.TabIndex = 213;
+            // 
+            // txtEage
+            // 
+            this.txtEage.Location = new System.Drawing.Point(274, 44);
+            this.txtEage.MenuManager = this.barManager1;
+            this.txtEage.Name = "txtEage";
+            this.txtEage.Properties.NullText = "例: 30";
+            this.txtEage.Size = new System.Drawing.Size(53, 20);
+            this.txtEage.TabIndex = 212;
             // 
             // txtcFull_timeDegree
             // 
@@ -1179,6 +1253,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtcIn_serviceEducation.Properties.Items.AddRange(new object[] {
             "",
+            "在职研究生",
             "研究生",
             "大学",
             "大专",
@@ -1423,7 +1498,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 23);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1050, 167);
+            this.tabPage2.Size = new System.Drawing.Size(1067, 156);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "工作信息";
             // 
@@ -1940,7 +2015,7 @@
             this.gcType.Location = new System.Drawing.Point(0, 264);
             this.gcType.MainView = this.gvType;
             this.gcType.Name = "gcType";
-            this.gcType.Size = new System.Drawing.Size(1100, 442);
+            this.gcType.Size = new System.Drawing.Size(1091, 442);
             this.gcType.TabIndex = 64;
             this.gcType.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvType});
@@ -2191,78 +2266,6 @@
             this.cMaker.Name = "cMaker";
             this.cMaker.Width = 47;
             // 
-            // txtEage
-            // 
-            this.txtEage.Location = new System.Drawing.Point(274, 44);
-            this.txtEage.MenuManager = this.barManager1;
-            this.txtEage.Name = "txtEage";
-            this.txtEage.Properties.NullText = "例: 30";
-            this.txtEage.Size = new System.Drawing.Size(53, 20);
-            this.txtEage.TabIndex = 212;
-            // 
-            // txtJoinDate1
-            // 
-            this.txtJoinDate1.Location = new System.Drawing.Point(573, 41);
-            this.txtJoinDate1.MenuManager = this.barManager1;
-            this.txtJoinDate1.Name = "txtJoinDate1";
-            this.txtJoinDate1.Properties.NullText = "例: 30";
-            this.txtJoinDate1.Size = new System.Drawing.Size(52, 20);
-            this.txtJoinDate1.TabIndex = 213;
-            // 
-            // txtEage2
-            // 
-            this.txtEage2.Location = new System.Drawing.Point(373, 44);
-            this.txtEage2.MenuManager = this.barManager1;
-            this.txtEage2.Name = "txtEage2";
-            this.txtEage2.Properties.NullText = "例: 35";
-            this.txtEage2.Size = new System.Drawing.Size(52, 20);
-            this.txtEage2.TabIndex = 214;
-            // 
-            // txtJoinDate2
-            // 
-            this.txtJoinDate2.Location = new System.Drawing.Point(671, 41);
-            this.txtJoinDate2.MenuManager = this.barManager1;
-            this.txtJoinDate2.Name = "txtJoinDate2";
-            this.txtJoinDate2.Properties.NullText = "例: 35";
-            this.txtJoinDate2.Size = new System.Drawing.Size(52, 20);
-            this.txtJoinDate2.TabIndex = 215;
-            // 
-            // txtWorkDate2
-            // 
-            this.txtWorkDate2.Location = new System.Drawing.Point(877, 44);
-            this.txtWorkDate2.MenuManager = this.barManager1;
-            this.txtWorkDate2.Name = "txtWorkDate2";
-            this.txtWorkDate2.Properties.NullText = "例: 35";
-            this.txtWorkDate2.Size = new System.Drawing.Size(52, 20);
-            this.txtWorkDate2.TabIndex = 216;
-            // 
-            // txtWorkDate1
-            // 
-            this.txtWorkDate1.Location = new System.Drawing.Point(793, 46);
-            this.txtWorkDate1.MenuManager = this.barManager1;
-            this.txtWorkDate1.Name = "txtWorkDate1";
-            this.txtWorkDate1.Properties.NullText = "例: 30";
-            this.txtWorkDate1.Size = new System.Drawing.Size(52, 20);
-            this.txtWorkDate1.TabIndex = 217;
-            // 
-            // txtJobDate1
-            // 
-            this.txtJobDate1.Location = new System.Drawing.Point(793, 104);
-            this.txtJobDate1.MenuManager = this.barManager1;
-            this.txtJobDate1.Name = "txtJobDate1";
-            this.txtJobDate1.Properties.NullText = "例: 30";
-            this.txtJobDate1.Size = new System.Drawing.Size(52, 20);
-            this.txtJobDate1.TabIndex = 218;
-            // 
-            // txtJobDate2
-            // 
-            this.txtJobDate2.Location = new System.Drawing.Point(877, 104);
-            this.txtJobDate2.MenuManager = this.barManager1;
-            this.txtJobDate2.Name = "txtJobDate2";
-            this.txtJobDate2.Properties.NullText = "例: 35";
-            this.txtJobDate2.Size = new System.Drawing.Size(52, 20);
-            this.txtJobDate2.TabIndex = 219;
-            // 
             // FrmExport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -2323,6 +2326,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.pcMain)).EndInit();
             this.pcMain.ResumeLayout(false);
             this.pcMain.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtJobDate2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtJobDate1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtWorkDate1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtWorkDate2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtJoinDate2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEage2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtJoinDate1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEage.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcFull_timeDegree.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtcIn_serviceDegree.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbbIsOfficialPosition.Properties)).EndInit();
@@ -2383,14 +2394,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvType)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtEage.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtJoinDate1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtEage2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtJoinDate2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtWorkDate2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtWorkDate1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtJobDate1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtJobDate2.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

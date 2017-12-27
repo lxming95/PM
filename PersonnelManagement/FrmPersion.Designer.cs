@@ -1244,6 +1244,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtcIn_serviceEducation.Properties.Items.AddRange(new object[] {
             "",
+            "在职研究生",
             "研究生",
             "大学",
             "大专",
@@ -1391,7 +1392,7 @@
             // 
             // labelControl14
             // 
-            this.labelControl14.Location = new System.Drawing.Point(924, 8);
+            this.labelControl14.Location = new System.Drawing.Point(913, 8);
             this.labelControl14.Name = "labelControl14";
             this.labelControl14.Size = new System.Drawing.Size(52, 14);
             this.labelControl14.TabIndex = 58;
@@ -1401,12 +1402,12 @@
             // 
             this.txtNum.EditValue = "";
             this.txtNum.Enabled = false;
-            this.txtNum.Location = new System.Drawing.Point(982, 5);
+            this.txtNum.Location = new System.Drawing.Point(971, 5);
             this.txtNum.MenuManager = this.barManager1;
             this.txtNum.Name = "txtNum";
             this.txtNum.Properties.Appearance.Options.UseTextOptions = true;
             this.txtNum.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            this.txtNum.Size = new System.Drawing.Size(41, 20);
+            this.txtNum.Size = new System.Drawing.Size(52, 20);
             this.txtNum.TabIndex = 58;
             // 
             // labelControl13

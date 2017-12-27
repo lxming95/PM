@@ -544,8 +544,8 @@ namespace PersonnelManagement
                         {
                             //INSERT Rewards
                             MySqlParameter[] tableParam = new MySqlParameter[]  {
-                                new MySqlParameter("dData", dt_Rewards.Rows[i]["dData"].ToString()),
-                                new MySqlParameter("cDetailed", dt_Rewards.Rows[i]["cDetailed"].ToString()),
+                                new MySqlParameter("dData", Convert.ToDateTime(dt_Rewards.Rows[i]["dData"]).ToString("yyyy.MM")),
+                                new MySqlParameter("cDetailed", Convert.ToDateTime(dt_Rewards.Rows[i]["cDetailed"]).ToString("yyyy.MM")),
                                 new MySqlParameter("cCategory", dt_Rewards.Rows[i]["cCategory"].ToString()),
                                 new MySqlParameter("cLevel", dt_Rewards.Rows[i]["cLevel"].ToString()),
                                 new MySqlParameter("pid", dt_pid.Rows[0]["pid"].ToString()),
@@ -568,7 +568,7 @@ namespace PersonnelManagement
                         MySqlParameter[] tableParam = new MySqlParameter[] {
                             new MySqlParameter("cfCalled", dt_Family.Rows[i]["cfCalled"].ToString()),
                             new MySqlParameter("cfName", dt_Family.Rows[i]["cfName"].ToString()),
-                            new MySqlParameter("dfBirthDate", dt_Family.Rows[i]["dfBirthDate"].ToString()),
+                            new MySqlParameter("dfBirthDate", Convert.ToDateTime(dt_Family.Rows[i]["dfBirthDate"]).ToString("yyyy.MM")),
                             new MySqlParameter("cfPoliticalStatus", dt_Family.Rows[i]["cfPoliticalStatus"].ToString()),
                             new MySqlParameter("cfDuties", dt_Family.Rows[i]["cfDuties"].ToString()),
                             new MySqlParameter("fid", dt_Family.Rows[i]["fid"].ToString()),
@@ -710,7 +710,7 @@ namespace PersonnelManagement
                             // Update family
 
                             MySqlParameter[] tableParam = new MySqlParameter[] {
-                            new MySqlParameter("eDate", dt_Employment.Rows[i]["eDate"].ToString()),
+                            new MySqlParameter("eDate", Convert.ToDateTime(dt_Employment.Rows[i]["eDate"]).ToString("yyyy.MM")),
                             new MySqlParameter("eWay", dt_Employment.Rows[i]["eWay"].ToString()),
                             new MySqlParameter("eid", dt_Employment.Rows[i]["eid"].ToString()),
                             };

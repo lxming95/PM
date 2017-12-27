@@ -2027,6 +2027,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtcIn_serviceEducation.Properties.Items.AddRange(new object[] {
             "",
+            "在职研究生",
             "研究生",
             "大学",
             "大专",

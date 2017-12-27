@@ -44,7 +44,7 @@ namespace PersonnelManagement
                             case ".lrm":
                                 //gcQurry.ExportToXls(exportFilePath);      //.lrm类型
                                 //使用“保存”对话框中输入的文件名实例化StreamWriter对象
-                                StreamWriter sw = new StreamWriter(exportFilePath, true);
+                                StreamWriter sw = new StreamWriter(exportFilePath, false);
                                 //向创建的文件中写入内容
                                 sw.WriteLine(s);
                                 //关闭当前文件写入流
@@ -53,7 +53,7 @@ namespace PersonnelManagement
                             default:
                                 break;
                         }
-                        path= saveDialog.FileName.Replace(name, "");
+                        path= saveDialog.FileName.Replace(name+".lrm", "");
                         XtraMessageBox.Show("文件保存成功");
                         //return saveDialog.FileName.Replace(name,"");
                     }
@@ -70,117 +70,115 @@ namespace PersonnelManagement
                 }
                 return path;
             }
-
-            //if (s == string.Empty)
-            //   {
-            //       MessageBox.Show("要写入的文件内容不能为空");
-            //   }
-            //   else
-            //   {
-            //       //设置保存文件的格式
-            //       saveFileDialog1.Filter = "文本文件(*.txt)|*.txt";
-            //       if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            //       {
-            //           //使用“另存为”对话框中输入的文件名实例化StreamWriter对象
-            //           StreamWriter sw = new StreamWriter(saveFileDialog1.FileName, true);
-            //           //向创建的文件中写入内容
-            //           sw.WriteLine(textBox1.Text);
-            //           //关闭当前文件写入流
-            //           sw.Close();
-            //           textBox1.Text = string.Empty;
-            //       }
-            //   }
         }
 
+        private static void saveLrmWithPath(string s, string name, string path)
+        {
+            name += DateTime.Now.ToString("yyyyMMdd");
+            path += name + ".lrm";
+            try
+            {
+                //gcQurry.ExportToXls(exportFilePath);      //.lrm类型
+                //使用“保存”对话框中输入的文件名实例化StreamWriter对象
+                StreamWriter sw = new StreamWriter(path, false);
+                //向创建的文件中写入内容
+                sw.WriteLine(s);
+                //关闭当前文件写入流
+                sw.Close();
+            }
+            catch
+            {
+                //文件无法打开 消息字符串 提示语+/n/n+path:+路径
+                String msg = "文件无法被创建或者修改，正在使用或者没有权限,请检查是否同名文件被打开，请尝试关闭打开文件后重试" + Environment.NewLine + Environment.NewLine + "路径: " + path;
+                XtraMessageBox.Show(msg, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //转到执行保存事件
+                //btnOutput_Click(sender,e);  待测试替换goto
+            }
+        }
         /// <summary>
         /// 格式化数据
         /// </summary>
-        /// <param name="dt">基础数据表，需含有pid列(人员主键列)</param>
+        /// <param name="dr">基础数据表，需含有pid列(人员主键列)</param>
         /// <returns>返回lrm字符串</returns>
-        private static string formString(DataTable dt)
+        private static string formString(DataRow dr)
         {
             StringBuilder s = new StringBuilder("");
-            if (dt == null || dt.Rows.Count < 0)
+            if (dr == null|| dr["cName"].ToString()=="")
             {
                 XtraMessageBox.Show("没有数据");
+                return s.ToString();
             }
-            s.Append(@"""" + dt.Rows[0]["cName"].ToString() + @""",");
-            s.Append(@"""" + dt.Rows[0]["cSex"].ToString() + @""",");
-            s.Append(@"""" + dt.Rows[0]["dBirth_date"].ToString() + @""",");
-            s.Append(@"""" + dt.Rows[0]["cNation"].ToString() + @""",");
-            s.Append(@"""" + dt.Rows[0]["cNativePlace"].ToString() + @""",");
-            s.Append(@"""" + dt.Rows[0]["dJoin_date"].ToString() + @""",");
-            s.Append(@"""" + dt.Rows[0]["cHealthStatus"].ToString() + @""",");
-            s.Append(@"""" + dt.Rows[0]["cBirthPlace"].ToString() + @""",");
-            s.Append(@"""" + dt.Rows[0]["dWorkDate"].ToString() + @""",");
+            s.Append(@"""" + dr["cName"].ToString() + @""",");
+            s.Append(@"""" + dr["cSex"].ToString() + @""",");
+            s.Append(@"""" + dr["dBirth_date"].ToString() + @""",");
+            s.Append(@"""" + dr["cNation"].ToString() + @""",");
+            s.Append(@"""" + dr["cNativePlace"].ToString() + @""",");
+            s.Append(@"""" + dr["dJoin_date"].ToString() + @""",");
+            s.Append(@"""" + dr["cHealthStatus"].ToString() + @""",");
+            s.Append(@"""" + dr["cBirthPlace"].ToString() + @""",");
+            s.Append(@"""" + dr["dWorkDate"].ToString() + @""",");
 
 
-            s.Append(@"""" + dt.Rows[0]["cFull_timeEducation"].ToString() + "#"+ dt.Rows[0]["cFull_timeDegree"].ToString() + "@" + dt.Rows[0]["cIn_serviceEducation"].ToString()+"#"+ dt.Rows[0]["cIn_serviceDegree"].ToString() + @""",");
-            s.Append(@"""" + dt.Rows[0]["cFull_timeSchool"].ToString() + "#"+ dt.Rows[0]["cFull_timeMajor"].ToString() + "@" + dt.Rows[0]["cIn_serviceSchool"].ToString()+"#"+ dt.Rows[0]["cIn_serviceMajor"].ToString() + @""",");
+            s.Append(@"""" + dr["cFull_timeEducation"].ToString() + "#"+ dr["cFull_timeDegree"].ToString() + "@" + dr["cIn_serviceEducation"].ToString()+"#"+ dr["cIn_serviceDegree"].ToString() + @""",");
+            s.Append(@"""" + dr["cFull_timeSchool"].ToString() + "#"+ dr["cFull_timeMajor"].ToString() + "@" + dr["cIn_serviceSchool"].ToString()+"#"+ dr["cIn_serviceMajor"].ToString() + @""",");
 
-            s.Append(@"""" + dt.Rows[0]["cDuties"].ToString() + @""",");
+            s.Append(@"""" + dr["cDuties"].ToString() + @""",");
             s.Append(@"""" + " " + @""",");
             s.Append(@"""" + " " + @""",");
             s.Append(@"""" + " " + @""",");
             s.Append(@"""" + " " + @""",");
 
-            s.Append(@"""" + dt.Rows[0]["cSkill"].ToString() + @""",");
+            s.Append(@"""" + dr["cSkill"].ToString() + @""",");
 
             //简历
-            DataTable dt_resume = MySQLHelper.table("SELECT *FROM data_resume WHERE PersionID='" + dt.Rows[0]["pid"] + "'");
+            DataTable dt_resume = MySQLHelper.table("SELECT *FROM data_resume WHERE PersionID='" + dr["pid"] + "'");
             if (dt_resume != null && dt_resume.Rows.Count > 0)
             {
+                s.Append(@"""");
                 for (int i = 0; i < dt_resume.Rows.Count - 1; i++)
                 {
-                    s.Append(@"""" + dt_resume.Rows[i]["dStartDate"]+ "-"
+                    s.Append(dt_resume.Rows[i]["dStartDate"]+ "--"
                         + dt_resume.Rows[i]["dDeadline"] + "       "
                         + dt_resume.Rows[i]["cExperience"].ToString() + "\r\n");
                 }
-                s.Append(@"""" + dt_resume.Rows[dt_resume.Rows.Count - 1]["dStartDate"] + "-"
+                s.Append(dt_resume.Rows[dt_resume.Rows.Count - 1]["dStartDate"] + "--"
                         + dt_resume.Rows[dt_resume.Rows.Count - 1]["dDeadline"]+ "       "
                         + dt_resume.Rows[dt_resume.Rows.Count - 1]["cExperience"].ToString() + @""",");
             }
             dt_resume.Dispose();
 
             //奖惩情况
-            DataTable dt_rewards = MySQLHelper.table("SELECT *FROM data_rewards_punishments WHERE PersionID='" + dt.Rows[0]["pid"] + "'");
+            DataTable dt_rewards = MySQLHelper.table("SELECT *FROM data_rewards_punishments WHERE PersionID='" + dr["pid"] + "'");
             if (dt_rewards != null && dt_rewards.Rows.Count > 0)
             {
+                s.Append(@"""");
                 for (int i = 0; i < dt_rewards.Rows.Count - 1; i++)
                 {
-                    //s.Append(@"""" + Convert.ToDateTime(dt_rewards.Rows[i]["dData"]).ToString("yyyy.MM") + "       "
-                    //       + dt_rewards.Rows[i]["cDetailed"].ToString() + "\r\n");
-                    s.Append(@"""" + dt_rewards.Rows[i]["dData"].ToString() + "       "
+                    s.Append(dt_rewards.Rows[i]["dData"].ToString() + "年度"
                            + dt_rewards.Rows[i]["cDetailed"].ToString() + "\r\n");
                 }
-                //s.Append(@"""" + Convert.ToDateTime(dt_rewards.Rows[dt_rewards.Rows.Count - 1]["dData"]).ToString("yyyy.MM") + "       "
-                //           + dt_rewards.Rows[dt_rewards.Rows.Count - 1]["cDetailed"].ToString() + "\r\n");
-                s.Append(@"""" + dt_rewards.Rows[dt_rewards.Rows.Count - 1]["dData"].ToString() + "       "
-                           + dt_rewards.Rows[dt_rewards.Rows.Count - 1]["cDetailed"].ToString() + "\r\n");
+                s.Append(dt_rewards.Rows[dt_rewards.Rows.Count - 1]["dData"].ToString() + "年度 "
+                           + dt_rewards.Rows[dt_rewards.Rows.Count - 1]["cDetailed"].ToString() + @""",");
             }
             dt_rewards.Dispose();
-
+        
             //年度考核结果
-            //s.Append(@"""" + dt.Rows[0]["cChech_Result"].ToString() + @""",");
-            DataTable dt_checkresult = MySQLHelper.table("SELECT *FROM data_rewards_punishments WHERE PersionID='" + dt.Rows[0]["pid"] + "'");
+            DataTable dt_checkresult = MySQLHelper.table("SELECT *FROM data_rewards_punishments WHERE PersionID='" + dr["pid"] + "'");
             if (dt_rewards != null && dt_rewards.Rows.Count > 0)
             {
+                s.Append(@"""");
                 for (int i = 0; i < dt_rewards.Rows.Count - 1; i++)
                 {
-                    //s.Append(@"""" + Convert.ToDateTime(dt_rewards.Rows[i]["dData"]).ToString("yyyy.MM") + "       "
-                    //       + dt_rewards.Rows[i]["cDetailed"].ToString() + "\r\n");
-                    s.Append(@"""" + dt_rewards.Rows[i]["dData"].ToString() + "       "
-                           + dt_rewards.Rows[i]["cDetailed"].ToString() + "\r\n");
+                    s.Append(dt_rewards.Rows[i]["dData"].ToString() + "  "
+                           + dt_rewards.Rows[i]["cDetailed"].ToString() + "；");
                 }
-                //s.Append(@"""" + Convert.ToDateTime(dt_rewards.Rows[dt_rewards.Rows.Count - 1]["dData"]).ToString("yyyy.MM") + "       "
-                //           + dt_rewards.Rows[dt_rewards.Rows.Count - 1]["cDetailed"].ToString() + "\r\n");
-                s.Append(@"""" + dt_rewards.Rows[dt_rewards.Rows.Count - 1]["dData"].ToString() + "       "
-                           + dt_rewards.Rows[dt_rewards.Rows.Count - 1]["cDetailed"].ToString() + "\r\n");
+                s.Append(dt_rewards.Rows[dt_rewards.Rows.Count - 1]["dData"].ToString() + "  "
+                           + dt_rewards.Rows[dt_rewards.Rows.Count - 1]["cDetailed"].ToString() + @"。"",");
             }
 
             //家庭成员
 
-            DataTable dt_family = MySQLHelper.table("SELECT *FROM data_familymembers WHERE PersionID='" + dt.Rows[0]["pid"] + "'");
+            DataTable dt_family = MySQLHelper.table("SELECT *FROM data_familymembers WHERE PersionID='" + dr["pid"] + "'");
             if (dt_family != null && dt_family.Rows.Count > 0)
             {
                 string[] name = new string[] { "cfCalled", "cfName", "dfBirthDate", "cfPoliticalStatus", "cfDuties" };
@@ -209,21 +207,21 @@ namespace PersonnelManagement
             dt_family.Dispose();
 
             //现任职务
-            s.Append(@"""" + dt.Rows[0]["cCurrentJob"].ToString() + @""",");
+            s.Append(@"""" + dr["cCurrentJob"].ToString() + @""",");
             //拟任职务
-            s.Append(@"""" + dt.Rows[0]["cProposedJob"].ToString() + @""",");
+            s.Append(@"""" + dr["cProposedJob"].ToString() + @""",");
             //拟免职务
-            s.Append(@"""" + dt.Rows[0]["cRemoveJob"].ToString() + @""",");
+            s.Append(@"""" + dr["cRemoveJob"].ToString() + @""",");
             //任免理由
-            s.Append(@"""" + dt.Rows[0]["cDismissalReason"].ToString() + @""",");
+            s.Append(@"""" + dr["cDismissalReason"].ToString() + @""",");
             //呈报单位
-            s.Append(@"""" + dt.Rows[0]["cReporting_Unit"].ToString() + @""",");
+            s.Append(@"""" + dr["cReporting_Unit"].ToString() + @""",");
             //计算年龄时间
-            s.Append(@"""" + dt.Rows[0]["dEageDate"].ToString() + @""",");
+            s.Append(@"""" + dr["dEageDate"].ToString() + @""",");
             //填表人
-            s.Append(@"""" + dt.Rows[0]["cMaker"].ToString() + @""",");
+            s.Append(@"""" + dr["cMaker"].ToString() + @""",");
             //填表时间
-            s.Append(@"""" + dt.Rows[0]["dMakeDate"].ToString() + @""",");
+            s.Append(@"""" + dr["dMakeDate"].ToString() + @"""");
 
             return s.ToString();
         }
@@ -234,7 +232,22 @@ namespace PersonnelManagement
         /// <param name="name">文件名</param>
         public static void ExportLrm(DataTable dt, string name = "")
         {
-            saveFile(formString(dt), name);
+            //saveFile(formString(dt), name);
+            string path = "";
+            string s = formString(dt.Rows[0]);
+            if (dt.Rows.Count > 0 && s != "")
+            {
+                if (name == "")
+                    name = dt.Rows[0]["cName"].ToString();
+                path = saveFile(s, name);
+            }
+            for (int i = 1; i < dt.Rows.Count; i++)
+            {
+                s = formString(dt.Rows[i]);
+                name = dt.Rows[i]["cName"].ToString();
+                if (s != ""&& path!="")
+                    saveLrmWithPath(s, name,path);
+            }
         }
         /// <summary>
         /// 导出人名单
@@ -596,10 +609,29 @@ namespace PersonnelManagement
         /// <param name="name">文件名</param>
         /// <param name="SheetName">excel工作表名，默认为Sheet1</param>
         /// <returns></returns>
-        public static bool seveExcel(DateTime date,DataRow dr,string name, int SheetNum=1)
+        public static bool seveExcel(DateTime date,DataTable dt,int SheetNum=1)
+        {
+            bool success = false;
+            string path = "";
+            string name = "";
+            if (dt.Rows.Count > 0 && dt.Rows[0]["cName"].ToString() != "")
+            {
+                name = "干部任免审批表-" + dt.Rows[0]["cName"].ToString() + dt.Rows[0]["dBirth_date"].ToString();
+                path = seveExcelWithOutPath(date,dt.Rows[0], name, SheetNum: SheetNum);
+            }
+            for (int i = 1; i < dt.Rows.Count; i++)
+            {
+                name = "干部任免审批表-" + dt.Rows[i]["cName"].ToString() + dt.Rows[i]["dBirth_date"].ToString()+".xls";
+                if (name != ""&&path != "")
+                    seveExcelWithPath(date, dt.Rows[i], name, path, SheetNum: SheetNum);
+            }
+            return success;
+        }
+
+        public static string seveExcelWithOutPath(DateTime date, DataRow dr, string name, int SheetNum = 1)
         {
             date1 = date;
-            bool success = false;
+            string path1 = "";
             //创建一个Word应用程序实例  
             Microsoft.Office.Interop.Excel._Application oExcel = new Microsoft.Office.Interop.Excel.Application();
             //设置为不可见  
@@ -635,15 +667,52 @@ namespace PersonnelManagement
                             //关闭word  
                             oExcel.Quit();
                             XtraMessageBox.Show("保存成功", "提示");
-                            success= true;
+                            path1 = sfd.FileName.Replace(name +".xls","");
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
+                KillExcel(oExcel);
+            }
+            return path1;
+        }
+        public static bool seveExcelWithPath(DateTime date, DataRow dr, string name,string path1,int SheetNum = 1)
+        {
+            date1 = date;
+            bool success = false;
+            //创建一个Word应用程序实例  
+            Microsoft.Office.Interop.Excel._Application oExcel = new Microsoft.Office.Interop.Excel.Application();
+            //设置为不可见  
+            oExcel.Visible = false;
+            //审批表模版路径
+            string path = AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "model//excel.xls";
+
+            try
+            {
+                Microsoft.Office.Interop.Excel.Workbook wb = oExcel.Workbooks._Open(path,
+                Missing.Value, Missing.Value, Missing.Value, Missing.Value,
+                Missing.Value, Missing.Value, Missing.Value, Missing.Value,
+                Missing.Value, Missing.Value, Missing.Value, Missing.Value);
+                Microsoft.Office.Interop.Excel.Worksheet ws = wb.Worksheets[SheetNum];
+                insertIntoExcel(ws, dr);
+                if (path1.Trim().Length > 0)
+                {
+                    path1 += name;
+                    wb.SaveAs(path1, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+                    wb.Close(Type.Missing, Type.Missing, Type.Missing);
+                    //关闭Excel
+                    oExcel.Quit();
+                    //XtraMessageBox.Show("保存成功", "提示");
+                    success = true;
+                }
+            }
+            catch (Exception ex)
+            {
                 success = false;
                 KillExcel(oExcel);
+                XtraMessageBox.Show("文件保存失败，姓名为"+name.Replace(".xls","")+"错误为："+ex.Message);
             }
             return success;
         }
