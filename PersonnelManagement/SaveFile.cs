@@ -44,7 +44,8 @@ namespace PersonnelManagement
                             case ".lrm":
                                 //gcQurry.ExportToXls(exportFilePath);      //.lrm类型
                                 //使用“保存”对话框中输入的文件名实例化StreamWriter对象
-                                StreamWriter sw = new StreamWriter(exportFilePath, false);
+                                Encoding ei = Encoding.GetEncoding(936);//编码格式设置为GB2312
+                                StreamWriter sw = new StreamWriter(exportFilePath, false,ei);
                                 //向创建的文件中写入内容
                                 sw.WriteLine(s);
                                 //关闭当前文件写入流
@@ -80,7 +81,8 @@ namespace PersonnelManagement
             {
                 //gcQurry.ExportToXls(exportFilePath);      //.lrm类型
                 //使用“保存”对话框中输入的文件名实例化StreamWriter对象
-                StreamWriter sw = new StreamWriter(path, false);
+                Encoding ei = Encoding.GetEncoding(936);//编码格式设置为GB2312
+                StreamWriter sw = new StreamWriter(path, false,ei);
                 //向创建的文件中写入内容
                 sw.WriteLine(s);
                 //关闭当前文件写入流
@@ -580,7 +582,7 @@ namespace PersonnelManagement
             SetCellValue(ws, 10, 6, dr["cIn_serviceEducation"].ToString());
             SetCellValue(ws, 10, 13, dr["cIn_serviceSchool"].ToString() + dr["cIn_serviceMajor"].ToString());
 
-            SetCellValue(ws, 11, 6, dr["cCurrentJob"].ToString());
+            SetCellValue(ws, 11, 6, dr["cUnit"].ToString()+dr["cCurrentJob"].ToString());
             SetCellValue(ws, 12, 6, dr["cProposedJob"].ToString());
             SetCellValue(ws, 13, 6, dr["cRemoveJob"].ToString());
 
