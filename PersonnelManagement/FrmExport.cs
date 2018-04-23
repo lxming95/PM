@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using PersonnelManagement;
 using System.Data.OleDb;
 using System.IO;
+using System.Configuration;
 
 namespace PersonnelManagement
 {
@@ -22,10 +23,15 @@ namespace PersonnelManagement
         {
             InitializeComponent();
             fromatDateEdit();
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //更新专业数据表
+
+           
+
             //显示CheckBox列初始化界面
             if (ExportCheckBox)
             {
@@ -112,9 +118,9 @@ namespace PersonnelManagement
             }
             if (m2.Success)
             {
-                year = date1.Year - Convert.ToInt32(txtEage2.Text);
-                string da2 = year + date1.ToString("yyyy-MM").Substring(4);
-                MyStringBuilder.Append(" and dBirth_date >= '" + da2 + "' ");
+                year = date1.Year - Convert.ToInt32(txtEage2.Text)-1;
+                string da2 = year + date1.ToString("yyyy.MM").Substring(4);
+                MyStringBuilder.Append(" and dBirth_date > '" + da2 + "' ");
             }
 
             //党龄
@@ -131,9 +137,9 @@ namespace PersonnelManagement
             }
             if (m2.Success)
             {
-                year = date1.Year - Convert.ToInt32(txtJoinDate2.Text);
+                year = date1.Year - Convert.ToInt32(txtJoinDate2.Text)-1;
                 string da2 = year + date1.ToString("yyyy-MM").Substring(4);
-                MyStringBuilder.Append(" and dJoin_date >= '" + da2 + "' ");
+                MyStringBuilder.Append(" and dJoin_date > '" + da2 + "' ");
             }
             //工龄
             m = r.Match(txtWorkDate1.Text);
@@ -149,9 +155,9 @@ namespace PersonnelManagement
             }
             if (m2.Success)
             {
-                year = date1.Year - Convert.ToInt32(txtWorkDate2.Text);
+                year = date1.Year - Convert.ToInt32(txtWorkDate2.Text)-1;
                 string da2 = year + date1.ToString("yyyy-MM").Substring(4);
-                MyStringBuilder.Append(" and dJoin_date >= '" + da2 + "' ");
+                MyStringBuilder.Append(" and dJoin_date > '" + da2 + "' ");
             }
 
 
@@ -167,7 +173,7 @@ namespace PersonnelManagement
             if (txtcFull_timeMajor.Text != "")
             {
                 DataTable dt_Major = MySQLHelper.table("SELECT *FROM data_majorinf WHERE cMulitString LIKE '%"+ txtcFull_timeMajor.Text + "%'");
-                MyStringBuilder.Append(" and cFull_timeMajor in "+SaveFile.FormatMajor(dt_Major));
+                MyStringBuilder.Append(" and cFull_timeMajor in "+SaveFile.FormatMajor(dt_Major)+ "OR cFull_timeMajor LIKE '%"+ txtcFull_timeMajor.Text + "%'");
             }
 
             //在职
@@ -181,7 +187,7 @@ namespace PersonnelManagement
             if (txtcIn_serviceMajor.Text != "")
             {
                 DataTable dt_Major = MySQLHelper.table("SELECT *FROM data_majorinf WHERE cMulitString LIKE '%" + txtcIn_serviceMajor.Text + "%'");
-                MyStringBuilder.Append(" and cIn_serviceMajor in " + SaveFile.FormatMajor(dt_Major));
+                MyStringBuilder.Append(" and cIn_serviceMajor in " + SaveFile.FormatMajor(dt_Major) + "OR cFull_timeMajor LIKE '%" + txtcIn_serviceMajor.Text + "%'");
             }
             //籍贯
             if (txtNativePlace.Text != "")
@@ -246,10 +252,10 @@ namespace PersonnelManagement
             #region 工作经历
             //简历起始时间
             if (dStartDate.Text != ""&& dStartDate.Text != "起")
-                other.Append(" and dStartDate like '" + Convert.ToDateTime(dStartDate.DateTime).ToString("yyyy-MM") + "%'");
+                other.Append(" and dStartDate >= '" + Convert.ToDateTime(dStartDate.DateTime).ToString("yyyy-MM") + "%'");
             //简历结束时间
             if (dDeadLine.Text != ""&& dDeadLine.Text != "止")
-                other.Append(" and dDeadline like '" + Convert.ToDateTime(dDeadLine.DateTime).ToString("yyyy-MM") + "%'");
+                other.Append(" and dDeadline <= '" + Convert.ToDateTime(dDeadLine.DateTime).ToString("yyyy-MM") + "%'");
 
             //学习或者工作单位
             if (txtExperience.Text != "")
@@ -302,7 +308,6 @@ namespace PersonnelManagement
 
 
             #endregion
-
 
             #region 奖惩信息
             if (dRewardData.Text != ""&& dRewardData.Text != "起")
@@ -608,6 +613,16 @@ namespace PersonnelManagement
             dDate.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
             dDate.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.Default;
 
+            dStartDate.Properties.Mask.EditMask = formatString;
+            dStartDate.Properties.Mask.UseMaskAsDisplayFormat = true;
+            dStartDate.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
+            dStartDate.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.Default;
+
+            dDeadLine.Properties.Mask.EditMask = formatString;
+            dDeadLine.Properties.Mask.UseMaskAsDisplayFormat = true;
+            dDeadLine.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
+            dDeadLine.Properties.VistaCalendarViewStyle = DevExpress.XtraEditors.VistaCalendarViewStyle.Default;
+
             dRewardData.Properties.Mask.EditMask = formatString;
             dRewardData.Properties.Mask.UseMaskAsDisplayFormat = true;
             dRewardData.Properties.VistaCalendarInitialViewStyle = DevExpress.XtraEditors.VistaCalendarInitialViewStyle.YearView;
@@ -668,7 +683,7 @@ namespace PersonnelManagement
                 XtraMessageBox.Show("请选择要导出的人员！");
                 return;
             }
-            SaveFile.ExportExcel(ReturnDT);
+            SaveFile.ExportExcel(ReturnDT,name:"人名册");
         }
         /// <summary>
         /// 添加年龄，添加党政正职
@@ -786,6 +801,12 @@ namespace PersonnelManagement
             }
             FrmInfMain frm = new FrmInfMain(row["pid"].ToString(), false);
             frm.Show();
+        }
+
+        private void btnupdate_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Excsql.ExecuteSqlScript("");
+            XtraMessageBox.Show("更新成功");
         }
     }
 }

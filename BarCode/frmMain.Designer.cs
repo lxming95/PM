@@ -408,7 +408,7 @@ namespace BarCode
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.ImageList imgList;
         private System.Windows.Forms.ImageList imgNode;
-        private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel1;
+        //private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel1;
         private DevExpress.Utils.Behaviors.BehaviorManager behaviorManager1;
         private DevExpress.XtraBars.BarManager barManager1;
         private DevExpress.XtraBars.Bar bar3;

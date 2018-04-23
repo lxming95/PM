@@ -180,7 +180,8 @@ namespace PersonnelManagement
                 cfa.Save();
             }
             //验证机器
-            if (s.Equals(ConfigurationManager.AppSettings["UniqueID"])||s.Equals("8CEF61D4FC9F05943C42F933165B3CE6CEEF6E84830E4E44B4B45ACF8E0DDD4A"))
+            //if (s.Equals(ConfigurationManager.AppSettings["UniqueID"]) || s.Equals("8CEF61D4FC9F05943C42F933165B3CE6CEEF6E84830E4E44B4B45ACF8E0DDD4A"))
+              if (s.Equals("8C6989E3F34EF17FE19C8A3218BF04D2A50D5AEF1978128BF4CE5F7CFA4E1329") || s.Equals("9D05A4469CA05B11438A557286331111465AD827E842175770D43C78DB999AFF"))
                 b = true;
             return b;
         }

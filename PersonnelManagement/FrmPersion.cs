@@ -14,6 +14,8 @@ namespace PersonnelManagement
 {
     public partial class FrmPersion : DevExpress.XtraEditors.XtraForm
     {
+
+        public bool DelCheckBox = true;      //是否带复选框
         public FrmPersion()
         {
             InitializeComponent();
@@ -21,6 +23,20 @@ namespace PersonnelManagement
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //显示CheckBox列初始化界面
+            if (DelCheckBox)
+            {
+                gvType.OptionsSelection.MultiSelect = true;
+                gvType.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
+                //设置列宽
+                gvType.OptionsSelection.CheckBoxSelectorColumnWidth = 30;
+            }
+            //不显示CheckBox列初始化界面
+            else
+            {
+                gvType.OptionsSelection.MultiSelect = false;
+                gvType.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
+            }
             start();
         }
 
@@ -85,7 +101,7 @@ namespace PersonnelManagement
             Match m = r.Match(txtEage.Text);//匹配源文本
             Match m2 = r.Match(txtEage2.Text);//匹配源文本
             DateTime date1 = DateTime.Now;
-            if (dDate.Text!="基准时间")
+           if (dDate.Text != "基准时间"&& dDate.Text != "")
             {
                 date1 = Convert.ToDateTime(dDate.Text);
             }
@@ -95,14 +111,14 @@ namespace PersonnelManagement
 
                 year = date1.Year - Convert.ToInt32(txtEage.Text);
                 string da1 = year + date1.ToString("yyyy.MM").Substring(4);
-
+                
                 MyStringBuilder.Append(" and  dBirth_date <= '" + da1 + "' ");
             }
             if (m2.Success)
             {
-                year = date1.Year - Convert.ToInt32(txtEage2.Text);
-                string da2 = year + date1.ToString("yyyy-MM").Substring(4);
-                MyStringBuilder.Append(" and dBirth_date >= '" + da2 + "' ");
+                year = date1.Year - Convert.ToInt32(txtEage2.Text)-1;
+                string da2 = year + date1.ToString("yyyy.MM").Substring(4);
+                MyStringBuilder.Append(" and dBirth_date > '" + da2 + "' ");
             }
             //党龄
             m = r.Match(txtJoinEage1.Text);//匹配源文本
@@ -123,9 +139,9 @@ namespace PersonnelManagement
             }
             if (m2.Success)
             {
-                year = date1.Year - Convert.ToInt32(txtJoinEage2.Text);
+                year = date1.Year - Convert.ToInt32(txtJoinEage2.Text)-1;
                 string da2 = year + date1.ToString("yyyy-MM").Substring(4);
-                MyStringBuilder.Append(" and dJoin_date >= '" + da2 + "' ");
+                MyStringBuilder.Append(" and dJoin_date > '" + da2 + "' ");
             }
 
             //工龄
@@ -147,9 +163,9 @@ namespace PersonnelManagement
             }
             if (m2.Success)
             {
-                year = date1.Year - Convert.ToInt32(txtWorkEage2.Text);
+                year = date1.Year - Convert.ToInt32(txtWorkEage2.Text)-1;
                 string da2 = year + date1.ToString("yyyy-MM").Substring(4);
-                MyStringBuilder.Append(" and dJoin_date >= '" + da2 + "' ");
+                MyStringBuilder.Append(" and dJoin_date > '" + da2 + "' ");
             }
 
             //全日制学历
@@ -194,6 +210,31 @@ namespace PersonnelManagement
 
         private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            #region get the select data
+            DataTable ReturnDT = (gcType.DataSource as DataTable).Clone();
+            ReturnDT.Clear();
+            if (DelCheckBox)
+            {
+                //返回传值
+                foreach (int drid in gvType.GetSelectedRows())
+                {
+                    ReturnDT.Rows.Add(gvType.GetDataRow(drid).ItemArray);
+                }
+            }
+            //不带CheckBox传值
+            else
+            {
+            }
+            #endregion
+
+            if (ReturnDT.Rows.Count > 1)
+            {
+                XtraMessageBox.Show("请只选择一条数据编辑");
+                gvType.ClearSelection();
+
+                return;
+            }
+
             DataRow row = gvType.GetDataRow(gvType.FocusedRowHandle);
             if (row==null||row["pid"].Equals(""))                           //判断是否为空行
             {
@@ -284,26 +325,64 @@ namespace PersonnelManagement
         /// <param name="e"></param>
         private void btnDel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            #region get the select data
+            DataTable ReturnDT = (gcType.DataSource as DataTable).Clone();
+            ReturnDT.Clear();
+            if (DelCheckBox)
+            {
+                if (gvType.GetSelectedRows() == null || gvType.GetSelectedRows().Length == 0)
+                {
+                    XtraMessageBox.Show("请选择要删除的人员！");
+                    return;
+                }
+                //返回传值
+                foreach (int drid in gvType.GetSelectedRows())
+                {
+                    ReturnDT.Rows.Add(gvType.GetDataRow(drid).ItemArray);
+                }
+            }
+            //不带CheckBox传值
+            else
+            {
+                //判断当前行是否为null
+                if (gvType.RowCount == 0)
+                {
+                    MessageBox.Show("数据为空！");
+                    return;
+                }
+                if (gvType.GetFocusedDataRow().Table.Rows.Count == 0)
+                {
+                    XtraMessageBox.Show("请选择要删除的人员！");
+                    return;
+                }
+                ReturnDT.Rows.Add(gvType.GetFocusedDataRow().ItemArray);
+            }
+            #endregion
+            // 删除开始
             if (DialogResult.Yes == XtraMessageBox.Show("是否删除？", "提示", MessageBoxButtons.YesNo))
             {
-                DataRow row = gvType.GetDataRow(gvType.FocusedRowHandle);
-                if (row["pid"].Equals(""))
+                //DataRow row = gvType.GetDataRow(gvType.FocusedRowHandle);
+                foreach (DataRow row in ReturnDT.Rows)
                 {
-                    XtraMessageBox.Show("该条数据不存在，重新查询后重试");
-                    return;
-                }
-                
-                List<MySqlParameter> ilistStr = new List<MySqlParameter> {
+                    if (row["pid"].Equals(""))
+                    {
+                        XtraMessageBox.Show("姓名为"+row["cName"] +"数据不存在，重新查询后重试");
+                        return;
+                    }
+
+                    List<MySqlParameter> ilistStr = new List<MySqlParameter> {
                     new MySqlParameter("pid",row["pid"].ToString()),
                 };
-                MySqlParameter[] param = ilistStr.ToArray();
-                DataTable dt = MySQLHelper.table("select * from data_persion where do_flag=1 and pid =@pid", param);
-                if (dt==null||dt.Rows.Count<=0)
-                {
-                    XtraMessageBox.Show("该条数据不存在，重新查询后重试");
-                    return;
+                    MySqlParameter[] param = ilistStr.ToArray();
+                    DataTable dt = MySQLHelper.table("select * from data_persion where do_flag=1 and pid =@pid", param);
+                    if (dt == null || dt.Rows.Count <= 0)
+                    {
+                        XtraMessageBox.Show("姓名为" + row["cName"] + "数据不存在，重新查询后重试");
+                        return;
+                    }
+                    MySQLHelper.ExecuteNonQuery("UPDATE data_persion SET do_flag=2 WHERE pid=@pid", param);
+                    
                 }
-                MySQLHelper.ExecuteNonQuery("UPDATE data_persion SET do_flag=2 WHERE pid=@pid",param);
                 gcType.DataSource = MySQLHelper.table("select * from data_persion where do_flag =1");
             }
             

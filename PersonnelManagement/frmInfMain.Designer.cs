@@ -80,6 +80,7 @@
             this.cCategory = new DevExpress.XtraGrid.Columns.GridColumn();
             this.cbcCategory = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.cLevel = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.cbcLevel = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.cDetailed = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridView8 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.labelControl29 = new DevExpress.XtraEditors.LabelControl();
@@ -228,6 +229,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcRewards)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvRewards)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbcCategory)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbcLevel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcReserveCadre)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvReserveCadre)).BeginInit();
@@ -643,7 +645,11 @@
             "",
             "优秀",
             "称职",
-            "不称职"});
+            "基本称职",
+            "不定等次",
+            "不称职",
+            "合格",
+            "不合格"});
             this.cbcrChechResult.Name = "cbcrChechResult";
             // 
             // dDate2
@@ -808,7 +814,8 @@
             this.gcRewards.MainView = this.gvRewards;
             this.gcRewards.Name = "gcRewards";
             this.gcRewards.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.cbcCategory});
+            this.cbcCategory,
+            this.cbcLevel});
             this.gcRewards.Size = new System.Drawing.Size(531, 153);
             this.gcRewards.TabIndex = 169;
             this.gcRewards.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -880,11 +887,25 @@
             this.cLevel.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.cLevel.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.cLevel.Caption = "奖惩级别";
+            this.cLevel.ColumnEdit = this.cbcLevel;
             this.cLevel.FieldName = "cLevel";
             this.cLevel.Name = "cLevel";
             this.cLevel.Visible = true;
             this.cLevel.VisibleIndex = 2;
             this.cLevel.Width = 116;
+            // 
+            // cbcLevel
+            // 
+            this.cbcLevel.AutoHeight = false;
+            this.cbcLevel.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.cbcLevel.Items.AddRange(new object[] {
+            "",
+            "中央",
+            "省",
+            "市",
+            "县"});
+            this.cbcLevel.Name = "cbcLevel";
             // 
             // cDetailed
             // 
@@ -1376,7 +1397,8 @@
             "干部（公务员）",
             "干部（事业编）",
             "工人（公务员聘干）",
-            "工人（事业编）"});
+            "工人（事业编）",
+            "工人（行政执勤）"});
             this.txtIdentityCategory.Size = new System.Drawing.Size(106, 20);
             this.txtIdentityCategory.TabIndex = 185;
             // 
@@ -1997,7 +2019,7 @@
             // 
             // txtcFull_timeDegree
             // 
-            this.txtcFull_timeDegree.Location = new System.Drawing.Point(283, 32);
+            this.txtcFull_timeDegree.Location = new System.Drawing.Point(283, 35);
             this.txtcFull_timeDegree.MenuManager = this.barManager1;
             this.txtcFull_timeDegree.Name = "txtcFull_timeDegree";
             this.txtcFull_timeDegree.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -2219,6 +2241,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcRewards)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvRewards)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbcCategory)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbcLevel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcReserveCadre)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvReserveCadre)).EndInit();
@@ -2471,5 +2494,6 @@
         private DevExpress.XtraEditors.LabelControl labelControl47;
         private DevExpress.XtraEditors.ComboBoxEdit txtcFull_timeDegree;
         private DevExpress.XtraEditors.ComboBoxEdit txtcIn_serviceDegree;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox cbcLevel;
     }
 }

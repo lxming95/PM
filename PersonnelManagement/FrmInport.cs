@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
 using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -126,7 +127,7 @@ namespace PersonnelManagement
                             List<MySqlParameter> ilistStr = new List<MySqlParameter> {
                             new MySqlParameter("cIDnumber", dt.Rows[i][1].ToString()),              //身份证号码
                             new MySqlParameter("cUnit", dt.Rows[i][2].ToString()),                  //单位
-                            new MySqlParameter("cName", dt.Rows[i][3].ToString()),                  //姓名
+                            new MySqlParameter("cName", formName(dt.Rows[i][3].ToString())),                  //姓名
                             new MySqlParameter("cCurrentJob", dt.Rows[i][4].ToString()),            //现任职务
                             new MySqlParameter("cSex", dt.Rows[i][5].ToString()),                   //性别
                             new MySqlParameter("cNation", dt.Rows[i][6].ToString()),                //民族
@@ -221,10 +222,10 @@ namespace PersonnelManagement
                 DataTable dt_cl = ds.Tables[0];
                 foreach (DataRow r in dt_cl.Rows)
                 {
-                    DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName='"+r["本人姓名"] +"' AND dBirth_date LIKE '%" + r["出生年月"].ToString() + "%'");
+                    DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName='"+ formName(r["本人姓名"].ToString()) +"' AND dBirth_date LIKE '%" + fromDate(r["出生年月"].ToString()) + "%'");
                     if (dt_persion == null || dt_persion.Rows.Count <= 0)
                     {
-                        XtraMessageBox.Show("请确保数据库中存在" + r["本人姓名"].ToString() + "的信息，然后再插入相关的学习及工作简历");
+                        XtraMessageBox.Show("请确保数据库中存在姓名为：" + r["本人姓名"].ToString() +"出生年月为："+ r["出生年月"] + "的信息，然后再插入相关的学习及工作简历");
                         return;
                         //break;
                     }
@@ -240,21 +241,39 @@ namespace PersonnelManagement
                     if (dt_re.Rows[i][1].ToString() != "")
                     {
                         List<MySqlParameter> ilistStr = new List<MySqlParameter> {
-                            new MySqlParameter("cName", dt_re.Rows[i][1].ToString()),          //姓名
+                            new MySqlParameter("cName", formName(dt_re.Rows[i][1].ToString())),          //姓名
                             new MySqlParameter("dBirth_date", dt_re.Rows[i][2].ToString()),    //出生日期
                             //new MySqlParameter("cIDnumber", dt_re.Rows[i][2].ToString()),    //身份证号码
                             new MySqlParameter("dStartDate", dt_re.Rows[i][3].ToString()),     //开始时间
-                            new MySqlParameter("dDeadline", dt_re.Rows[i][4].ToString()),      //截至时间
+                            //new MySqlParameter("dDeadline", dt_re.Rows[i][4].ToString()),      //截至时间
                             new MySqlParameter("rLevel", dt_re.Rows[i][5].ToString()),         //工作单位经历
                             new MySqlParameter("cExperience", dt_re.Rows[i][6].ToString()),    //工作单位经历
-                            new MySqlParameter("rRemarks", dt_re.Rows[i][7].ToString()),       //备注
+                            new MySqlParameter("rRemarks", ""),       //备注
+                            //new MySqlParameter("rRemarks", dt_re.Rows[i][7].ToString()),       //备注
                         };
+                        if (dt_re.Rows[i][4].ToString() != "")
+                        {
+                            ilistStr.Add(new MySqlParameter("dDeadline", dt_re.Rows[i][4].ToString()));
+                        }
+                        else if(i+1== dt_re.Rows.Count)
+                        {
+                            ilistStr.Add(new MySqlParameter("dDeadline", dt_re.Rows[i][4].ToString()));
+                        }
+                        else if (dt_re.Rows[i][1].ToString() == dt_re.Rows[i + 1][1].ToString() && dt_re.Rows[i][2].ToString() == dt_re.Rows[i + 1][2].ToString())
+                        {
+                            ilistStr.Add(new MySqlParameter("dDeadline", dt_re.Rows[i + 1][3].ToString()));
+                        }
+                        else
+                        {
+                            ilistStr.Add(new MySqlParameter("dDeadline", dt_re.Rows[i][4].ToString()));
+                        }
+
                         MySqlParameter[] param = ilistStr.ToArray();
-                        DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName=@cName AND dBirth_date LIKE '%" + dt_re.Rows[i][2].ToString() + "%'", param);
+                        DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName=@cName AND dBirth_date LIKE '%" + fromDate(dt_re.Rows[i][2].ToString()) + "%'", param);
                         //DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cIDnumber=@cIDnumber", param);
                         if (dt_persion == null || dt_persion.Rows.Count <= 0)
                         {
-                            XtraMessageBox.Show("请确保数据库中存在"+ dt_re.Rows[i][1].ToString() + "的信息，然后再插入相关的学习及工作简历");
+                            XtraMessageBox.Show("请确保数据库中存在姓名为："+ dt_re.Rows[i][1].ToString() +"出生年月为："+ dt_re.Rows[i][2].ToString() + "的信息，然后再插入相关的学习及工作简历");
                             return;
                             //break;
                         }
@@ -275,10 +294,10 @@ namespace PersonnelManagement
                 dt_cl = ds.Tables[0];
                 foreach (DataRow r in dt_cl.Rows)
                 {
-                    DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName='" + r["本人姓名"] + "' AND dBirth_date LIKE '%" + r["出生年月"].ToString() + "%'");
+                    DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName='" + formName(r["本人姓名"].ToString()) + "' AND dBirth_date LIKE '%" + fromDate(r["出生年月"].ToString()) + "%'");
                     if (dt_persion == null || dt_persion.Rows.Count <= 0)
                     {
-                        XtraMessageBox.Show("请确保数据库中存在" + r["本人姓名"].ToString() + "的信息，然后再插入相关的学习及工作简历");
+                        XtraMessageBox.Show("请确保数据库中存在姓名为" + r["本人姓名"].ToString()+"出生年月为："+ r["出生年月"].ToString() + "的信息，然后再插入相关的学习及工作简历");
                         return;
                         //break;
                     }
@@ -294,7 +313,7 @@ namespace PersonnelManagement
                     if (dt_re.Rows[i][1].ToString() != "")
                     {
                         List<MySqlParameter> ilistStr = new List<MySqlParameter> {
-                            new MySqlParameter("cName", dt_re.Rows[i][1].ToString()),          //姓名
+                            new MySqlParameter("cName", formName(dt_re.Rows[i][1].ToString())),          //姓名
                             new MySqlParameter("dBirth_date", dt_re.Rows[i][2].ToString()),    //身份证号码
                             //new MySqlParameter("cIDnumber", dt_re.Rows[i][2].ToString()),      //身份证号码
                             new MySqlParameter("rcYear", dt_re.Rows[i][3].ToString()),         //年度
@@ -302,11 +321,11 @@ namespace PersonnelManagement
                             new MySqlParameter("rcRemarks", dt_re.Rows[i][5].ToString()),      //备注
                         };
                         MySqlParameter[] param = ilistStr.ToArray();
-                        DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName=@cName AND dBirth_date LIKE '%" + dt_re.Rows[i][2].ToString() + "%'", param);
+                        DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName=@cName AND dBirth_date LIKE '%" + fromDate(dt_re.Rows[i][2].ToString()) + "%'", param);
                         //DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND  cIDnumber=@cIDnumber", param);
                         if (dt_persion == null || dt_persion.Rows.Count <= 0)
                         {
-                            XtraMessageBox.Show("请确保数据库中存在" + dt_re.Rows[i][1].ToString() + "的信息，然后再插入相关的后备干部数据");
+                            XtraMessageBox.Show("请确保数据库中存在姓名为：" + dt_re.Rows[i][1].ToString()+"出生年月为：" + dt_re.Rows[i][2].ToString() + "的信息，然后再插入相关的后备干部数据");
                             return;
                             //break;
                         }
@@ -317,6 +336,7 @@ namespace PersonnelManagement
                     }
                 }
                 #endregion
+
                 #region 家庭主要成员 data_familymembers
                 strExcel = "SELECT 本人姓名,出生年月 FROM [学习及工作简历$] WHERE len(本人姓名)>0  GROUP BY 本人姓名,出生年月";
                 myCommand = new OleDbDataAdapter(strExcel, strConn);
@@ -325,10 +345,10 @@ namespace PersonnelManagement
                 dt_cl = ds.Tables[0];
                 foreach (DataRow r in dt_cl.Rows)
                 {
-                    DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName='" + r["本人姓名"] + "' AND dBirth_date LIKE '%" + r["出生年月"].ToString() + "%'");
+                    DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName='" + formName(r["本人姓名"].ToString()) + "' AND dBirth_date LIKE '%" + fromDate(r["出生年月"].ToString()) + "%'");
                     if (dt_persion == null || dt_persion.Rows.Count <= 0)
                     {
-                        XtraMessageBox.Show("请确保数据库中存在" + r["本人姓名"].ToString() + "的信息，然后再插入相关的学习及工作简历");
+                        XtraMessageBox.Show("请确保数据库中存在姓名为：" + r["本人姓名"].ToString()+"出生年月为："+ r["出生年月"].ToString() + "的信息，然后再插入相关的学习及工作简历");
                         return;
                         //break;
                     }
@@ -345,7 +365,7 @@ namespace PersonnelManagement
                     if (dt_re.Rows[i][1].ToString() != "")
                     {
                         List<MySqlParameter> ilistStr = new List<MySqlParameter> {
-                            new MySqlParameter("cName", dt_re.Rows[i][1].ToString()),               //姓名
+                            new MySqlParameter("cName", formName(dt_re.Rows[i][1].ToString())),               //姓名
                             new MySqlParameter("dBirth_date", dt_re.Rows[i][2].ToString()),         //出生日期
                             //new MySqlParameter("cIDnumber", dt_re.Rows[i][2].ToString()),           //身份证号码
                             new MySqlParameter("cfCalled", dt_re.Rows[i][3].ToString()),            //称谓
@@ -356,11 +376,11 @@ namespace PersonnelManagement
                             
                         };
                         MySqlParameter[] param = ilistStr.ToArray();
-                        DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName=@cName AND dBirth_date LIKE '%" + dt_re.Rows[i][2].ToString() + "%'", param);
+                        DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName=@cName AND dBirth_date LIKE '%" + fromDate(dt_re.Rows[i][2].ToString()) + "%'", param);
                         //DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND  cIDnumber=@cIDnumber", param);
                         if (dt_persion == null || dt_persion.Rows.Count <= 0)
                         {
-                            XtraMessageBox.Show("请确保数据库中存在" + dt_re.Rows[i][1].ToString() + "的信息，然后再插入相关的家庭主要成员数据");
+                            XtraMessageBox.Show("请确保数据库中存在姓名为：" + dt_re.Rows[i][1].ToString() +"出生年月为："+ dt_re.Rows[i][2].ToString() + "的信息，然后再插入相关的家庭主要成员数据");
                             return;
                             //break;
                         }
@@ -371,6 +391,7 @@ namespace PersonnelManagement
                     }
                 }
                 #endregion
+
                 #region 奖惩情况 data_rewards_punishments
                 strExcel = "SELECT 本人姓名,出生年月 FROM [学习及工作简历$] WHERE len(本人姓名)>0  GROUP BY 本人姓名,出生年月";
                 myCommand = new OleDbDataAdapter(strExcel, strConn);
@@ -379,10 +400,10 @@ namespace PersonnelManagement
                 dt_cl = ds.Tables[0];
                 foreach (DataRow r in dt_cl.Rows)
                 {
-                    DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName='" + r["本人姓名"] + "' AND dBirth_date LIKE '%" + r["出生年月"].ToString() + "%'");
+                    DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName='" + formName(r["本人姓名"].ToString()) + "' AND dBirth_date LIKE '%" + fromDate(r["出生年月"].ToString()) + "%'");
                     if (dt_persion == null || dt_persion.Rows.Count <= 0)
                     {
-                        XtraMessageBox.Show("请确保数据库中存在" + r["本人姓名"].ToString() + "的信息，然后再插入相关的学习及工作简历");
+                        XtraMessageBox.Show("请确保数据库中存在姓名为：" + r["本人姓名"].ToString() +"出生年月为：" + r["出生年月"].ToString() + "的信息，然后再插入相关的奖惩情况");
                         return;
                         //break;
                     }
@@ -399,7 +420,7 @@ namespace PersonnelManagement
                     if (dt_re.Rows[i][1].ToString() != "")
                     {
                         List<MySqlParameter> ilistStr = new List<MySqlParameter> {
-                            new MySqlParameter("cName", dt_re.Rows[i][1].ToString()),               //姓名
+                            new MySqlParameter("cName", formName(dt_re.Rows[i][1].ToString())),               //姓名
                             new MySqlParameter("dBirth_date", dt_re.Rows[i][2].ToString()),         //出生日期
                             //new MySqlParameter("cIDnumber", dt_re.Rows[i][2].ToString()),           //身份证号码
                             new MySqlParameter("dData", dt_re.Rows[i][4].ToString()),               //时间
@@ -409,11 +430,11 @@ namespace PersonnelManagement
                             new MySqlParameter("rpRemarks", dt_re.Rows[i][7].ToString()),           //备注
                         };
                         MySqlParameter[] param = ilistStr.ToArray();
-                        DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName=@cName AND dBirth_date LIKE '%" + dt_re.Rows[i][2].ToString() + "%'", param);
+                        DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName=@cName AND dBirth_date LIKE '%" + fromDate(dt_re.Rows[i][2].ToString()) + "%'", param);
                         //DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND  cIDnumber=@cIDnumber", param);
                         if (dt_persion == null || dt_persion.Rows.Count <= 0)
                         {
-                            XtraMessageBox.Show("请确保数据库中存在" + dt_re.Rows[i][1].ToString() + "的信息，然后再插入相关的奖惩情况数据");
+                            XtraMessageBox.Show("请确保数据库中存在姓名为：" + dt_re.Rows[i][1].ToString() +"出生年月为："+ dt_re.Rows[i][2].ToString() + "的信息，然后再插入相关的奖惩情况数据");
                             return;
                             //break;
                         }
@@ -424,6 +445,7 @@ namespace PersonnelManagement
                     }
                 }
                 #endregion
+
                 #region 年度考核 data_checkresult
                 strExcel = "SELECT 本人姓名,出生年月 FROM [学习及工作简历$] WHERE len(本人姓名)>0  GROUP BY 本人姓名,出生年月";
                 myCommand = new OleDbDataAdapter(strExcel, strConn);
@@ -432,10 +454,10 @@ namespace PersonnelManagement
                 dt_cl = ds.Tables[0];
                 foreach (DataRow r in dt_cl.Rows)
                 {
-                    DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName='" + r["本人姓名"] + "' AND dBirth_date LIKE '%" + r["出生年月"].ToString() + "%'");
+                    DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName='" + formName(r["本人姓名"].ToString()) + "' AND dBirth_date LIKE '%" + fromDate(r["出生年月"].ToString()) + "%'");
                     if (dt_persion == null || dt_persion.Rows.Count <= 0)
                     {
-                        XtraMessageBox.Show("请确保数据库中存在" + r["本人姓名"].ToString() + "的信息，然后再插入相关的学习及工作简历");
+                        XtraMessageBox.Show("请确保数据库中存在姓名为：" + r["本人姓名"].ToString()+"出生年月为："+ r["出生年月"].ToString() + "的信息，然后再插入相关的学习及工作简历");
                         return;
                         //break;
                     }
@@ -452,7 +474,7 @@ namespace PersonnelManagement
                     if (dt_re.Rows[i][1].ToString() != "")
                     {
                         List<MySqlParameter> ilistStr = new List<MySqlParameter> {
-                            new MySqlParameter("cName", dt_re.Rows[i][1].ToString()),               //姓名
+                            new MySqlParameter("cName", formName(dt_re.Rows[i][1].ToString())),               //姓名
                             new MySqlParameter("dBirth_date", dt_re.Rows[i][2].ToString()),         //出生日期
                             //new MySqlParameter("cIDnumber", dt_re.Rows[i][2].ToString()),           //身份证号码
                             new MySqlParameter("dcrYear", dt_re.Rows[i][3].ToString()),             //考核年度
@@ -460,11 +482,12 @@ namespace PersonnelManagement
                             new MySqlParameter("crRemarks", dt_re.Rows[i][5].ToString()),           //类别
                         };
                         MySqlParameter[] param = ilistStr.ToArray();
-                        DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName=@cName AND dBirth_date LIKE '%" + dt_re.Rows[i][2].ToString() + "%'", param);
+                        DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName=@cName AND dBirth_date LIKE '%" + fromDate(dt_re.Rows[i][2].ToString()) + "%'", param);
                         //DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1  AND  cIDnumber=@cIDnumber", param);
                         if (dt_persion == null || dt_persion.Rows.Count <= 0)
                         {
-                            XtraMessageBox.Show("请确保数据库中存在" + dt_re.Rows[i][1].ToString() + "的信息，然后再插入相关的年度考核数据");
+                            XtraMessageBox.Show("请确保数据库中存在姓名为：" + dt_re.Rows[i][1].ToString() + "出生年月为：" + dt_re.Rows[i][2].ToString() + "的信息，然后再插入相关的年度考核数据");
+                            fromDate(dt_re.Rows[i][2].ToString());
                             return;
                             //break;
                         }
@@ -475,6 +498,7 @@ namespace PersonnelManagement
                     }
                 }
                 #endregion
+
                 #region 现实表现 data_performance
                 strExcel = "SELECT 本人姓名,出生年月 FROM [学习及工作简历$] WHERE len(本人姓名)>0  GROUP BY 本人姓名,出生年月";
                 myCommand = new OleDbDataAdapter(strExcel, strConn);
@@ -483,10 +507,10 @@ namespace PersonnelManagement
                 dt_cl = ds.Tables[0];
                 foreach (DataRow r in dt_cl.Rows)
                 {
-                    DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName='" + r["本人姓名"] + "' AND dBirth_date LIKE '%" + r["出生年月"].ToString() + "%'");
+                    DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName='" + formName(r["本人姓名"].ToString()) + "' AND dBirth_date LIKE '%" + fromDate(r["出生年月"].ToString()) + "%'");
                     if (dt_persion == null || dt_persion.Rows.Count <= 0)
                     {
-                        XtraMessageBox.Show("请确保数据库中存在" + r["本人姓名"].ToString() + "的信息，然后再插入相关的学习及工作简历");
+                        XtraMessageBox.Show("请确保数据库中存在姓名为：" + r["本人姓名"].ToString() +"出生年月为："+ r["出生年月"].ToString() + "的信息，然后再插入相关的学习及工作简历");
                         return;
                         //break;
                     }
@@ -503,7 +527,7 @@ namespace PersonnelManagement
                     if (dt_re.Rows[i][1].ToString() != "")
                     {
                         List<MySqlParameter> ilistStr = new List<MySqlParameter> {
-                            new MySqlParameter("cName", dt_re.Rows[i][1].ToString()),                   //姓名
+                            new MySqlParameter("cName", formName(dt_re.Rows[i][1].ToString())),                   //姓名
                             new MySqlParameter("dBirth_date", dt_re.Rows[i][2].ToString()),             //出生日期
                             //new MySqlParameter("cIDnumber", dt_re.Rows[i][2].ToString()),               //身份证号码
                             new MySqlParameter("rpYear", dt_re.Rows[i][3].ToString()),                  //年度
@@ -513,11 +537,11 @@ namespace PersonnelManagement
                             new MySqlParameter("prRemarks", dt_re.Rows[i][7].ToString()), //组织部评价
                         };
                         MySqlParameter[] param = ilistStr.ToArray();
-                        DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName=@cName AND dBirth_date LIKE '%" + dt_re.Rows[i][2].ToString() + "%'", param);
+                        DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName=@cName AND dBirth_date LIKE '%" + fromDate(dt_re.Rows[i][2].ToString()) + "%'", param);
                         //DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND  cIDnumber=@cIDnumber", param);
                         if (dt_persion == null || dt_persion.Rows.Count <= 0)
                         {
-                            XtraMessageBox.Show("请确保数据库中存在" + dt_re.Rows[i][1].ToString() + "的信息，然后再插入相关的现实表现数据");
+                            XtraMessageBox.Show("请确保数据库中存在姓名为：" + dt_re.Rows[i][1].ToString() + "出生年月为：" + dt_re.Rows[i][2].ToString() + "的信息，然后再插入相关的现实表现数据");
                             return;
                             //break;
                         }
@@ -539,6 +563,7 @@ namespace PersonnelManagement
             }
             catch (Exception err)
             {
+                //SaveFile.KillExcel();
                 XtraMessageBox.Show(err.Message);
             }
         }
@@ -548,8 +573,21 @@ namespace PersonnelManagement
         /// <param name="s">输入年月字符</param>
         /// <param name="c">输入分隔符</param>
         /// <returns>返回为yyyy.MM</returns>
-        private string fromDate(string s,char c,string f= "yyyy.MM")
+        private string fromDate(string s,char c='.',string f= "yyyy.MM")
         {
+            s=s.Replace(" ","");
+            if (s.Length >7)
+            {
+                s = s.Substring(0,7);
+            }
+            if (s.Split('.').Length > 1)
+            {
+                c = '.';
+            }
+            else if (s.Split('-').Length > 1)
+            {
+                c = '-';
+            }
             if (s == "")
                 return "";
             if (s.Split(c).Length > 1)
@@ -582,10 +620,19 @@ namespace PersonnelManagement
 
                 return Convert.ToDateTime(date).ToString(f);
             }
-            else { XtraMessageBox.Show("时间格式错误，请填写yyyy"+c+"MM格式或者yy"+c+"MM格式的时间");return ""; }
+            else if (s.Length == 6)
+            {
+                return s.Substring(0,4) + c + s.Substring(4,2);
+            }
+            else { XtraMessageBox.Show("时间格式错误，请填写yyyy" + c + "MM格式或者yy" + c + "MM格式的时间或者yyyyMM格式"); return ""; }
 
         }
 
+        private string formName(string s)
+        {
+            s = s.Replace(" ", "");
+            return s;
+        }
         private DataTable fromDTcolumns(DataTable dt)
         {
             dt.Columns[2].ColumnName = "cUnit";
@@ -655,6 +702,244 @@ namespace PersonnelManagement
         {
             ShowCount.DrawRowIndicator(gvType,30);
         }
-   
+
+        private void btnDownloadAddModel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            SaveFileDialog sfExcel = new SaveFileDialog();
+            sfExcel.Filter = "Excel 97-2013 工作簿(*.xls)|*.xls";
+            sfExcel.FileName = "模版";
+            if (sfExcel.ShowDialog() == DialogResult.OK)
+            {
+                if (sfExcel.FileName.Trim().Length > 0)
+                {
+                    byte[] excel = Properties.Resources.追加导入模板;
+                    FileStream stream = new FileStream(sfExcel.FileName, FileMode.Create);
+                    stream.Write(excel, 0, excel.Length);
+                    stream.Close();
+                    stream.Dispose();
+                    XtraMessageBox.Show("保存成功", "提示");
+                }
+            }
+        }
+        private void btnAddInport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            //XtraMessageBox.Show(Convert.ToDateTime("1975.05").ToString("yyyyMM"));
+            int a=addInport();
+            if (a == 1)
+            {
+                //XtraMessageBox.Show("保存成功");
+            }
+        }
+        private int addInport()
+        {
+            string Path = "";
+            //int tatal = 0;
+            int success = 0;
+            OpenFileDialog fileDialog1 = new OpenFileDialog();
+            fileDialog1.InitialDirectory = "C:\\";//默认打开C：
+            fileDialog1.Filter = "Excel 97-2013 工作簿(*.xls)|*.xls";
+            fileDialog1.FilterIndex = 1;//如果您设置 FilterIndex 属性，则当显示对话框时，将选择该筛选器。
+            fileDialog1.RestoreDirectory = true;//取得或设定值，指出对话方块是否在关闭前还原目前的目录。
+            if (fileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                //Bitmap bitmap = new Bitmap(fileDialog1.FileName);// fileDialog1.FileName显示选中文件的路径
+                Path = fileDialog1.FileName;
+                //picGPS.Image = bitmap;
+            }
+            else
+            {
+                //MessageBox.Show("");
+                return success;
+
+            }
+            if (Path == "")
+                return success;
+
+            DataTable dt = new DataTable();
+            try
+            {
+                string strConn = "Provider=Microsoft.JET.OLEDB.4.0;Data Source=" + Path + ";" + "Extended Properties='Excel 8.0;HDR=Yes;IMEX=1;'";
+                OleDbConnection conn = new OleDbConnection(strConn);
+                conn.Open();
+                DataTable schemaTable = conn.GetOleDbSchemaTable(System.Data.OleDb.OleDbSchemaGuid.Tables, null);
+                string tableName = schemaTable.Rows[0][2].ToString().Trim();
+                string strExcel = "";
+                OleDbDataAdapter myCommand = null;
+                DataSet ds = null;
+                //strExcel = "select * from [sheet1$]";
+                //strExcel = "select * from [" + tableName + "]";
+                #region 考核定档
+                strExcel = "select * from [考核定档$]";                 //取出“考核定档”数据表
+                //myCommand = new OleDbDataAdapter(strExcel, strConn);
+                try
+                {
+                    myCommand = new OleDbDataAdapter(strExcel, strConn);
+                }
+                catch (Exception e)
+                {
+                    XtraMessageBox.Show("请用模版填写，按照规范填写，错误内容：" + e.Message.ToString());
+                    return 0;
+                }
+                ds = new DataSet();
+                myCommand.Fill(ds, "table1");
+                dt = ds.Tables[0];
+                if (dt != null || dt.Rows.Count > 0)
+                {
+                    DataTable dt_pid = new DataTable();
+                    foreach (DataRow r in dt.Rows)
+                    {
+                        if (r[1].ToString() != "" && r[0].ToString() != "")
+                            dt_pid = MySQLHelper.table("SELECT pid,cIDnumber  FROM data_persion WHERE cName in " + GetNames(r[1].ToString()));
+                        foreach (DataRow dr in dt_pid.Rows)
+                        {
+                            List<MySqlParameter> ilistStr = new List<MySqlParameter> {
+                                new MySqlParameter("dcrYear", r[0].ToString().Substring(0,4)),    //年份
+                                new MySqlParameter("crChechResult", "优秀"),                      //考核结果
+                                new MySqlParameter("cIDnumber", dr["cIDnumber"].ToString()),      //身份证号码
+                                new MySqlParameter("crRemarks", ""),                              //备注
+                                new MySqlParameter("pid", dr["pid"].ToString()),                  //pid
+                            };
+                            MySqlParameter[] param = ilistStr.ToArray();
+                            MySQLHelper.ExecuteNonQuery("DELETE FROM data_checkresult WHERE PersionID=@pid and dcrYear=@dcrYear ", param);
+                            MySQLHelper.ExecuteNonQuery("INSERT INTO data_checkresult(PersionID,dcrYear,crChechResult,cIDnumber,crRemarks) VALUES(@pid,@dcrYear,@crChechResult,@cIDnumber,@crRemarks) ", param);
+                        }
+
+                        dt_pid = MySQLHelper.table("SELECT pid,cIDnumber  FROM data_persion WHERE cName in " + GetNames(r[3].ToString()));
+                        foreach (DataRow dr in dt_pid.Rows)
+                        {
+                            List<MySqlParameter> ilistStr = new List<MySqlParameter> {
+                                new MySqlParameter("dcrYear", r[0].ToString().Substring(0,4)),    //年份
+                                new MySqlParameter("crChechResult", "不定等次"),                  //考核结果
+                                new MySqlParameter("cIDnumber", dr["cIDnumber"].ToString()),      //身份证号码
+                                new MySqlParameter("crRemarks", ""),                              //备注
+                                new MySqlParameter("pid", dr["pid"].ToString()),                  //pid
+                            };
+                            MySqlParameter[] param = ilistStr.ToArray();
+                            MySQLHelper.ExecuteNonQuery("DELETE FROM data_checkresult WHERE PersionID=@pid and dcrYear=@dcrYear ", param);
+                            MySQLHelper.ExecuteNonQuery("INSERT INTO data_checkresult(PersionID,dcrYear,crChechResult,cIDnumber,crRemarks) VALUES(@pid,@dcrYear,@crChechResult,@cIDnumber,@crRemarks) ", param);
+                        }
+                        //不定等次
+                        dt_pid = MySQLHelper.table("SELECT pid,cIDnumber FROM data_persion WHERE cName NOT IN " + GetNames(r[1].ToString()) + " AND cName NOT IN " + GetNames(r[3].ToString()) + " AND cName NOT IN " + GetNames(r[4].ToString()));
+                        foreach (DataRow dr in dt_pid.Rows)
+                        {
+                            List<MySqlParameter> ilistStr = new List<MySqlParameter> {
+                                new MySqlParameter("dcrYear", r[0].ToString().Substring(0,4)),    //年份
+                                new MySqlParameter("crChechResult", "不定等次"),                  //考核结果
+                                new MySqlParameter("cIDnumber", dr["cIDnumber"].ToString()),      //身份证号码
+                                new MySqlParameter("crRemarks", ""),                              //备注
+                                new MySqlParameter("pid", dr["pid"].ToString()),                  //pid
+                            };
+                            MySqlParameter[] param = ilistStr.ToArray();
+                            MySQLHelper.ExecuteNonQuery("DELETE FROM data_checkresult WHERE PersionID=@pid and dcrYear=@dcrYear ", param);
+                            MySQLHelper.ExecuteNonQuery("INSERT INTO data_checkresult(PersionID,dcrYear,crChechResult,cIDnumber,crRemarks) VALUES(@pid,@dcrYear,@crChechResult,@cIDnumber,@crRemarks) ", param);
+                        }
+                        //不称职
+                        dt_pid = MySQLHelper.table("SELECT pid,cIDnumber  FROM data_persion WHERE cName in " + GetNames(r[4].ToString()));
+                        foreach (DataRow dr in dt_pid.Rows)
+                        {
+                            List<MySqlParameter> ilistStr = new List<MySqlParameter> {
+                                new MySqlParameter("dcrYear", r[0].ToString().Substring(0,4)),    //年份
+                                new MySqlParameter("crChechResult", "不称职"),                    //考核结果
+                                new MySqlParameter("cIDnumber", dr["cIDnumber"].ToString()),      //身份证号码
+                                new MySqlParameter("crRemarks", ""),                              //备注
+                                new MySqlParameter("pid", dr["pid"].ToString()),                  //pid
+                            };
+                            MySqlParameter[] param = ilistStr.ToArray();
+                            MySQLHelper.ExecuteNonQuery("DELETE FROM data_checkresult WHERE PersionID=@pid and dcrYear=@dcrYear ", param);
+                            MySQLHelper.ExecuteNonQuery("INSERT INTO data_checkresult(PersionID,dcrYear,crChechResult,cIDnumber,crRemarks) VALUES(@pid,@dcrYear,@crChechResult,@cIDnumber,@crRemarks) ", param);
+                        }
+
+                    }
+                    success = 1;
+                }
+                #endregion
+
+                #region 后备干部
+                strExcel = "select * from [后备干部$]";                 //取出“考核定档”数据表
+                try
+                {
+                    myCommand = new OleDbDataAdapter(strExcel, strConn);
+                }
+                catch (Exception e)
+                {
+                    XtraMessageBox.Show("请用模版填写，按照规范填写，错误内容："+e.Message.ToString());
+                    return 0;
+                }
+                ds = new DataSet();
+                myCommand.Fill(ds, "table1");
+                dt = ds.Tables[0];
+                if (dt == null || dt.Rows.Count <= 0)
+                {
+
+                    foreach (DataRow r in dt.Rows)
+                    {
+                        DataTable dt_persion = MySQLHelper.table("SELECT * FROM data_persion WHERE do_flag=1 AND cName='" + r["姓名"] + "' AND dBirth_date LIKE '%" + r["出生年月"].ToString() + "%'");
+                        if (dt_persion == null || dt_persion.Rows.Count <= 0)
+                        {
+                            XtraMessageBox.Show("不存在姓名为：" + r["姓名"] + "生日为：" + r["出生年月"].ToString() + "，的人员信息");
+                            success = 0;
+                            return success;
+                        }
+                        List<MySqlParameter> ilistStr = new List<MySqlParameter> {
+                            new MySqlParameter("rcYear", r[0].ToString().Substring(0,4)),    //年份
+                            new MySqlParameter("rcLevel", r[1].ToString()),                      //考核结果
+                            new MySqlParameter("cIDnumber", dt_persion.Rows[0]["cIDnumber"].ToString()),      //身份证号码
+                            new MySqlParameter("rcRemarks", ""),                              //备注
+                            new MySqlParameter("pid", dt_persion.Rows[0]["pid"].ToString()),                  //pid
+                        };
+                        MySqlParameter[] param = ilistStr.ToArray();
+                        MySQLHelper.ExecuteNonQuery("DELETE FROM data_checkresult WHERE (PersionID=@pid,dcrYear=@dcrYear", param);
+                        MySQLHelper.ExecuteNonQuery("INSERT INTO data_reservecadre(PersionID,rcYear,rcLevel,cIDnumber,rcRemarks) VALUES(@pid,@rcYear,@rcLevel,@cIDnumber,@rcRemarks)", param);
+                    }
+
+
+
+                    #endregion
+
+                    success = 1;
+                }
+                XtraMessageBox.Show(Path.Split('\\')[Path.Split('\\').Length-1]+"文件导入成功");
+                return success;
+            }
+            catch (Exception err)
+            {
+                XtraMessageBox.Show(err.Message);
+                success = 2;
+                return success;
+            }
+
+        }
+
+        private string GetNames(string s,char c= '、')
+        {
+            s = s.Replace(",", "、");
+            s = s.Replace("，", "、");
+            StringBuilder str = new StringBuilder("('");
+            String[] sa = s.Split(c);
+            foreach (string st in sa)
+            {
+                string a = "";
+                a = st.Replace(" ", "");
+                str.Append(a + "','");
+            }
+            str.Remove(str.Length-3,1);
+            str.Append(")");
+            return str.ToString();
+        }
+        private string GetPidByNames(String s)
+        {
+            StringBuilder str = new StringBuilder("('");
+            DataTable dt = MySQLHelper.table("SELECT pid FROM data_persion WHERE cName in "+s);
+            foreach(DataRow r in dt.Rows)
+            {
+                str.Append(r["pid"].ToString()+"',");
+            }
+            str.Remove(str.Length - 2, 1);
+            str.Append(")");
+
+            return str.ToString();
+        }
+
+       
     }
 }

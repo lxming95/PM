@@ -99,5 +99,15 @@ namespace PersonnelManagement.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] 追加导入模板 {
+            get {
+                object obj = ResourceManager.GetObject("追加导入模板", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

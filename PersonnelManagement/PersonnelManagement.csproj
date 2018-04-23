@@ -77,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="awQurry.cs" />
+    <Compile Include="Excsql.cs" />
     <Compile Include="FrmExport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,13 +152,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Resources\初始数据表171122.xlsx" />
-    <None Include="Resources\初始数据表171124.xlsx" />
-    <None Include="Resources\初始数据表171207.xlsx" />
-    <None Include="Resources\初始数据表171212.xls" />
     <None Include="Resources\名册12-07.xls" />
     <None Include="Resources\名册12-5.xls" />
     <None Include="Resources\数据导出%28干部任免审批表%29.doc" />
+    <None Include="Resources\模版.xls" />
+    <None Include="Resources\追加导入模板.xls" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pub\Pub.csproj">

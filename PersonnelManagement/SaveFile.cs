@@ -112,17 +112,38 @@ namespace PersonnelManagement
             }
             s.Append(@"""" + dr["cName"].ToString() + @""",");
             s.Append(@"""" + dr["cSex"].ToString() + @""",");
-            s.Append(@"""" + dr["dBirth_date"].ToString() + @""",");
+            if (dr["dBirth_date"].ToString().Replace(" ", "") == "")
+            {
+                s.Append(@"""" + " " + @""",");
+            }
+            else
+            {
+                s.Append(@"""" + Convert.ToDateTime(dr["dBirth_date"]).ToString("yyyyMM") + @""",");
+            }
             s.Append(@"""" + dr["cNation"].ToString() + @""",");
             s.Append(@"""" + dr["cNativePlace"].ToString() + @""",");
-            s.Append(@"""" + dr["dJoin_date"].ToString() + @""",");
+            if (dr["dJoin_date"].ToString().Replace(" ","") == "")
+            {
+                s.Append(@"""" + " " + @""",");
+            }
+            else
+            {
+                s.Append(@"""" + Convert.ToDateTime(dr["dJoin_date"]).ToString("yyyyMM") + @""",");
+
+            }
             s.Append(@"""" + dr["cHealthStatus"].ToString() + @""",");
             s.Append(@"""" + dr["cBirthPlace"].ToString() + @""",");
-            s.Append(@"""" + dr["dWorkDate"].ToString() + @""",");
-
+            if (dr["dWorkDate"].ToString().Replace(" ", "") == "")
+            {
+                s.Append(@"""" + " " + @""",");
+            }
+            else
+            {
+                s.Append(@"""" + Convert.ToDateTime(dr["dWorkDate"]).ToString("yyyyMM") + @""",");
+            }
 
             s.Append(@"""" + dr["cFull_timeEducation"].ToString() + "#"+ dr["cFull_timeDegree"].ToString() + "@" + dr["cIn_serviceEducation"].ToString()+"#"+ dr["cIn_serviceDegree"].ToString() + @""",");
-            s.Append(@"""" + dr["cFull_timeSchool"].ToString() + "#"+ dr["cFull_timeMajor"].ToString() + "@" + dr["cIn_serviceSchool"].ToString()+"#"+ dr["cIn_serviceMajor"].ToString() + @""",");
+            s.Append(@"""" + dr["cFull_timeSchool"].ToString() + dr["cFull_timeMajor"].ToString() + "#" + "@" + dr["cIn_serviceSchool"].ToString() + dr["cIn_serviceMajor"].ToString() + "#" + @""",");
 
             s.Append(@"""" + dr["cDuties"].ToString() + @""",");
             s.Append(@"""" + " " + @""",");
@@ -139,12 +160,12 @@ namespace PersonnelManagement
                 s.Append(@"""");
                 for (int i = 0; i < dt_resume.Rows.Count - 1; i++)
                 {
-                    s.Append(dt_resume.Rows[i]["dStartDate"]+ "--"
+                    s.Append(dt_resume.Rows[i]["dStartDate"]+ "-"
                         + dt_resume.Rows[i]["dDeadline"] + "       "
                         + dt_resume.Rows[i]["cExperience"].ToString() + "\r\n");
                 }
-                s.Append(dt_resume.Rows[dt_resume.Rows.Count - 1]["dStartDate"] + "--"
-                        + dt_resume.Rows[dt_resume.Rows.Count - 1]["dDeadline"]+ "       "
+                s.Append(dt_resume.Rows[dt_resume.Rows.Count - 1]["dStartDate"] + "-"
+                        + (dt_resume.Rows[dt_resume.Rows.Count - 1]["dDeadline"].ToString()==""?"       ": dt_resume.Rows[dt_resume.Rows.Count - 1]["dDeadline"]) + "       "
                         + dt_resume.Rows[dt_resume.Rows.Count - 1]["cExperience"].ToString() + @""",");
             }
             dt_resume.Dispose();
@@ -156,26 +177,26 @@ namespace PersonnelManagement
                 s.Append(@"""");
                 for (int i = 0; i < dt_rewards.Rows.Count - 1; i++)
                 {
-                    s.Append(dt_rewards.Rows[i]["dData"].ToString() + "年度"
+                    s.Append(dt_rewards.Rows[i]["dData"].ToString() + " "
                            + dt_rewards.Rows[i]["cDetailed"].ToString() + "\r\n");
                 }
-                s.Append(dt_rewards.Rows[dt_rewards.Rows.Count - 1]["dData"].ToString() + "年度 "
+                s.Append(dt_rewards.Rows[dt_rewards.Rows.Count - 1]["dData"].ToString() + " "
                            + dt_rewards.Rows[dt_rewards.Rows.Count - 1]["cDetailed"].ToString() + @""",");
             }
             dt_rewards.Dispose();
         
             //年度考核结果
-            DataTable dt_checkresult = MySQLHelper.table("SELECT *FROM data_rewards_punishments WHERE PersionID='" + dr["pid"] + "'");
-            if (dt_rewards != null && dt_rewards.Rows.Count > 0)
+            DataTable dt_checkresult = MySQLHelper.table("SELECT *FROM data_checkresult WHERE PersionID='" + dr["pid"] + "'");
+            if (dt_checkresult != null && dt_checkresult.Rows.Count > 0)
             {
                 s.Append(@"""");
-                for (int i = 0; i < dt_rewards.Rows.Count - 1; i++)
+                for (int i = 0; i < dt_checkresult.Rows.Count - 1; i++)
                 {
-                    s.Append(dt_rewards.Rows[i]["dData"].ToString() + "  "
-                           + dt_rewards.Rows[i]["cDetailed"].ToString() + "；");
+                    s.Append(dt_checkresult.Rows[i]["dcrYear"].ToString() + "年度考核为"
+                           + dt_checkresult.Rows[i]["crChechResult"].ToString() + "； ");
                 }
-                s.Append(dt_rewards.Rows[dt_rewards.Rows.Count - 1]["dData"].ToString() + "  "
-                           + dt_rewards.Rows[dt_rewards.Rows.Count - 1]["cDetailed"].ToString() + @"。"",");
+                s.Append(dt_checkresult.Rows[dt_checkresult.Rows.Count - 1]["dcrYear"].ToString() + "年度考核为"
+                           + dt_checkresult.Rows[dt_checkresult.Rows.Count - 1]["crChechResult"].ToString() + @""",");
             }
 
             //家庭成员
@@ -209,7 +230,7 @@ namespace PersonnelManagement
             dt_family.Dispose();
 
             //现任职务
-            s.Append(@"""" + dr["cCurrentJob"].ToString() + @""",");
+            s.Append(@"""" + (dr["cCurrentJob"].ToString() == "" ? "" : dr["cUnit"].ToString() + dr["cCurrentJob"].ToString()) + @""",");
             //拟任职务
             s.Append(@"""" + dr["cProposedJob"].ToString() + @""",");
             //拟免职务
@@ -221,9 +242,9 @@ namespace PersonnelManagement
             //计算年龄时间
             s.Append(@"""" + dr["dEageDate"].ToString() + @""",");
             //填表人
-            s.Append(@"""" + dr["cMaker"].ToString() + @""",");
+            s.Append(@"""" + Pub.PubValue.UserName + @""",");
             //填表时间
-            s.Append(@"""" + dr["dMakeDate"].ToString() + @"""");
+            s.Append(@"""" + DateTime.Now.ToString("yyyy.MM.dd")+ @"""");
 
             return s.ToString();
         }
@@ -298,12 +319,21 @@ namespace PersonnelManagement
                             //foreach (DataRow r in dt.Rows)
                             for(int i=0;i<dt.Rows.Count;i++)
                             {
+                                string cRemarks = "";
                                 //cmd.CommandText = "INSERT INTO [在职$] (入党时间) VALUES('1995.02')";
+                                if (dt.Rows[i]["bIsOfficialPosition"].ToString()=="是")
+                                {
+                                    cRemarks = "党政正职";
+                                }
+                                else
+                                {
+                                    cRemarks = dt.Rows[i]["cRank"].ToString();
+                                }
                                 cmd.CommandText = "INSERT INTO [在职$] (序号,单位,姓名,职务,性别,民族,籍贯,"
                                     + "出生年月,入党时间,参加工作时间,全日制学历,毕业院校及专业,在职教育,毕业学校及专业,历任职务,"
                                     + "任现职时间,任同级职务时间,备注) "
                                     + "VALUES('" + (i+1).ToString() + "','" + dt.Rows[i]["cUnit"] + "','" + dt.Rows[i]["cName"] + "','" + dt.Rows[i]["cCurrentJob"] + "','" + dt.Rows[i]["cSex"] + "','" + dt.Rows[i]["cNation"] + "','" + dt.Rows[i]["cNativePlace"] + "','" + dt.Rows[i]["dBirth_date"] + "','" + dt.Rows[i]["dJoin_date"] + "',"
-                                    + "'" + dt.Rows[i]["dWorkDate"] + "','" + dt.Rows[i]["cFull_timeEducation"] + "','" + dt.Rows[i]["cFull_timeSchool"] + dt.Rows[i]["cFull_timeMajor"] + "','" + dt.Rows[i]["cIn_serviceEducation"] + "','" + dt.Rows[i]["cIn_serviceSchool"] + dt.Rows[i]["cIn_serviceMajor"] + "','" + getResumeBypid(dt.Rows[i]["pid"].ToString()) + "','" + dt.Rows[i]["dInOffice"] + "','" + dt.Rows[i]["dSameOffic"] + "','" + dt.Rows[i]["cRemarks"] + "')";
+                                    + "'" + dt.Rows[i]["dWorkDate"] + "','" + dt.Rows[i]["cFull_timeEducation"] + "','" + dt.Rows[i]["cFull_timeSchool"] + dt.Rows[i]["cFull_timeMajor"] + "','" + dt.Rows[i]["cIn_serviceEducation"] + "','" + dt.Rows[i]["cIn_serviceSchool"] + dt.Rows[i]["cIn_serviceMajor"] + "','" + getResumeBypid(dt.Rows[i]["pid"].ToString()) + "','" + dt.Rows[i]["dInOffice"] + "','" + dt.Rows[i]["dSameOffic"] + "','" + cRemarks + "')";
 
                                 //添加数据
                                 cmd.ExecuteNonQuery();
@@ -335,7 +365,14 @@ namespace PersonnelManagement
             {
                 foreach (DataRow r in dt_resume.Rows)
                 {
-                    resume.Append(r["dStartDate"]+ "-"+ r["dDeadline"]+","+ r["cExperience"]+"；");
+                    resume.Append(r["dStartDate"]+ "-");
+                    if (r["dDeadline"].ToString()!="")
+                    { resume.Append(r["dDeadline"]); }
+                    else
+                    {
+                        resume.Append("       ");
+                    }
+                    resume.Append("  " + r["cExperience"]);
                     if (wrap)
                         resume.Append("\r\n");
                 }
@@ -355,12 +392,19 @@ namespace PersonnelManagement
             DataTable dt_rewards = MySQLHelper.table("SELECT *FROM data_rewards_punishments WHERE PersionID='" + pid + "'");
             if (dt_rewards != null && dt_rewards.Rows.Count > 0)
             {
-                foreach (DataRow r in dt_rewards.Rows)
+                for (int i = 0; i < dt_rewards.Rows.Count - 1; i++)
                 {
-                    rewards.Append(r["dData"] + "," + r["cDetailed"] + "；");
+                    rewards.Append(dt_rewards.Rows[i]["dData"] + "," + dt_rewards.Rows[i]["cDetailed"] + "；");
                     if (wrap)
-                        rewards.Append("\r\n");
+                        rewards.Append("\r\n"); 
                 }
+                rewards.Append(dt_rewards.Rows[dt_rewards.Rows.Count - 1]["dData"] + "," + dt_rewards.Rows[dt_rewards.Rows.Count - 1]["cDetailed"]);
+                //foreach (DataRow r in dt_rewards.Rows)
+                //{
+                //    rewards.Append(r["dData"] + "," + r["cDetailed"] + "；");
+                //    if (wrap)
+                //        rewards.Append("\r\n");
+                //}
             }
             return rewards.ToString();
 
@@ -377,12 +421,19 @@ namespace PersonnelManagement
             DataTable dt_checkresult = MySQLHelper.table("SELECT *FROM data_checkresult WHERE PersionID='" + pid + "'");
             if (dt_checkresult != null && dt_checkresult.Rows.Count > 0)
             {
-                foreach (DataRow r in dt_checkresult.Rows)
+                for (int i=0;i< dt_checkresult.Rows.Count-1;i++)
                 {
-                    checkresult.Append(r["dcrYear"] + "年度考核为：" + r["crChechResult"] + "；");
+                    checkresult.Append(dt_checkresult.Rows[i]["dcrYear"] + "年度考核为" + dt_checkresult.Rows[i]["crChechResult"] + "；");
                     if (wrap)
                         checkresult.Append("\r\n");
                 }
+                checkresult.Append(dt_checkresult.Rows[dt_checkresult.Rows.Count - 1]["dcrYear"] + "年度考核为" + dt_checkresult.Rows[dt_checkresult.Rows.Count - 1]["crChechResult"]);
+                //foreach (DataRow r in dt_checkresult.Rows)
+                //{
+                //    checkresult.Append(r["dcrYear"] + "年度考核为" + r["crChechResult"] + "；");
+                //    if (wrap)
+                //        checkresult.Append("\r\n");
+                //}
 
             }
             return checkresult.ToString();
@@ -576,13 +627,13 @@ namespace PersonnelManagement
             SetCellValue(ws, 8, 4, dr["cDuties"].ToString());
             SetCellValue(ws, 8, 10, dr["cSkill"].ToString());
 
-            SetCellValue(ws, 9, 6, dr["cFull_timeEducation"].ToString());
+            SetCellValue(ws, 9, 6, dr["cFull_timeEducation"].ToString()+ dr["cFull_timeDegree"].ToString());
             SetCellValue(ws, 9, 13, dr["cFull_timeSchool"].ToString() + dr["cFull_timeMajor"].ToString());
 
-            SetCellValue(ws, 10, 6, dr["cIn_serviceEducation"].ToString());
+            SetCellValue(ws, 10, 6, dr["cIn_serviceEducation"].ToString()+ dr["cIn_serviceDegree"].ToString());
             SetCellValue(ws, 10, 13, dr["cIn_serviceSchool"].ToString() + dr["cIn_serviceMajor"].ToString());
 
-            SetCellValue(ws, 11, 6, dr["cUnit"].ToString()+dr["cCurrentJob"].ToString());
+            SetCellValue(ws, 11, 6, dr["cUnit"].ToString() + dr["cCurrentJob"].ToString());
             SetCellValue(ws, 12, 6, dr["cProposedJob"].ToString());
             SetCellValue(ws, 13, 6, dr["cRemoveJob"].ToString());
 
@@ -601,7 +652,8 @@ namespace PersonnelManagement
                 SetCellValue(ws, 63 + i, 9, dt_familymembers.Rows[i]["cfPoliticalStatus"].ToString());
                 SetCellValue(ws, 63 + i, 11, dt_familymembers.Rows[i]["cfDuties"].ToString());
             }
-
+            SetCellValue(ws, 78, 2, "填表人：");
+            SetCellValue(ws, 78, 4, Pub.PubValue.UserName);
 
         }
         /// <summary>
@@ -677,6 +729,7 @@ namespace PersonnelManagement
             catch (Exception ex)
             {
                 KillExcel(oExcel);
+                XtraMessageBox.Show("文件保存失败，姓名为" + name.Replace(".xls", "") + "错误为：" + ex.Message+"请重新导出");
             }
             return path1;
         }
@@ -714,14 +767,14 @@ namespace PersonnelManagement
             {
                 success = false;
                 KillExcel(oExcel);
-                XtraMessageBox.Show("文件保存失败，姓名为"+name.Replace(".xls","")+"错误为："+ex.Message);
+                XtraMessageBox.Show("文件保存失败，姓名为"+name.Replace(".xls","")+"错误为："+ex.Message + "请重新导出");
             }
             return success;
         }
 
         [DllImport("User32.dll")]
         public static extern int GetWindowThreadProcessId(IntPtr hWnd, out int ProcessId);
-        private static void KillExcel(Microsoft.Office.Interop.Excel._Application theApp)
+        public static void KillExcel(Microsoft.Office.Interop.Excel._Application theApp)
         {
             int id = 0;
             IntPtr intptr = new IntPtr(theApp.Hwnd);
@@ -738,7 +791,7 @@ namespace PersonnelManagement
             }
             catch (Exception ex)
             {
-
+                XtraMessageBox.Show(ex.Message);
             }
         }
 
@@ -766,8 +819,8 @@ namespace PersonnelManagement
             {
                 s.Append("'"+r["cSubject"] +"',");
             }
-            s.Append("' ')");
-            return s.ToString();
+            //s.Append("' ')");
+            return s.ToString().Substring(0, s.Length - 2)+ "')";
         }
     }
 }

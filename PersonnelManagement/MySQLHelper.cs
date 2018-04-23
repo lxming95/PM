@@ -6,7 +6,7 @@ using System.Data;
 
 namespace BarCode
 {
-    
+
     /// <summary>
     ///SQLHelper 的摘要说明
     /// </summary>
@@ -174,6 +174,7 @@ namespace BarCode
             catch (Exception e)
             {
                 throw e;
+                //XtraMessageBox.Show("请不要更换机器");
             }
         }
 

@@ -17,7 +17,7 @@ namespace BarCode
         string[] password;
         bool DLorGB = false;
         //是否绑定机器
-        public bool Authentication = false;
+        public bool Authentication = true;
         public FrmLogin(frmMain frmMain)
         {
             //初始化登陆界面
@@ -73,7 +73,15 @@ namespace BarCode
                 XtraMessageBox.Show("服务器不能为空！！");
                 return;
             }
-            
+            if (Authentication)
+            {
+                if (GetId.IsTruePersion() != true)
+                {
+                    XtraMessageBox.Show("请不要更换机器");
+                    this.Close();
+                    return;
+                }
+            }
             suserName = this.txtUser.Text;
             string suserPassword = this.txtPassword.Text;
             List<MySqlParameter> ilistStr = new List<MySqlParameter> {
@@ -81,22 +89,24 @@ namespace BarCode
                     new MySqlParameter("user_pass", suserPassword),};
             MySqlParameter[] param = ilistStr.ToArray();
             DataTable dt = MySQLHelper.table("SELECT * FROM ry_user WHERE user_code=@user_code  AND user_pass=@user_pass ", param);
-            
+            //更新数据表
+            DataTable dt_major = MySQLHelper.table("SELECT COUNT(id) AS num FROM data_majorinf");
+            if (dt_major==null||dt_major.Rows.Count <= 0)
+            {
+                Configuration config = System.Configuration.ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);//获取Configuration对象
+                config.AppSettings.Settings["Update"].Value = "1";//key的值设置为1
+                config.Save(ConfigurationSaveMode.Modified);    //保存
+                ConfigurationManager.RefreshSection("appSettings");//刷新
+                Excsql.isUpdate();
+            }
+
             if (dt!=null&&dt.Rows.Count>0)
             {
                
                 if (suserPassword.Equals(dt.Rows[0]["user_pass"]))
                 {
                     this.Close();
-                    if (Authentication)
-                    { 
-                        if (GetId.IsTruePersion() != true)
-                        {
-                            XtraMessageBox.Show("请不要更换机器");
-                            this.Close();
-                            return;
-                        }
-                    }
+
                     DateTime LoginDate = DateTime.Today;
                     Pub.PubValue.ComputerName = Environment.MachineName;
                     //赋值执行程序目录

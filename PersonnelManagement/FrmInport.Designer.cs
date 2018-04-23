@@ -90,6 +90,7 @@
             this.bar5 = new DevExpress.XtraBars.Bar();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.btnInPort = new DevExpress.XtraBars.BarButtonItem();
+            this.btnDownloadAddModel = new DevExpress.XtraBars.BarButtonItem();
             this.btnAddInport = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
@@ -759,9 +760,10 @@
             this.btnDel,
             this.btnInPort,
             this.barButtonItem1,
-            this.btnAddInport});
+            this.btnAddInport,
+            this.btnDownloadAddModel});
             this.barManager1.MainMenu = this.bar5;
-            this.barManager1.MaxItemId = 15;
+            this.barManager1.MaxItemId = 16;
             // 
             // bar5
             // 
@@ -774,6 +776,7 @@
             this.bar5.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barButtonItem1, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnInPort, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnDownloadAddModel, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnAddInport, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
             this.bar5.OptionsBar.MultiLine = true;
             this.bar5.OptionsBar.UseWholeRow = true;
@@ -781,7 +784,7 @@
             // 
             // barButtonItem1
             // 
-            this.barButtonItem1.Caption = "下载模版";
+            this.barButtonItem1.Caption = "更新模版下载";
             this.barButtonItem1.Id = 13;
             this.barButtonItem1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.Image")));
             this.barButtonItem1.Name = "barButtonItem1";
@@ -795,14 +798,25 @@
             this.btnInPort.Name = "btnInPort";
             this.btnInPort.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnInPort_ItemClick);
             // 
+            // btnDownloadAddModel
+            // 
+            this.btnDownloadAddModel.Caption = "追加模版下载";
+            this.btnDownloadAddModel.Id = 15;
+            this.btnDownloadAddModel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnDownloadAddModel.ImageOptions.Image")));
+            this.btnDownloadAddModel.ItemAppearance.Normal.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.btnDownloadAddModel.ItemAppearance.Normal.Options.UseForeColor = true;
+            this.btnDownloadAddModel.Name = "btnDownloadAddModel";
+            this.btnDownloadAddModel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDownloadAddModel_ItemClick);
+            // 
             // btnAddInport
             // 
             this.btnAddInport.Caption = "追加导入";
             this.btnAddInport.Id = 14;
-            this.btnAddInport.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem2.ImageOptions.Image")));
-            this.btnAddInport.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Red;
+            this.btnAddInport.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnAddInport.ImageOptions.Image")));
+            this.btnAddInport.ItemAppearance.Normal.ForeColor = System.Drawing.Color.DodgerBlue;
             this.btnAddInport.ItemAppearance.Normal.Options.UseForeColor = true;
             this.btnAddInport.Name = "btnAddInport";
+            this.btnAddInport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAddInport_ItemClick);
             // 
             // barDockControlTop
             // 
@@ -1111,6 +1125,7 @@
         private DevExpress.XtraEditors.TextEdit txtSuccess;
         private DevExpress.XtraBars.BarButtonItem btnAddInport;
         private DevExpress.XtraEditors.LabelControl labelControl5;
+        private DevExpress.XtraBars.BarButtonItem btnDownloadAddModel;
     }
 }
 
